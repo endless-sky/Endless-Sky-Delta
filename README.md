@@ -1,4 +1,11 @@
-# Endless Sky
+# Endless Sky - Delta
+
+This is the Rapid Development and Experimentation fork of the Endless Sky project, and is colloquially known as "Endless Sky Delta" or "Revamp 2.0." The purpose is to be an area where more changes can be worked on, trialed, and experimented with.
+
+If you are looking for a stable version of Endless Sky to play, you should go to https://github.com/endless-sky/endless-sky instead.
+If you are looking to try out the cutting edge (and possible failures) of our attempts to make Endless Sky better, this is the place to be.
+
+------
 
 Explore other star systems. Earn money by trading, carrying passengers, or completing missions. Use your earnings to buy a better ship or to upgrade the weapons and engines on your current one. Blow up pirates. Take sides in a civil war. Or leave human space behind and hope to find some friendly aliens whose culture is more civilized than your own...
 
