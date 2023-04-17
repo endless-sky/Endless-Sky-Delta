@@ -45,7 +45,7 @@ void Gamerules::Load(const DataNode &node)
 		else if(key == "npc max mining time")
 			npcMaxMiningTime = max<int>(0, child.Value(1));
 		else if(key == "default lateral thrust ratio")
-			defaultLateralThrustRatio = max<double>(0, child.Value(1));
+			defaultLateralThrustRatio = child.Value(1);
 		else
 			child.PrintTrace("Skipping unrecognized gamerule:");
 	}
