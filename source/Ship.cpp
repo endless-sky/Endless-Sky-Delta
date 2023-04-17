@@ -2094,7 +2094,7 @@ void Ship::Move(vector<Visual> &visuals, list<shared_ptr<Flotsam>> &flotsam)
 		double lateralThrustValue = 0.;
 		if(attributes.Get("lateral thrust ratio"))
 			lateralThrustValue = attributes.Get("lateral thrust ratio");
-		else
+		else if(!attributes.Get("lateral thrust ratio"))
 			lateralThrustValue = 0.25;
 		if(latThrustCommand)
 		{
