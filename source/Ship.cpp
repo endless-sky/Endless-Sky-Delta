@@ -2097,10 +2097,10 @@ void Ship::Move(vector<Visual> &visuals, list<shared_ptr<Flotsam>> &flotsam)
 		double lateralThrustValue = 0.;
 		if(attributes.Get("lateral thrust ratio"))
 			lateralThrustValue = attributes.Get("lateral thrust ratio");
-		else if (!attributes.Get("lateral thrust ratio"))
+		else if(!attributes.Get("lateral thrust ratio"))
 		{
 			// lateralThrustValue = GameData::GetGamerules().DefaultLateralThrustRatio();
-			if (mass < 2500)
+			if(mass < 2500)
 				lateralThrustValue = (3000 - mass) / 3500;
 			else
 				lateralThrustValue = 0.1;
