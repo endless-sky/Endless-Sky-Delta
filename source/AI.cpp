@@ -2183,18 +2183,18 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 		if(inFront && isFacing)
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-			command |= Command::LATERALLEFT;
-			command |= Command::FORWARD;
+			command.SetLateralThrust(-1);
+			command.SetThrust(1.);
 		}
 		else if(length >= weaponsRange)
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-			command |= Command::FORWARD;
+			command.SetThrust(1.);
 		}
 		else if(length < weaponsRange && ship.Facing().Unit().Dot(ship.Velocity().Unit()) > .7)
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-			command |= Command::FORWARD;
+			command.SetThrust(1.);
 		}
 		else if(length < weaponsRange && ship.Facing().Unit().Dot(ship.Velocity().Unit()) < .7)
 		{
@@ -2202,13 +2202,13 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 		}
 		else if(length < weaponsRange)
 		{
-			command |= Command::FORWARD;
+			command.SetThrust(1.);
 		}
 	}
 	else
 	{
 		command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 	}
 }
 
