@@ -114,7 +114,7 @@ private:
 	static void PrepareForHyperspace(Ship &ship, Command &command);
 	static void CircleAround(Ship &ship, Command &command, const Body &target);
 	static void StrikeThrough(Ship &ship, Command &command, const Ship &target);
-	static void AttackRear(Ship& ship, Command& command, const Ship& target);
+	static void AttackRear(Ship &ship, Command &command, const Ship &target);
 	static void Swarm(Ship &ship, Command &command, const Body &target);
 	static void KeepStation(Ship &ship, Command &command, const Body &target);
 	static void Attack(Ship &ship, Command &command, const Ship &target);

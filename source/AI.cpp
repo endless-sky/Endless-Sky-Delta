@@ -2164,22 +2164,22 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 	// Point velocity = ship.Velocity();
 	bool inFront = direction.Unit().Dot(target.Facing().Unit()) > .9;
 	bool isFacing = direction.Unit().Dot(ship.Facing().Unit()) < 0;
-	bool outerRadius = direction.Length() < targetTurretRange * 1.2; // should be max (target gun range, turget turret range)
+	bool outerRadius = direction.Length() < targetTurretRange * 1.2; // should be max target gun & turget turret range
 	// double speed = ship.MaxVelocity();
 
 	if(outerRadius)
 	{
-		//   if(inFront && isFacing)
-		   // {
-			   // MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
-			   // if(command.Has(Command::FORWARD) && ShouldUseAfterburner(ship))
-				   // command |= Command::AFTERBURNER;
-		   // }
-		   // else if(inFront)
-		   // {
-			   // command |= Command::FORWARD;
-		   // }
-		   
+		// if(inFront && isFacing)
+			// {
+			// MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
+			// if(command.Has(Command::FORWARD) && ShouldUseAfterburner(ship))
+			// command |= Command::AFTERBURNER;
+		 // }
+		 // else if(inFront)
+		 // {
+			// command |= Command::FORWARD;
+		 // }
+
 		if(inFront && isFacing)
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
@@ -2265,16 +2265,16 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 		{
 			MoveThrough(ship, command, rearAvoid, target.Velocity(), 20., speed);
 		}
-		else if(!isBehind) //not behind target
+		else if(!isBehind) // not behind target
 		{
 			MoveTo(ship, command, offset, target.Velocity(), 80., 20);
 		}
-		else if(!inRange) //behind but too far away
+		else if(!inRange) // behind but too far away
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
 			command |= Command::FORWARD;
 		}
-		else if(tooClose) //behind target but too close
+		else if(tooClose) // behind target but too close
 		{
 			if(reverseSpeed && target.Velocity().Dot(-d.Unit()) <= reverseSpeed)
 			{
@@ -2287,7 +2287,7 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 				MoveTo(ship, command, offset, target.Velocity(), 80., 20);
 			}
 		}
-		else if(inRange) //behind target, in sweet spot.
+		else if(inRange) // behind target, in sweet spot.
 		{
 			if(justRight) command |= Command::LATERALLEFT;
 			else if(justLeft) command |= Command::LATERALRIGHT;
@@ -2569,12 +2569,11 @@ void AI::Attack(Ship &ship, Command &command, const Ship &target)
 	if(target.TrueTurnRate() < ship.Acceleration() * 1.2) AttackRear(ship, command, target);
 	else if(ship.Attributes().Get("rear")) StrikeThrough(ship, command, target);
 	else if(ship.Attributes().Get("strike")) StrikeThrough(ship, command, target);
-	else 
+	else
 		if(weaponDistanceFromTarget < shortestRange * .75)
 			AimToAttack(ship, command, target);
 		else
 			MoveToAttack(ship, command, target);
-	
 }
 
 
