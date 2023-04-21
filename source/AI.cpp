@@ -2174,11 +2174,11 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 			// MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
 			// if(command.Has(Command::FORWARD) && ShouldUseAfterburner(ship))
 			// command |= Command::AFTERBURNER;
-		 // }
-		 // else if(inFront)
-		 // {
+		// }
+		// else if(inFront)
+		// {
 			// command |= Command::FORWARD;
-		 // }
+		// }
 
 		if(inFront && isFacing)
 		{
