@@ -2046,7 +2046,8 @@ bool AI::MoveTo(Ship &ship, Command &command, const Point &targetPosition,
 
 
 
-bool AI::MoveThrough(Ship &ship, Command &command, const Point &targetPosition, const Point &targetVelocity, double radius, double slow)
+bool AI::MoveThrough(Ship &ship, Command &command, const Point &targetPosition,
+	const Point &targetVelocity, double radius, double slow)
 {
 	const Point &position = ship.Position();
 	const Point &velocity = ship.Velocity();
@@ -2163,22 +2164,22 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 	// Point velocity = ship.Velocity();
 	bool inFront = direction.Unit().Dot(target.Facing().Unit()) > .9;
 	bool isFacing = direction.Unit().Dot(ship.Facing().Unit()) < 0;
-	bool outerRadius = direction.Length() < targetTurretRange * 1.2; //should be max (target gun range, turget turret range)
+	bool outerRadius = direction.Length() < targetTurretRange * 1.2; // should be max (target gun range, turget turret range)
 	// double speed = ship.MaxVelocity();
 
 	if(outerRadius)
 	{
-		/*   if(inFront && isFacing)
-		   {
-			   MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
-			   if(command.Has(Command::FORWARD) && ShouldUseAfterburner(ship))
-				   command |= Command::AFTERBURNER;
-		   }
-		   else if(inFront)
-		   {
-			   command |= Command::FORWARD;
-		   }
-		   */
+		//   if(inFront && isFacing)
+		   // {
+			   // MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
+			   // if(command.Has(Command::FORWARD) && ShouldUseAfterburner(ship))
+				   // command |= Command::AFTERBURNER;
+		   // }
+		   // else if(inFront)
+		   // {
+			   // command |= Command::FORWARD;
+		   // }
+		   
 		if(inFront && isFacing)
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
@@ -2215,7 +2216,7 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 
 void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 {
-	int weaponsRange = 864; //attacker weapon range this will be passed in eventually
+	int weaponsRange = 864; // attacker weapon range this will be passed in eventually
 	int targetTurretRange = target.GetAICache().TurretRange();
 	Point offset = target.Position() - target.Facing().Unit() * weaponsRange;
 	Point direction = ship.Position() - target.Position();
