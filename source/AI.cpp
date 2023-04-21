@@ -2067,11 +2067,11 @@ bool AI::MoveThrough(Ship &ship, Command &command, const Point &targetPosition,
 	if(!isClose || (!isFacing && !shouldReverse))
 		command.SetTurn(TurnToward(ship, dp));
 	if(isFacing)
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 	else if(shouldReverse)
 	{
 		command.SetTurn(TurnToward(ship, velocity));
-		command |= Command::BACK;
+		command.SetThrust(-1.);
 	}
 
 	return false;
@@ -2260,19 +2260,23 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 		if(inFront)
 		{
 			MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
+			ship.SetSwizzle(27);
 		}
 		else if(atSide)
 		{
 			MoveThrough(ship, command, rearAvoid, target.Velocity(), 20., speed);
+			ship.SetSwizzle(0);
 		}
 		else if(!isBehind) // not behind target
 		{
 			MoveTo(ship, command, offset, target.Velocity(), 80., 20);
+			ship.SetSwizzle(8);
 		}
 		else if(!inRange) // behind but too far away
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-			command |= Command::FORWARD;
+			command.SetThrust(1.);
+			ship.SetSwizzle(5);
 		}
 		else if(tooClose) // behind target but too close
 		{
@@ -2280,24 +2284,27 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 			{
 				command.SetTurn(TurnToward(ship, d));
 				if(ship.Facing().Unit().Dot(d) >= 0.)
-					command |= Command::BACK;
+					command.SetThrust(-1.);
 			}
 			else
 			{
 				MoveTo(ship, command, offset, target.Velocity(), 80., 20);
 			}
+			ship.SetSwizzle(14);
 		}
 		else if(inRange) // behind target, in sweet spot.
 		{
-			if(justRight) command |= Command::LATERALLEFT;
-			else if(justLeft) command |= Command::LATERALRIGHT;
+			if (justRight) command.SetLateralThrust(-1.);
+			else if (justLeft) command.SetLateralThrust(1.);
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
+			ship.SetSwizzle(3);
 		}
 	}
 	else
 	{
 		command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
+		ship.SetSwizzle(26);
 	}
 }
 
@@ -2506,7 +2513,10 @@ void AI::Attack(Ship &ship, Command &command, const Ship &target)
 		MoveToAttack(ship, command, target);
 		return;
 	}
-
+	if (target.TrueTurnRate() < ship.Acceleration() * 1.2)
+	{
+		AttackRear(ship, command, target);
+	}
 	// Check if this ship is fast enough to keep distance from target.
 	// Have a 10% minimum to avoid ships getting in a chase loop.
 	const bool isAbleToRun = target.MaxVelocity() * SAFETY_MULTIPLIER < ship.MaxVelocity();
