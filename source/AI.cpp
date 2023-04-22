@@ -2216,7 +2216,7 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 
 void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 {
-	int weaponsRange = 864; // attacker weapon range this will be passed in eventually
+	int weaponsRange = 370; // attacker weapon range this will be passed in eventually
 	int targetTurretRange = target.GetAICache().TurretRange();
 	Point offset = target.Position() - target.Facing().Unit() * weaponsRange;
 	Point direction = ship.Position() - target.Position();
