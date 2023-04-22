@@ -2294,8 +2294,8 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 		}
 		else if(inRange) // behind target, in sweet spot.
 		{
-			if (justRight) command.SetLateralThrust(-1.);
-			else if (justLeft) command.SetLateralThrust(1.);
+			if(justRight) command.SetLateralThrust(-1.);
+			else if(justLeft) command.SetLateralThrust(1.);
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
 			ship.SetSwizzle(3);
 		}
@@ -2513,7 +2513,7 @@ void AI::Attack(Ship &ship, Command &command, const Ship &target)
 		MoveToAttack(ship, command, target);
 		return;
 	}
-	if (target.TrueTurnRate() < ship.Acceleration() * 1.2)
+	if(target.TrueTurnRate() < ship.Acceleration() * 1.2)
 	{
 		AttackRear(ship, command, target);
 	}
