@@ -2255,9 +2255,15 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 	double speed = ship.MaxVelocity();
 
 
-	if(outerRadius)
+	if (outerRadius)
 	{
-		if(inFront)
+		if (!isBehind) // not behind the target
+		{
+			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
+			command.SetLateralThrust(1.);
+			ship.SetSwizzle(27);
+		}
+		/*if (inFront)
 		{
 			MoveThrough(ship, command, frontAvoid, target.Velocity(), 20., speed);
 			ship.SetSwizzle(27);
@@ -2271,7 +2277,7 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 		{
 			MoveTo(ship, command, offset, target.Velocity(), 80., 20);
 			ship.SetSwizzle(8);
-		}
+		}*/
 		else if(!inRange) // behind but too far away
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
