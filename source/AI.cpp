@@ -2259,8 +2259,9 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 	{
 		if (!isBehind) // not behind the target
 		{
-			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
-			command.SetLateralThrust(1.);
+			command.SetTurn(TurnToward(ship, TargetAim(ship, target))-0.2);
+			command.SetLateralThrust(TurnToward(ship, TargetAim(ship, target)));
+			if(!inRange) command.SetThrust(1.);
 			ship.SetSwizzle(27);
 		}
 		/*if (inFront)
@@ -2277,31 +2278,34 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 		{
 			MoveTo(ship, command, offset, target.Velocity(), 80., 20);
 			ship.SetSwizzle(8);
-		}*/
+		}
 		else if(!inRange) // behind but too far away
 		{
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
 			command.SetThrust(1.);
 			ship.SetSwizzle(5);
-		}
+		}*/
 		else if(tooClose) // behind target but too close
 		{
 			if(reverseSpeed && target.Velocity().Dot(-d.Unit()) <= reverseSpeed)
 			{
-				command.SetTurn(TurnToward(ship, d));
+				command.SetTurn(TurnToward(ship, d)-0.2);
+				command.SetLateralThrust(-1.);
 				if(ship.Facing().Unit().Dot(d) >= 0.)
 					command.SetThrust(-1.);
 			}
 			else
 			{
-				MoveTo(ship, command, offset, target.Velocity(), 80., 20);
+				command.SetTurn(TurnToward(ship, d) - 0.2);
+				command.SetLateralThrust(-1.);
 			}
 			ship.SetSwizzle(14);
 		}
 		else if(inRange) // behind target, in sweet spot.
 		{
-			if(justRight) command.SetLateralThrust(-1.);
-			else if(justLeft) command.SetLateralThrust(1.);
+			// if(justRight) command.SetLateralThrust(-1.);
+			// else if(justLeft) command.SetLateralThrust(1.);
+			command.SetLateralThrust(-1.);
 			command.SetTurn(TurnToward(ship, TargetAim(ship, target)));
 			ship.SetSwizzle(3);
 		}
