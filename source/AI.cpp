@@ -2242,7 +2242,7 @@ void AI::AttackRear(Ship& ship, Command& command, const Ship& target)
 	Point frontAvoid = (direction.Cross(ship.Facing().Unit()) < 0. ? northWest : northEast);
 	Point rearAvoid = (direction.Cross(target.Facing().Unit()) > 0. ? southWest : southEast);
 
-	bool isBehind = direction.Unit().Dot(target.Facing().Unit()) < -.90;
+	bool isBehind = direction.Unit().Dot(target.Facing().Unit()) < -.98;
 	bool justLeft = direction.Unit().Dot(target.Facing().Unit()) < -.8 && direction.Cross(target.Facing().Unit()) > 0;
 	bool justRight = direction.Unit().Dot(target.Facing().Unit()) < -.8 && direction.Cross(target.Facing().Unit()) <= 0;
 	bool inFront = direction.Unit().Dot(target.Facing().Unit()) > .75;
