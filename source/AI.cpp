@@ -4085,7 +4085,7 @@ void AI::MovePlayer(Ship &ship, const PlayerInfo &player, Command &activeCommand
 		}
 
 		// Stability control, uses lateral thrusters instead of ship applying drag.
-		bool stabilityEngage = !shift && !Preferences::Has("Disable auto-stabilization");
+		bool stabilityEngage = !shift && Preferences::Has("Disable auto-stabilization");
 		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
 		if(shipThrusting && !stabilityEngage && !ShipLateralThrusting)
 			command.SetLateralThrust(deviation * 5);
