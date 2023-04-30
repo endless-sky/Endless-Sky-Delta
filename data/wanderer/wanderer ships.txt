@@ -386,7 +386,7 @@ ship "Derecho"
 	sprite "ship/derecho"
 	thumbnail "thumbnail/derecho"
 	attributes
-		category "Heavy Warship"
+		category "Light Warship"
 		licenses
 			"Wanderer Military"
 		"cost" 30500000
@@ -713,7 +713,7 @@ ship "Winter Gale"
 	sprite "ship/winter gale"
 	thumbnail "thumbnail/winter gale"
 	attributes
-		category "Light Warship"
+		category "Medium Warship"
 		licenses
 			"Wanderer Military"
 		"cost" 14100000
