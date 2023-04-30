@@ -287,7 +287,7 @@ ship "'nra'ret"
 	sprite "ship/-nra-ret"
 	thumbnail "thumbnail/-nra-ret"
 	attributes
-		category "Heavy Warship"
+		category "Medium Warship"
 		"cost" 24760000
 		"shields" 32700
 		"hull" 9850
@@ -1795,7 +1795,7 @@ ship "Met Par Tek 53"
 	sprite "ship/met par tek 53"
 	thumbnail "thumbnail/met par tek 53"
 	attributes
-		category "Light Warship"
+		category "Medium Warship"
 		"cost" 14480000
 		"shields" 15100
 		"hull" 22200
