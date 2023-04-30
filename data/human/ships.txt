@@ -1979,7 +1979,7 @@ ship "Gunboat"
 	sprite "ship/gunboat"
 	thumbnail "thumbnail/gunboat"
 	attributes
-		category "Light Warship"
+		category "Medium Warship"
 		licenses
 			Navy
 		"cost" 3200000
@@ -2597,7 +2597,7 @@ ship "Modified Argosy"
 	sprite "ship/modified argosy"
 	thumbnail "thumbnail/modified argosy"
 	attributes
-		category "Medium Warship"
+		category "Heavy Warship"
 		"cost" 1960000
 		"shields" 4800
 		"hull" 1900
