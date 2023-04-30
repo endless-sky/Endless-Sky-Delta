@@ -450,7 +450,7 @@ ship "Bastion"
 	sprite "ship/bastion"
 	thumbnail "thumbnail/bastion"
 	attributes
-		category "Medium Warship"
+		category "Heavy Warship"
 		"cost" 3860000
 		"shields" 7500
 		"hull" 4700
@@ -827,7 +827,7 @@ ship "Bulwark"
 	sprite "ship/pirate bulwark"
 	thumbnail "thumbnail/pirate bulwark"
 	attributes
-		category "Medium Warship"
+		category "Heavy Warship"
 		"cost" 4360000
 		"shields" 7000
 		"hull" 5600
@@ -1228,7 +1228,7 @@ ship "Corvette"
 	sprite "ship/corvette"
 	thumbnail "thumbnail/corvette"
 	attributes
-		category "Medium Warship"
+		category "Light Warship"
 		"cost" 4400000
 		"shields" 6800
 		"hull" 800
@@ -1590,7 +1590,7 @@ ship "Falcon"
 	sprite "ship/falcon"
 	thumbnail "thumbnail/falcon"
 	attributes
-		category "Heavy Warship"
+		category "Light Warship"
 		"cost" 10900000
 		"shields" 12800
 		"hull" 3700
@@ -2540,7 +2540,7 @@ ship "Manta"
 	sprite "ship/manta"
 	thumbnail "thumbnail/manta"
 	attributes
-		category "Medium Warship"
+		category "Light Warship"
 		"cost" 3400000
 		"shields" 5900
 		"hull" 1500
@@ -2597,7 +2597,7 @@ ship "Modified Argosy"
 	sprite "ship/modified argosy"
 	thumbnail "thumbnail/modified argosy"
 	attributes
-		category "Light Warship"
+		category "Medium Warship"
 		"cost" 1960000
 		"shields" 4800
 		"hull" 1900
@@ -3726,7 +3726,7 @@ ship "Vanguard"
 	sprite "ship/vanguard"
 	thumbnail "thumbnail/vanguard"
 	attributes
-		category "Heavy Warship"
+		category "Medium Warship"
 		"cost" 7200000
 		"shields" 9800
 		"hull" 6000
