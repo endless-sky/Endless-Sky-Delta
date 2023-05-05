@@ -55,7 +55,7 @@ namespace {
 	{
 		static const Command cancelers(Command::LAND | Command::JUMP | Command::FLEET_JUMP | Command::BOARD
 			| Command::AFTERBURNER | Command::BACK | Command::FORWARD | Command::LEFT | Command::RIGHT
-			| Command::AUTOSTEER | Command::STOP);
+			| Command::LATERALLEFT | Command::LATERALRIGHT | Command::AUTOSTEER | Command::STOP);
 
 		return cancelers;
 	}
@@ -769,7 +769,7 @@ void AI::Step(const PlayerInfo &player, Command &activeCommands)
 		// Behave in accordance with personality traits.
 		if(isPresent && personality.IsSwarming() && !isStranded)
 		{
-			// Swarming ships should not wait for (or be waited for by) any ship.
+			// Swarming ships should not wait for(or be waited for by) any ship.
 			if(parent)
 			{
 				parent.reset();
@@ -1525,7 +1525,7 @@ void AI::MoveIndependent(Ship &ship, Command &command) const
 			{
 				MoveTo(ship, command, Point(), Point(), 40., .8);
 				if(ship.Velocity().Dot(ship.Position()) > 0.)
-					command |= Command::FORWARD;
+					command.SetThrust(1.);
 				return;
 			}
 		}
@@ -2046,11 +2046,11 @@ bool AI::MoveTo(Ship &ship, Command &command, const Point &targetPosition,
 	if(!isClose || (!isFacing && !shouldReverse))
 		command.SetTurn(TurnToward(ship, dp));
 	if(isFacing)
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 	else if(shouldReverse)
 	{
 		command.SetTurn(TurnToward(ship, velocity));
-		command |= Command::BACK;
+		command.SetThrust(-1.);
 	}
 
 	return false;
@@ -2111,14 +2111,14 @@ bool AI::Stop(Ship &ship, Command &command, double maxSpeed, const Point directi
 		{
 			command.SetTurn(TurnToward(ship, velocity));
 			if(velocity.Unit().Dot(angle.Unit()) > limit)
-				command |= Command::BACK;
+				command.SetThrust(-1.);
 			return false;
 		}
 	}
 
 	command.SetTurn(TurnBackward(ship));
 	if(velocity.Unit().Dot(angle.Unit()) < -limit)
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 
 	return false;
 }
@@ -2159,7 +2159,7 @@ void AI::PrepareForHyperspace(Ship &ship, Command &command)
 				direction = -deviation * normal;
 			else
 			{
-				command |= Command::FORWARD;
+				command.SetThrust(1.);
 
 				// How much correction will be applied to deviation by thrusting
 				// as I turn back toward the jump direction.
@@ -2194,7 +2194,7 @@ void AI::CircleAround(Ship &ship, Command &command, const Body &target)
 	double length = direction.Length();
 	if(length > 200. && ship.Facing().Unit().Dot(direction) >= 0.)
 	{
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 
 		// If the ship is far away enough the ship should use the afterburner.
 		if(length > 750. && ShouldUseAfterburner(ship))
@@ -2301,7 +2301,7 @@ void AI::KeepStation(Ship &ship, Command &command, const Body &target)
 			+ velocityWeight * velocityDelta.Dot(a) / VELOCITY_DEADBAND;
 		if(direction > THRUST_DEADBAND)
 		{
-			command |= Command::BACK;
+			command.SetThrust(-1.);
 			return;
 		}
 	}
@@ -2309,7 +2309,7 @@ void AI::KeepStation(Ship &ship, Command &command, const Body &target)
 	double direction = positionWeight * positionDelta.Dot(a) / POSITION_DEADBAND
 		+ velocityWeight * velocityDelta.Dot(a) / VELOCITY_DEADBAND;
 	if(direction > THRUST_DEADBAND)
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 }
 
 
@@ -2333,7 +2333,7 @@ void AI::Attack(Ship &ship, Command &command, const Ship &target)
 	// Have a 10% minimum to avoid ships getting in a chase loop.
 	const bool isAbleToRun = target.MaxVelocity() * SAFETY_MULTIPLIER < ship.MaxVelocity();
 
-	ShipAICache &shipAICache = ship.GetAICache();
+	const ShipAICache &shipAICache = ship.GetAICache();
 	const bool useArtilleryAI = shipAICache.IsArtilleryAI() && isAbleToRun;
 	const double shortestRange = shipAICache.ShortestRange();
 	const double shortestArtillery = shipAICache.ShortestArtillery();
@@ -2368,13 +2368,13 @@ void AI::Attack(Ship &ship, Command &command, const Ship &target)
 			{
 				command.SetTurn(TurnToward(ship, direction));
 				if(ship.Facing().Unit().Dot(direction) >= 0.)
-					command |= Command::BACK;
+					command.SetThrust(-1.);
 			}
 			else
 			{
 				command.SetTurn(TurnToward(ship, -direction));
 				if(ship.Facing().Unit().Dot(direction) <= 0.)
-					command |= Command::FORWARD;
+					command.SetThrust(1.);
 			}
 		}
 		else
@@ -2421,12 +2421,12 @@ void AI::MoveToAttack(Ship &ship, Command &command, const Body &target)
 	// If the ship has reverse thrusters and the target is behind it, we can
 	// use them to reach the target more quickly.
 	if(facing < -.75 && ship.Attributes().Get("reverse thrust"))
-		command |= Command::BACK;
+		command.SetThrust(-1.);
 	// This isn't perfect, but it works well enough.
 	else if((facing >= 0. && direction.Length() > diameter)
 			|| (ship.Velocity().Dot(direction) < 0. &&
 				facing) >= .9)
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 
 	// Use an equipped afterburner if possible.
 	if(command.Has(Command::FORWARD) && direction.Length() < 1000. && ShouldUseAfterburner(ship))
@@ -2454,7 +2454,7 @@ void AI::PickUp(Ship &ship, Command &command, const Body &target)
 	command.SetTurn(TurnToward(ship, p));
 	double dp = p.Unit().Dot(ship.Facing().Unit());
 	if(dp > .7)
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 
 	// Use the afterburner if it will not cause you to miss your target.
 	double squareDistance = p.LengthSquared();
@@ -2747,7 +2747,7 @@ void AI::DoMining(Ship &ship, Command &command)
 	Point heading = Angle(30.).Rotate(ship.Position().Unit() * radius) - ship.Position();
 	command.SetTurn(TurnToward(ship, heading));
 	if(ship.Velocity().Dot(heading.Unit()) < .7 * ship.MaxVelocity())
-		command |= Command::FORWARD;
+		command.SetThrust(1.);
 }
 
 
@@ -3607,6 +3607,8 @@ void AI::MovePlayer(Ship &ship, const PlayerInfo &player, Command &activeCommand
 	firingCommands.SetHardpoints(ship.Weapons().size());
 
 	bool shift = activeCommands.Has(Command::SHIFT);
+	bool hasCtrl = activeCommands.Has(Command::CTRL);
+
 
 	bool isWormhole = false;
 	if(player.HasTravelPlan())
@@ -4045,17 +4047,48 @@ void AI::MovePlayer(Ship &ship, const PlayerInfo &player, Command &activeCommand
 
 	if(activeCommands)
 	{
-		if(activeCommands.Has(Command::FORWARD))
-			command |= Command::FORWARD;
-		if(activeCommands.Has(Command::RIGHT | Command::LEFT) && !mouseTurning)
-			command.SetTurn(activeCommands.Has(Command::RIGHT) - activeCommands.Has(Command::LEFT));
+//		if(activeCommands.Has(Command::FORWARD))
+//			command.SetThrust(1.);
+//		if(activeCommands.Has(Command::RIGHT | Command::LEFT) && !mouseTurning)
+//			command.SetTurn(activeCommands.Has(Command::RIGHT) - activeCommands.Has(Command::LEFT));
+//		if(activeCommands.Has(Command::BACK))
+//		{
+//			if(!activeCommands.Has(Command::FORWARD) && ship.Attributes().Get("reverse thrust"))
+//				command.SetThrust(-1.);
+//			else if(!activeCommands.Has(Command::RIGHT | Command::LEFT))
+//				command.SetTurn(TurnBackward(ship));
+//		}
+		bool shipThrusting = false;
+		bool ShipLateralThrusting = false;
+		// Following tweak is for better 'spin around' behaviour.
+		if(activeCommands.Has(Command::FORWARD) && !activeCommands.Has(Command::BACK))
+		{
+			command.SetThrust(hasCtrl ? .5 : 1.);
+			shipThrusting = true;
+		}
+		if(activeCommands.Has(Command::LATERALLEFT | Command::LATERALRIGHT))
+		{
+			command.SetLateralThrust((activeCommands.Has(Command::LATERALRIGHT)
+				- activeCommands.Has(Command::LATERALLEFT)) * (hasCtrl ? .5 : 1.));
+			ShipLateralThrusting = true;
+		}
+		if(activeCommands.Has(Command::RIGHT) && activeCommands.Has(Command::LEFT))
+			command.SetTurn(TurnToward(ship, target ? target->Position() - ship.Position() : Point() - ship.Position()));
+		else if(activeCommands.Has(Command::RIGHT | Command::LEFT))
+			command.SetTurn((activeCommands.Has(Command::RIGHT) - activeCommands.Has(Command::LEFT))* (hasCtrl ? .5 : 1.));
 		if(activeCommands.Has(Command::BACK))
 		{
 			if(!activeCommands.Has(Command::FORWARD) && ship.Attributes().Get("reverse thrust"))
-				command |= Command::BACK;
+				command.SetThrust(hasCtrl ? -.5 : -1.);
 			else if(!activeCommands.Has(Command::RIGHT | Command::LEFT | Command::AUTOSTEER))
 				command.SetTurn(TurnBackward(ship));
 		}
+
+		// Stability control, uses lateral thrusters instead of ship applying drag.
+		bool stabilityEngage = !shift && Preferences::Has("Disable auto-stabilization");
+		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+		if(shipThrusting && !stabilityEngage && !ShipLateralThrusting)
+			command.SetLateralThrust(deviation * 5);
 
 		if(activeCommands.Has(Command::PRIMARY))
 		{

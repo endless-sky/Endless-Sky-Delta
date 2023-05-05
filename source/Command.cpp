@@ -53,34 +53,37 @@ const Command Command::LEFT(ONE << 2, "Turn left");
 const Command Command::RIGHT(ONE << 3, "Turn right");
 const Command Command::BACK(ONE << 4, "Reverse");
 const Command Command::MOUSE_TURNING_HOLD(ONE << 5, "Mouse turning (hold)");
-const Command Command::PRIMARY(ONE << 6, "Fire primary weapon");
-const Command Command::SECONDARY(ONE << 7, "Fire secondary weapon");
-const Command Command::SELECT(ONE << 8, "Select secondary weapon");
-const Command Command::LAND(ONE << 9, "Land on planet / station");
-const Command Command::BOARD(ONE << 10, "Board selected ship");
-const Command Command::HAIL(ONE << 11, "Talk to selected ship");
-const Command Command::SCAN(ONE << 12, "Scan selected ship");
-const Command Command::JUMP(ONE << 13, "Initiate hyperspace jump");
-const Command Command::FLEET_JUMP(ONE << 14, "");
-const Command Command::TARGET(ONE << 15, "Select next ship");
-const Command Command::NEAREST(ONE << 16, "Select nearest hostile ship");
-const Command Command::NEAREST_ASTEROID(ONE << 17, "Select nearest asteroid");
-const Command Command::DEPLOY(ONE << 18, "Deploy / recall fighters");
-const Command Command::AFTERBURNER(ONE << 19, "Fire afterburner");
-const Command Command::CLOAK(ONE << 20, "Toggle cloaking device");
-const Command Command::MAP(ONE << 21, "View star map");
-const Command Command::INFO(ONE << 22, "View player info");
-const Command Command::FULLSCREEN(ONE << 23, "Toggle fullscreen");
-const Command Command::FASTFORWARD(ONE << 24, "Toggle fast-forward");
-const Command Command::FIGHT(ONE << 25, "Fleet: Fight my target");
-const Command Command::GATHER(ONE << 26, "Fleet: Gather around me");
-const Command Command::HOLD(ONE << 27, "Fleet: Hold position");
-const Command Command::HARVEST(ONE << 28, "Fleet: Harvest Flotsam");
-const Command Command::AMMO(ONE << 29, "Fleet: Toggle ammo usage");
-const Command Command::AUTOSTEER(ONE << 30, "Auto steer");
-const Command Command::WAIT(ONE << 31, "");
-const Command Command::STOP(ONE << 32, "");
-const Command Command::SHIFT(ONE << 33, "");
+const Command Command::AUTOSTEER(ONE << 6, "Auto steer");
+const Command Command::LATERALLEFT(ONE << 7, "Lateral left thrust");
+const Command Command::LATERALRIGHT(ONE << 8, "Lateral right thrust");
+const Command Command::PRIMARY(ONE << 9, "Fire primary weapon");
+const Command Command::SECONDARY(ONE << 10, "Fire secondary weapon");
+const Command Command::SELECT(ONE << 11, "Select secondary weapon");
+const Command Command::LAND(ONE << 12, "Land on planet / station");
+const Command Command::BOARD(ONE << 13, "Board selected ship");
+const Command Command::HAIL(ONE << 14, "Talk to selected ship");
+const Command Command::SCAN(ONE << 15, "Scan selected ship");
+const Command Command::JUMP(ONE << 16, "Initiate hyperspace jump");
+const Command Command::FLEET_JUMP(ONE << 17, "");
+const Command Command::TARGET(ONE << 18, "Select next ship");
+const Command Command::NEAREST(ONE << 19, "Select nearest hostile ship");
+const Command Command::NEAREST_ASTEROID(ONE << 20, "Select nearest asteroid");
+const Command Command::DEPLOY(ONE << 21, "Deploy / recall fighters");
+const Command Command::AFTERBURNER(ONE << 22, "Fire afterburner");
+const Command Command::CLOAK(ONE << 23, "Toggle cloaking device");
+const Command Command::MAP(ONE << 24, "View star map");
+const Command Command::INFO(ONE << 25, "View player info");
+const Command Command::FULLSCREEN(ONE << 26, "Toggle fullscreen");
+const Command Command::FASTFORWARD(ONE << 27, "Toggle fast-forward");
+const Command Command::FIGHT(ONE << 28, "Fleet: Fight my target");
+const Command Command::GATHER(ONE << 29, "Fleet: Gather around me");
+const Command Command::HOLD(ONE << 30, "Fleet: Hold position");
+const Command Command::HARVEST(ONE << 31, "Fleet: Harvest Flotsam");
+const Command Command::AMMO(ONE << 32, "Fleet: Toggle ammo usage");
+const Command Command::WAIT(ONE << 33, "");
+const Command Command::STOP(ONE << 34, "");
+const Command Command::SHIFT(ONE << 35, "");
+const Command Command::CTRL(ONE << 36, "");
 
 
 
@@ -123,6 +126,8 @@ void Command::ReadKeyboard()
 	// Check whether the `Shift` modifier key was pressed for this step.
 	if(SDL_GetModState() & KMOD_SHIFT)
 		*this |= SHIFT;
+	if(SDL_GetModState() & KMOD_CTRL)
+		*this |= CTRL;
 }
 
 
@@ -245,6 +250,8 @@ void Command::Load(const DataNode &node)
 			{"left", Command::LEFT},
 			{"right", Command::RIGHT},
 			{"back", Command::BACK},
+			{"lateralleft", Command::LATERALLEFT},
+			{"lateralright", Command::LATERALRIGHT},
 			{"primary", Command::PRIMARY},
 			{"secondary", Command::SECONDARY},
 			{"select", Command::SELECT},
@@ -271,7 +278,8 @@ void Command::Load(const DataNode &node)
 			{"nearest asteroid", Command::NEAREST_ASTEROID},
 			{"wait", Command::WAIT},
 			{"stop", Command::STOP},
-			{"shift", Command::SHIFT}
+			{"shift", Command::SHIFT},
+			{"control", Command::CTRL}
 		};
 
 		auto it = lookup.find(node.Token(i));
@@ -345,6 +353,39 @@ double Command::Turn() const
 {
 	return turn;
 }
+
+
+
+// Set the thrust direction and amount to a value between -1 and 1.
+void Command::SetThrust(double amount)
+{
+	thrust = max(-1., min(1., amount));
+}
+
+
+
+// Get the thrust amount.
+double Command::Thrust() const
+{
+	return thrust;
+}
+
+
+
+// Set the lateral thrust direction and amount to a value between -1 and 1.
+void Command::SetLateralThrust(double amount)
+{
+	lateralThrust = max(-1., min(1., amount));
+}
+
+
+
+// Get the lateral thrust amount.
+double Command::LateralThrust() const
+{
+	return lateralThrust;
+}
+
 
 
 
