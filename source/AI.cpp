@@ -578,6 +578,12 @@ void AI::Step(const PlayerInfo &player, Command &activeCommands)
 		bool isPresent = (it->GetSystem() == playerSystem);
 		bool isStranded = IsStranded(*it);
 		bool thisIsLaunching = (isPresent && HasDeployments(*it));
+
+		// Check if this ship's government has the authority to enforce scans & fines in this system.
+		if(!scanPermissions.count(gov))
+			scanPermissions.emplace(gov, gov && gov->CanEnforce(player, playerSystem));
+
+
 		if(isStranded || it->IsDisabled())
 		{
 			// Derelicts never ask for help (only the player should repair them).
@@ -4333,10 +4339,6 @@ void AI::UpdateStrengths(map<const Government *, int64_t> &strength, const Syste
 	for(const auto &it : ships)
 	{
 		const Government *gov = it->GetGovernment();
-
-		// Check if this ship's government has the authority to enforce scans & fines in this system.
-		if(!scanPermissions.count(gov))
-			scanPermissions.emplace(gov, gov && gov->CanEnforce(playerSystem));
 
 		// Only have ships update their strength estimate once per second on average.
 		if(!gov || it->GetSystem() != playerSystem || it->IsDisabled() || Random::Int(60))
