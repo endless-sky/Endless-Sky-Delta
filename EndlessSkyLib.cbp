@@ -203,6 +203,7 @@
 		<Unit filename="source/ItemInfoDisplay.cpp" />
 		<Unit filename="source/ItemInfoDisplay.h" />
 		<Unit filename="source/JumpTypes.h" />
+		<Unit filename="source/LimitedEvents.h" />
 		<Unit filename="source/LineShader.cpp" />
 		<Unit filename="source/LineShader.h" />
 		<Unit filename="source/LoadPanel.cpp" />
@@ -332,6 +333,8 @@
 		<Unit filename="source/Sound.h" />
 		<Unit filename="source/SpaceportPanel.cpp" />
 		<Unit filename="source/SpaceportPanel.h" />
+		<Unit filename="source/SpawnedFleet.cpp" />
+		<Unit filename="source/SpawnedFleet.h" />
 		<Unit filename="source/Sprite.cpp" />
 		<Unit filename="source/Sprite.h" />
 		<Unit filename="source/SpriteQueue.cpp" />

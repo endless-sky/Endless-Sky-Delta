@@ -24,17 +24,21 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Command.h"
 #include "DrawList.h"
 #include "EscortDisplay.h"
+#include "Fleet.h"
 #include "Information.h"
+#include "LimitedEvents.h"
 #include "Point.h"
 #include "Preferences.h"
 #include "Radar.h"
 #include "Rectangle.h"
+#include "SpawnedFleet.h"
 
 #include <condition_variable>
 #include <list>
 #include <map>
 #include <memory>
 #include <thread>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -157,6 +161,12 @@ private:
 
 	void DoGrudge(const std::shared_ptr<Ship> &target, const Government *attacker);
 
+	size_t FleetPlacementLimit(const LimitedEvents<Fleet> &fleet, unsigned frames, bool requireGovernment);
+	size_t CountFleetsWithCategory(const std::string &category);
+	size_t CountNonDisabledFleetsWithCategory(const std::string &category);
+	void PruneSpawnedFleets();
+	void AddSpawnedFleet(const LimitedEvents<Fleet> &category);
+
 	void CreateStatusOverlays();
 	void EmplaceStatusOverlay(const std::shared_ptr<Ship> &ship, Preferences::OverlayState overlaySetting, int value);
 
@@ -170,6 +180,11 @@ private:
 	std::list<std::shared_ptr<Flotsam>> flotsam;
 	std::vector<Visual> visuals;
 	AsteroidField asteroids;
+	std::unordered_multimap<std::string, std::weak_ptr<SpawnedFleet>> spawnedFleets;
+	bool updateFleetCounters = false;
+
+	// Temporary usage while adding a fleet:
+	std::list<std::shared_ptr<Ship>> fleetShips;
 
 	// New objects created within the latest step:
 	std::list<std::shared_ptr<Ship>> newShips;
