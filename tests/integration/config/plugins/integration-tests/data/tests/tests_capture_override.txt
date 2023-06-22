@@ -130,7 +130,6 @@ test "Capture Uncapturable With Capturable Override"
 		input
 			key d
 		call "Land"
-		watchdog 1000
 		call "Wait 10 steps"
 		assert
 			"ship model: %TEST%: outfitless wardragon" == 1
