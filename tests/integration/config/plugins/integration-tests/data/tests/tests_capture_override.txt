@@ -108,6 +108,11 @@ test "Capture Uncapturable With Capturable Override"
 		call "Depart"
 		input
 			command board
+		label looping
+		apply
+			"test: board loop" += 1
+		branch looping
+			"test: board loop" < 30
 		label "floating"
 		# empty input to make time pass
 		input
