@@ -131,11 +131,7 @@ test "Capture Uncapturable With Capturable Override"
 			key d
 		call "Land"
 		watchdog 1000
-		label looping
-		apply
-			"test: loopControl" += 1
-		branch looping
-			"test: loopControl" < 30
+		call "Wait 10 steps"
 		assert
 			"ship model: %TEST%: outfitless wardragon" == 1
 			"test: %TEST%: Capture That Quarg!: declined" == 0
