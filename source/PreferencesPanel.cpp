@@ -557,6 +557,8 @@ void PreferencesPanel::DrawSettings()
 		"Show mini-map",
 		"Show asteroid scanner overlay",
 		"Always underline shortcuts",
+		"Show planet labels",
+		"Show mini-map",
 		"Clickable radar display",
 		ALERT_INDICATOR,
 		"Extra fleet status messages",

@@ -3738,6 +3738,18 @@ void Ship::DoGeneration()
 				if(fuelRemaining > 0.)
 					DoRepair(ship.fuel, fuelRemaining, ship.attributes.Get("fuel capacity"));
 			}
+
+			// Carried ships can recharge energy from their parent's batteries,
+			// if they are preparing for deployment. Otherwise, they replenish the
+			// parent's batteries.
+			for(const pair<double, Ship *> &it : carried)
+			{
+				Ship &ship = *it.second;
+				if(ship.HasDeployOrder())
+					DoRepair(ship.energy, energy, ship.attributes.Get("energy capacity"));
+				else
+					DoRepair(energy, ship.energy, attributes.Get("energy capacity"));
+			}
 		}
 		// Decrease the shield and hull delays by 1 now that shield generation
 		// and hull repair have been skipped over.
@@ -4324,7 +4336,6 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 				"thrusting energy" : "reverse thrusting energy");
 			if(cost > 0. && energy < cost)
 				thrustCommand *= energy / cost;
-			thrustMagnitude = thrustCommand * slowMultiplier;
 			cost = attributes.Get((thrustCommand > 0.) ?
 				"thrusting shields" : "reverse thrusting shields");
 			if(cost > 0. && shields < cost)
