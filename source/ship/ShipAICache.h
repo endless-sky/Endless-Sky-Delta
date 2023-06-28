@@ -49,10 +49,10 @@ private:
 	double shortestArtillery = 4000.;
 	double minSafeDistance = 0.;
 	double maxTurningRadius = 200.;
-	double turretRange = 0.;
-	double gunRange = 0.;
 	bool hasWeapons = false;
 	bool canFight = false;
+	double turretRange = 0.;
+	double gunRange = 0.;
 };
 
 
