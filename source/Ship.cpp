@@ -4505,7 +4505,7 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 				if((aNormal > 0.) != (vNormal > 0.) && fabs(aNormal) > fabs(vNormal))
 					dragAcceleration = -vNormal * angle.Unit();
 			}
-			if(velocity.Length() > MaxVelocity() || velocity.Length() < 0.1)
+			if(commands.Has(Command::STOP) || velocity.Length() > MaxVelocity() || velocity.Length() < 0.1)
 				velocity += dragAcceleration;
 			else
 				velocity += acceleration;
