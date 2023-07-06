@@ -2517,7 +2517,7 @@ void AI::MoveToAttack(Ship &ship, Command &command, const Body &target)
 		command.SetThrust(1.);
 
 	// Use an equipped afterburner if possible.
-	if(command.Has(Command::FORWARD) && direction.Length() < 1000. && ShouldUseAfterburner(ship))
+	if(command.Thrust() > 0 && direction.Length() < 1000. && ShouldUseAfterburner(ship))
 		command |= Command::AFTERBURNER;
 }
 
@@ -2546,7 +2546,7 @@ void AI::PickUp(Ship &ship, Command &command, const Body &target)
 
 	// Use the afterburner if it will not cause you to miss your target.
 	double squareDistance = p.LengthSquared();
-	if(command.Has(Command::FORWARD) && ShouldUseAfterburner(ship))
+	if(command.Thrust() > 0 && ShouldUseAfterburner(ship))
 		if(dp > max(.9, min(.9999, 1. - squareDistance / 10000000.)))
 			command |= Command::AFTERBURNER;
 }
@@ -3006,10 +3006,11 @@ bool AI::DoCloak(Ship &ship, Command &command)
 
 void AI::DoScatter(Ship &ship, Command &command)
 {
-	if(!command.Has(Command::FORWARD) && !command.Has(Command::BACK))
+	double thrust = command.Thrust();
+	if(!thrust)
 		return;
 
-	double flip = command.Has(Command::BACK) ? -1 : 1;
+	double flip = copysign(1, thrust);
 	double turnRate = ship.TurnRate();
 	double acceleration = ship.Acceleration();
 	// TODO: If there are many ships, use CollisionSet::Circle or another
