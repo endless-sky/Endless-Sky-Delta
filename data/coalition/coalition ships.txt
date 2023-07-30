@@ -1492,7 +1492,7 @@ ship "Heliarch Stalker"
 		"hull" 5200
 		"required crew" 1
 		"bunks" 2
-		"mass" 96 
+		"mass" 96
 		"drag" 2.1
 		"heat dissipation" 0.64
 		"outfit space" 117
