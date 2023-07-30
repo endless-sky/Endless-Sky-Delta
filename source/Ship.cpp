@@ -4500,7 +4500,8 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 	if(acceleration)
 	{
 		acceleration *= slowMultiplier;
-		Point dragAcceleration = acceleration - velocity * (Drag() / mass);
+		double drag = Drag();
+		Point dragAcceleration = acceleration - velocity * (drag / mass);
 		// Make sure dragAcceleration has nonzero length, to avoid divide by zero.
 		if(dragAcceleration)
 		{
@@ -4522,12 +4523,17 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 				double vNormal = velocity.Dot(angle.Unit());
 				double aNormal = dragAcceleration.Dot(angle.Unit());
 				if((aNormal > 0.) != (vNormal > 0.) && fabs(aNormal) > fabs(vNormal))
-					dragAcceleration = -vNormal * angle.Unit();
+				{
+					velocity = acceleration = Point();
+					return;
+				}
 			}
-			if(velocity.Length() > MaxVelocity() || velocity.Length() < 0.1)
-				velocity += dragAcceleration;
-			else
-				velocity += acceleration;
+			double maxSpeedSquared = MaxVelocity();
+			maxSpeedSquared *= maxSpeedSquared;
+			double speedSquared = velocity.LengthSquared();
+			if(!commands.Has(Command::STOP) && speedSquared < maxSpeedSquared)
+				dragAcceleration *= 1 - (speedSquared / maxSpeedSquared);
+			velocity += dragAcceleration;
 		}
 		acceleration = Point();
 	}
