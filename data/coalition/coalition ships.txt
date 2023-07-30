@@ -1536,9 +1536,7 @@ ship "Heliarch Stalker" "Heliarch Stalker (Scrappy)"
 		"Small Shield Module"
 		"Small Repair Module" 2
 		"Cooling Module"
-		
-		"Small Thrust Module"
-		"Small Steering Module"
+
 
 
 ship "Kimek Briar"
