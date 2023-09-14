@@ -583,7 +583,6 @@ void PreferencesPanel::DrawSettings()
 		"Show flagship data in HUD",
 		"Show planet labels",
 		"Show mini-map",
-		"Show asteroid scanner overlay",
 		"Clickable radar display",
 		ALERT_INDICATOR,
 		"Extra fleet status messages",
