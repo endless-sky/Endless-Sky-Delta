@@ -79,7 +79,7 @@ ship "Argosy"
 	sprite "ship/argosy"
 	thumbnail "thumbnail/argosy"
 	attributes
-		category "Light Freighter"
+		category "Medium Freighter"
 		"cost" 1960000
 		"shields" 4200
 		"hull" 2600
@@ -2074,7 +2074,7 @@ ship "Hauler II"
 	sprite "ship/hauler ii"
 	thumbnail "thumbnail/hauler ii"
 	attributes
-		category "Heavy Freighter"
+		category "Medium Freighter"
 		"cost" 2340000
 		"shields" 2900
 		"hull" 5200
@@ -2303,7 +2303,7 @@ ship "Heavy Shuttle"
 		"hull" 700
 		"required crew" 1
 		"bunks" 10
-		"mass" 90
+		"mass" 120
 		"drag" 1.9
 		"heat dissipation" .8
 		"fuel capacity" 500
@@ -3184,7 +3184,7 @@ ship "Scout"
 		"hull" 400
 		"required crew" 1
 		"bunks" 12
-		"mass" 110
+		"mass" 140
 		"drag" 3.4
 		"heat dissipation" .7
 		"fuel capacity" 800
@@ -3282,7 +3282,7 @@ ship "Shuttle"
 		"hull" 600
 		"required crew" 1
 		"bunks" 6
-		"mass" 70
+		"mass" 100
 		"drag" 1.7
 		"heat dissipation" .8
 		"fuel capacity" 400
@@ -3507,7 +3507,7 @@ ship "Star Barge"
 		"hull" 1000
 		"required crew" 1
 		"bunks" 3
-		"mass" 70
+		"mass" 100
 		"drag" 2.1
 		"heat dissipation" .8
 		"fuel capacity" 300
