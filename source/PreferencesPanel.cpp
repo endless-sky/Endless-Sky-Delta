@@ -589,7 +589,8 @@ void PreferencesPanel::DrawControls()
 	Table infoTable;
 	infoTable.AddColumn(125, {150, Alignment::RIGHT});
 	infoTable.SetUnderline(0, 130);
-	infoTable.DrawAt(Point(-400, 32));
+	// infoTable coordinates are Y axis (up/down), then X axis (left/right); -400,32
+	infoTable.DrawAt(Point(-400, 16));
 
 	infoTable.DrawUnderline(medium);
 	infoTable.Draw("Additional info", bright);
