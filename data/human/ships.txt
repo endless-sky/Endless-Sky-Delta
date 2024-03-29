@@ -2397,7 +2397,7 @@ ship "Hogshead"
 		"hull" 1900
 		"required crew" 18
 		"bunks" 84
-		"mass" 210
+		"mass" 840
 		"drag" 4.3
 		"heat dissipation" .55
 		"fuel capacity" 600
@@ -3815,7 +3815,7 @@ ship "Sunder"
 		"hull" 1600
 		"required crew" 3
 		"bunks" 5
-		"mass" 160
+		"mass" 320
 		"drag" 3.8
 		"heat dissipation" .7
 		"fuel capacity" 600
