@@ -42,7 +42,7 @@ ship "vyu-Ir"
 		"energy generation" 80
 		"heat generation" 20
 		
-		"thrust" 100
+		"thrust" 75
 		"thrusting energy" 20
 		"thrusting heat" 10
 		"flare sound" "impulse engine"

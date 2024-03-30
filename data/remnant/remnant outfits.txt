@@ -702,7 +702,7 @@ outfit "Anvil-Class Engine"
 	"mass" 26
 	"outfit space" -26
 	"engine capacity" -26
-	"thrust" 27.6
+	"thrust" 22
 	"thrusting energy" 2.05
 	"thrusting heat" 1.95
 	"turn" 539.2
@@ -732,7 +732,7 @@ outfit "Crucible-Class Thruster"
 	"mass" 20
 	"outfit space" -20
 	"engine capacity" -20
-	"thrust" 33.1
+	"thrust" 25
 	"thrusting energy" 2.1
 	"thrusting heat" 2.0
 	"reverse thrust" 12.4
@@ -756,7 +756,7 @@ outfit "Forge-Class Thruster"
 	"mass" 39
 	"outfit space" -39
 	"engine capacity" -39
-	"thrust" 68
+	"thrust" 51
 	"thrusting energy" 4.4
 	"thrusting heat" 4.25
 	"reverse thrust" 25.5
@@ -780,7 +780,7 @@ outfit "Smelter-Class Thruster"
 	"mass" 76
 	"outfit space" -76
 	"engine capacity" -76
-	"thrust" 142.2
+	"thrust" 107
 	"thrusting energy" 9.5
 	"thrusting heat" 9.6
 	"reverse thrust" 53.3

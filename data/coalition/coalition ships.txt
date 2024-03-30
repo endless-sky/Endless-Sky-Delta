@@ -1556,7 +1556,7 @@ ship "Heliarch Stalker"
 		"outfit space" 117
 		"weapon capacity" 43
 		"engine capacity" 0
-		"thrust" 6.6
+		"thrust" 4
 		"thrusting energy" 1.7
 		"thrusting heat" 11
 		"turn" 178.8
