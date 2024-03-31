@@ -37,11 +37,13 @@ public:
 	static const Command FORWARD;
 	static const Command LEFT;
 	static const Command RIGHT;
+	static const Command AUTOSTEER;
 	static const Command BACK;
 	static const Command MOUSE_TURNING_HOLD;
 	static const Command LATERALLEFT;
 	static const Command LATERALRIGHT;
 	static const Command PRIMARY;
+	static const Command TURRET_TRACKING;
 	static const Command SECONDARY;
 	static const Command SELECT;
 	static const Command LAND;
@@ -59,8 +61,10 @@ public:
 	// UI controls:
 	static const Command MAP;
 	static const Command INFO;
+	static const Command MESSAGE_LOG;
 	static const Command FULLSCREEN;
 	static const Command FASTFORWARD;
+	static const Command HELP;
 	// Escort commands:
 	static const Command FIGHT;
 	static const Command GATHER;
@@ -106,6 +110,7 @@ public:
 	// a combination of more than one command, an empty string is returned.
 	const std::string &Description() const;
 	const std::string &KeyName() const;
+	bool HasBinding() const;
 	bool HasConflict() const;
 
 	// Load this command from an input file (for testing or scripted missions).
