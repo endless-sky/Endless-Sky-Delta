@@ -659,7 +659,7 @@ outfit `"Bondir" Atomic Thruster`
 	"mass" 63
 	"outfit space" -63
 	"engine capacity" -63
-	"thrust" 188
+	"thrust" 93
 	"thrusting energy" 6.1
 	"thrusting heat" 12.7
 	"flare sprite" "effect/atomic flare/medium"

@@ -57,7 +57,7 @@ ship "Dolomite"
 	sprite "ship/gegno dolomite"
 	thumbnail "thumbnail/gegno dolomite"
 	attributes
-		category "Heavy Freighter"
+		category "Medium Freighter"
 		licenses
 			"Gegno Civilian"
 		"cost" 2768000
@@ -606,7 +606,7 @@ ship "Schist"
 	sprite "ship/gegno schist a"
 	thumbnail "thumbnail/gegno schist a"
 	attributes
-		category "Heavy Freighter"
+		category "Medium Freighter"
 		licenses
 			"Vi Evocati"
 		"cost" 3737000

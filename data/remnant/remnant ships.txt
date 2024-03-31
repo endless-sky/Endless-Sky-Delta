@@ -1001,8 +1001,8 @@ ship "Pelican"
 		"required crew" 14
 		"bunks" 35
 		"cargo space" 302
-		"mass" 1280
-		"drag" 7.2
+		"mass" 1200
+		"drag" 7.0
 		"heat dissipation" 0.7
 		"fuel capacity" 600
 		"ramscoop" 2.75

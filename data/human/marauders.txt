@@ -231,7 +231,7 @@ ship "Marauder Falcon"
 		"required crew" 57
 		"bunks" 96
 		"mass" 4480
-		"drag" 6.7
+		"drag" 6.8
 		"heat dissipation" .8
 		"fuel capacity" 600
 		"cargo space" 80

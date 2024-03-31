@@ -130,8 +130,8 @@ ship "Tanto"
 		"hull" 3600
 		"required crew" 3
 		"bunks" 7
-		"mass" 274
-		"drag" 3
+		"mass" 508
+		"drag" 3.1
 		"heat dissipation" 0.9
 		"fuel capacity" 600
 		"cargo space" 219

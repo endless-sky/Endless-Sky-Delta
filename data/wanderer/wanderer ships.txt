@@ -913,7 +913,7 @@ ship "Deep River Transport"
 		"hull" 47500
 		"required crew" 13
 		"bunks" 166
-		"mass" 750
+		"mass" 6000
 		"drag" 9.4
 		"heat dissipation" .6
 		"fuel capacity" 500

@@ -878,8 +878,8 @@ ship "Carrier"
 		"hull" 8300
 		"required crew" 111
 		"bunks" 184
-		"mass" 7280
-		"drag" 17.7
+		"mass" 7580
+		"drag" 19
 		"heat dissipation" .45
 		"fuel capacity" 700
 		"cargo space" 100
@@ -1278,7 +1278,7 @@ ship "Cruiser"
 		"required crew" 81
 		"bunks" 136
 		"mass" 5440
-		"drag" 10.1
+		"drag" 11
 		"heat dissipation" .45
 		"fuel capacity" 600
 		"cargo space" 60
@@ -1464,7 +1464,7 @@ ship "Dreadnought"
 		"required crew" 84
 		"bunks" 147
 		"mass" 5040
-		"drag" 10.1
+		"drag" 11
 		"heat dissipation" .65
 		"fuel capacity" 600
 		"cargo space" 100
@@ -1627,7 +1627,7 @@ ship "Falcon"
 		"required crew" 52
 		"bunks" 91
 		"mass" 4080
-		"drag" 6.7
+		"drag" 6.8
 		"heat dissipation" .7
 		"fuel capacity" 600
 		"cargo space" 130
