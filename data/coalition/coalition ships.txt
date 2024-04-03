@@ -31,7 +31,7 @@ ship "Arach Courier"
 		"outfit space" 148
 		"weapon capacity" 39
 		"engine capacity" 40
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -93,7 +93,7 @@ ship "Arach Freighter"
 		"outfit space" 349
 		"weapon capacity" 132
 		"engine capacity" 92
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -166,7 +166,7 @@ ship "Arach Hulk"
 		"outfit space" 520
 		"weapon capacity" 208
 		"engine capacity" 148
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -245,7 +245,7 @@ ship "Arach Spindle"
 		"outfit space" 434
 		"weapon capacity" 138
 		"engine capacity" 148
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -359,7 +359,7 @@ ship "Arach Transport"
 		"outfit space" 281
 		"weapon capacity" 96
 		"engine capacity" 70
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -431,7 +431,7 @@ ship "Heliarch Breacher"
 		"outfit space" 372
 		"weapon capacity" 112
 		"engine capacity" 106
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -552,7 +552,7 @@ ship "Heliarch Hunter"
 		"outfit space" 552
 		"weapon capacity" 201
 		"engine capacity" 141
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -741,7 +741,7 @@ ship "Heliarch Interdictor"
 		"outfit space" 544
 		"weapon capacity" 179
 		"engine capacity" 135
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -917,7 +917,7 @@ ship "Heliarch Judicator"
 		"outfit space" 524
 		"weapon capacity" 164
 		"engine capacity" 114
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1104,7 +1104,7 @@ ship "Heliarch Neutralizer"
 		"outfit space" 367
 		"weapon capacity" 72
 		"engine capacity" 102
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1228,7 +1228,7 @@ ship "Heliarch Punisher"
 		"outfit space" 885
 		"weapon capacity" 352
 		"engine capacity" 187
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1472,7 +1472,7 @@ ship "Heliarch Pursuer"
 		"outfit space" 105
 		"weapon capacity" 19
 		"engine capacity" 36
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1534,7 +1534,7 @@ ship "Heliarch Rover"
 		"outfit space" 125
 		"weapon capacity" 24
 		"engine capacity" 32
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1593,9 +1593,9 @@ ship "Heliarch Stalker"
 		"drag" 2.1
 		"heat dissipation" 0.64
 		"outfit space" 117
-		"weapon capacity" 0
-		"engine capacity" 16
-		"reverse thruster slot" 1
+		"weapon capacity" 43
+		"engine capacity" 0
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		"thrust" 4
@@ -1659,7 +1659,7 @@ ship "Kimek Briar"
 		"outfit space" 245
 		"weapon capacity" 89
 		"engine capacity" 60
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1723,7 +1723,7 @@ ship "Kimek Spire"
 		"outfit space" 489
 		"weapon capacity" 256
 		"engine capacity" 129
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1798,7 +1798,7 @@ ship "Kimek Thistle"
 		"outfit space" 321
 		"weapon capacity" 118
 		"engine capacity" 87
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1886,7 +1886,7 @@ ship "Kimek Thorn"
 		"outfit space" 133
 		"weapon capacity" 40
 		"engine capacity" 38
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -1948,7 +1948,7 @@ ship "Saryd Runabout"
 		"outfit space" 172
 		"weapon capacity" 44
 		"engine capacity" 42
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -2008,7 +2008,7 @@ ship "Saryd Sojourner"
 		"outfit space" 568
 		"weapon capacity" 202
 		"engine capacity" 156
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		weapon
@@ -2105,7 +2105,7 @@ ship "Saryd Traveler"
 		"outfit space" 466
 		"weapon capacity" 177
 		"engine capacity" 79
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1.5
 		"asteroid scan power" 36
@@ -2183,7 +2183,7 @@ ship "Saryd Visitor"
 		"outfit space" 320
 		"weapon capacity" 90
 		"engine capacity" 57
-		"reverse thruster slot" 1
+		"reverse thruster slot" 1.5
 		"steering slot" 1.5
 		"thruster slot" 1
 		weapon
