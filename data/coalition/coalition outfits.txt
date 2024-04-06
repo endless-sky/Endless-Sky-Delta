@@ -299,7 +299,7 @@ outfit "Small Thrust Module"
 	"cost" 66000
 	thumbnail "outfit/small thrust module"
 	"thruster slot" -0.25
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 9
 	"outfit space" -9
 	"engine capacity" -9
@@ -319,7 +319,7 @@ outfit "Large Thrust Module"
 	"cost" 292000
 	thumbnail "outfit/large thrust module"
 	"thruster slot" -0.5
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 32
 	"outfit space" -32
 	"engine capacity" -32

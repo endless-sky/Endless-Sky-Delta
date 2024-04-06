@@ -244,7 +244,7 @@ outfit "Pug Akfar Thruster"
 	"cost" 608000
 	thumbnail "outfit/pug akfar thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 43
 	"outfit space" -43
 	"engine capacity" -43
@@ -277,7 +277,7 @@ outfit "Pug Cormet Thruster"
 	"cost" 1050000
 	thumbnail "outfit/pug cormet thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 60
 	"outfit space" -60
 	"engine capacity" -60
@@ -310,7 +310,7 @@ outfit "Pug Lohmar Thruster"
 	"cost" 1740000
 	thumbnail "outfit/pug lohmar thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 84
 	"outfit space" -84
 	"engine capacity" -84

@@ -148,7 +148,7 @@ namespace {
 				<< "hull" << ',' << "mass" << ',' << "drag" << ',' << "heat dissipation" << ','
 				<< "required crew" << ',' << "bunks" << ',' << "cargo space" << ',' << "fuel" << ','
 				<< "outfit space" << ',' << "weapon capacity" << ',' << "engine capacity" << ','
-				<< "afterburner slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ',' << "thruster slot" << ','
+				<< "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ',' << "thruster slot" << ','
 				<< "gun mounts" << ',' << "turret mounts" << ',' << "fighter bays" << ',' << "drone bays" << '\n';
 
 			for(auto &it : GameData::Ships())
@@ -179,7 +179,7 @@ namespace {
 				cout << attributes.Get("outfit space") << ',';
 				cout << attributes.Get("weapon capacity") << ',';
 				cout << attributes.Get("engine capacity") << ',';
-				cout << attributes.Get("afterburner slot") << ',';
+				cout << attributes.Get("propulsion accessory slot") << ',';
 				cout << attributes.Get("reverse thruster slot") << ',';
 				cout << attributes.Get("steering slot") << ',';
 				cout << attributes.Get("thruster slot") << ',';
@@ -206,7 +206,7 @@ namespace {
 			cout << "model" << ',' << "category" << ',' << "cost" << ',' << "shields" << ','
 				<< "hull" << ',' << "mass" << ',' << "required crew" << ',' << "bunks" << ','
 				<< "cargo space" << ',' << "fuel" << ',' << "outfit space" << ',' << "weapon capacity" << ','
-				<< "engine capacity" << "afterburner slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
+				<< "engine capacity" << "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
 				<< "thruster slot" << ',' << "speed" << ',' << "accel" << ',' << "turn" << ','
 				<< "energy generation" << ',' << "max energy usage" << ',' << "energy capacity" << ','
 				<< "idle/max heat" << ',' << "max heat generation" << ',' << "max heat dissipation" << ','
@@ -238,7 +238,7 @@ namespace {
 				cout << ship.BaseAttributes().Get("outfit space") << ',';
 				cout << ship.BaseAttributes().Get("weapon capacity") << ',';
 				cout << ship.BaseAttributes().Get("engine capacity") << ',';
-				cout << ship.BaseAttributes().Get("afterburner slot") << ',';
+				cout << ship.BaseAttributes().Get("propulsion accessory slot") << ',';
 				cout << ship.BaseAttributes().Get("reverse thruster slot") << ',';
 				cout << ship.BaseAttributes().Get("steering slot") << ',';
 				cout << ship.BaseAttributes().Get("thruster slot") << ',';
@@ -447,7 +447,7 @@ namespace {
 		auto PrintEngineStats = []() -> void
 		{
 			cout << "name" << ',' << "cost" << ',' << "mass" << ',' << "outfit space" << ','
-				<< "engine capacity" << "afterburner slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
+				<< "engine capacity" << "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
 				<< "thruster slot" << ',' << "thrust/s" << ',' << "thrust energy/s" << ','
 				<< "thrust heat/s" << ',' << "turn/s" << ',' << "turn energy/s" << ','
 				<< "turn heat/s" << ',' << "reverse thrust/s" << ',' << "reverse energy/s" << ','
@@ -466,7 +466,7 @@ namespace {
 				cout << outfit.Mass() << ',';
 				cout << outfit.Get("outfit space") << ',';
 				cout << outfit.Get("engine capacity") << ',';
-				cout << outfit.Get("afterburner slot") << ',';
+				cout << outfit.Get("propulsion accessory slot") << ',';
 				cout << outfit.Get("reverse thruster slot") << ',';
 				cout << outfit.Get("steering slot") << ',';
 				cout << outfit.Get("thruster slot") << ',';

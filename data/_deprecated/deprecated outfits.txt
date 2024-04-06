@@ -59,7 +59,7 @@ outfit "Korath Ark'torbal Thruster"
 	"cost" 40000
 	thumbnail "outfit/unknown"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 17
 	"outfit space" -17
 	"engine capacity" -17
@@ -89,7 +89,7 @@ outfit "Korath Jak'torbal Thruster"
 	"cost" 317000
 	thumbnail "outfit/unknown"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 89
 	"outfit space" -89
 	"engine capacity" -89
@@ -230,7 +230,7 @@ outfit "Afterburner"
 	category "Engines"
 	"cost" 70000
 	thumbnail "outfit/afterburner"
-	"afterburner slot" -1
+	"propulsion accessory slot" -1
 	"mass" 10
 	"outfit space" -10
 	"engine capacity" -10

@@ -441,28 +441,28 @@ ShopPanel::BuyResult OutfitterPanel::CanBuy(bool onlyOwned) const
 				+ Format::CargoString(engineNeeded, "engine space") + ", and this ship has "
 				+ Format::MassString(engineSpace) + " free.";
 
-		int afterburnerSlotNeeded = -selectedOutfit->Get("afterburner slot");
-		int afterburnerSlotFree = playerShip->Attributes().Get("afterburner slot");
-		if(afterburnerSlotNeeded && !afterburnerSlotFree)
-			return "This afterbuner is designed to be installed in an afterburner slot, "
-				"but your ship does not have any unused afterburner slots available.";
+		int propulsionAccessorySlotNeeded = -selectedOutfit->Get("propulsion accessory slot");
+		int propulsionAccessorySlotFree = playerShip->Attributes().Get("propulsion accessory slot");
+		if(propulsionAccessorySlotNeeded && !propulsionAccessorySlotFree)
+			return "This afterbuner is designed to be installed in a dedicated slot, "
+				"but your ship does not have any unused propulsion accessory slots available.";
 
 		int reverseThrusterSlotNeeded = -selectedOutfit->Get("reverse thruster slot");
 		int reverseThrusterSlotFree = playerShip->Attributes().Get("reverse thruster slot");
 		if(reverseThrusterSlotNeeded && !reverseThrusterSlotFree)
-			return "This reverse thruster is designed to be installed in a reverse thruster slot, "
+			return "This reverse thruster is designed to be installed in a dedicated slot, "
 				"but your ship does not have any unused reverse thruster slots available.";
 
 		int steeringSlotNeeded = -selectedOutfit->Get("steering slot");
 		int steeringSlotFree = playerShip->Attributes().Get("steering slot");
 		if(steeringSlotNeeded && !steeringSlotFree)
-			return "This steering is designed to be installed in a steering slot, "
+			return "This steering is designed to be installed in a dedicated slot, "
 				"but your ship does not have any unused steering slots available.";
 
 		int thrusterSlotNeeded = -selectedOutfit->Get("thruster slot");
 		int thrusterSlotFree = playerShip->Attributes().Get("thruster slot");
 		if(thrusterSlotNeeded && !thrusterSlotFree)
-			return "This thruster is designed to be installed in a thruster slot, "
+			return "This thruster is designed to be installed in a dedicated slot, "
 				"but your ship does not have any unused thruster slots available.";
 
 		if(selectedOutfit->Category() == "Ammunition")

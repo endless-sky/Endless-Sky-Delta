@@ -224,7 +224,7 @@ outfit "Chiisana Rift Thruster"
 	cost 130000
 	thumbnail "outfit/chiisana rift thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 11
 	"outfit space" -11
 	"engine capacity" -11
@@ -243,7 +243,7 @@ outfit "Nami Rift Thruster"
 	cost 262000
 	thumbnail "outfit/nami rift thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 19
 	"outfit space" -19
 	"engine capacity" -19
@@ -262,7 +262,7 @@ outfit "Ookii Rift Thruster"
 	cost 512000
 	thumbnail "outfit/ookii rift thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 32
 	"outfit space" -32
 	"engine capacity" -32
@@ -281,7 +281,7 @@ outfit "Subarashii Rift Thruster"
 	cost 1004000
 	thumbnail "outfit/subarashii rift thruster"
 	"thruster slot" -1
-	"afterburner slot" 1
+	"propulsion accessory slot" 1
 	"mass" 55
 	"outfit space" -55
 	"engine capacity" -55
