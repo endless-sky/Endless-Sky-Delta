@@ -330,8 +330,8 @@ void OutfitInfoDisplay::UpdateRequirements(const Outfit &outfit, const PlayerInf
 	requirementsHeight += 10;
 
 	bool hasContent = false;
-	static const vector<string> BEFORE = {"outfit space", "weapon capacity", "engine capacity", "propulsion accessory slot",
-		"reverse thruster slot", "steering slot", "thruster slot"};
+	static const vector<string> BEFORE = {"outfit space", "weapon capacity", "engine capacity",
+		"propulsion accessory slot", "reverse thruster slot", "steering slot", "thruster slot"};
 	for(const auto &attr : BEFORE)
 	{
 		if(outfit.Get(attr) < 0)

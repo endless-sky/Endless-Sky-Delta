@@ -144,12 +144,13 @@ namespace {
 	{
 		auto PrintBaseShipStats = []() -> void
 		{
-			cout << "model" << ',' << "category" << ',' << "chassis cost" << ',' << "loaded cost" << ',' << "shields" << ','
-				<< "hull" << ',' << "mass" << ',' << "drag" << ',' << "heat dissipation" << ','
+			cout << "model" << ',' << "category" << ',' << "chassis cost" << ',' << "loaded cost" << ','
+				<< "shields" << ',' << "hull" << ',' << "mass" << ',' << "drag" << ',' << "heat dissipation" << ','
 				<< "required crew" << ',' << "bunks" << ',' << "cargo space" << ',' << "fuel" << ','
 				<< "outfit space" << ',' << "weapon capacity" << ',' << "engine capacity" << ','
-				<< "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ',' << "thruster slot" << ','
-				<< "gun mounts" << ',' << "turret mounts" << ',' << "fighter bays" << ',' << "drone bays" << '\n';
+				<< "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
+				<< "thruster slot" << ',' << "gun mounts" << ',' << "turret mounts" << ',' << "fighter bays" << ','
+				<< "drone bays" << '\n';
 
 			for(auto &it : GameData::Ships())
 			{
@@ -203,10 +204,10 @@ namespace {
 
 		auto PrintLoadedShipStats = [](bool variants) -> void
 		{
-			cout << "model" << ',' << "category" << ',' << "cost" << ',' << "shields" << ','
-				<< "hull" << ',' << "mass" << ',' << "required crew" << ',' << "bunks" << ','
-				<< "cargo space" << ',' << "fuel" << ',' << "outfit space" << ',' << "weapon capacity" << ','
-				<< "engine capacity" << "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
+			cout << "model" << ',' << "category" << ',' << "cost" << ',' << "shields" << ',' << "hull" << ','
+				<< "mass" << ',' << "required crew" << ',' << "bunks" << ',' << "cargo space" << ',' << "fuel" << ','
+				<< "outfit space" << ',' << "weapon capacity" << ',' << "engine capacity" << ','
+				<< "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
 				<< "thruster slot" << ',' << "speed" << ',' << "accel" << ',' << "turn" << ','
 				<< "energy generation" << ',' << "max energy usage" << ',' << "energy capacity" << ','
 				<< "idle/max heat" << ',' << "max heat generation" << ',' << "max heat dissipation" << ','
@@ -447,12 +448,12 @@ namespace {
 		auto PrintEngineStats = []() -> void
 		{
 			cout << "name" << ',' << "cost" << ',' << "mass" << ',' << "outfit space" << ','
-				<< "engine capacity" << "propulsion accessory slot" << ',' << "reverse thruster slot" << ',' << "steering slot" << ','
-				<< "thruster slot" << ',' << "thrust/s" << ',' << "thrust energy/s" << ','
-				<< "thrust heat/s" << ',' << "turn/s" << ',' << "turn energy/s" << ','
-				<< "turn heat/s" << ',' << "reverse thrust/s" << ',' << "reverse energy/s" << ','
-				<< "reverse heat/s" << ',' << "afterburner thrust/s" << ',' << "afterburner energy/s" << ','
-				<< "afterburner heat/s" << ',' << "afterburner fuel/s" << '\n';
+				<< "engine capacity" << "propulsion accessory slot" << ',' << "reverse thruster slot" << ','
+				<< "steering slot" << ',' << "thruster slot" << ',' << "thrust/s" << ',' << "thrust energy/s" << ','
+				<< "thrust heat/s" << ',' << "turn/s" << ',' << "turn energy/s" << ',' << "turn heat/s" << ','
+				<< "reverse thrust/s" << ',' << "reverse energy/s" << ',' << "reverse heat/s" << ','
+				<< "afterburner thrust/s" << ',' << "afterburner energy/s" << ',' << "afterburner heat/s" << ','
+				<< "afterburner fuel/s" << '\n';
 
 			for(auto &it : GameData::Outfits())
 			{
