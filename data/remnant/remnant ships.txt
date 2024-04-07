@@ -107,7 +107,7 @@ ship "Albatross" "Albatross (Sniper)"
 		"Tuning Rifle" 57
 
 		"Forge-Class Thruster"
-		"Crucible-Class Thruster"
+		# "Crucible-Class Thruster" # Extra thruster
 		"Smelter-Class Steering"
 		"Scram Drive"
 
@@ -165,9 +165,9 @@ ship "Albatross" "Albatross (Heavy)"
 		"Tuning Rifle" 65
 
 		"Forge-Class Thruster"
-		"Crucible-Class Thruster"
+		# "Crucible-Class Thruster" # Extra thruster
 		"Smelter-Class Steering"
-		"Forge-Class Steering"
+		# "Forge-Class Steering" # Extra steering
 		"Scram Drive"
 
 	gun "Inhibitor Cannon"
@@ -253,7 +253,7 @@ ship "Albatross" "Albatross (Sniper II)"
 		"Tuning Rifle" 57
 
 		"Forge-Class Thruster"
-		"Crucible-Class Thruster"
+		# "Crucible-Class Thruster" # Extra thruster
 		"Smelter-Class Steering"
 		"Scram Drive"
 

@@ -1458,7 +1458,7 @@ ship "Arch-Carrack"
 		"Thermal Repeater Rifle" 55
 		
 		"Gaktem GP Hybrid Thruster"
-		"Farves GP Hybrid Thruster"
+		# "Farves GP Hybrid Thruster" # Extra thruster
 		"Gaktem GP Hybrid Steering"
 		"Scram Drive"
 

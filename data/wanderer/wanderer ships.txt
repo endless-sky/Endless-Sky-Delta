@@ -443,9 +443,9 @@ ship "Derecho"
 		"Wanderer Ramscoop"
 		
 		"Type 4 Radiant Thruster"
-		"Type 1 Radiant Thruster"
+		# "Type 1 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
-		"Type 3 Radiant Steering"
+		# "Type 3 Radiant Steering" # Extra steering
 		"Hyperdrive"
 		
 	engine -16 177
@@ -477,9 +477,9 @@ ship "Derecho" "Derecho (Turret)"
 		"Wanderer Ramscoop"
 		
 		"Type 4 Radiant Thruster"
-		"Type 2 Radiant Thruster"
+		# "Type 2 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
-		"Type 2 Radiant Steering"
+		# "Type 2 Radiant Steering" # Extra steering
 		"Hyperdrive"
 
 ship "Derecho" "Derecho (Tough)"
@@ -494,7 +494,7 @@ ship "Derecho" "Derecho (Tough)"
 		"Outfits Expansion"
 		
 		"Type 4 Radiant Thruster"
-		"Type 4 Radiant Steering" 2
+		"Type 4 Radiant Steering" # Extra steering
 		"Hyperdrive"
 	
 	turret "Dual Sunbeam Turret"
@@ -517,9 +517,9 @@ ship "Derecho" "Derecho (Moonbeam)"
 		"Wanderer Ramscoop"
 		
 		"Type 4 Radiant Thruster"
-		"Type 1 Radiant Thruster"
+		# "Type 1 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
-		"Type 3 Radiant Steering"
+		# "Type 3 Radiant Steering" # Extra steering
 		"Hyperdrive"
 	
 	gun "Moonbeam"

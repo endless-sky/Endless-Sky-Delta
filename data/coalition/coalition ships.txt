@@ -263,8 +263,8 @@ ship "Arach Spindle"
 		
 		"Large Thrust Module" 2
 		"Large Reverse Module" 2
-		"Small Thrust Module" 3
-		"Small Reverse Module" 3
+		"Small Thrust Module" 2
+		"Small Reverse Module" 2
 		"Large Steering Module" 2
 		"Small Steering Module" 1
 		"Hyperdrive"
@@ -298,8 +298,8 @@ ship "Arach Spindle" "Arach Spindle (Miner)"
 		"Large Thrust Module" 2
 		"Large Reverse Module" 2
 		"Large Steering Module" 2
-		"Small Thrust Module" 3
-		"Small Reverse Module" 3
+		"Small Thrust Module" 2
+		"Small Reverse Module" 2
 		"Small Steering Module"
 		"Hyperdrive"
 
@@ -311,7 +311,7 @@ ship "Arach Spindle" "Arach Spindle (Plasma)"
 		"Small Repair Module" 2
 		"Large Repair Module"
 		"Cooling Module" 5
-		"Small Thrust Module" 3
+		"Small Thrust Module" 2
 		"Large Thrust Module" 2
 		"Small Steering Module"
 		"Small Battery Module"
@@ -333,7 +333,7 @@ ship "Arach Spindle" "Arach Spindle (Jump Drive)"
 		"Fuel Module" 4
 		
 		"Large Thrust Module" 2
-		"Small Thrust Module" 3
+		"Small Thrust Module" 2
 		"Large Steering Module" 2
 		"Small Steering Module"
 		"Jump Drive"

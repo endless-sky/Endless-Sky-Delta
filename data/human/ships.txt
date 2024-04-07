@@ -241,7 +241,7 @@ ship "Auxiliary"
 		"Ramscoop"
 		
 		"X4700 Ion Thruster"
-		"X1700 Ion Thruster"
+		# "X1700 Ion Thruster" # Extra thruster
 		"X5200 Ion Steering"
 		"Scram Drive"
 	engine -41. 180.5 0.45
@@ -548,7 +548,7 @@ ship "Behemoth"
 		
 		"X3700 Ion Thruster"
 		"X3200 Ion Steering"
-		"X1100 Ion Reverse Thruster" 2
+		"X1100 Ion Reverse Thruster" 1 # Extra reverse thruster
 		"Scram Drive"
 		
 	engine -34 143 0.8

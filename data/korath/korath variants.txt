@@ -487,11 +487,11 @@ ship "'olofez" "'olofez (World-Ship)"
 		"atmosphere scan" 1
 	outfits
 		"Generator (Candle Class)"
-		"Systems Core (Tiny)"
+		# "Systems Core (Tiny)" Removed in favor of the Engine for compatibility with the slots system. If the Korath had a smaller generator (<=9, then using that instead of the candle would be better)
 		"Small Bunk Room"
 		"Thermal Repeater Rifle" 3
 		
-		"Steering (Asteroid Class)"
+		"Engine (Meteor Class)"
 		"Afterburner (Asteroid Class)"
 		"Hyperdrive"
 
