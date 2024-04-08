@@ -864,7 +864,7 @@ ship "Ibis"
 		"Tuning Rifle" 20
 		
 		"Forge-Class Thruster"
-		"Forge-Class Steering" 2
+		"Forge-Class Steering" # Extra steering
 		"Scram Drive"
 		
 	bay "Drone" 0 30 over
@@ -965,7 +965,7 @@ ship "Merganser"
 		"Small Heat Shunt"
 		"Quantum Key Stone"
 		
-		"Crucible-Class Thruster"
+		# "Crucible-Class Thruster" Extra thruster
 		"Anvil-Class Engine"
 		"Bellows-Class Afterburner"
 		"Scram Drive"
@@ -994,7 +994,7 @@ ship "Merganser" "Merganser (II)"
 		"Small Heat Shunt"
 		"Quantum Key Stone"
 		
-		"Crucible-Class Thruster"
+		# "Crucible-Class Thruster" Extra Thruster
 		"Anvil-Class Engine"
 		"Bellows-Class Afterburner"
 		"Scram Drive"

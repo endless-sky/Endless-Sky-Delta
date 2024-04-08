@@ -2725,7 +2725,7 @@ ship "Mammoth"
 		"Catalytic Ramscoop"
 		"Laser Rifle" 18
 		
-		"Volcano Afterburner" 2
+		"Volcano Afterburner" # Extra afterburner
 		"AR120 Reverse Thruster"
 		"A370 Atomic Thruster"
 		"A375 Atomic Steering"

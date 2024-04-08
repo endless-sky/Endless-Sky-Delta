@@ -1777,7 +1777,7 @@ ship "Firebird" "Firebird (CCOR)"
 		"Outfit Scanner"
 		"Laser Rifle" 22
 		"Security Station"
-		"Chipmunk Plasma Steering"
+		# "Chipmunk Plasma Steering" # Extra Steering
 		"Greyhound Plasma Thruster"
 		"Greyhound Plasma Steering"
 		"Hyperdrive"
@@ -2181,7 +2181,7 @@ ship "Hauler II" "Hauler II (CCOR)"
 		"Laser Rifle" 12
 		"Security Station" 2
 		"Capybara Reverse Thruster"
-		"Chipmunk Plasma Thruster"
+		# "Chipmunk Plasma Thruster" # Extra 1
 		"Greyhound Plasma Thruster"
 		"Greyhound Plasma Steering"
 		"Scram Drive"
@@ -2538,7 +2538,7 @@ ship "Leviathan" "Leviathan (CCOR)"
 		"Security Station"
 		"Impala Plasma Thruster"
 		"Impala Plasma Steering"
-		"Chipmunk Plasma Steering"
+		# "Chipmunk Plasma Steering" # Extra steering
 		"Scram Drive"
 
 
@@ -2636,7 +2636,7 @@ ship "Marauder Firebird" "Marauder Firebird (Hai)"
 		"Outfits Expansion"
 		"Laser Rifle" 25
 		`"Biroo" Atomic Thruster`
-		`"Basrem" Atomic Steering`
+		# `"Basrem" Atomic Steering` # Extra steering
 		`"Bondir" Atomic Steering`
 		"Hyperdrive"
 

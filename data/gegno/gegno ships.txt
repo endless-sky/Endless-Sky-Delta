@@ -189,7 +189,7 @@ ship "Granofel"
 		"C7 Brawl Cell"
 		"R02 Battlezone Battery"
 		
-		"RG18 Torch Thruster" 2
+		"RG18 Torch Thruster" # Extra thruster
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine -36 114
@@ -247,7 +247,7 @@ ship "Gypsum"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
-		"RG15 Torch Steering"
+		# "RG15 Torch Steering" # Extra Steering
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine 0 124
@@ -301,7 +301,7 @@ ship "Corundum"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
-		"RG18 Torch Steering" 2
+		"RG18 Torch Steering" # Extra Steering
 		"Hyperdrive"
 	engine 58 -58
 	engine -58 -58
@@ -1090,9 +1090,9 @@ ship "Granulite"
 		"R03 Warforge Battery" 3
 		"Savagery Pike" 53
 		
-		"RG3 Torch Thruster"
+		# "RG3 Torch Thruster" # Extra thruster
 		"RG15 Torch Thruster"
-		"RG3 Torch Steering"
+		# "RG3 Torch Steering"  # Extra Steering
 		"RG15 Torch Steering"
 		"Hyperdrive"
 	engine 0 266
@@ -1381,7 +1381,7 @@ ship "Felsic"
 		
 		"SC-14 Plasma Thruster"
 		"SC-14 Plasma Steering"
-		"SC-12 Plasma Steering"
+		# "SC-12 Plasma Steering" # Extra Steering
 		"Hyperdrive"
 	engine -18.5 155.5
 	engine 18.5 155.5
@@ -1437,7 +1437,7 @@ ship "Feldspar"
 		"Plasma Grenades" 66
 		
 		"SC-15 Plasma Thrusters"
-		"SC-12 Plasma Steering"
+		# "SC-12 Plasma Steering" # Extra thruster
 		"SC-14 Plasma Steering"
 		"Hyperdrive"
 	engine 31 194
@@ -1531,7 +1531,7 @@ ship "Epidote"
 		"Plasma Grenades" 51
 		
 		"SC-15 Plasma Thrusters"
-		"SC-14 Plasma Steering" 2
+		"SC-14 Plasma Steering" # Extra Steering
 		"Hyperdrive"
 	engine 64 188
 	engine -64 188
@@ -1601,8 +1601,8 @@ ship "Kyanite"
 		"Plasmasickle" 33
 		"Plasma Grenades" 33
 
-		"SC-14 Plasma Thruster" 2
-		"SC-14 Plasma Steering" 2
+		"SC-14 Plasma Thruster"  # Extra thruster
+		"SC-14 Plasma Steering"  # Extra steering
 		"Hyperdrive"
 	"steering engine" -84 -100 0.5
 		angle 58.5
@@ -1639,8 +1639,8 @@ ship "Kyanite" "Kyanite (Guile)"
 		"Plasmasickle" 33
 		"Plasma Grenades" 33
 
-		"SC-14 Plasma Thruster" 2
-		"SC-14 Plasma Steering" 2
+		"SC-14 Plasma Thruster" # Extra thruster
+		"SC-14 Plasma Steering" # Extra steering
 		"Hyperdrive"
 
 	gun "Guile Pulse Laser"
@@ -1658,8 +1658,8 @@ ship "Kyanite" "Kyanite (Acumen)"
 		"Plasmasickle" 33
 		"Plasma Grenades" 33
 
-		"SC-14 Plasma Thruster" 2
-		"SC-14 Plasma Steering" 2
+		"SC-14 Plasma Thruster" # Extra thruster
+		"SC-14 Plasma Steering" # Extra steering
 		"Hyperdrive"
 
 	gun

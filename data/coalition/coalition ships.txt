@@ -866,7 +866,7 @@ ship "Heliarch Interdictor" "Heliarch Interdictor (Missile)"
 		"Enforcer Confrontation Gear" 28
 
 		"Large Thrust Module" 3
-		"Small Thrust Module"
+		# "Small Thrust Module" # Extra thruster
 		"Large Steering Module"
 		"Hyperdrive"
 
@@ -1032,7 +1032,7 @@ ship "Heliarch Judicator" "Heliarch Judicator (Missile)"
 		"Enforcer Confrontation Gear" 36
 		
 		"Large Thrust Module" 2
-		"Small Thrust Module" 3
+		"Small Thrust Module" 2  # Extra thruster
 		"Small Steering Module" 3
 		"Scram Drive"
 
@@ -1254,7 +1254,7 @@ ship "Heliarch Punisher"
 		"Large Thrust Module" 2
 		"Small Thrust Module" 2
 		"Large Steering Module" 2
-		"Small Steering Module" 3
+		"Small Steering Module" 2 # Extra steering
 		"Hyperdrive"
 	
 	engine -24 184 .6
@@ -1297,7 +1297,7 @@ ship "Heliarch Punisher" "Heliarch Punisher (Burst Fire)"
 		"Large Thrust Module" 3
 		"Small Thrust Module" 2
 		"Large Steering Module" 2
-		"Small Steering Module" 3
+		"Small Steering Module" 2 # Extra steering
 		"Hyperdrive"
 	
 	gun "Finisher Maegrolain"
@@ -1348,7 +1348,7 @@ ship "Heliarch Punisher" "Heliarch Punisher (Interdicting)"
 		"Enforcer Confrontation Gear" 42
 		
 		"Large Thrust Module" 2
-		"Small Thrust Module" 3
+		"Small Thrust Module" 2 # Extra thruster
 		"Large Steering Module" 2
 		"Small Steering Module" 2
 		"Hyperdrive"
@@ -1382,7 +1382,7 @@ ship "Heliarch Punisher" "Heliarch Punisher (Ions)"
 
 		"Large Thrust Module" 3
 		"Large Steering Module" 2
-		"Small Steering Module" 3
+		"Small Steering Module" 2 # Extra steering
 		"Hyperdrive"
 
 ship "Heliarch Punisher" "Heliarch Punisher (Missile)"
@@ -1401,7 +1401,7 @@ ship "Heliarch Punisher" "Heliarch Punisher (Missile)"
 		"Enforcer Riot Staff" 85
 		"Enforcer Confrontation Gear" 40
 		
-		"Large Thrust Module" 4
+		"Large Thrust Module" 3 # Extra thrust
 		"Large Steering Module" 2
 		"Small Steering Module"
 		"Hyperdrive"
@@ -1426,8 +1426,8 @@ ship "Heliarch Punisher" "Heliarch Punisher (Pure Finishers)"
 		"Enforcer Riot Staff" 71
 		"Enforcer Confrontation Gear" 40
 
-		"Large Thrust Module" 4
-		"Small Thrust Module"
+		"Large Thrust Module" 3 # Extra thruster
+		# "Small Thrust Module" # Extra thruster
 		"Large Steering Module" 2
 		"Hyperdrive"
 
@@ -1449,8 +1449,8 @@ ship "Heliarch Punisher" "Heliarch Punisher (Scrappy)"
 		
 		"Large Thrust Module" 2
 		"Small Thrust Module"
-		"Large Steering Module" 4
-		"Small Steering Module" 2
+		"Large Steering Module" 3 # Extra steering
+		# "Small Steering Module" 2 # Extra steering
 		"Hyperdrive"
 
 

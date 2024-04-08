@@ -1131,9 +1131,9 @@ ship "Korsmanath A'awoj"
 		"outfit space" 3180
 		"weapon capacity" 1148
 		"engine capacity" 480
-		"reverse thruster slot" 1
-		"steering slot" 1
-		"thruster slot" 1
+		"reverse thruster slot" 2
+		"steering slot" 2
+		"thruster slot" 2
 		"atmosphere scan" 100
 		weapon
 			"blast radius" 400

@@ -733,7 +733,7 @@ ship "Ladybug" "Ladybug (Tracker)"
 		"Boulder Reactor"
 		"Pulse Rifle" 7
 		
-		`"Basrem" Atomic Steering`
+		# `"Basrem" Atomic Steering` # Extra steering
 		`"Biroo" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Hyperdrive"

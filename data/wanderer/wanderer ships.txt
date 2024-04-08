@@ -574,7 +574,7 @@ ship "Hurricane"
 		
 		"Type 4 Radiant Thruster"
 		"Type 4 Radiant Steering"
-		"Type 2 Radiant Steering"
+		# "Type 2 Radiant Steering" # Extra steering
 		"Hyperdrive"
 		
 	engine -23 181
@@ -608,7 +608,7 @@ ship "Hurricane" "Hurricane (Turret)"
 		"Wanderer Ramscoop"
 		
 		"Type 4 Radiant Thruster"
-		"Type 2 Radiant Thruster"
+		# "Type 2 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
 		"Hyperdrive"
 
@@ -627,9 +627,9 @@ ship "Hurricane" "Hurricane (Tough)"
 		"Outfits Expansion" 2
 		
 		"Type 4 Radiant Thruster"
-		"Type 1 Radiant Thruster"
+		# "Type 1 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
-		"Type 1 Radiant Steering"
+		# "Type 1 Radiant Steering" # Extra steering
 		"Hyperdrive"
 
 	gun "Sunbeam"
@@ -659,7 +659,7 @@ ship "Hurricane" "Hurricane (Moonbeam)"
 		
 		"Type 4 Radiant Thruster"
 		"Type 4 Radiant Steering"
-		"Type 2 Radiant Steering"
+		# "Type 2 Radiant Steering" # Extra steering
 		"Hyperdrive"
 	
 	gun "Moonbeam"
