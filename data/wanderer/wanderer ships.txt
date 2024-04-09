@@ -1026,9 +1026,9 @@ ship "Riptide"
 		"Wanderer Ramscoop"
 		
 		"Type 4 Radiant Thruster"
-		"Type 2 Radiant Thruster"
+		# "Type 2 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
-		"Type 3 Radiant Steering"
+		# "Type 3 Radiant Steering" # Extra steering
 		"Hyperdrive"
 	engine 30 165
 	engine -30 165

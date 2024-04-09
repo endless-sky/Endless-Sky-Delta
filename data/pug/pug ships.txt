@@ -228,7 +228,7 @@ ship "Pug Arfecta"
 		"Pug Peacekeeping Staff" 36
 		
 		"Pug Lohmar Thruster"
-		"Pug Lohmar Steering" 2
+		"Pug Lohmar Steering" # Extra steering
 		"Jump Drive"
 	
 	engine -17.5 157.5

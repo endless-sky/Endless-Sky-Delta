@@ -60,9 +60,9 @@ ship "Rano'erek" "Rano'erek (Crippled)"
 		
 		"Reverser (Lunar Class)"
 		"Steering (Lunar Class)"
-		"Steering (Asteroid Class)"
+		# "Steering (Asteroid Class)" # Extra steering
 		"Thruster (Lunar Class)"
-		"Thruster (Asteroid Class)"
+		# "Thruster (Asteroid Class)" # Extra thruster
 		"Hyperdrive"
 		"Jump Drive (Broken)"
 		
@@ -232,9 +232,9 @@ ship "Palavret" "Palavret (Crippled)"
 		"Outfits Expansion"
 		
 		"Bow Drive (Meteor Class)"
-		"Thruster (Asteroid Class)"
+		# "Thruster (Asteroid Class)" # Extra thruster
 		"Thruster (Lunar Class)"
-		"Steering (Asteroid Class)"
+		# "Steering (Asteroid Class)" # Extra steering
 		"Steering (Lunar Class)"
 		"Afterburner (Asteroid Class)"
 		"Jump Drive (Broken)"
@@ -571,10 +571,10 @@ ship "Ra'gru Ik 618" "Ra'gru Ik 618 (Crippled)"
 		"Systems Core (Small)"
 		
 		"Thruster (Lunar Class)"
-		"Thruster (Asteroid Class)"
+		# "Thruster (Asteroid Class)" # Extra thruster
 		"Steering (Lunar Class)"
-		"Steering (Comet Class)"
-		"Steering (Asteroid Class)"
+		# "Steering (Comet Class)" # Extra steering
+		# "Steering (Asteroid Class)" # Extra steering
 		"Jump Drive (Broken)"
 		"Hyperdrive"
 	
@@ -967,7 +967,7 @@ ship "Ra'at Ik 621" "Ra'at Ik 621 (Digger)"
 		"Microbot Defense Station" 15
 
 		"Reverser (Lunar Class)"
-		"Bow Drive (Meteor Class)"
+		# "Bow Drive (Meteor Class)" # Extra reverse thruster
 		"Afterburner (Comet Class)"
 		"Thruster (Planetary Class)"
 		"Steering (Planetary Class)"
@@ -1473,7 +1473,7 @@ ship "Met Par Tek 53" "Met Par Tek 53 (Sniper)"
 		
 		"Thruster (Lunar Class)"
 		"Steering (Planetary Class)"
-		"Steering (Comet Class)"
+		# "Steering (Comet Class)" # Extra steering
 		"Hyperdrive"
 	
 	gun "Korath Detainer"

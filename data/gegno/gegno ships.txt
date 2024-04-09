@@ -369,8 +369,8 @@ ship "Protolith"
 		"weapon capacity" 0
 		"engine capacity" 480
 		"reverse thruster slot" 1
-		"steering slot" 1
-		"thruster slot" 1
+		"steering slot" 2 # Extra steering not removed as this sounds like verging on a superheavy that justifies it.
+		"thruster slot" 4 # Extra thruster not removed
 		weapon
 			"blast radius" 360
 			"shield damage" 1860

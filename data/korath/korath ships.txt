@@ -2237,7 +2237,7 @@ ship "Model 64"
 		"Reasoning Node" 2
 		
 		"Thruster (Lunar Class)"
-		"Thruster (Asteroid Class)"
+		# "Thruster (Asteroid Class)" # Extra thruster
 		"Steering (Planetary Class)"
 		Hyperdrive
 	
@@ -2298,7 +2298,7 @@ ship "Model 128"
 		
 		"Thruster (Planetary Class)"
 		"Steering (Planetary Class)"
-		"Steering (Asteroid Class)"
+		# "Steering (Asteroid Class)" # Extra steering
 		Hyperdrive
 
 	engine -14 178
@@ -2361,7 +2361,7 @@ ship "Model 256"
 		
 		"Thruster (Planetary Class)"
 		"Steering (Planetary Class)"
-		"Steering (Comet Class)"
+		# "Steering (Comet Class)" # Extra steering
 		Hyperdrive
 
 	engine -60 147

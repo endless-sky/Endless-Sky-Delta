@@ -692,7 +692,7 @@ ship "Heliarch Hunter" "Heliarch Hunter (Missile)"
 		"Enforcer Confrontation Gear" 17
 		
 		"Large Thrust Module" 2
-		"Small Thrust Module" 3
+		"Small Thrust Module" 2 # Extra thruster
 		"Large Steering Module" 2
 		"Scram Drive"
 
@@ -1295,7 +1295,7 @@ ship "Heliarch Punisher" "Heliarch Punisher (Burst Fire)"
 		"Enforcer Confrontation Gear" 113
 		
 		"Large Thrust Module" 3
-		"Small Thrust Module" 2
+		# "Small Thrust Module" 2 # Extra thruster
 		"Large Steering Module" 2
 		"Small Steering Module" 2 # Extra steering
 		"Hyperdrive"
@@ -1596,8 +1596,8 @@ ship "Heliarch Stalker"
 		"weapon capacity" 43
 		"engine capacity" 0
 		"reverse thruster slot" 1.5
-		"steering slot" 1.5
-		"thruster slot" 1.5
+		"steering slot" 1.25
+		"thruster slot" 1.25
 		"thrust" 4
 		"thrusting energy" 1.7
 		"thrusting heat" 11

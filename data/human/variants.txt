@@ -3232,7 +3232,7 @@ ship "Saber" "Saber (CCOR Javelin)"
 		"Laser Rifle" 16
 		"Greyhound Plasma Thruster"
 		"Greyhound Plasma Steering"
-		"Chipmunk Plasma Steering"
+		# "Chipmunk Plasma Steering" # Extra steering
 		"Hyperdrive"
 
 
