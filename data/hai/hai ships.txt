@@ -1671,7 +1671,7 @@ ship "Solifuge"
 		"Hai Williwaw Cooling" 6
 		"Quantum Keystone"
 		"Pulse Rifle" 62
-		`"Benga" Atomic Steering`
+		# `"Benga" Atomic Steering` # Extra steering
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Hyperdrive"
@@ -1727,7 +1727,7 @@ ship "Solifuge" "Solifuge (Jump)"
 		"Hai Diamond Regenerator"
 		"Hai Williwaw Cooling" 6
 		"Pulse Rifle" 86
-		`"Benga" Atomic Steering`
+		# `"Benga" Atomic Steering` # Extra steering
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Jump Drive"
@@ -1745,7 +1745,7 @@ ship "Solifuge" "Solifuge (Jump, Pulse)"
 		"Hai Diamond Regenerator"
 		"Hai Williwaw Cooling" 8
 		"Pulse Rifle" 71
-		`"Benga" Atomic Steering`
+		# `"Benga" Atomic Steering` # Extra steering
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Jump Drive"
@@ -1769,7 +1769,7 @@ ship "Solifuge" "Solifuge (Jump, Tracker)"
 		"Hai Diamond Regenerator" 2
 		"Hai Williwaw Cooling" 6
 		"Pulse Rifle" 68
-		`"Benga" Atomic Steering`
+		# `"Benga" Atomic Steering` # Extra steering
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Jump Drive"
@@ -1787,7 +1787,7 @@ ship "Solifuge" "Solifuge (Pulse)"
 		"Hai Diamond Regenerator"
 		"Hai Williwaw Cooling" 8
 		"Pulse Rifle" 62
-		`"Benga" Atomic Steering`
+		# `"Benga" Atomic Steering` # Extra steering
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Hyperdrive"
@@ -1811,7 +1811,7 @@ ship "Solifuge" "Solifuge (Tracker)"
 		"Hai Diamond Regenerator" 2
 		"Hai Williwaw Cooling" 6
 		"Pulse Rifle" 59
-		`"Benga" Atomic Steering`
+		# `"Benga" Atomic Steering` # Extra steering
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Hyperdrive"

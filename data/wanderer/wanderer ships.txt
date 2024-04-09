@@ -346,7 +346,7 @@ ship "Tempest" "Tempest (Heavy)"
 		
 		"Type 3 Radiant Thruster"
 		"Type 4 Radiant Steering"
-		"Type 2 Radiant Steering"
+		# "Type 2 Radiant Steering" # Extra steering
 		"Hyperdrive"
 	
 	turret "Dual Sunbeam Turret"
@@ -774,7 +774,7 @@ ship "Winter Gale"
 		
 		"Type 3 Radiant Thruster"
 		"Type 4 Radiant Steering"
-		"Type 3 Radiant Steering"
+		# "Type 3 Radiant Steering" # Extra steering
 		"Hyperdrive"
 		
 	engine -13 94
@@ -801,9 +801,9 @@ ship "Winter Gale" "Winter Gale (Heavy)"
 		"Dark Storm Shielding"
 		
 		"Type 3 Radiant Thruster"
-		"Type 1 Radiant Thruster"
+		# "Type 1 Radiant Thruster" # Extra thruster
 		"Type 4 Radiant Steering"
-		"Type 1 Radiant Steering"
+		# "Type 1 Radiant Steering" # Extra steering
 		"Hyperdrive"
 		
 	engine -13 94

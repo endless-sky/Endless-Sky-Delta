@@ -2025,8 +2025,8 @@ ship "Saryd Sojourner"
 		
 		"Large Thrust Module" 2
 		"Large Reverse Module" 2
-		"Small Thrust Module" 3
-		"Small Reverse Module" 3
+		"Small Thrust Module" 2 # Extra thruster
+		"Small Reverse Module" 2 # Extra thruster
 		"Large Steering Module" 2
 		"Small Steering Module"
 		"Hyperdrive"
@@ -2064,8 +2064,8 @@ ship "Saryd Sojourner" "Saryd Sojourner (Miner)"
 		"Large Thrust Module" 2
 		"Large Reverse Module" 2
 		"Large Steering Module" 2
-		"Small Thrust Module" 3
-		"Small Reverse Module" 3
+		"Small Thrust Module" 2 # Extra thruster
+		"Small Reverse Module" 2 # Extra reverse thruster
 		"Small Steering Module"
 		"Hyperdrive"
 
@@ -2078,7 +2078,7 @@ ship "Saryd Sojourner" "Saryd Sojourner (Bombardments)"
 		"Small Battery Module"
 		"Large Battery Module" 2
 		"Cooling Module" 3
-		"Small Thrust Module" 3
+		"Small Thrust Module" 2 # Extra thruster
 		"Large Thrust Module" 2
 		"Small Steering Module" 2
 		"Large Steering Module" 2

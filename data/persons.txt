@@ -830,7 +830,7 @@ ship "Ursa Polaris"
 		"engine capacity" 301
 		"reverse thruster slot" 1
 		"steering slot" 1
-		"thruster slot" 2
+		"thruster slot" 3
 		weapon
 			"blast radius" 1000
 			"shield damage" 4000

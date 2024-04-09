@@ -405,7 +405,7 @@ ship "Tubfalet" "Tubfalet (Crippler)"
 		"Thermal Repeater Rifle" 196
 		
 		"Thruster (Planetary Class)"
-		"Thruster (Lunar Class)"
+		# "Thruster (Lunar Class)" # Extra thruster
 		"Steering (Planetary Class)"
 		"Jump Drive"
 

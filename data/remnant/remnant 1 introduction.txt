@@ -3248,7 +3248,7 @@ ship "Starling" "Starling (Keystone)"
 		
 		"Forge-Class Thruster"
 		"Forge-Class Steering"
-		"Crucible-Class Steering"
+		# "Crucible-Class Steering" # Extra steering
 		"Hyperdrive"
 
 

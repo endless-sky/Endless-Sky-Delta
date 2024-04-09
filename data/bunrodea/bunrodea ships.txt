@@ -161,7 +161,7 @@ ship "Tanto"
 		
 		"Ookii Rift Thruster"
 		"Ookii Rift Steering"
-		"Chiisana Rift Thruster"
+		# "Chiisana Rift Thruster" # Extra thruster
 		"Hyperdrive"
 		
 	engine -20 148
