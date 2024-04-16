@@ -310,6 +310,12 @@ outfit "X1100 Ion Reverse Thruster"
 	"mass" 16
 	"outfit space" -16
 	"weapon capacity" -16
+	"thrust" 0.9
+	"thrusting energy" .06
+	"thrusting heat" .09
+	"flare sprite" "effect/ion flare/tiny"
+		"frame rate" 1.2
+	"flare sound" "ion tiny"
 	"reverse thrust" 9.03
 	"reverse thrusting energy" .6
 	"reverse thrusting heat" .9
@@ -512,6 +518,12 @@ outfit "Capybara Reverse Thruster"
 	"mass" 20
 	"outfit space" -20
 	"weapon capacity" -20
+	"thrust" 1.45
+	"thrusting energy" 0.1
+	"thrusting heat" 0.18
+	"flare sprite" "effect/plasma flare/tiny"
+		"frame rate" 5
+	"flare sound" "plasma tiny"
 	"reverse thrust" 14.5
 	"reverse thrusting energy" 1.0
 	"reverse thrusting heat" 1.8
@@ -704,6 +716,12 @@ outfit "AR120 Reverse Thruster"
 	"mass" 22
 	"outfit space" -22
 	"weapon capacity" -22
+	"thrust" 1.868
+	"thrusting energy" 0.18
+	"thrusting heat" 0.35
+	"flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"flare sound" "atomic tiny"
 	"reverse thrust" 18.68
 	"reverse thrusting energy" 1.8
 	"reverse thrusting heat" 3.5

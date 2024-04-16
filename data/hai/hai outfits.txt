@@ -689,6 +689,12 @@ outfit `"Basrem" Reverse Thruster`
 	"mass" 18
 	"outfit space" -18
 	"weapon capacity" -18
+	"thrust" 1.522
+	"thrusting energy" 0.14
+	"thrusting heat" 0.28
+	"flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"flare sound" "atomic tiny"
 	"reverse thrust" 15.22
 	"reverse thrusting energy" 1.4
 	"reverse thrusting heat" 2.8
@@ -704,6 +710,12 @@ outfit `"Benga" Reverse Thruster`
 	"mass" 28
 	"outfit space" -28
 	"weapon capacity" -28
+	"thrust" 2.515
+	"thrusting energy" 0.25
+	"thrusting heat" 0.48
+	"flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"flare sound" "atomic tiny"
 	"reverse thrust" 25.15
 	"reverse thrusting energy" 2.5
 	"reverse thrusting heat" 4.8
@@ -719,6 +731,12 @@ outfit `"Biroo" Reverse Thruster`
 	"mass" 44
 	"outfit space" -44
 	"weapon capacity" -44
+	"thrust" 4.165
+	"thrusting energy" 0.4
+	"thrusting heat" 0.82
+	"flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"flare sound" "atomic tiny"
 	"reverse thrust" 41.65
 	"reverse thrusting energy" 4
 	"reverse thrusting heat" 8.2

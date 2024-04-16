@@ -335,6 +335,12 @@ outfit "Small Reverse Module"
 	"mass" 9
 	"outfit space" -9
 	"weapon capacity" -9
+	"thrust" 0.9
+	"thrusting energy" 0.046
+	"thrusting heat" 0.3
+	"flare sprite" "effect/coalition flare/small"
+		"frame rate" 10
+	"flare sound" "atomic tiny"
 	"reverse thrust" 8.3
 	"reverse thrusting energy" 0.46
 	"reverse thrusting heat" 3
@@ -353,6 +359,12 @@ outfit "Large Reverse Module"
 	"mass" 32
 	"outfit space" -32
 	"weapon capacity" -32
+	"thrust" 3.06
+	"thrusting energy" 0.17
+	"thrusting heat" 1.1
+	"flare sprite" "effect/coalition flare/small"
+		"frame rate" 10
+	"flare sound" "atomic tiny"
 	"reverse thrust" 30.6
 	"reverse thrusting energy" 1.7
 	"reverse thrusting heat" 11
