@@ -674,7 +674,7 @@ outfit "Bellows-Class Afterburner"
 	category "Engines"
 	"cost" 640000
 	thumbnail "outfit/remnant afterburner"
-	"propulsion accessory slot" -1
+	"propulsion accessory slot" -0.76
 	"mass" 8
 	"outfit space" -7
 	"engine capacity" -7

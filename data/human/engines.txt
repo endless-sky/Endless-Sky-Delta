@@ -17,7 +17,7 @@ outfit "Volcano Afterburner"
 	index 10
 	"cost" 70000
 	thumbnail "outfit/afterburner"
-	"propulsion accessory slot" -1
+	"propulsion accessory slot" -0.76
 	"mass" 10
 	"outfit space" -10
 	"engine capacity" -10
@@ -44,7 +44,7 @@ outfit "Caldera Afterburner"
 	index 20
 	"cost" 390000
 	thumbnail "outfit/caldera afterburner"
-	"propulsion accessory slot" -1
+	"propulsion accessory slot" -1.08
 	"mass" 37
 	"outfit space" -37
 	"engine capacity" -37
@@ -72,7 +72,7 @@ outfit "Ionic Afterburner"
 	index 30
 	"cost" 340000
 	thumbnail "outfit/ionic afterburner"
-	"propulsion accessory slot" -1
+	"propulsion accessory slot" -0.87
 	"mass" 16
 	"outfit space" -16
 	"engine capacity" -16
