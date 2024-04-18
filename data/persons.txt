@@ -642,7 +642,7 @@ ship "Modified Osprey"
 		"outfit space" 2172
 		"weapon capacity" 851
 		"engine capacity" 499
-		"propulsion accessory slot" 4
+		"engine mod space" 4
 		"reverse thruster slot" 1
 		"steering slot" 4
 		"thruster slot" 2

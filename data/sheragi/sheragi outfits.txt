@@ -72,7 +72,7 @@ outfit "Fission Drive"
 	thumbnail "outfit/fissiondrive"
 	"steering slot" -1
 	"thruster slot" -1
-	"propulsion accessory slot" 1.11
+	"engine mod space" 1.11
 	"mass" 71
 	"outfit space" -71
 	"engine capacity" -38
@@ -109,7 +109,7 @@ outfit "Fusion Drive"
 	"reverse thruster slot" -1
 	"steering slot" -1
 	"thruster slot" -1
-	"propulsion accessory slot" 1.5
+	"engine mod space" 1.5
 	"mass" 480
 	"outfit space" -480
 	"engine capacity" -230

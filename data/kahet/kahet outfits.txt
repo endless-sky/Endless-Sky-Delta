@@ -403,7 +403,7 @@ outfit "Maeri Engine Nacelles"
 	thumbnail "outfit/ka'het maeri engine"
 	"steering slot" -0.25
 	"thruster slot" -0.25
-	"propulsion accessory slot" 1.26
+	"engine mod space" 1.26
 	"mass" 59
 	"outfit space" -76
 	"engine capacity" -59
@@ -433,7 +433,7 @@ outfit "Ka'het Sustainer Nacelles"
 	thumbnail "outfit/ka'het sustainer engine"
 	"steering slot" -0.25
 	"thruster slot" -0.25
-	"propulsion accessory slot" 1
+	"engine mod space" 1
 	"mass" 27
 	"outfit space" -34
 	"engine capacity" -27
@@ -463,7 +463,7 @@ outfit "Telis Engine Nacelles"
 	thumbnail "outfit/ka'het telis engine"
 	"steering slot" -0.25
 	"thruster slot" -0.25
-	"propulsion accessory slot" 1.36
+	"engine mod space" 1.36
 	"mass" 81
 	"outfit space" -101
 	"engine capacity" -81
@@ -492,7 +492,7 @@ outfit "Vareti Engine Block"
 	thumbnail "outfit/ka'het vareti engine"
 	"steering slot" -0.5
 	"thruster slot" -0.5
-	"propulsion accessory slot" 1.5
+	"engine mod space" 1.5
 	"mass" 137
 	"outfit space" -168
 	"engine capacity" -137
@@ -521,7 +521,7 @@ outfit "Ka'het Compact Engine"
 	thumbnail "outfit/ka'het compact engine"
 	"steering slot" -0.25
 	"thruster slot" -0.25
-	"propulsion accessory slot" 0.9
+	"engine mod space" 0.9
 	"mass" 21
 	"outfit space" -26
 	"engine capacity" -21
