@@ -105,7 +105,7 @@ outfit "X1050 Ion Engines"
 	thumbnail "outfit/tiny ion engines"
 	"steering slot" -1
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 0.79
 	"mass" 20
 	"outfit space" -20
 	"engine capacity" -20
@@ -138,7 +138,7 @@ outfit "X1700 Ion Thruster"
 	"cost" 12000
 	thumbnail "outfit/tiny ion thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 0.8
 	"mass" 16
 	"outfit space" -16
 	"engine capacity" -16
@@ -164,7 +164,7 @@ outfit "X2700 Ion Thruster"
 	"cost" 26000
 	thumbnail "outfit/small ion thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.01
 	"mass" 27
 	"outfit space" -27
 	"engine capacity" -27
@@ -190,7 +190,7 @@ outfit "X3700 Ion Thruster"
 	"cost" 58000
 	thumbnail "outfit/medium ion thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.19
 	"mass" 46
 	"outfit space" -46
 	"engine capacity" -46
@@ -216,7 +216,7 @@ outfit "X4700 Ion Thruster"
 	"cost" 128000
 	thumbnail "outfit/large ion thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.35
 	"mass" 79
 	"outfit space" -79
 	"engine capacity" -79
@@ -242,7 +242,7 @@ outfit "X5700 Ion Thruster"
 	"cost" 281000
 	thumbnail "outfit/huge ion thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.48
 	"mass" 121
 	"outfit space" -121
 	"engine capacity" -121
@@ -386,7 +386,7 @@ outfit "Chipmunk Plasma Thruster"
 	"cost" 20000
 	thumbnail "outfit/tiny plasma thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 0.88
 	"mass" 20
 	"outfit space" -20
 	"engine capacity" -20
@@ -412,7 +412,7 @@ outfit "Greyhound Plasma Thruster"
 	"cost" 45000
 	thumbnail "outfit/small plasma thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.1
 	"mass" 34
 	"outfit space" -34
 	"engine capacity" -34
@@ -438,7 +438,7 @@ outfit "Impala Plasma Thruster"
 	"cost" 99000
 	thumbnail "outfit/medium plasma thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.25
 	"mass" 58
 	"outfit space" -58
 	"engine capacity" -58
@@ -464,7 +464,7 @@ outfit "Orca Plasma Thruster"
 	"cost" 217000
 	thumbnail "outfit/large plasma thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.43
 	"mass" 98
 	"outfit space" -98
 	"engine capacity" -98
@@ -490,7 +490,7 @@ outfit "Tyrant Plasma Thruster"
 	"cost" 389000
 	thumbnail "outfit/huge plasma thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.5
 	"mass" 129
 	"outfit space" -129
 	"engine capacity" -129
@@ -634,7 +634,7 @@ outfit "A120 Atomic Thruster"
 	"cost" 140000
 	thumbnail "outfit/tiny atomic thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 0.93
 	"mass" 22
 	"outfit space" -22
 	"engine capacity" -22
@@ -659,7 +659,7 @@ outfit "A250 Atomic Thruster"
 	"cost" 280000
 	thumbnail "outfit/small atomic thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.08
 	"mass" 34
 	"outfit space" -34
 	"engine capacity" -34
@@ -684,7 +684,7 @@ outfit "A370 Atomic Thruster"
 	"cost" 560000
 	thumbnail "outfit/medium atomic thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.21
 	"mass" 53
 	"outfit space" -53
 	"engine capacity" -53
@@ -709,7 +709,7 @@ outfit "A520 Atomic Thruster"
 	"cost" 1120000
 	thumbnail "outfit/large atomic thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.37
 	"mass" 82
 	"outfit space" -82
 	"engine capacity" -82
@@ -734,7 +734,7 @@ outfit "A860 Atomic Thruster"
 	"cost" 2240000
 	thumbnail "outfit/huge atomic thruster"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.49
 	"mass" 127
 	"outfit space" -127
 	"engine capacity" -127

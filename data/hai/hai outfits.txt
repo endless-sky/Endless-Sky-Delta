@@ -592,7 +592,7 @@ outfit `"Baellie" Atomic Engines`
 	thumbnail "outfit/tiny atomic engines hai"
 	"steering slot" -1
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 0.82
 	"mass" 22
 	"outfit space" -22
 	"engine capacity" -22
@@ -621,7 +621,7 @@ outfit `"Basrem" Atomic Thruster`
 	"cost" 150000
 	thumbnail "outfit/tiny atomic thruster hai"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 0.82
 	"mass" 18
 	"outfit space" -18
 	"engine capacity" -18
@@ -644,7 +644,7 @@ outfit `"Benga" Atomic Thruster`
 	"cost" 300000
 	thumbnail "outfit/small atomic thruster hai"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.02
 	"mass" 28
 	"outfit space" -28
 	"engine capacity" -28
@@ -667,7 +667,7 @@ outfit `"Biroo" Atomic Thruster`
 	"cost" 610000
 	thumbnail "outfit/medium atomic thruster hai"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.17
 	"mass" 44
 	"outfit space" -44
 	"engine capacity" -44
@@ -690,7 +690,7 @@ outfit `"Bondir" Atomic Thruster`
 	"cost" 1100000
 	thumbnail "outfit/large atomic thruster hai"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.29
 	"mass" 63
 	"outfit space" -63
 	"engine capacity" -63
@@ -713,7 +713,7 @@ outfit `"Bufaer" Atomic Thruster`
 	"cost" 2400000
 	thumbnail "outfit/huge atomic thruster hai"
 	"thruster slot" -1
-	"propulsion accessory slot" 1
+	"propulsion accessory slot" 1.44
 	"mass" 104
 	"outfit space" -104
 	"engine capacity" -104
