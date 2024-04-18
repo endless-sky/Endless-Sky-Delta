@@ -331,7 +331,7 @@ void OutfitInfoDisplay::UpdateRequirements(const Outfit &outfit, const PlayerInf
 
 	bool hasContent = false;
 	static const vector<string> BEFORE = {"outfit space", "weapon capacity", "engine capacity",
-		"propulsion accessory slot", "reverse thruster slot", "steering slot", "thruster slot"};
+		"engine mod space", "reverse thruster slot", "steering slot", "thruster slot"};
 	for(const auto &attr : BEFORE)
 	{
 		if(outfit.Get(attr) < 0)
@@ -401,7 +401,7 @@ void OutfitInfoDisplay::UpdateAttributes(const Outfit &outfit)
 	// tag them with "added" and show them first. They conveniently
 	// don't use SCALE or BOOLEAN_ATTRIBUTES.
 	static const vector<string> EXPECTED_NEGATIVE = {
-		"outfit space", "weapon capacity", "engine capacity", "propulsion accessory slot", "reverse thruster slot",
+		"outfit space", "weapon capacity", "engine capacity", "engine mod space", "reverse thruster slot",
 		"steering slot", "thruster slot", "gun ports", "turret mounts"
 	};
 

@@ -441,8 +441,8 @@ ShopPanel::BuyResult OutfitterPanel::CanBuy(bool onlyOwned) const
 				+ Format::CargoString(engineNeeded, "engine space") + ", and this ship has "
 				+ Format::MassString(engineSpace) + " free.";
 
-		int propulsionAccessorySlotNeeded = -selectedOutfit->Get("propulsion accessory slot");
-		int propulsionAccessorySlotFree = playerShip->Attributes().Get("propulsion accessory slot");
+		int propulsionAccessorySlotNeeded = -selectedOutfit->Get("engine mod space");
+		int propulsionAccessorySlotFree = playerShip->Attributes().Get("engine mod space");
 		if(propulsionAccessorySlotNeeded && !propulsionAccessorySlotFree)
 			return "This afterbuner is designed to be installed in a dedicated slot, "
 				"but your ship does not have any unused propulsion accessory slots available.";

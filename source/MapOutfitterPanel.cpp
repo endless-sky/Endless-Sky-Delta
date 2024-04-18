@@ -218,7 +218,7 @@ void MapOutfitterPanel::DrawItems()
 					info += " of weapon space";
 				else if(space && -outfit->Get("engine capacity") == space)
 					info += " of engine space";
-				else if(space && -outfit->Get("propulsion accessory slot") == space)
+				else if(space && -outfit->Get("engine mod space") == space)
 					info += " of engine space";
 				else
 					info += " of outfit space";
