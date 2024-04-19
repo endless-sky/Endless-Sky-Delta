@@ -292,7 +292,7 @@ void ShipInfoDisplay::UpdateAttributes(const Ship &ship, const PlayerInfo &playe
 		"outfit space free:", "outfit space",
 		"    weapon capacity:", "weapon capacity",
 		"    engine capacity:", "engine capacity",
-		"t. access. slots free:", "engine mod space",
+		"engine mod space free:", "engine mod space",
 		"reverse thruster slots free:", "reverse thruster slot",
 		"steering slots free:", "steering slot",
 		"thruster slots free:", "thruster slot",
