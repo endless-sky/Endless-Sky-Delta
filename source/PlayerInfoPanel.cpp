@@ -37,6 +37,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "text/Table.h"
 #include "text/truncate.hpp"
 #include "UI.h"
+#include "WeaponInfoPanel.h"
 
 #include <algorithm>
 #include <cmath>
@@ -294,6 +295,14 @@ bool PlayerInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &comman
 		{
 			GetUI()->Pop(this);
 			GetUI()->Push(new ShipInfoPanel(player, std::move(panelState)));
+		}
+	}
+	else if(key == 'w')
+	{
+		if(!player.Ships().empty())
+		{
+			GetUI()->Pop(this);
+			GetUI()->Push(new WeaponInfoPanel(player, std::move(panelState)));
 		}
 	}
 	else if(key == SDLK_PAGEUP || key == SDLK_PAGEDOWN)
