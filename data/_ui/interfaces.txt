@@ -1602,17 +1602,42 @@ interface "info panel"
 	box "cargo"
 		from 250 -290 to 500 280
 	
+	visible if "hardpoint tab"
+	button R
+		center -375 -270
+		dimensions 250 30
+	sprite "ui/hardpoint tab"
+		center 0 -310
+	label "Hardpoint Info"
+		center -180 -305
+		color "bright"
+	label "Ship Info"
+		center -300 -305
+	label "Player _Info"
+		center -420 -305
+	button i
+		center -420 -305
+		dimensions 120 30
+	button s
+		center -300 -305
+		dimensions 120 30
+	
 	visible if "ship tab"
 	button R
 		center -375 -270
 		dimensions 250 30
 	sprite "ui/ship tab"
 		center 0 -310
+	label "Hardpoint Info"
+		center -180 -305
 	label "Ship Info"
 		center -300 -305
 		color "bright"
 	label "Player _Info"
 		center -420 -305
+	button h
+		center -180 -305
+		dimensions 120 30
 	button i
 		center -420 -305
 		dimensions 120 30
@@ -1620,11 +1645,16 @@ interface "info panel"
 	visible if "player tab"
 	sprite "ui/player tab"
 		center 0 -310
+	label "Hardpoint Info"
+		center -180 -305
 	label "_Ship Info"
 		center -300 -305
 	label "Player Info"
 		center -420 -305
 		color "bright"
+	button h
+		center -180 -305
+		dimensions 120 30
 	button s
 		center -300 -305
 		dimensions 120 30

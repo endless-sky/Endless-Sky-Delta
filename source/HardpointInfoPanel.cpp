@@ -1,10 +1,10 @@
-//  WeaponInfoPanel.cpp
+//  HardpointInfoPanel.cpp
 //
 //  inspired by VitalChip 2021
 //  created by Zitchas 2024
 //
 
-#include "WeaponInfoPanel.h"
+#include "HardpointInfoPanel.h"
 
 #include "text/alignment.hpp"
 #include "CategoryList.h"
@@ -33,7 +33,7 @@
 #include "text/Table.h"
 #include "text/truncate.hpp"
 #include "UI.h"
-#include "WeaponInfoPanel.h"
+#include "HardpointInfoPanel.h"
 
 #include <algorithm>
 
@@ -44,12 +44,12 @@ namespace {
 	constexpr int COLUMN_WIDTH = static_cast<int>(WIDTH) - 20;
 }
 
-WeaponInfoPanel::WeaponInfoPanel(PlayerInfo& player)
-	: WeaponInfoPanel(player, InfoPanelState(player))
+HardpointInfoPanel::HardpointInfoPanel(PlayerInfo& player)
+	: HardpointInfoPanel(player, InfoPanelState(player))
 {
 }
 
-WeaponInfoPanel::WeaponInfoPanel(PlayerInfo& player, InfoPanelState state)
+HardpointInfoPanel::HardpointInfoPanel(PlayerInfo& player, InfoPanelState state)
 	: player(player), panelState(std::move(state))
 {
 	shipIt = this->panelState.Ships().begin();
@@ -71,21 +71,21 @@ WeaponInfoPanel::WeaponInfoPanel(PlayerInfo& player, InfoPanelState state)
 
 
 
-void WeaponInfoPanel::Step()
+void HardpointInfoPanel::Step()
 {
-	DoHelp("weapon info");
+	DoHelp("hardpoint info");
 }
 
 
 
-void WeaponInfoPanel::Draw()
+void HardpointInfoPanel::Draw()
 {
 	// Dim everything behind this panel.
 	DrawBackdrop();
 
 	// Fill in the information for how this interface should be drawn.
 	Information interfaceInfo;
-	interfaceInfo.SetCondition("weapon tab");
+	interfaceInfo.SetCondition("hardpoint tab");
 	if (panelState.CanEdit() && shipIt != panelState.Ships().end()
 		&& (shipIt->get() != player.Flagship() || (*shipIt)->IsParked()))
 	{
@@ -127,14 +127,14 @@ void WeaponInfoPanel::Draw()
 
 
 
-bool WeaponInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& command, bool /* isNewPress */)
+bool HardpointInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& command, bool /* isNewPress */)
 {
 	bool control = (mod & (KMOD_CTRL | KMOD_GUI));
 	bool shift = (mod & KMOD_SHIFT);
 	if (key == 'd' || key == SDLK_ESCAPE || (key == 'w' && control))
 		GetUI()->Pop(this);
 	else if (command.Has(Command::HELP))
-		DoHelp("weapon info", true);
+		DoHelp("hardpoint info", true);
 	else if (!player.Ships().empty() && ((key == 'p' && !shift) || key == SDLK_LEFT || key == SDLK_UP))
 	{
 		if (shipIt == panelState.Ships().begin())
@@ -154,16 +154,16 @@ bool WeaponInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& comman
 		GetUI()->Pop(this);
 		GetUI()->Push(new PlayerInfoPanel(player, std::move(panelState)));
 	}
-	else if (key == 'w')
+	else if (key == 's')
 	{
 		if (!player.Ships().empty())
 		{
 			GetUI()->Pop(this);
-			GetUI()->Push(new WeaponInfoPanel(player, std::move(panelState)));
+			GetUI()->Push(new ShipInfoPanel(player, std::move(panelState)));
 		}
 	}
 	else if (key == 'R' || (key == 'r' && shift))
-		GetUI()->Push(new Dialog(this, &WeaponInfoPanel::Rename, "Change this ship's name?", (*shipIt)->Name()));
+		GetUI()->Push(new Dialog(this, &HardpointInfoPanel::Rename, "Change this ship's name?", (*shipIt)->Name()));
 	else if (panelState.CanEdit() && (key == 'P' || (key == 'p' && shift) || key == 'k'))
 	{
 		if (shipIt->get() != player.Flagship() || (*shipIt)->IsParked())
@@ -207,7 +207,7 @@ bool WeaponInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& comman
 				}
 			}
 
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::Disown, message));
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::Disown, message));
 		}
 	}
 	else if (key == 'c' && CanDump())
@@ -217,35 +217,35 @@ bool WeaponInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& comman
 		int plunderAmount = (*shipIt)->Cargo().Get(selectedPlunder);
 		if (amount)
 		{
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::DumpCommodities,
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::DumpCommodities,
 				"How many tons of " + Format::LowerCase(selectedCommodity)
 				+ " do you want to jettison?", amount));
 		}
 		else if (plunderAmount > 0 && selectedPlunder->Get("installable") < 0.)
 		{
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::DumpPlunder,
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::DumpPlunder,
 				"How many tons of " + Format::LowerCase(selectedPlunder->DisplayName())
 				+ " do you want to jettison?", plunderAmount));
 		}
 		else if (plunderAmount == 1)
 		{
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::Dump,
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::Dump,
 				"Are you sure you want to jettison a " + selectedPlunder->DisplayName() + "?"));
 		}
 		else if (plunderAmount > 1)
 		{
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::DumpPlunder,
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::DumpPlunder,
 				"How many " + selectedPlunder->PluralName() + " do you want to jettison?",
 				plunderAmount));
 		}
 		else if (commodities)
 		{
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::Dump,
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::Dump,
 				"Are you sure you want to jettison all of this ship's regular cargo?"));
 		}
 		else
 		{
-			GetUI()->Push(new Dialog(this, &WeaponInfoPanel::Dump,
+			GetUI()->Push(new Dialog(this, &HardpointInfoPanel::Dump,
 				"Are you sure you want to jettison all of this ship's cargo?"));
 		}
 	}
@@ -261,7 +261,7 @@ bool WeaponInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& comman
 
 
 
-bool WeaponInfoPanel::Click(int x, int y, int /* clicks */)
+bool HardpointInfoPanel::Click(int x, int y, int /* clicks */)
 {
 	if (shipIt == panelState.Ships().end())
 		return true;
@@ -285,7 +285,7 @@ bool WeaponInfoPanel::Click(int x, int y, int /* clicks */)
 
 
 
-bool WeaponInfoPanel::Hover(int x, int y)
+bool HardpointInfoPanel::Hover(int x, int y)
 {
 	Point point(x, y);
 	info.Hover(point);
@@ -294,14 +294,14 @@ bool WeaponInfoPanel::Hover(int x, int y)
 
 
 
-bool WeaponInfoPanel::Drag(double dx, double dy)
+bool HardpointInfoPanel::Drag(double dx, double dy)
 {
 	return Hover(hoverPoint + Point(dx, dy));
 }
 
 
 
-bool WeaponInfoPanel::Release(int /* x */, int /* y */)
+bool HardpointInfoPanel::Release(int /* x */, int /* y */)
 {
 	if (draggingIndex >= 0 && hoverIndex >= 0 && hoverIndex != draggingIndex)
 		(**shipIt).GetArmament().Swap(hoverIndex, draggingIndex);
@@ -312,7 +312,7 @@ bool WeaponInfoPanel::Release(int /* x */, int /* y */)
 
 
 
-void WeaponInfoPanel::UpdateInfo()
+void HardpointInfoPanel::UpdateInfo()
 {
 	draggingIndex = -1;
 	hoverIndex = -1;
@@ -334,7 +334,7 @@ void WeaponInfoPanel::UpdateInfo()
 
 
 
-void WeaponInfoPanel::ClearZones()
+void HardpointInfoPanel::ClearZones()
 {
 	zones.clear();
 	commodityZones.clear();
@@ -343,7 +343,7 @@ void WeaponInfoPanel::ClearZones()
 
 
 
-void WeaponInfoPanel::DrawShipStats(const Rectangle& bounds)
+void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 {
 	// Check that the specified area is big enough.
 	if (bounds.Width() < WIDTH)
@@ -368,7 +368,7 @@ void WeaponInfoPanel::DrawShipStats(const Rectangle& bounds)
 
 
 
-void WeaponInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBounds)
+void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBounds)
 {
 	// Check that the specified area is big enough.
 	if (bounds.Width() < WIDTH)
@@ -441,7 +441,7 @@ void WeaponInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBound
 
 
 
-void WeaponInfoPanel::DrawWeapons(const Rectangle& bounds)
+void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 {
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
@@ -563,7 +563,7 @@ void WeaponInfoPanel::DrawWeapons(const Rectangle& bounds)
 
 
 
-void WeaponInfoPanel::DrawCargo(const Rectangle& bounds)
+void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 {
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
@@ -663,7 +663,7 @@ void WeaponInfoPanel::DrawCargo(const Rectangle& bounds)
 
 
 
-void WeaponInfoPanel::DrawLine(const Point& from, const Point& to, const Color& color) const
+void HardpointInfoPanel::DrawLine(const Point& from, const Point& to, const Color& color) const
 {
 	Color black(0.f, 1.f);
 	Point mid(to.X(), from.Y());
@@ -676,7 +676,7 @@ void WeaponInfoPanel::DrawLine(const Point& from, const Point& to, const Color& 
 
 
 
-bool WeaponInfoPanel::Hover(const Point& point)
+bool HardpointInfoPanel::Hover(const Point& point)
 {
 	if (shipIt == panelState.Ships().end())
 		return true;
@@ -698,7 +698,7 @@ bool WeaponInfoPanel::Hover(const Point& point)
 
 
 
-void WeaponInfoPanel::Rename(const string& name)
+void HardpointInfoPanel::Rename(const string& name)
 {
 	if (shipIt != panelState.Ships().end() && !name.empty())
 	{
@@ -709,7 +709,7 @@ void WeaponInfoPanel::Rename(const string& name)
 
 
 
-bool WeaponInfoPanel::CanDump() const
+bool HardpointInfoPanel::CanDump() const
 {
 	if (panelState.CanEdit() || shipIt == panelState.Ships().end())
 		return false;
@@ -720,7 +720,7 @@ bool WeaponInfoPanel::CanDump() const
 
 
 
-void WeaponInfoPanel::Dump()
+void HardpointInfoPanel::Dump()
 {
 	if (!CanDump())
 		return;
@@ -771,7 +771,7 @@ void WeaponInfoPanel::Dump()
 
 
 
-void WeaponInfoPanel::DumpPlunder(int count)
+void HardpointInfoPanel::DumpPlunder(int count)
 {
 	int64_t loss = 0;
 	count = min(count, (*shipIt)->Cargo().Get(selectedPlunder));
@@ -789,7 +789,7 @@ void WeaponInfoPanel::DumpPlunder(int count)
 
 
 
-void WeaponInfoPanel::DumpCommodities(int count)
+void HardpointInfoPanel::DumpCommodities(int count)
 {
 	int64_t loss = 0;
 	count = min(count, (*shipIt)->Cargo().Get(selectedCommodity));
@@ -809,7 +809,7 @@ void WeaponInfoPanel::DumpCommodities(int count)
 
 
 
-void WeaponInfoPanel::Disown()
+void HardpointInfoPanel::Disown()
 {
 	// Make sure a ship really is selected.
 	if (shipIt == panelState.Ships().end() || shipIt->get() == player.Flagship())

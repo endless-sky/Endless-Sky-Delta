@@ -1,4 +1,4 @@
-/* WeaponInfoPanel.h
+/* HardpointInfoPanel.h
 Copyright (c) 2017 by Michael Zahniser
 
 Endless Sky is free software: you can redistribute it and/or modify it under the
@@ -36,10 +36,10 @@ class Rectangle;
 // This panel displays detailed information about one of the player's ships. If
 // they are landed on a planet, it also allows the player to change weapon
 // hardpoints. In flight, this panel allows them to jettison cargo.
-class WeaponInfoPanel : public Panel {
+class HardpointInfoPanel : public Panel {
 public:
-	explicit WeaponInfoPanel(PlayerInfo &player);
-	explicit WeaponInfoPanel(PlayerInfo &player, InfoPanelState state);
+	explicit HardpointInfoPanel(PlayerInfo &player);
+	explicit HardpointInfoPanel(PlayerInfo &player, InfoPanelState state);
 
 	virtual void Step() override;
 	virtual void Draw() override;
