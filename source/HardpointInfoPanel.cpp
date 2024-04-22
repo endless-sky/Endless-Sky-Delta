@@ -117,7 +117,7 @@ void HardpointInfoPanel::Draw()
 		interfaceInfo.SetCondition("enable logbook");
 
 	// Draw the interface.
-	const Interface* infoPanelUi = GameData::Interfaces().Get("info panel");
+	const Interface * infoPanelUi = GameData::Interfaces().Get("info panel");
 	infoPanelUi->Draw(interfaceInfo, this);
 
 	// Draw all the different information sections.
@@ -185,7 +185,7 @@ bool HardpointInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& com
 			map<const Outfit*, int> uniqueOutfits;
 			auto AddToUniques = [&uniqueOutfits](const std::map<const Outfit*, int>& outfits)
 				{
-					for (const auto& it : outfits)
+					for(const auto & it : outfits)
 						if(it.first->Attributes().Get("unique"))
 							uniqueOutfits[it.first] += it.second;
 				};
@@ -201,7 +201,7 @@ bool HardpointInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& com
 				const int detailedOutfitSize = (uniquesSize > 20 ? 19 : uniquesSize);
 				message += "\nThe following unique items carried by the ship will be lost:";
 				auto it = uniqueOutfits.begin();
-				for (int i = 0; i < detailedOutfitSize; ++i)
+				for(int i = 0; i < detailedOutfitSize; ++i)
 				{
 					message += "\n" + to_string(it->second) + " "
 						+ (it->second == 1 ? it->first->DisplayName() : it->first->PluralName());
@@ -210,7 +210,7 @@ bool HardpointInfoPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command& com
 				if(it != uniqueOutfits.end())
 				{
 					int otherUniquesCount = 0;
-					for (; it != uniqueOutfits.end(); ++it)
+					for(; it != uniqueOutfits.end(); ++it)
 						otherUniquesCount += it->second;
 					message += "\nand " + to_string(otherUniquesCount) + " other unique outfits";
 				}
@@ -282,10 +282,10 @@ bool HardpointInfoPanel::Click(int x, int y, int /* clicks */)
 	selectedCommodity.clear();
 	selectedPlunder = nullptr;
 	Point point(x, y);
-	for (const auto& zone : commodityZones)
+	for(const auto & zone : commodityZones)
 		if(zone.Contains(point))
 			selectedCommodity = zone.Value();
-	for (const auto& zone : plunderZones)
+	for(const auto & zone : plunderZones)
 		if(zone.Contains(point))
 			selectedPlunder = zone.Value();
 
@@ -335,7 +335,7 @@ void HardpointInfoPanel::UpdateInfo()
 		player.Flagship()->SetTargetShip(*shipIt);
 
 	outfits.clear();
-	for (const auto& it : ship.Outfits())
+	for(const auto & it : ship.Outfits())
 		outfits[it.first->Category()].push_back(it.first);
 
 	panelState.SelectOnly(shipIt - panelState.Ships().begin());
@@ -397,7 +397,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 	table.DrawAt(start);
 
 	// Draw the outfits in the same order used in the outfitter.
-	for (const auto& cat : GameData::GetCategory(CategoryType::OUTFIT))
+	for(const auto & cat : GameData::GetCategory(CategoryType::OUTFIT))
 	{
 		const string& category = cat.Name();
 		auto it = outfits.find(category);
@@ -417,7 +417,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 		// Draw the category label.
 		table.Draw(category, bright);
 		table.Advance();
-		for (const Outfit* outfit : it->second)
+		for(const Outfit* outfit : it->second)
 		{
 			// Check if we've gone below the bottom of the bounds.
 			if(table.GetRowBounds().Bottom() > bounds.Bottom())
@@ -469,7 +469,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	// Also figure out how many weapons of each type are on each side.
 	double maxX = 0.;
 	int count[2][2] = { {0, 0}, {0, 0} };
-	for (const Hardpoint& hardpoint : ship.Weapons())
+	for(const Hardpoint& hardpoint : ship.Weapons())
 	{
 		// Multiply hardpoint X by 2 to convert to sprite pixels.
 		maxX = max(maxX, fabs(2. * hardpoint.GetPoint().X()));
@@ -514,7 +514,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	Color topColor;
 	bool hasTop = false;
 	auto layout = Layout(static_cast<int>(LABEL_WIDTH), Truncate::BACK);
-	for (const Hardpoint& hardpoint : ship.Weapons())
+	for(const Hardpoint& hardpoint : ship.Weapons())
 	{
 		string name = "[empty]";
 		if(hardpoint.GetOutfit())
@@ -597,7 +597,7 @@ void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 	}
 	if(cargo.CommoditiesSize() && hasSpace)
 	{
-		for (const auto& it : cargo.Commodities())
+		for(const auto & it : cargo.Commodities())
 		{
 			if(!it.second)
 				continue;
@@ -620,7 +620,7 @@ void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 	}
 	if(cargo.HasOutfits() && hasSpace)
 	{
-		for (const auto& it : cargo.Outfits())
+		for(const auto & it : cargo.Outfits())
 		{
 			if(!it.second)
 				continue;
@@ -650,7 +650,7 @@ void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 	}
 	if(cargo.HasMissionCargo() && hasSpace)
 	{
-		for (const auto& it : cargo.MissionCargo())
+		for(const auto & it : cargo.MissionCargo())
 		{
 			// Capitalize the name of the cargo.
 			table.Draw(Format::Capitalize(it.first->Cargo()), dim);
@@ -695,7 +695,7 @@ bool HardpointInfoPanel::Hover(const Point& point)
 	hoverIndex = -1;
 	const vector<Hardpoint>& weapons = (**shipIt).Weapons();
 	bool dragIsTurret = (draggingIndex >= 0 && weapons[draggingIndex].IsTurret());
-	for (const auto& zone : zones)
+	for(const auto & zone : zones)
 	{
 		bool isTurret = weapons[zone.Value()].IsTurret();
 		if(zone.Contains(hoverPoint) && (draggingIndex == -1 || isTurret == dragIsTurret))
@@ -753,7 +753,7 @@ void HardpointInfoPanel::Dump()
 	}
 	else if(commodities)
 	{
-		for (const auto& it : cargo.Commodities())
+		for(const auto & it : cargo.Commodities())
 		{
 			int64_t basis = player.GetBasis(it.first, it.second);
 			loss += basis;
@@ -763,7 +763,7 @@ void HardpointInfoPanel::Dump()
 	}
 	else
 	{
-		for (const auto& it : cargo.Outfits())
+		for(const auto & it : cargo.Outfits())
 		{
 			loss += it.first->Cost() * max(0, it.second);
 			(*shipIt)->Jettison(it.first, it.second);
