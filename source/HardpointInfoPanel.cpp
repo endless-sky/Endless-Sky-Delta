@@ -115,11 +115,11 @@ void HardpointInfoPanel::Draw()
 	ClearZones();
 	if (shipIt == panelState.Ships().end())
 		return;
-	Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
+	// Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
 	DrawShipStats(infoPanelUi->GetBox("stats"));
-	DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
+	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
-	DrawCargo(cargoBounds);
+	// DrawCargo(cargoBounds);
 
 	// If the player hovers their mouse over a ship attribute, show its tooltip.
 	info.DrawTooltips();
