@@ -64,14 +64,14 @@ private:
 
 	// Draw the ship tab (and its subsections).
 	void DrawShipStats(const Rectangle & bounds);
-	void DrawOutfits(const Rectangle & bounds, Rectangle& cargoBounds);
+	void DrawOutfits(const Rectangle & bounds, Rectangle & cargoBounds);
 	void DrawWeapons(const Rectangle & bounds);
 	void DrawCargo(const Rectangle & bounds);
 
 	// Helper functions.
-	void DrawLine(const Point & from, const Point& to, const Color& color) const;
+	void DrawLine(const Point & from, const Point & to, const Color & color) const;
 	bool Hover(const Point & point);
-	void Rename(const std::string& name);
+	void Rename(const std::string & name);
 	bool CanDump() const;
 	void Dump();
 	void DumpPlunder(int count);
