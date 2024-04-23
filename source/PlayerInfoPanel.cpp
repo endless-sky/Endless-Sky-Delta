@@ -21,6 +21,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "text/FontSet.h"
 #include "text/Format.h"
 #include "GameData.h"
+#include "HardpointInfoPanel.h"
 #include "InfoPanelState.h"
 #include "Information.h"
 #include "Interface.h"
@@ -37,7 +38,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "text/Table.h"
 #include "text/truncate.hpp"
 #include "UI.h"
-#include "HardpointInfoPanel.h"
 
 #include <algorithm>
 #include <cmath>

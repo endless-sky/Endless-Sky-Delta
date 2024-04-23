@@ -1,5 +1,5 @@
 /* HardpointInfoPanel.cpp
-Copyright (c) 2024 Zitchas
+Copyright (c) 2024 by Zitchas
 
 Endless Sky is free software: you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the Free Software
@@ -329,7 +329,7 @@ void HardpointInfoPanel::UpdateInfo()
 	if(shipIt == panelState.Ships().end())
 		return;
 
-	const Ship& ship = **shipIt;
+	const ship & ship = **shipIt;
 	info.Update(ship, player);
 	if(player.Flagship() && ship.GetSystem() == player.GetSystem() && &ship != player.Flagship())
 		player.Flagship()->SetTargetShip(*shipIt);
@@ -361,7 +361,7 @@ void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Ship& ship = **shipIt;
+	const ship & ship = **shipIt;
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -386,7 +386,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Ship& ship = **shipIt;
+	const ship & ship = **shipIt;
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -399,7 +399,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 	// Draw the outfits in the same order used in the outfitter.
 	for(const auto & cat : GameData::GetCategory(CategoryType::OUTFIT))
 	{
-		const string& category = cat.Name();
+		const string & category = cat.Name();
 		auto it = outfits.find(category);
 		if(it == outfits.end())
 			continue;
@@ -456,7 +456,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
 	const Font& font = FontSet::Get(14);
-	const Ship& ship = **shipIt;
+	const ship & ship = **shipIt;
 
 	// Figure out how much to scale the sprite by.
 	const Sprite* sprite = ship.GetSprite();
@@ -577,7 +577,7 @@ void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
 	Color backColor = *GameData::Colors().Get("faint");
-	const Ship& ship = **shipIt;
+	const ship & ship = **shipIt;
 
 	// Cargo list.
 	const CargoHold& cargo = (player.Cargo().Used() ? player.Cargo() : ship.Cargo());
