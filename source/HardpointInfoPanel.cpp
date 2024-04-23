@@ -417,7 +417,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 		// Draw the category label.
 		table.Draw(category, bright);
 		table.Advance();
-		for(const Outfit* outfit : it->second)
+		for(const Outfit * outfit : it->second)
 		{
 			// Check if we've gone below the bottom of the bounds.
 			if(table.GetRowBounds().Bottom() > bounds.Bottom())
@@ -455,11 +455,11 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Font& font = FontSet::Get(14);
+	const Font & font = FontSet::Get(14);
 	const ship & ship = **shipIt;
 
 	// Figure out how much to scale the sprite by.
-	const Sprite* sprite = ship.GetSprite();
+	const Sprite * sprite = ship.GetSprite();
 	double scale = 0.;
 	if(sprite)
 		scale = min(1., min((WIDTH - 10) / sprite->Width(), (WIDTH - 10) / sprite->Height()));
@@ -469,7 +469,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	// Also figure out how many weapons of each type are on each side.
 	double maxX = 0.;
 	int count[2][2] = { {0, 0}, {0, 0} };
-	for(const Hardpoint& hardpoint : ship.Weapons())
+	for(const Hardpoint & hardpoint : ship.Weapons())
 	{
 		// Multiply hardpoint X by 2 to convert to sprite pixels.
 		maxX = max(maxX, fabs(2. * hardpoint.GetPoint().X()));
@@ -514,7 +514,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	Color topColor;
 	bool hasTop = false;
 	auto layout = Layout(static_cast<int>(LABEL_WIDTH), Truncate::BACK);
-	for(const Hardpoint& hardpoint : ship.Weapons())
+	for(const Hardpoint & hardpoint : ship.Weapons())
 	{
 		string name = "[empty]";
 		if(hardpoint.GetOutfit())
@@ -523,7 +523,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 		bool isRight = (hardpoint.GetPoint().X() >= 0.);
 		bool isTurret = hardpoint.IsTurret();
 
-		double& y = nextY[isRight][isTurret];
+		double & y = nextY[isRight][isTurret];
 		double x = centerX + (isRight ? LABEL_DX : -LABEL_DX - LABEL_WIDTH);
 		bool isHover = (index == hoverIndex);
 		layout.align = isRight ? Alignment::LEFT : Alignment::RIGHT;
@@ -562,7 +562,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	// Re-positioning weapons.
 	if(draggingIndex >= 0)
 	{
-		const Outfit* outfit = ship.Weapons()[draggingIndex].GetOutfit();
+		const Outfit * outfit = ship.Weapons()[draggingIndex].GetOutfit();
 		string name = outfit ? outfit->DisplayName() : "[empty]";
 		Point pos(hoverPoint.X() - .5 * font.Width(name), hoverPoint.Y());
 		font.Draw(name, pos + Point(1., 1.), Color(0., 1.));
@@ -580,7 +580,7 @@ void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 	const ship & ship = **shipIt;
 
 	// Cargo list.
-	const CargoHold& cargo = (player.Cargo().Used() ? player.Cargo() : ship.Cargo());
+	const CargoHold & cargo = (player.Cargo().Used() ? player.Cargo() : ship.Cargo());
 	Table table;
 	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
 	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT });
@@ -723,7 +723,7 @@ bool HardpointInfoPanel::CanDump() const
 	if(panelState.CanEdit() || shipIt == panelState.Ships().end())
 		return false;
 
-	CargoHold& cargo = (*shipIt)->Cargo();
+	CargoHold & cargo = (*shipIt)->Cargo();
 	return (selectedPlunder && cargo.Get(selectedPlunder) > 0) || cargo.CommoditiesSize() || cargo.OutfitsSize();
 }
 
@@ -734,7 +734,7 @@ void HardpointInfoPanel::Dump()
 	if(!CanDump())
 		return;
 
-	CargoHold& cargo = (*shipIt)->Cargo();
+	CargoHold & cargo = (*shipIt)->Cargo();
 	int commodities = (*shipIt)->Cargo().CommoditiesSize();
 	int amount = cargo.Get(selectedCommodity);
 	int plunderAmount = cargo.Get(selectedPlunder);
