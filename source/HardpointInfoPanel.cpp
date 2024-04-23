@@ -329,7 +329,7 @@ void HardpointInfoPanel::UpdateInfo()
 	if(shipIt == panelState.Ships().end())
 		return;
 
-	const ship & ship = **shipIt;
+	const Ship & ship = **shipIt;
 	info.Update(ship, player);
 	if(player.Flagship() && ship.GetSystem() == player.GetSystem() && &ship != player.Flagship())
 		player.Flagship()->SetTargetShip(*shipIt);
@@ -361,7 +361,7 @@ void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const ship & ship = **shipIt;
+	const Ship & ship = **shipIt;
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -386,7 +386,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const ship & ship = **shipIt;
+	const Ship & ship = **shipIt;
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -456,7 +456,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
 	const Font & font = FontSet::Get(14);
-	const ship & ship = **shipIt;
+	const Ship & ship = **shipIt;
 
 	// Figure out how much to scale the sprite by.
 	const Sprite * sprite = ship.GetSprite();
@@ -577,7 +577,7 @@ void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
 	Color backColor = *GameData::Colors().Get("faint");
-	const ship & ship = **shipIt;
+	const Ship & ship = **shipIt;
 
 	// Cargo list.
 	const CargoHold & cargo = (player.Cargo().Used() ? player.Cargo() : ship.Cargo());
