@@ -1628,7 +1628,7 @@ interface "info panel"
 		dimensions 250 30
 	sprite "ui/ship tab"
 		center 0 -310
-	label "Hardpoint Info"
+	label "_Hardpoint Info"
 		center -180 -305
 	label "Ship Info"
 		center -300 -305
@@ -1645,7 +1645,7 @@ interface "info panel"
 	visible if "player tab"
 	sprite "ui/player tab"
 		center 0 -310
-	label "Hardpoint Info"
+	label "_Hardpoint Info"
 		center -180 -305
 	label "_Ship Info"
 		center -300 -305
