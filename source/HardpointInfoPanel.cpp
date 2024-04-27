@@ -360,14 +360,14 @@ void HardpointInfoPanel::ClearZones()
 void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 {
 	// Check that the specified area is big enough.
-	if (bounds.Width() < WIDTH)
+	if(bounds.Width() < WIDTH)
 		return;
 
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Ship& ship = **shipIt;
-	const Outfit& attributes = ship.Attributes();
+	const Ship & ship = **shipIt;
+	const Outfit & attributes = ship.Attributes();
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -383,7 +383,7 @@ void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 		* (1. + attributes.Get("shield generation multiplier"));
 	bool hasShieldRegen = shieldRegen > 0.;
 
-	if (hasShieldRegen)
+	if(hasShieldRegen)
 	{
 		table.DrawTruncatedPair("shields (charge):", dim, Format::Number(ship.MaxShields())
 			+ " (" + Format::Number(60. * shieldRegen) + "/s)", bright, Truncate::MIDDLE, true);
@@ -399,13 +399,13 @@ void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 void HardpointInfoPanel::DrawShipName(const Rectangle& bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
-	if (bounds.Width() < WIDTH)
+	if(bounds.Width() < WIDTH)
 		return;
 
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Ship& ship = **shipIt;
+	const Ship & ship = **shipIt;
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -428,13 +428,13 @@ void HardpointInfoPanel::DrawShipName(const Rectangle& bounds, int & infoPanelLi
 void HardpointInfoPanel::DrawShipModelStats(const Rectangle& bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
-	if (bounds.Width() < WIDTH)
+	if(bounds.Width() < WIDTH)
 		return;
 
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Ship& ship = **shipIt;
+	const Ship & ship = **shipIt;
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -486,14 +486,14 @@ void HardpointInfoPanel::DrawShipCosts(const Rectangle & bounds, int & infoPanel
 void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
-	if (bounds.Width() < WIDTH)
+	if(bounds.Width() < WIDTH)
 		return;
 
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
-	const Ship& ship = **shipIt;
-	const Outfit& attributes = ship.Attributes();
+	const Ship & ship = **shipIt;
+	const Outfit & attributes = ship.Attributes();
 
 	// Two columns of opposite alignment are used to simulate a single visual column.
 	Table table;
@@ -514,7 +514,7 @@ void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & info
 	{
 		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
 	}
-	if (hasShieldRegen)
+	if(hasShieldRegen)
 	{
 		table.DrawTruncatedPair("shields (charge):", dim, Format::Number(ship.MaxShields())
 			+ " (" + Format::Number(60. * shieldRegen) + "/s)", bright, Truncate::MIDDLE, true);
@@ -523,7 +523,7 @@ void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & info
 	{
 		table.DrawTruncatedPair("shields", dim, Format::Number(ship.MaxShields()), bright, Truncate::MIDDLE, true);
 	}
-	if (hasHullRegen)
+	if(hasHullRegen)
 	{
 		table.DrawTruncatedPair("hull (repair):", dim, Format::Number(ship.MaxHull())
 			+ " (" + Format::Number(60. * hullRegen) + "/s)", bright, Truncate::MIDDLE, true);
