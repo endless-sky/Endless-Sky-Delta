@@ -1611,7 +1611,7 @@ interface "info panel"
 	label "Hardpoint Info"
 		center -180 -305
 		color "bright"
-	label "Ship Info"
+	label "_Ship Info"
 		center -300 -305
 	label "Player _Info"
 		center -420 -305

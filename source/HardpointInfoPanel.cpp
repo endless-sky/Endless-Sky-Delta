@@ -119,13 +119,18 @@ void HardpointInfoPanel::Draw()
 	// Draw the interface.
 	const Interface * infoPanelUi = GameData::Interfaces().Get("info panel");
 	infoPanelUi->Draw(interfaceInfo, this);
+	int infoPanelLine = 0;
 
 	// Draw all the different information sections.
 	ClearZones();
 	if(shipIt == panelState.Ships().end())
 		return;
 	// Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
-	DrawShipStats(infoPanelUi->GetBox("stats"));
+	// DrawShipStats(infoPanelUi->GetBox("stats")); // This line currently displays all the stats calls L355
+	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine);
+	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine);
+	DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine);
+	DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
@@ -355,6 +360,103 @@ void HardpointInfoPanel::ClearZones()
 void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 {
 	// Check that the specified area is big enough.
+	if (bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship& ship = **shipIt;
+	const Outfit& attributes = ship.Attributes();
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	table.DrawTruncatedPair("ship:", dim, ship.Name(), bright, Truncate::MIDDLE, true);
+
+	double shieldRegen = (attributes.Get("shield generation")
+		+ attributes.Get("delayed shield generation"))
+		* (1. + attributes.Get("shield generation multiplier"));
+	bool hasShieldRegen = shieldRegen > 0.;
+
+	if (hasShieldRegen)
+	{
+		table.DrawTruncatedPair("shields (charge):", dim, Format::Number(ship.MaxShields())
+			+ " (" + Format::Number(60. * shieldRegen) + "/s)", bright, Truncate::MIDDLE, true);
+	}
+	else
+	{
+		table.DrawTruncatedPair("shields", dim, Format::Number(ship.MaxShields()), bright, Truncate::MIDDLE, true);
+	}
+}
+
+
+
+void HardpointInfoPanel::DrawShipName(const Rectangle& bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if (bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship& ship = **shipIt;
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	table.DrawTruncatedPair("ship:", dim, ship.Name(), bright, Truncate::MIDDLE, true);
+	infoPanelLine = infoPanelLine + 1;
+}
+
+
+
+void HardpointInfoPanel::DrawShipModelStats(const Rectangle& bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if (bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship& ship = **shipIt;
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	table.DrawTruncatedPair("model:", dim, ship.DisplayModelName(), bright, Truncate::MIDDLE, true);
+	infoPanelLine = infoPanelLine + 1;
+}
+
+
+
+void HardpointInfoPanel::DrawShipCosts(const Rectangle & bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
 		return;
 
@@ -370,9 +472,67 @@ void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 	table.SetUnderline(0, COLUMN_WIDTH);
 	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
 
-	table.DrawTruncatedPair("ship:", dim, ship.Name(), bright, Truncate::MIDDLE, true);
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
 
-	info.DrawAttributes(table.GetRowBounds().TopLeft() - Point(10., 10.));
+	table.DrawTruncatedPair("cost:", dim, to_string(ship.Cost()), bright, Truncate::MIDDLE, true);
+	infoPanelLine = infoPanelLine + 1;
+}
+
+
+
+void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if (bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship& ship = **shipIt;
+	const Outfit& attributes = ship.Attributes();
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	double shieldRegen = (attributes.Get("shield generation")
+		+ attributes.Get("delayed shield generation"))
+		* (1. + attributes.Get("shield generation multiplier"));
+	bool hasShieldRegen = shieldRegen > 0.;
+	double hullRegen = (attributes.Get("hull repair rate"))
+		* (1. + attributes.Get("hull repair multiplier"));
+	bool hasHullRegen = hullRegen > 0.;
+
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+	if (hasShieldRegen)
+	{
+		table.DrawTruncatedPair("shields (charge):", dim, Format::Number(ship.MaxShields())
+			+ " (" + Format::Number(60. * shieldRegen) + "/s)", bright, Truncate::MIDDLE, true);
+	}
+	else
+	{
+		table.DrawTruncatedPair("shields", dim, Format::Number(ship.MaxShields()), bright, Truncate::MIDDLE, true);
+	}
+	if (hasHullRegen)
+	{
+		table.DrawTruncatedPair("hull (repair):", dim, Format::Number(ship.MaxHull())
+			+ " (" + Format::Number(60. * hullRegen) + "/s)", bright, Truncate::MIDDLE, true);
+	}
+	else
+	{
+		table.DrawTruncatedPair("hull", dim, Format::Number(ship.MaxHull()), bright, Truncate::MIDDLE, true);
+	}
+	infoPanelLine = infoPanelLine + 2;
 }
 
 
