@@ -130,7 +130,11 @@ void HardpointInfoPanel::Draw()
 	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine);
+	infoPanelLine = infoPanelLine + 1;
 	DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull
+	DrawShipCarryingCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel
+	infoPanelLine = infoPanelLine + 1;
+	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse thrust, turn, lateral
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
@@ -477,7 +481,10 @@ void HardpointInfoPanel::DrawShipCosts(const Rectangle & bounds, int & infoPanel
 		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
 	}
 
-	table.DrawTruncatedPair("cost:", dim, to_string(ship.Cost()), bright, Truncate::MIDDLE, true);
+	// This just displays the ship's cost.
+	// Another function should give the hull + outfits breakdown.
+	table.DrawTruncatedPair("cost:", dim, Format::Credits(ship.Cost()), bright, Truncate::MIDDLE, true);
+
 	infoPanelLine = infoPanelLine + 1;
 }
 
@@ -533,6 +540,107 @@ void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & info
 		table.DrawTruncatedPair("hull", dim, Format::Number(ship.MaxHull()), bright, Truncate::MIDDLE, true);
 	}
 	infoPanelLine = infoPanelLine + 2;
+}
+
+
+
+void HardpointInfoPanel::DrawShipCarryingCapacities(const Rectangle & bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if(bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship & ship = **shipIt;
+	const Outfit & attributes = ship.Attributes();
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	table.DrawTruncatedPair("current mass:", dim, Format::Number(ship.Mass()), bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("cargo space:", dim, Format::Number(ship.Cargo().Used())
+		+ " / " + Format::Number(attributes.Get("cargo space")) + " tons", bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("required crew / bunks", dim, Format::Number(ship.Crew())
+		+ " / " + Format::Number(attributes.Get("bunks")), bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("fuel / fuel capacity:", dim, Format::Number(ship.Fuel() * attributes.Get("fuel capacity"))
+		+ " / " + Format::Number(attributes.Get("fuel capacity")), bright, Truncate::MIDDLE, true);
+
+	infoPanelLine = infoPanelLine + 4;
+}
+
+
+
+void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if(bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship & ship = **shipIt;
+	const Outfit & attributes = ship.Attributes();
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	// This allows the section to stack nicely with other info panel sections,
+	// But will also allow it to be called on its own in a new box if desire.
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	// Get the full mass of the ship
+	double emptyMass = attributes.Mass();
+	double currentMass = ship.Mass();
+	double fullMass = emptyMass + attributes.Get("cargo space");
+
+	// Determine forward thrust as being regular thrust, or afterburner thrust if no regular thrust is present.
+	double forwardThrust = attributes.Get("thrust") ? attributes.Get("thrust") : attributes.Get("afterburner thrust");
+
+	// Movement stats are influenced by inertia reduction.
+	double reduction = 1. + attributes.Get("inertia reduction");
+	emptyMass /= reduction;
+	currentMass /= reduction;
+	fullMass /= reduction;
+
+	double baseAccel = 3600. * attributes.Get("thrust") * (1. + attributes.Get("acceleration multiplier"));
+	double afterburnerAccel = 3600. * attributes.Get("afterburner thrust") * (1. + attributes.Get("acceleration multiplier"));
+	double reverseAccel = 3600. * attributes.Get("reverse thrust") * (1. + attributes.Get("acceleration multiplier"));
+
+	double baseTurn = (60. * attributes.Get("turn") * (1. + attributes.Get("turn multiplier"))) / emptyMass;
+	double minTurn = (60. * attributes.Get("turn") * (1. + attributes.Get("turn multiplier"))) / fullMass;
+
+	table.DrawTruncatedPair("movement (full - no cargo):", dim, " ", bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("max speed (w/AB):", dim, Format::Number(60. * attributes.Get("thrust") / ship.Drag()) + " (" +
+		Format::Number(60. * attributes.Get("afterburner thrust") / ship.Drag()) + ")", bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("forward thrust:", dim, Format::Number(baseAccel / fullMass) +
+		" (" + Format::Number(baseAccel / emptyMass) + ")", bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("Afterburner thrust:", dim, Format::Number(afterburnerAccel / fullMass) +
+		" (" + Format::Number(afterburnerAccel / emptyMass) + ")", bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("reverse thrust:", dim, Format::Number(reverseAccel / fullMass) +
+		" (" + Format::Number(reverseAccel / emptyMass), bright, Truncate::MIDDLE, true);
+	table.DrawTruncatedPair("turning:", dim, Format::Number(minTurn) + " - " + Format::Number(baseTurn), bright,
+		Truncate::MIDDLE, true);
+
+	infoPanelLine = infoPanelLine + 4;
 }
 
 
