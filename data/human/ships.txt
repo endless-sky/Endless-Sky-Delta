@@ -170,7 +170,7 @@ ship "Arrow"
 			"hit force" 360
 	outfits
 		"Sidewinder Missile Pod" 2
-		"Sidewinder Missile" 8
+		"Sidewinder Missile" 12
 		"Anti-Missile Turret"
 		
 		"Dwarf Core"
@@ -604,7 +604,7 @@ ship "Berserker"
 	outfits
 		"Energy Blaster" 2
 		"Javelin Mini Pod" 2
-		"Javelin" 80
+		"Javelin" 60
 		
 		"nGVF-CC Fuel Cell"
 		"LP072a Battery Pack"
@@ -1128,7 +1128,7 @@ ship "Clipper"
 	outfits
 		"Beam Laser" 2
 		"Javelin Mini Pod" 2
-		"Javelin" 80
+		"Javelin" 60
 		
 		"nGVF-DD Fuel Cell"
 		"LP072a Battery Pack"
@@ -1500,7 +1500,7 @@ ship "Dagger"
 	outfits
 		"Beam Laser"
 		"Javelin Mini Pod" 2
-		"Javelin" 80
+		"Javelin" 60
 		
 		"nGVF-AA Fuel Cell"
 		"Supercapacitor"
@@ -1794,7 +1794,7 @@ ship "Finch"
 		"Beam Laser"
 		"Javelin Mini Pod" 2
 		"Javelin Storage Crate"
-		"Javelin" 180
+		"Javelin" 160
 		
 		"nGVF-BB Fuel Cell"
 		"LP036a Battery Pack"
@@ -2598,7 +2598,7 @@ ship "Lance"
 		"Energy Blaster"
 		"Sidewinder Missile Pod" 2
 		"Sidewinder Missile Rack"
-		"Sidewinder Missile" 31
+		"Sidewinder Missile" 35
 		
 		"nGVF-AA Fuel Cell"
 		"Supercapacitor" 4
@@ -4266,7 +4266,7 @@ ship "Wasp"
 	outfits
 		"Energy Blaster" 2
 		"Sidewinder Missile Pod"
-		"Sidewinder Missile" 4
+		"Sidewinder Missile" 6
 		
 		"nGVF-BB Fuel Cell"
 		"LP036a Battery Pack"
