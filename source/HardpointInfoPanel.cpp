@@ -647,7 +647,6 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & i
 	table.DrawTruncatedPair("max speed (w/AB):", dim, Format::Number(60. * attributes.Get("thrust") / ship.Drag()) + " (" +
 		Format::Number(60. * attributes.Get("afterburner thrust") / ship.Drag()) + ")", bright, Truncate::MIDDLE, true);
 	table.DrawTruncatedPair("thrust (full - no cargo):", dim, " ", bright, Truncate::MIDDLE, true);
-	
 	table.DrawTruncatedPair("   forward:", dim, Format::Number(baseAccel / fullMass) +
 		" - " + Format::Number(baseAccel / emptyMass), bright, Truncate::MIDDLE, true);
 	table.DrawTruncatedPair("   Afterburner:", dim, Format::Number(afterburnerAccel / fullMass) +
