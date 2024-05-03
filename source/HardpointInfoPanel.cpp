@@ -627,13 +627,13 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & i
 
 	// Get the full mass of the ship
 	double emptyMass = attributes.Mass();
-	double currentMass = ship.Mass();
+	// double currentMass = ship.Mass();
 	double fullMass = emptyMass + attributes.Get("cargo space");
 
 	// Movement stats are influenced by inertia reduction.
 	double reduction = 1. + attributes.Get("inertia reduction");
 	emptyMass /= reduction;
-	currentMass /= reduction;
+	// currentMass /= reduction;
 	fullMass /= reduction;
 
 	double baseAccel = 3600. * attributes.Get("thrust") * (1. + attributes.Get("acceleration multiplier"));
@@ -711,8 +711,6 @@ void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle & bounds, int & info
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
 	}
-
-	table.DrawTruncatedPair("outfit space free:", dim, Format::Number(attributes.Get("outfit space free")) + " / " + Format::Number(attributes.Get("outfit space")), bright, Truncate::MIDDLE, true);
 
 	infoPanelLine = infoPanelLine + 1;
 }
