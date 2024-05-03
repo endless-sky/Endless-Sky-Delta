@@ -137,6 +137,7 @@ void HardpointInfoPanel::Draw()
 	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse thrust, turn, lateral
 	infoPanelLine = infoPanelLine + 1;
 	DrawShipOutfitStat(infoPanelUi->GetBox("stats"), infoPanelLine);
+	DrawShipCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
@@ -637,7 +638,8 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & i
 	fullMass /= reduction;
 
 	double baseAccel = 3600. * attributes.Get("thrust") * (1. + attributes.Get("acceleration multiplier"));
-	double afterburnerAccel = 3600. * attributes.Get("afterburner thrust") * (1. + attributes.Get("acceleration multiplier"));
+	double afterburnerAccel = 3600. * attributes.Get("afterburner thrust") * (1. +
+		attributes.Get("acceleration multiplier"));
 	double reverseAccel = 3600. * attributes.Get("reverse thrust") * (1. + attributes.Get("acceleration multiplier"));
 	double lateralAccel = 3600. * attributes.Get("lateral thrust") * (1. + attributes.Get("acceleration multiplier"));
 
@@ -654,7 +656,7 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & i
 	table.DrawTruncatedPair("   reverse:", dim, Format::Number(reverseAccel / fullMass) +
 		" - " + Format::Number(reverseAccel / emptyMass), bright, Truncate::MIDDLE, true);
 	table.DrawTruncatedPair("   lateral:", dim, Format::Number(lateralAccel / fullMass) +
-		" - " + Format::Number(lateralAccel / emptyMass), bright, Truncate::MIDDLE, true);
+		" - " + Format::Number(lateralAccel / emptyMass), bright, Truncate::MIDDLE, true); // currently doesn't work
 	table.DrawTruncatedPair("turning:", dim, Format::Number(minTurn) + " - " + Format::Number(baseTurn), bright,
 		Truncate::MIDDLE, true);
 
@@ -682,6 +684,57 @@ void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle & bounds, int & info
 	table.SetUnderline(0, COLUMN_WIDTH);
 	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
 
+	// This allows the section to stack nicely with other info panel sections,
+	// But will also allow it to be called on its own in a new box if desire.
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	// Find out how much outfit space the chassis has.
+	map<string, double> chassis;
+	static const vector<string> NAMES = {
+		"outfit space free:", "outfit space",
+	};
+
+	for(unsigned i = 1; i < NAMES.size(); i += 2)
+		chassis[NAMES[i]] = attributes.Get(NAMES[i]);
+	for(const auto & it : ship.Outfits())
+		for(auto & cit : chassis)
+			cit.second -= min(0., it.second * it.first->Get(cit.first));
+
+	for(unsigned i = 0; i < NAMES.size(); i += 2)
+	{
+		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
+			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
+	}
+
+	infoPanelLine = infoPanelLine + 1;
+}
+
+
+
+void HardpointInfoPanel::DrawShipCapacities(const Rectangle & bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if(bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship & ship = **shipIt;
+	const Outfit & attributes = ship.Attributes();
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	// This allows the section to stack nicely with other info panel sections,
+	// But will also allow it to be called on its own in a new box if desire.
 	for(int i = 0; i < infoPanelLine; i++)
 	{
 		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
@@ -690,7 +743,6 @@ void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle & bounds, int & info
 	// Find out how much outfit, engine, and weapon space the chassis has.
 	map<string, double> chassis;
 	static const vector<string> NAMES = {
-		"outfit space free:", "outfit space",
 		"    weapon capacity:", "weapon capacity",
 		"    engine capacity:", "engine capacity",
 		"gun ports free:", "gun ports",
@@ -703,15 +755,13 @@ void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle & bounds, int & info
 		for(auto & cit : chassis)
 			cit.second -= min(0., it.second * it.first->Get(cit.first));
 
-	// This allows the section to stack nicely with other info panel sections,
-	// But will also allow it to be called on its own in a new box if desire.
 	for(unsigned i = 0; i < NAMES.size(); i += 2)
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
 	}
 
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine = infoPanelLine + 4;
 }
 
 
