@@ -70,6 +70,7 @@ private:
 	void DrawShipHealthStats(const Rectangle & bounds, int & infoPanelLine);
 	void DrawShipCarryingCapacities(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawShipManeuverStats(const Rectangle & bounds, int & InfoPanelLine);
+	void DrawShipOutfitStat(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawOutfits(const Rectangle & bounds, Rectangle & cargoBounds);
 	void DrawWeapons(const Rectangle & bounds);
 	void DrawCargo(const Rectangle & bounds);
