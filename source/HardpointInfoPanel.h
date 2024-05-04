@@ -74,6 +74,7 @@ private:
 	void DrawShipCapacities(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawShipPropulsionCapacities(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawShipHardpointStats(const Rectangle & bounds, int & InfoPanelLine);
+	void DrawShipBayStats(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawOutfits(const Rectangle & bounds, Rectangle & cargoBounds);
 	void DrawWeapons(const Rectangle & bounds);
 	void DrawCargo(const Rectangle & bounds);

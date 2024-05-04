@@ -140,6 +140,8 @@ void HardpointInfoPanel::Draw()
 	DrawShipCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine);
+	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine);
+	infoPanelLine = infoPanelLine +1;
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
@@ -864,6 +866,54 @@ void HardpointInfoPanel::DrawShipHardpointStats(const Rectangle & bounds, int & 
 	}
 
 	infoPanelLine = infoPanelLine + 2;
+}
+
+
+
+void HardpointInfoPanel::DrawShipBayStats(const Rectangle & bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	if(bounds.Width() < WIDTH)
+		return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship & ship = **shipIt;
+	int BayCategoryCount = 0;
+
+	// Two columns of opposite alignment are used to simulate a single visual column.
+	Table table;
+	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
+	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
+	table.SetUnderline(0, COLUMN_WIDTH);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+
+	// This allows the section to stack nicely with other info panel sections,
+	// But will also allow it to be called on its own in a new box if desire.
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	// Print the number of bays for each bay-type we have
+	for(const auto & category : GameData::GetCategory(CategoryType::BAY))
+	{
+		const string & bayType = category.Name();
+		int totalBays = ship.BaysTotal(bayType);
+		if(totalBays)
+		{
+			// Count  how many types of bays are displayed
+			BayCategoryCount = BayCategoryCount + 1;
+			// make sure the label is printed in lower case
+			string bayLabel = bayType;
+			transform(bayLabel.begin(), bayLabel.end(), bayLabel.begin(), ::tolower);
+
+			table.DrawTruncatedPair(bayLabel + " bays:", dim, Format::Number(totalBays), bright, Truncate::MIDDLE, true);
+		}
+	}
+
+	infoPanelLine = infoPanelLine + BayCategoryCount;
 }
 
 
