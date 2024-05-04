@@ -129,9 +129,9 @@ void HardpointInfoPanel::Draw()
 	// DrawShipStats(infoPanelUi->GetBox("stats")); // This line currently displays all the stats calls L355
 	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine);
-	DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine);
+	// DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine = infoPanelLine + 1;
-	DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull
+	// DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull
 	DrawShipCarryingCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel
 	infoPanelLine = infoPanelLine + 1;
 	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse thrust, turn, lateral
@@ -142,6 +142,7 @@ void HardpointInfoPanel::Draw()
 	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine = infoPanelLine +1;
+	DrawShipEnergyHeatStats(infoPanelUi->GetBox("Stats"), infoPanelLine);
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
@@ -914,6 +915,151 @@ void HardpointInfoPanel::DrawShipBayStats(const Rectangle & bounds, int & infoPa
 	}
 
 	infoPanelLine = infoPanelLine + BayCategoryCount;
+}
+
+
+
+void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle & bounds, int & infoPanelLine)
+{
+	// Check that the specified area is big enough.
+	//if(bounds.Width() < WIDTH)
+		//return;
+
+	// Colors to draw with.
+	Color dim = *GameData::Colors().Get("medium");
+	Color bright = *GameData::Colors().Get("bright");
+	const Ship & ship = **shipIt;
+	const Outfit & attributes = ship.Attributes();
+
+	// Three columns are created.
+	Table table;
+	table.AddColumn(10, {240, Alignment::LEFT });
+	table.AddColumn(160, {170, Alignment::RIGHT });
+	table.AddColumn(240, {230, Alignment::RIGHT });
+	table.SetHighlight(0, 250);
+	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
+	table.DrawGap(10.);
+
+	// This allows the section to stack nicely with other info panel sections,
+	// But will also allow it to be called on its own in a new box if desire.
+	for(int i = 0; i < infoPanelLine; i++)
+	{
+		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+	}
+
+	table.Advance();
+	table.Draw("energy", dim);
+	table.Draw("heat", dim);
+
+	tableLabels.clear();
+	energyTable.clear();
+	heatTable.clear();
+	// Skip a spacer and the table header.
+	attributesHeight += 30;
+
+	const double idleEnergyPerFrame = attributes.Get("energy generation")
+		+ attributes.Get("solar collection")
+		+ attributes.Get("fuel energy")
+		- attributes.Get("energy consumption")
+		- attributes.Get("cooling energy");
+	const double idleHeatPerFrame = attributes.Get("heat generation")
+		+ attributes.Get("solar heat")
+		+ attributes.Get("fuel heat")
+		- ship.CoolingEfficiency() * (attributes.Get("cooling") + attributes.Get("active cooling"));
+	tableLabels.push_back("idle:");
+	energyTable.push_back(Format::Number(60. * idleEnergyPerFrame));
+	heatTable.push_back(Format::Number(60. * idleHeatPerFrame));
+
+	// Add energy and heat while moving to the table.
+	attributesHeight += 20;
+	const double movingEnergyPerFrame =
+		max(attributes.Get("thrusting energy"), attributes.Get("reverse thrusting energy"))
+		+ attributes.Get("turning energy")
+		+ attributes.Get("afterburner energy");
+	const double movingHeatPerFrame = max(attributes.Get("thrusting heat"), attributes.Get("reverse thrusting heat"))
+		+ attributes.Get("turning heat")
+		+ attributes.Get("afterburner heat");
+	tableLabels.push_back("moving:");
+	energyTable.push_back(Format::Number(-60. * movingEnergyPerFrame));
+	heatTable.push_back(Format::Number(60. * movingHeatPerFrame));
+
+	// Add energy and heat while firing to the table.
+	attributesHeight += 20;
+	double firingEnergy = 0.;
+	double firingHeat = 0.;
+	for(const auto & it : ship.Outfits())
+		if(it.first->IsWeapon() && it.first->Reload())
+		{
+			firingEnergy += it.second * it.first->FiringEnergy() / it.first->Reload();
+			firingHeat += it.second * it.first->FiringHeat() / it.first->Reload();
+		}
+	tableLabels.push_back("firing:");
+	energyTable.push_back(Format::Number(-60. * firingEnergy));
+	heatTable.push_back(Format::Number(60. * firingHeat));
+
+	// Add energy and heat when doing shield and hull repair to the table.
+	attributesHeight += 20;
+
+	double shieldRegen = (attributes.Get("shield generation")
+		+ attributes.Get("delayed shield generation"))
+		* (1. + attributes.Get("shield generation multiplier"));
+	bool hasShieldRegen = shieldRegen > 0.;
+	double shieldEnergy = (hasShieldRegen) ? (attributes.Get("shield energy")
+		+ attributes.Get("delayed shield energy"))
+		* (1. + attributes.Get("shield energy multiplier")) : 0.;
+	double hullRepair = (attributes.Get("hull repair rate")
+		+ attributes.Get("delayed hull repair rate"))
+		* (1. + attributes.Get("hull repair multiplier"));
+	bool hasHullRepair = hullRepair > 0.;
+	double hullEnergy = (hasHullRepair) ? (attributes.Get("hull energy")
+		+ attributes.Get("delayed hull energy"))
+		* (1. + attributes.Get("hull energy multiplier")) : 0.;
+	tableLabels.push_back((shieldEnergy && hullEnergy) ? "shields / hull:" :
+		hullEnergy ? "repairing hull:" : "charging shields:");
+	energyTable.push_back(Format::Number(-60. * (shieldEnergy + hullEnergy)));
+	double shieldHeat = (hasShieldRegen) ? (attributes.Get("shield heat")
+		+ attributes.Get("delayed shield heat"))
+		* (1. + attributes.Get("shield heat multiplier")) : 0.;
+	double hullHeat = (hasHullRepair) ? (attributes.Get("hull heat")
+		+ attributes.Get("delayed hull heat"))
+		* (1. + attributes.Get("hull heat multiplier")) : 0.;
+	heatTable.push_back(Format::Number(60. * (shieldHeat + hullHeat)));
+
+	// Add up the maximum possible changes and add the total to the table.
+	attributesHeight += 20;
+	const double overallEnergy = idleEnergyPerFrame
+		- movingEnergyPerFrame
+		- firingEnergy
+		- shieldEnergy
+		- hullEnergy;
+	const double overallHeat = idleHeatPerFrame
+		+ movingHeatPerFrame
+		+ firingHeat
+		+ shieldHeat
+		+ hullHeat;
+	tableLabels.push_back("net change:");
+	energyTable.push_back(Format::Number(60. * overallEnergy));
+	heatTable.push_back(Format::Number(60. * overallHeat));
+
+	// Add maximum values of energy and heat to the table.
+	attributesHeight += 20;
+	const double maxEnergy = attributes.Get("energy capacity");
+	const double maxHeat = 60. * ship.HeatDissipation() * ship.MaximumHeat();
+	tableLabels.push_back("max:");
+	energyTable.push_back(Format::Number(maxEnergy));
+	heatTable.push_back(Format::Number(maxHeat));
+	// Pad by 10 pixels on the top and bottom.
+	attributesHeight += 30;
+
+	for(unsigned i = 0; i < tableLabels.size(); ++i)
+	{
+		// CheckHover(table, tableLabels[i]);
+		table.Draw(tableLabels[i], dim);
+		table.Draw(energyTable[i], bright);
+		table.Draw(heatTable[i], bright);
+	}
+
+	infoPanelLine = infoPanelLine + 4;
 }
 
 

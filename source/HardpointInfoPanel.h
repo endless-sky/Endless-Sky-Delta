@@ -43,6 +43,7 @@ class HardpointInfoPanel : public Panel {
 public:
 	explicit HardpointInfoPanel(PlayerInfo &player);
 	explicit HardpointInfoPanel(PlayerInfo &player, InfoPanelState state);
+	int AttributesHeight() const;
 
 	virtual void Step() override;
 	virtual void Draw() override;
@@ -75,6 +76,7 @@ private:
 	void DrawShipPropulsionCapacities(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawShipHardpointStats(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawShipBayStats(const Rectangle & bounds, int & InfoPanelLine);
+	void DrawShipEnergyHeatStats(const Rectangle & bounds, int & InfoPanelLine);
 	void DrawOutfits(const Rectangle & bounds, Rectangle & cargoBounds);
 	void DrawWeapons(const Rectangle & bounds);
 	void DrawCargo(const Rectangle & bounds);
@@ -115,6 +117,15 @@ private:
 	// Track whether a commodity or plundered outfit is selected to jettison.
 	std::string selectedCommodity;
 	const Outfit * selectedPlunder = nullptr;
+
+	// Table variables
+	std::vector<std::string> attributeHeaderLabels;
+	std::vector<std::string> attributeHeaderValues;
+	int attributesHeight = 0;
+
+	std::vector<std::string> tableLabels;
+	std::vector<std::string> energyTable;
+	std::vector<std::string> heatTable;
 };
 
 
