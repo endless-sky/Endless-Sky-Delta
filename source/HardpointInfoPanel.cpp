@@ -126,23 +126,23 @@ void HardpointInfoPanel::Draw()
 	if(shipIt == panelState.Ships().end())
 		return;
 	// Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
-	// DrawShipStats(infoPanelUi->GetBox("stats")); // This line currently displays all the stats calls L355
-	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine);
-	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine);
-	// DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine);
-	infoPanelLine++;
-	// DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull
-	DrawShipCarryingCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel
-	infoPanelLine++;
-	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse thrust, turn, lateral
-	infoPanelLine++;
-	DrawShipOutfitStat(infoPanelUi->GetBox("stats"), infoPanelLine);
-	DrawShipCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
-	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
-	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine);
-	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine);
-	infoPanelLine++;
-	DrawShipEnergyHeatStats(infoPanelUi->GetBox("Stats"), infoPanelLine);
+	// DrawShipStats(infoPanelUi->GetBox("stats")); // This is the old "display all the stats" call.
+	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "name: " and the ship name.
+	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "model: " and the ship model name.
+	DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine); // Draws the ship's cost.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull.
+	DrawShipCarryingCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse, turn, lateral.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	DrawShipOutfitStat(infoPanelUi->GetBox("stats"), infoPanelLine); // displays "outfit space free: " and outfit space.
+	DrawShipCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // draws weapon capacity and engine capacity.
+	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // draws all the engine slots.
+	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine); // draws the weapon slots.
+	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine); // draws the numbers of bays.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	DrawShipEnergyHeatStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
@@ -929,18 +929,21 @@ void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle &bounds, int &i
 
 	// Three columns are created.
 	Table table;
-	table.AddColumn(10, {240, Alignment::LEFT });
-	table.AddColumn(160, {170, Alignment::RIGHT });
-	table.AddColumn(240, {230, Alignment::RIGHT });
-	table.SetHighlight(0, 250);
+	table.AddColumn(0, {230, Alignment::LEFT });
+	table.AddColumn(150, {160, Alignment::RIGHT });
+	table.AddColumn(230, {220, Alignment::RIGHT });
+	table.SetHighlight(0, 240);
 	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
-	table.DrawGap(10.);
+	// table.DrawGap(10.);
 
 	// This allows the section to stack nicely with other info panel sections,
 	// But will also allow it to be called on its own in a new box if desire.
+	// The heat/energy section uses three columns, which causes the draw pair to
+	// be short. This uses a "table.Advance();" to push it an extra cell.
 	for(int i = 0; i < infoPanelLine; i++)
 	{
-		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
+		table.DrawTruncatedPair(" ", dim, " ", dim, Truncate::MIDDLE, true);
+		table.Advance();
 	}
 
 	table.Advance();
