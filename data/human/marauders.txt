@@ -765,7 +765,7 @@ ship "Marauder Quicksilver"
 		"fuel capacity" 400
 		"cargo space" 5
 		"outfit space" 265
-		"weapon capacity" 65
+		"weapon capacity" 85
 		"engine capacity" 75
 		"reverse thruster slot" 1
 		"steering slot" 1
