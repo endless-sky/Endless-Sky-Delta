@@ -64,22 +64,22 @@ private:
 	void ClearZones();
 
 	// Draw the ship tab (and its subsections).
-	void DrawShipStats(const Rectangle & bounds);
-	void DrawShipName(const Rectangle & bounds, int & infoPanelLine);
-	void DrawShipModelStats(const Rectangle & bounds, int & infoPanelLine);
-	void DrawShipCosts(const Rectangle & bounds, int & infoPanelLine);
-	void DrawShipHealthStats(const Rectangle & bounds, int & infoPanelLine);
-	void DrawShipCarryingCapacities(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipManeuverStats(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipOutfitStat(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipCapacities(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipPropulsionCapacities(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipHardpointStats(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipBayStats(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawShipEnergyHeatStats(const Rectangle & bounds, int & InfoPanelLine);
-	void DrawOutfits(const Rectangle & bounds, Rectangle & cargoBounds);
-	void DrawWeapons(const Rectangle & bounds);
-	void DrawCargo(const Rectangle & bounds);
+	void DrawShipStats(const Rectangle &bounds);
+	void DrawShipName(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipModelStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipCosts(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipHealthStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipCarryingCapacities(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipManeuverStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipOutfitStat(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipCapacities(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipPropulsionCapacities(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipHardpointStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipBayStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipEnergyHeatStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawOutfits(const Rectangle &bounds, Rectangle & cargoBounds);
+	void DrawWeapons(const Rectangle &bounds);
+	void DrawCargo(const Rectangle &bounds);
 
 	// Helper functions.
 	void DrawLine(const Point & from, const Point & to, const Color & color) const;

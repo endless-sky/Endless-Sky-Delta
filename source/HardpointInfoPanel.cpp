@@ -867,7 +867,7 @@ void HardpointInfoPanel::DrawShipHardpointStats(const Rectangle &bounds, int & i
 
 
 
-void HardpointInfoPanel::DrawShipBayStats(const Rectangle &bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipBayStats(const Rectangle &bounds, int &infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -915,7 +915,7 @@ void HardpointInfoPanel::DrawShipBayStats(const Rectangle &bounds, int & infoPan
 
 
 
-void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle &bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle &bounds, int &infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	// if(bounds.Width() < WIDTH)
