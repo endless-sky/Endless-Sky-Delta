@@ -141,7 +141,7 @@ void HardpointInfoPanel::Draw()
 	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine);
-	infoPanelLine = infoPanelLine +1;
+	infoPanelLine = infoPanelLine + 1;
 	DrawShipEnergyHeatStats(infoPanelUi->GetBox("Stats"), infoPanelLine);
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
@@ -369,7 +369,7 @@ void HardpointInfoPanel::ClearZones()
 
 
 
-void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
+void HardpointInfoPanel::DrawShipStats(const Rectangle &bounds)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -408,7 +408,7 @@ void HardpointInfoPanel::DrawShipStats(const Rectangle& bounds)
 
 
 
-void HardpointInfoPanel::DrawShipName(const Rectangle& bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipName(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -440,7 +440,7 @@ void HardpointInfoPanel::DrawShipName(const Rectangle& bounds, int & infoPanelLi
 
 
 
-void HardpointInfoPanel::DrawShipModelStats(const Rectangle& bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipModelStats(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -472,7 +472,7 @@ void HardpointInfoPanel::DrawShipModelStats(const Rectangle& bounds, int & infoP
 
 
 
-void HardpointInfoPanel::DrawShipCosts(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipCosts(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -507,7 +507,7 @@ void HardpointInfoPanel::DrawShipCosts(const Rectangle & bounds, int & infoPanel
 
 
 
-void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipHealthStats(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -565,7 +565,7 @@ void HardpointInfoPanel::DrawShipHealthStats(const Rectangle& bounds, int & info
 
 
 
-void HardpointInfoPanel::DrawShipCarryingCapacities(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipCarryingCapacities(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -605,7 +605,7 @@ void HardpointInfoPanel::DrawShipCarryingCapacities(const Rectangle & bounds, in
 
 
 
-void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -670,7 +670,7 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle & bounds, int & i
 
 
 
-void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -719,7 +719,7 @@ void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle & bounds, int & info
 
 
 
-void HardpointInfoPanel::DrawShipCapacities(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipCapacities(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -769,7 +769,7 @@ void HardpointInfoPanel::DrawShipCapacities(const Rectangle & bounds, int & info
 
 
 
-void HardpointInfoPanel::DrawShipPropulsionCapacities(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipPropulsionCapacities(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -821,7 +821,7 @@ void HardpointInfoPanel::DrawShipPropulsionCapacities(const Rectangle & bounds, 
 
 
 
-void HardpointInfoPanel::DrawShipHardpointStats(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipHardpointStats(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -871,7 +871,7 @@ void HardpointInfoPanel::DrawShipHardpointStats(const Rectangle & bounds, int & 
 
 
 
-void HardpointInfoPanel::DrawShipBayStats(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipBayStats(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -919,11 +919,11 @@ void HardpointInfoPanel::DrawShipBayStats(const Rectangle & bounds, int & infoPa
 
 
 
-void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle & bounds, int & infoPanelLine)
+void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle &bounds, int & infoPanelLine)
 {
 	// Check that the specified area is big enough.
-	//if(bounds.Width() < WIDTH)
-		//return;
+	// if(bounds.Width() < WIDTH)
+		// return;
 
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
@@ -1064,7 +1064,7 @@ void HardpointInfoPanel::DrawShipEnergyHeatStats(const Rectangle & bounds, int &
 
 
 
-void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBounds)
+void HardpointInfoPanel::DrawOutfits(const Rectangle &bounds, Rectangle& cargoBounds)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -1137,7 +1137,7 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle& bounds, Rectangle& cargoBo
 
 
 
-void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
+void HardpointInfoPanel::DrawWeapons(const Rectangle &bounds)
 {
 	// Colors to draw with.
 	Color dim = *GameData::Colors().Get("medium");
@@ -1259,7 +1259,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle& bounds)
 
 
 
-void HardpointInfoPanel::DrawCargo(const Rectangle& bounds)
+void HardpointInfoPanel::DrawCargo(const Rectangle &bounds)
 {
 	Color dim = *GameData::Colors().Get("medium");
 	Color bright = *GameData::Colors().Get("bright");
