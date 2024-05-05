@@ -130,18 +130,18 @@ void HardpointInfoPanel::Draw()
 	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	// DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine);
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 	// DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull
 	DrawShipCarryingCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse thrust, turn, lateral
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 	DrawShipOutfitStat(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine);
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 	DrawShipEnergyHeatStats(infoPanelUi->GetBox("Stats"), infoPanelLine);
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
@@ -435,7 +435,7 @@ void HardpointInfoPanel::DrawShipName(const Rectangle &bounds, int & infoPanelLi
 	}
 
 	table.DrawTruncatedPair("ship:", dim, ship.Name(), bright, Truncate::MIDDLE, true);
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 }
 
 
@@ -467,7 +467,7 @@ void HardpointInfoPanel::DrawShipModelStats(const Rectangle &bounds, int & infoP
 	}
 
 	table.DrawTruncatedPair("model:", dim, ship.DisplayModelName(), bright, Truncate::MIDDLE, true);
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 }
 
 
@@ -502,7 +502,7 @@ void HardpointInfoPanel::DrawShipCosts(const Rectangle &bounds, int & infoPanelL
 	// Another function should give the hull + outfits breakdown.
 	table.DrawTruncatedPair("cost:", dim, Format::Credits(ship.Cost()), bright, Truncate::MIDDLE, true);
 
-	infoPanelLine = infoPanelLine + 1;
+	infoPanelLine++;
 }
 
 
@@ -712,9 +712,8 @@ void HardpointInfoPanel::DrawShipOutfitStat(const Rectangle &bounds, int & infoP
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
+		infoPanelLine++;
 	}
-
-	infoPanelLine = infoPanelLine + 1;
 }
 
 
@@ -762,9 +761,8 @@ void HardpointInfoPanel::DrawShipCapacities(const Rectangle &bounds, int & infoP
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
+		infoPanelLine++;
 	}
-
-	infoPanelLine = infoPanelLine + 2;
 }
 
 
@@ -814,9 +812,8 @@ void HardpointInfoPanel::DrawShipPropulsionCapacities(const Rectangle &bounds, i
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
+		infoPanelLine++;
 	}
-
-	infoPanelLine = infoPanelLine + 4;
 }
 
 
@@ -864,9 +861,8 @@ void HardpointInfoPanel::DrawShipHardpointStats(const Rectangle &bounds, int & i
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
+		infoPanelLine++;
 	}
-
-	infoPanelLine = infoPanelLine + 2;
 }
 
 
