@@ -636,7 +636,7 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle &bounds, int & in
 	for(const auto & category : GameData::GetCategory(CategoryType::BAY))
 	{
 		const string & bayType = category.Name();
-		totalBays = totalBays + ship.BaysTotal(bayType);
+		int totalBays = totalBays + ship.BaysTotal(bayType);
 	}
 
 	// Get the full mass of the ship
