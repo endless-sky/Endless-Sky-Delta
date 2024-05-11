@@ -4753,10 +4753,11 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 		else if(!attributes.Get("lateral thrust ratio"))
 		{
 			// lateralThrustValue = GameData::GetGamerules().DefaultLateralThrustRatio();
-			if(mass < 2500)
-				lateralThrustValue = (3000 - mass) / 3500;
-			else
-				lateralThrustValue = 0.1;
+			double tempLateralThrustRatio = (3000 - mass) / 3500;
+			double defaultLateralThrustRatio = GameData::GetGamerules().DefaultLateralThrustRatio();
+			if(tempLateralThrustRatio > defaultLateralThrustRatio)
+				lateralThrustValue = tempLateralThrustRatio;
+			else lateralThrustValue = defaultLateralThrustRatio;
 		}
 
 		if(latThrustCommand)

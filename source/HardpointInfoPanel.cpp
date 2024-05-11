@@ -25,6 +25,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "text/FontSet.h"
 #include "text/Format.h"
 #include "GameData.h"
+#include "Gamerules.h"
 #include "HardpointInfoPanel.h"
 #include "Information.h"
 #include "Interface.h"
@@ -650,11 +651,26 @@ void HardpointInfoPanel::DrawShipManeuverStats(const Rectangle &bounds, int & in
 	// currentMass /= reduction;
 	fullMass /= reduction;
 
+	// This calculates a fixed lateral thrust using the ship's empty mass.
+	double lateralThrustValue = 0.;
+
+	if(attributes.Get("lateral thrust ratio"))
+		lateralThrustValue = attributes.Get("lateral thrust ratio");
+	else if(!attributes.Get("lateral thrust ratio"))
+	{
+		double tempLateralThrustRatio = (3000 - emptyMass) / 3500;
+		double defaultLateralThrustRatio = GameData::GetGamerules().DefaultLateralThrustRatio();
+		if(tempLateralThrustRatio > defaultLateralThrustRatio)
+			lateralThrustValue = tempLateralThrustRatio;
+		else lateralThrustValue = defaultLateralThrustRatio;
+	}
+	double emptyLatThrust = attributes.Get("thrust") * lateralThrustValue;
+
 	double baseAccel = 3600. * attributes.Get("thrust") * (1. + attributes.Get("acceleration multiplier"));
 	double afterburnerAccel = 3600. * attributes.Get("afterburner thrust") * (1. +
 		attributes.Get("acceleration multiplier"));
 	double reverseAccel = 3600. * attributes.Get("reverse thrust") * (1. + attributes.Get("acceleration multiplier"));
-	double lateralAccel = 3600. * attributes.Get("lateral thrust") * (1. + attributes.Get("acceleration multiplier"));
+	double lateralAccel = 3600. * emptyLatThrust * (1. + attributes.Get("acceleration multiplier"));
 
 	double baseTurn = (60. * attributes.Get("turn") * (1. + attributes.Get("turn multiplier"))) / emptyMass;
 	double minTurn = (60. * attributes.Get("turn") * (1. + attributes.Get("turn multiplier"))) / fullMass;
