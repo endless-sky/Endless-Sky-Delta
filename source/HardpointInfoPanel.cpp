@@ -134,16 +134,19 @@ void HardpointInfoPanel::Draw()
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	DrawShipHealthStats(infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull.
 	DrawShipCarryingCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel.
-	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse, turn, lateral.
+	// infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	// DrawShipManeuverStats(infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse, turn, lateral.
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	DrawShipOutfitStat(infoPanelUi->GetBox("stats"), infoPanelLine); // displays "outfit space free: " and outfit space.
 	DrawShipCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // draws weapon capacity and engine capacity.
-	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // draws all the engine slots.
-	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine); // draws the weapon slots.
-	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine); // draws the numbers of bays.
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	DrawShipEnergyHeatStats(infoPanelUi->GetBox("stats"), infoPanelLine);
+	DrawShipPropulsionCapacities(infoPanelUi->GetBox("stats"), infoPanelLine); // draws all the engine slots.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	DrawShipHardpointStats(infoPanelUi->GetBox("stats"), infoPanelLine); // draws the weapon slots.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	DrawShipBayStats(infoPanelUi->GetBox("stats"), infoPanelLine); // draws the numbers of bays.
+	// infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	// DrawShipEnergyHeatStats(infoPanelUi->GetBox("stats"), infoPanelLine);
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawCargo(cargoBounds);
