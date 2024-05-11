@@ -1598,7 +1598,7 @@ interface "info panel"
 	box "outfits"
 		from -250 -290 to 500 30
 	box "weapons"
-		from -250 30 to 250 280
+		from -250 -270 to 250 280
 	box "cargo"
 		from 250 -290 to 500 280
 	
