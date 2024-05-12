@@ -127,7 +127,6 @@ void HardpointInfoPanel::Draw()
 	if(shipIt == panelState.Ships().end())
 		return;
 	// Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
-	// DrawShipStats(infoPanelUi->GetBox("stats")); // This is the old "display all the stats" call.
 	DrawShipName(infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "name: " and the ship name.
 	DrawShipModelStats(infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "model: " and the ship model name.
 	DrawShipCosts(infoPanelUi->GetBox("stats"), infoPanelLine); // Draws the ship's cost.
@@ -369,45 +368,6 @@ void HardpointInfoPanel::ClearZones()
 	zones.clear();
 	commodityZones.clear();
 	plunderZones.clear();
-}
-
-
-
-void HardpointInfoPanel::DrawShipStats(const Rectangle &bounds)
-{
-	// Check that the specified area is big enough.
-	if(bounds.Width() < WIDTH)
-		return;
-
-	// Colors to draw with.
-	Color dim = *GameData::Colors().Get("medium");
-	Color bright = *GameData::Colors().Get("bright");
-	const Ship & ship = **shipIt;
-	const Outfit & attributes = ship.Attributes();
-
-	// Two columns of opposite alignment are used to simulate a single visual column.
-	Table table;
-	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
-	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT, Truncate::MIDDLE });
-	table.SetUnderline(0, COLUMN_WIDTH);
-	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
-
-	table.DrawTruncatedPair("ship:", dim, ship.Name(), bright, Truncate::MIDDLE, true);
-
-	double shieldRegen = (attributes.Get("shield generation")
-		+ attributes.Get("delayed shield generation"))
-		* (1. + attributes.Get("shield generation multiplier"));
-	bool hasShieldRegen = shieldRegen > 0.;
-
-	if(hasShieldRegen)
-	{
-		table.DrawTruncatedPair("shields (charge):", dim, Format::Number(ship.MaxShields())
-			+ " (" + Format::Number(60. * shieldRegen) + "/s)", bright, Truncate::MIDDLE, true);
-	}
-	else
-	{
-		table.DrawTruncatedPair("shields", dim, Format::Number(ship.MaxShields()), bright, Truncate::MIDDLE, true);
-	}
 }
 
 
