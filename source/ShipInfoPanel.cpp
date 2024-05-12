@@ -140,7 +140,7 @@ void ShipInfoPanel::Draw()
 	info.DrawShipOutfitStat(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	// Displays max speed, thrust, reverse, lateral, and turn
-	info.DrawShipManeuverStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); 
+	info.DrawShipManeuverStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	// infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	info.DrawShipEnergyHeatStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	// DrawShipStats(infoPanelUi->GetBox("stats")); // This is the old method that drew all the stats

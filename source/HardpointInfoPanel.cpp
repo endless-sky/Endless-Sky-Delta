@@ -155,7 +155,7 @@ void HardpointInfoPanel::Draw()
 	info.DrawShipBayStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	// Displays the ship sprite with all the hardpoints labeled and allows rearranging weapons
-	DrawWeapons(infoPanelUi->GetBox("weapons")); 
+	DrawWeapons(infoPanelUi->GetBox("weapons"));
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	// DrawCargo(cargoBounds);
 
