@@ -126,7 +126,8 @@ void ShipInfoPanel::Draw()
 	Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
 	DrawShipStats(infoPanelUi->GetBox("stats"));
 	DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
-	// DrawWeapons(infoPanelUi->GetBox("weapons"));
+	DrawSprite(infoPanelUi->GetBox("ship info sprite"));
+	DrawThumbnail(infoPanelUi->GetBox("ship info thumbnail"));
 	DrawCargo(cargoBounds);
 
 	// If the player hovers their mouse over a ship attribute, show its tooltip.
@@ -449,12 +450,8 @@ void ShipInfoPanel::DrawOutfits(const Rectangle &bounds, Rectangle &cargoBounds)
 
 
 
-void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
+void ShipInfoPanel::DrawSprite(const Rectangle &bounds)
 {
-	// Colors to draw with.
-	Color dim = *GameData::Colors().Get("medium");
-	Color bright = *GameData::Colors().Get("bright");
-	const Font &font = FontSet::Get(14);
 	const Ship &ship = **shipIt;
 
 	// Figure out how much to scale the sprite by.
@@ -467,105 +464,55 @@ void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
 	// too far apart, the scale may need to be reduced.
 	// Also figure out how many weapons of each type are on each side.
 	double maxX = 0.;
-	int count[2][2] = {{0, 0}, {0, 0}};
 	for(const Hardpoint &hardpoint : ship.Weapons())
 	{
 		// Multiply hardpoint X by 2 to convert to sprite pixels.
 		maxX = max(maxX, fabs(2. * hardpoint.GetPoint().X()));
-		++count[hardpoint.GetPoint().X() >= 0.][hardpoint.IsTurret()];
 	}
 	// If necessary, shrink the sprite to keep the hardpoints inside the labels.
-	// The width of this UI block will be 2 * (LABEL_WIDTH + HARDPOINT_DX).
-	static const double LABEL_WIDTH = 150.;
 	static const double LABEL_DX = 95.;
 	static const double LABEL_PAD = 5.;
 	if(maxX > (LABEL_DX - LABEL_PAD))
 		scale = min(scale, (LABEL_DX - LABEL_PAD) / (2. * maxX));
 
-	// Draw the ship, using the black silhouette swizzle.
+	// Draw the ship, using the default swizzle 0
 	if(sprite)
 	{
-		SpriteShader::Draw(sprite, bounds.Center(), scale, 28);
-		OutlineShader::Draw(sprite, bounds.Center(), scale * Point(sprite->Width(), sprite->Height()), Color(.5f));
+		SpriteShader::Draw(sprite, bounds.Center(), scale, ship.GetSwizzle());
 	}
+}
 
-	// Figure out how tall each part of the weapon listing will be.
-	int gunRows = max(count[0][0], count[1][0]);
-	int turretRows = max(count[0][1], count[1][1]);
-	// If there are both guns and turrets, add a gap of ten pixels.
-	double height = 20. * (gunRows + turretRows) + 10. * (gunRows && turretRows);
 
-	double gunY = bounds.Top() + .5 * (bounds.Height() - height);
-	double turretY = gunY + 20. * gunRows + 10. * (gunRows != 0);
-	double nextY[2][2] = {
-		{gunY + 20. * (gunRows - count[0][0]), turretY + 20. * (turretRows - count[0][1])},
-		{gunY + 20. * (gunRows - count[1][0]), turretY + 20. * (turretRows - count[1][1])}};
 
-	int index = 0;
-	const double centerX = bounds.Center().X();
-	const double labelCenter[2] = {-.5 * LABEL_WIDTH - LABEL_DX, LABEL_DX + .5 * LABEL_WIDTH};
-	const double fromX[2] = {-LABEL_DX + LABEL_PAD, LABEL_DX - LABEL_PAD};
-	static const double LINE_HEIGHT = 20.;
-	static const double TEXT_OFF = .5 * (LINE_HEIGHT - font.Height());
-	static const Point LINE_SIZE(LABEL_WIDTH, LINE_HEIGHT);
-	Point topFrom;
-	Point topTo;
-	Color topColor;
-	bool hasTop = false;
-	auto layout = Layout(static_cast<int>(LABEL_WIDTH), Truncate::BACK);
-	for(const Hardpoint &hardpoint : ship.Weapons())
+void ShipInfoPanel::DrawThumbnail(const Rectangle & bounds)
+{
+	const Ship & ship = **shipIt;
+
+	// Figure out how much to scale the sprite by.
+	const Sprite * sprite = ship.Thumbnail();
+	double scale = 0.;
+	if(sprite)
+		scale = min(1., min((WIDTH - 10) / sprite->Width(), (WIDTH - 10) / sprite->Height()));
+
+	// Figure out the left- and right-most hardpoints on the ship. If they are
+	// too far apart, the scale may need to be reduced.
+	// Also figure out how many weapons of each type are on each side.
+	double maxX = 0.;
+	for(const Hardpoint & hardpoint : ship.Weapons())
 	{
-		string name = "[empty]";
-		if(hardpoint.GetOutfit())
-			name = hardpoint.GetOutfit()->DisplayName();
-
-		bool isRight = (hardpoint.GetPoint().X() >= 0.);
-		bool isTurret = hardpoint.IsTurret();
-
-		double &y = nextY[isRight][isTurret];
-		double x = centerX + (isRight ? LABEL_DX : -LABEL_DX - LABEL_WIDTH);
-		bool isHover = (index == hoverIndex);
-		layout.align = isRight ? Alignment::LEFT : Alignment::RIGHT;
-		font.Draw({name, layout}, Point(x, y + TEXT_OFF), isHover ? bright : dim);
-		Point zoneCenter(labelCenter[isRight], y + .5 * LINE_HEIGHT);
-		zones.emplace_back(zoneCenter, LINE_SIZE, index);
-
-		// Determine what color to use for the line.
-		Color color;
-		if(isTurret)
-			color = *GameData::Colors().Get(isHover ? "player info hardpoint turret hover"
-			: "player info hardpoint turret");
-		else
-			color = *GameData::Colors().Get(isHover ? "player info hardpoint gun hover"
-			: "player info hardpoint gun");
-
-		// Draw the line.
-		Point from(fromX[isRight], zoneCenter.Y());
-		Point to = bounds.Center() + (2. * scale) * hardpoint.GetPoint();
-		DrawLine(from, to, color);
-		if(isHover)
-		{
-			topFrom = from;
-			topTo = to;
-			topColor = color;
-			hasTop = true;
-		}
-
-		y += LINE_HEIGHT;
-		++index;
+		// Multiply hardpoint X by 2 to convert to sprite pixels.
+		maxX = max(maxX, fabs(2. * hardpoint.GetPoint().X()));
 	}
-	// Make sure the line for whatever hardpoint we're hovering is always on top.
-	if(hasTop)
-		DrawLine(topFrom, topTo, topColor);
+	// If necessary, shrink the sprite to keep the hardpoints inside the labels.
+	static const double LABEL_DX = 95.;
+	static const double LABEL_PAD = 5.;
+	if(maxX > (LABEL_DX - LABEL_PAD))
+		scale = min(scale, (LABEL_DX - LABEL_PAD) / (2. * maxX));
 
-	// Re-positioning weapons.
-	if(draggingIndex >= 0)
+	// Draw the ship, using the default swizzle 0
+	if(sprite)
 	{
-		const Outfit *outfit = ship.Weapons()[draggingIndex].GetOutfit();
-		string name = outfit ? outfit->DisplayName() : "[empty]";
-		Point pos(hoverPoint.X() - .5 * font.Width(name), hoverPoint.Y());
-		font.Draw(name, pos + Point(1., 1.), Color(0., 1.));
-		font.Draw(name, pos, bright);
+		SpriteShader::Draw(sprite, bounds.Center(), scale, ship.GetSwizzle());
 	}
 }
 
