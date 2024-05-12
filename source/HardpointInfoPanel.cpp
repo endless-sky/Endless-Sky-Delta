@@ -1190,7 +1190,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle &bounds)
 	}
 	// If necessary, shrink the sprite to keep the hardpoints inside the labels.
 	// The width of this UI block will be 2 * (LABEL_WIDTH + HARDPOINT_DX).
-	static const double LABEL_WIDTH = 150.;
+	static const double LABEL_WIDTH = 200.;
 	static const double LABEL_DX = 95.;
 	static const double LABEL_PAD = 5.;
 	if(maxX > (LABEL_DX - LABEL_PAD))
@@ -1217,8 +1217,8 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle &bounds)
 
 	int index = 0;
 	const double centerX = bounds.Center().X();
-	const double labelCenter[2] = { -.5 * LABEL_WIDTH - LABEL_DX, LABEL_DX + .5 * LABEL_WIDTH };
-	const double fromX[2] = { -LABEL_DX + LABEL_PAD, LABEL_DX - LABEL_PAD };
+	const double labelCenter[2] = { centerX -.5 * LABEL_WIDTH - LABEL_DX, centerX + LABEL_DX + .5 * LABEL_WIDTH };
+	const double fromX[2] = { centerX -LABEL_DX + LABEL_PAD, centerX + LABEL_DX - LABEL_PAD };
 	static const double LINE_HEIGHT = 20.;
 	static const double TEXT_OFF = .5 * (LINE_HEIGHT - font.Height());
 	static const Point LINE_SIZE(LABEL_WIDTH, LINE_HEIGHT);
