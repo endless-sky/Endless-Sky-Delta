@@ -581,7 +581,6 @@ void ShipInfoDisplay::DrawShipCosts(const Ship &ship, const Rectangle & bounds, 
 	// This just displays the ship's cost.
 	// Another function should give the hull + outfits breakdown.
 	table.DrawTruncatedPair("cost:", dim, Format::Credits(ship.Cost()), bright, Truncate::MIDDLE, true);
-
 	infoPanelLine++;
 }
 
