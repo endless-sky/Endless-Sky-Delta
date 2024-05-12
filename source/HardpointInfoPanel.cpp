@@ -126,7 +126,7 @@ void HardpointInfoPanel::Draw()
 	ClearZones();
 	if(shipIt == panelState.Ships().end())
 		return;
-	// Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
+	Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
 	// Displays "name: " and the ship name
 	info.DrawShipName(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	// Displays "model: " and the ship model name
@@ -156,8 +156,7 @@ void HardpointInfoPanel::Draw()
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	// Displays the ship sprite with all the hardpoints labeled and allows rearranging weapons
 	DrawWeapons(infoPanelUi->GetBox("weapons"));
-	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
-	// DrawCargo(cargoBounds);
+	DrawAmmunition(infoPanelUi->GetBox("outfits"), cargoBounds);
 
 	// If the player hovers their mouse over a ship attribute, show its tooltip.
 	info.DrawTooltips();
@@ -520,7 +519,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle & bounds)
 
 
 
-void HardpointInfoPanel::DrawOutfits(const Rectangle &bounds, Rectangle& cargoBounds)
+void HardpointInfoPanel::DrawAmmunition(const Rectangle &bounds, Rectangle& cargoBounds)
 {
 	// Check that the specified area is big enough.
 	if(bounds.Width() < WIDTH)
@@ -540,46 +539,43 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle &bounds, Rectangle& cargoBo
 	table.DrawAt(start);
 
 	// Draw the outfits in the same order used in the outfitter.
-	for(const auto & cat : GameData::GetCategory(CategoryType::OUTFIT))
-	{
-		const string & category = cat.Name();
-		auto it = outfits.find(category);
-		if(it == outfits.end())
-			continue;
+	const string & category = "Ammunition";
+	auto it = outfits.find(category);
+	if(it == outfits.end())
+		return;
 
-		// Skip to the next column if there is no space for this category label
-		// plus at least one outfit.
-		if(table.GetRowBounds().Bottom() + 40. > bounds.Bottom())
+	// Skip to the next column if there is no space for this category label
+	// plus at least one outfit.
+	if(table.GetRowBounds().Bottom() + 40. > bounds.Bottom())
+	{
+		start += Point(WIDTH, 0.);
+		if(start.X() + COLUMN_WIDTH > bounds.Right())
+			return;
+		table.DrawAt(start);
+	}
+
+	// Draw the category label.
+	table.Draw(category, bright);
+	table.Advance();
+	for(const Outfit * outfit : it->second)
+	{
+		// Check if we've gone below the bottom of the bounds.
+		if(table.GetRowBounds().Bottom() > bounds.Bottom())
 		{
 			start += Point(WIDTH, 0.);
 			if(start.X() + COLUMN_WIDTH > bounds.Right())
 				break;
 			table.DrawAt(start);
+			table.Draw(category, bright);
+			table.Advance();
 		}
 
-		// Draw the category label.
-		table.Draw(category, bright);
-		table.Advance();
-		for(const Outfit * outfit : it->second)
-		{
-			// Check if we've gone below the bottom of the bounds.
-			if(table.GetRowBounds().Bottom() > bounds.Bottom())
-			{
-				start += Point(WIDTH, 0.);
-				if(start.X() + COLUMN_WIDTH > bounds.Right())
-					break;
-				table.DrawAt(start);
-				table.Draw(category, bright);
-				table.Advance();
-			}
-
-			// Draw the outfit name and count.
-			table.DrawTruncatedPair(outfit->DisplayName(), dim,
-				to_string(ship.OutfitCount(outfit)), bright, Truncate::BACK, false);
-		}
-		// Add an extra gap in between categories.
-		table.DrawGap(10.);
+		// Draw the outfit name and count.
+		table.DrawTruncatedPair(outfit->DisplayName(), dim,
+			to_string(ship.OutfitCount(outfit)), bright, Truncate::BACK, false);
 	}
+	// Add an extra gap in between categories.
+	table.DrawGap(10.);
 
 	// Check if this information spilled over into the cargo column.
 	if(table.GetPoint().X() >= cargoBounds.Left())
@@ -588,106 +584,6 @@ void HardpointInfoPanel::DrawOutfits(const Rectangle &bounds, Rectangle& cargoBo
 		cargoBounds = Rectangle::WithCorners(
 			Point(cargoBounds.Left(), startY),
 			Point(cargoBounds.Right(), max(startY, cargoBounds.Bottom())));
-	}
-}
-
-
-
-void HardpointInfoPanel::DrawCargo(const Rectangle &bounds)
-{
-	Color dim = *GameData::Colors().Get("medium");
-	Color bright = *GameData::Colors().Get("bright");
-	Color backColor = *GameData::Colors().Get("faint");
-	const Ship & ship = **shipIt;
-
-	// Cargo list.
-	const CargoHold & cargo = (player.Cargo().Used() ? player.Cargo() : ship.Cargo());
-	Table table;
-	table.AddColumn(0, { COLUMN_WIDTH, Alignment::LEFT });
-	table.AddColumn(COLUMN_WIDTH, { COLUMN_WIDTH, Alignment::RIGHT });
-	table.SetUnderline(-5, COLUMN_WIDTH + 5);
-	table.DrawAt(bounds.TopLeft() + Point(10., 8.));
-
-	double endY = bounds.Bottom() - 30. * (cargo.Passengers() != 0);
-	bool hasSpace = (table.GetRowBounds().Bottom() < endY);
-	if((cargo.CommoditiesSize() || cargo.HasOutfits() || cargo.MissionCargoSize()) && hasSpace)
-	{
-		table.Draw("Cargo", bright);
-		table.Advance();
-		hasSpace = (table.GetRowBounds().Bottom() < endY);
-	}
-	if(cargo.CommoditiesSize() && hasSpace)
-	{
-		for(const auto & it : cargo.Commodities())
-		{
-			if(!it.second)
-				continue;
-
-			commodityZones.emplace_back(table.GetCenterPoint(), table.GetRowSize(), it.first);
-			if(it.first == selectedCommodity)
-				table.DrawHighlight(backColor);
-
-			table.Draw(it.first, dim);
-			table.Draw(to_string(it.second), bright);
-
-			// Truncate the list if there is not enough space.
-			if(table.GetRowBounds().Bottom() >= endY)
-			{
-				hasSpace = false;
-				break;
-			}
-		}
-		table.DrawGap(10.);
-	}
-	if(cargo.HasOutfits() && hasSpace)
-	{
-		for(const auto & it : cargo.Outfits())
-		{
-			if(!it.second)
-				continue;
-
-			plunderZones.emplace_back(table.GetCenterPoint(), table.GetRowSize(), it.first);
-			if(it.first == selectedPlunder)
-				table.DrawHighlight(backColor);
-
-			// For outfits, show how many of them you have and their total mass.
-			bool isSingular = (it.second == 1 || it.first->Get("installable") < 0.);
-			string name = (isSingular ? it.first->DisplayName() : it.first->PluralName());
-			if(!isSingular)
-				name += " (" + to_string(it.second) + "x)";
-			table.Draw(name, dim);
-
-			double mass = it.first->Mass() * it.second;
-			table.Draw(Format::Number(mass), bright);
-
-			// Truncate the list if there is not enough space.
-			if(table.GetRowBounds().Bottom() >= endY)
-			{
-				hasSpace = false;
-				break;
-			}
-		}
-		table.DrawGap(10.);
-	}
-	if(cargo.HasMissionCargo() && hasSpace)
-	{
-		for(const auto & it : cargo.MissionCargo())
-		{
-			// Capitalize the name of the cargo.
-			table.Draw(Format::Capitalize(it.first->Cargo()), dim);
-			table.Draw(to_string(it.second), bright);
-
-			// Truncate the list if there is not enough space.
-			if(table.GetRowBounds().Bottom() >= endY)
-				break;
-		}
-		table.DrawGap(10.);
-	}
-	if(cargo.Passengers() && endY >= bounds.Top())
-	{
-		table.DrawAt(Point(bounds.Left(), endY) + Point(10., 8.));
-		table.Draw("passengers:", dim);
-		table.Draw(to_string(cargo.Passengers()), bright);
 	}
 }
 
