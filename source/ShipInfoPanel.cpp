@@ -125,16 +125,22 @@ void ShipInfoPanel::Draw()
 	if(shipIt == panelState.Ships().end())
 		return;
 	Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
-	info.DrawShipName(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "name: " and the ship name.
-	info.DrawShipModelStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "model: " and the ship model name.
+	// Draws "name: " and the ship name.
+	info.DrawShipName(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
+	// Draws "model: " and the ship model name.
+	info.DrawShipModelStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipHealthStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull.
+	// Displays the shield and hull.
+	info.DrawShipHealthStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipCarryingCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel.
+	// Displays mass, cargo, bunks, and fuel
+	info.DrawShipCarryingCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipOutfitStat(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // displays "outfit space free: " and outfit space.
+	// Displays "outfit space free: " and outfit space
+	info.DrawShipOutfitStat(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipManeuverStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse, turn, lateral.
+	// Displays max speed, thrust, reverse, lateral, and turn
+	info.DrawShipManeuverStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); 
 	// infoPanelLine++; // This makes a one-text-line gap in the display of text.
 	info.DrawShipEnergyHeatStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	// DrawShipStats(infoPanelUi->GetBox("stats")); // This is the old method that drew all the stats

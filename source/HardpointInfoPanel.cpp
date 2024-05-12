@@ -127,24 +127,35 @@ void HardpointInfoPanel::Draw()
 	if(shipIt == panelState.Ships().end())
 		return;
 	// Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
-	info.DrawShipName(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "name: " and the ship name.
-	info.DrawShipModelStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "model: " and the ship model name.
-	info.DrawShipCosts(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws the ship's cost.
+	// Displays "name: " and the ship name
+	info.DrawShipName(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
+	// Displays "model: " and the ship model name
+	info.DrawShipModelStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
+	// Displays the ship's cost
+	info.DrawShipCosts(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipHealthStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull.
+	// Displays the ship's shields and hulls as well as regeneration
+	info.DrawShipHealthStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipCarryingCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel.
+	// Displays the mass, cargo, bunks, fuel
+	info.DrawShipCarryingCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipOutfitStat(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // displays "outfit space free: " and outfit space.
-	info.DrawShipCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // draws weapon capacity and engine capacity.
+	// displays "outfit space free: " and outfit space
+	info.DrawShipOutfitStat(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
+	// Displays weapon capacity and engine capacity
+	info.DrawShipCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipPropulsionCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // draws all the engine slots.
+	// Displays all the engine slots.
+	info.DrawShipPropulsionCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipHardpointStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // draws the weapon slots.
+	// Displays the weapon slots
+	info.DrawShipHardpointStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	info.DrawShipBayStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // draws the numbers of bays.
+	// Displays the numbers of bays
+	info.DrawShipBayStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
 	infoPanelLine++; // This makes a one-text-line gap in the display of text.
-	DrawWeapons(infoPanelUi->GetBox("weapons")); // displays the ship sprite with all the hardpoints labeled and allows rearranging weapons.
+	// Displays the ship sprite with all the hardpoints labeled and allows rearranging weapons
+	DrawWeapons(infoPanelUi->GetBox("weapons")); 
 	// DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	// DrawCargo(cargoBounds);
 
