@@ -43,7 +43,6 @@ class HardpointInfoPanel : public Panel {
 public:
 	explicit HardpointInfoPanel(PlayerInfo &player);
 	explicit HardpointInfoPanel(PlayerInfo &player, InfoPanelState state);
-	int AttributesHeight() const;
 
 	virtual void Step() override;
 	virtual void Draw() override;
