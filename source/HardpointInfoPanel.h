@@ -63,20 +63,8 @@ private:
 	void ClearZones();
 
 	// Draw the ship tab (and its subsections).
-	void DrawShipName(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipModelStats(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipCosts(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipHealthStats(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipCarryingCapacities(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipManeuverStats(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipOutfitStat(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipCapacities(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipPropulsionCapacities(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipHardpointStats(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipBayStats(const Rectangle &bounds, int &infoPanelLine);
-	void DrawShipEnergyHeatStats(const Rectangle &bounds, int &infoPanelLine);
+	void DrawWeapons(const Rectangle & bounds);
 	void DrawOutfits(const Rectangle &bounds, Rectangle & cargoBounds);
-	void DrawWeapons(const Rectangle &bounds);
 	void DrawCargo(const Rectangle &bounds);
 
 	// Helper functions.
@@ -119,7 +107,6 @@ private:
 	// Table variables
 	std::vector<std::string> attributeHeaderLabels;
 	std::vector<std::string> attributeHeaderValues;
-	int attributesHeight = 0;
 
 	std::vector<std::string> tableLabels;
 	std::vector<std::string> energyTable;

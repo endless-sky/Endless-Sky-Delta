@@ -118,13 +118,26 @@ void ShipInfoPanel::Draw()
 	// Draw the interface.
 	const Interface *infoPanelUi = GameData::Interfaces().Get("info panel");
 	infoPanelUi->Draw(interfaceInfo, this);
+	int infoPanelLine = 0;
 
 	// Draw all the different information sections.
 	ClearZones();
 	if(shipIt == panelState.Ships().end())
 		return;
 	Rectangle cargoBounds = infoPanelUi->GetBox("cargo");
-	DrawShipStats(infoPanelUi->GetBox("stats"));
+	info.DrawShipName(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "name: " and the ship name.
+	info.DrawShipModelStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // Draws "model: " and the ship model name.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	info.DrawShipHealthStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // This should pull up shield and hull.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	info.DrawShipCarryingCapacities(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // mass, cargo, bunks, fuel.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	info.DrawShipOutfitStat(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // displays "outfit space free: " and outfit space.
+	infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	info.DrawShipManeuverStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine); // max speed, thrust, reverse, turn, lateral.
+	// infoPanelLine++; // This makes a one-text-line gap in the display of text.
+	info.DrawShipEnergyHeatStats(**shipIt, infoPanelUi->GetBox("stats"), infoPanelLine);
+	// DrawShipStats(infoPanelUi->GetBox("stats")); // This is the old method that drew all the stats
 	DrawOutfits(infoPanelUi->GetBox("outfits"), cargoBounds);
 	DrawSprite(infoPanelUi->GetBox("ship info sprite"));
 	DrawThumbnail(infoPanelUi->GetBox("ship info thumbnail"));
