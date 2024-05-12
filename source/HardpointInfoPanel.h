@@ -63,7 +63,6 @@ private:
 	void ClearZones();
 
 	// Draw the ship tab (and its subsections).
-	void DrawShipStats(const Rectangle &bounds);
 	void DrawShipName(const Rectangle &bounds, int &infoPanelLine);
 	void DrawShipModelStats(const Rectangle &bounds, int &infoPanelLine);
 	void DrawShipCosts(const Rectangle &bounds, int &infoPanelLine);
