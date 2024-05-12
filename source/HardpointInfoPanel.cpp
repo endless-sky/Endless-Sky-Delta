@@ -1182,11 +1182,19 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle &bounds)
 	// Also figure out how many weapons of each type are on each side.
 	double maxX = 0.;
 	int count[2][2] = { {0, 0}, {0, 0} };
+	bool stayRight = true;
 	for(const Hardpoint & hardpoint : ship.Weapons())
 	{
 		// Multiply hardpoint X by 2 to convert to sprite pixels.
 		maxX = max(maxX, fabs(2. * hardpoint.GetPoint().X()));
-		++count[hardpoint.GetPoint().X() >= 0.][hardpoint.IsTurret()];
+		bool isRight = hardpoint.GetPoint().X() >= 0.;
+		// Alternate between left and right counting of hardpoints which are dead centre.
+		if(hardpoint.GetPoint().X() == 0.)
+		{
+			isRight = stayRight;
+			stayRight = !stayRight;
+		}
+		++count[isRight][hardpoint.IsTurret()];
 	}
 	// If necessary, shrink the sprite to keep the hardpoints inside the labels.
 	// The width of this UI block will be 2 * (LABEL_WIDTH + HARDPOINT_DX).
@@ -1226,6 +1234,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle &bounds)
 	Point topTo;
 	Color topColor;
 	bool hasTop = false;
+	stayRight = true;
 	auto layout = Layout(static_cast<int>(LABEL_WIDTH), Truncate::BACK);
 	for(const Hardpoint & hardpoint : ship.Weapons())
 	{
@@ -1234,6 +1243,11 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle &bounds)
 			name = hardpoint.GetOutfit()->DisplayName();
 
 		bool isRight = (hardpoint.GetPoint().X() >= 0.);
+		if(hardpoint.GetPoint().X() == 0.)
+		{
+			isRight = stayRight;
+			stayRight = !stayRight;
+		}
 		bool isTurret = hardpoint.IsTurret();
 
 		double & y = nextY[isRight][isTurret];
