@@ -30542,15 +30542,15 @@ system Sol
 		period 10
 	object
 		sprite planet/mercury
-		distance 289.647
+		distance 673
 		period 60.0000
 	object
 		sprite planet/venus
-		distance 533.534
+		distance 1085
 		period 150.000
 	object Earth
 		sprite planet/earth
-		distance 965.669
+		distance 1496
 		period 365.250
 		object Luna
 			sprite planet/luna
@@ -30558,11 +30558,11 @@ system Sol
 			period 27.3
 	object Mars
 		sprite planet/mars
-		distance 1471.43
+		distance 2281
 		period 687.001
 	object Jupiter
 		sprite planet/jupiter
-		distance 3339
+		distance 7787
 		period 2348.40
 		object
 			sprite planet/io
@@ -30582,7 +30582,7 @@ system Sol
 			period 66.76
 	object
 		sprite planet/saturn
-		distance 5562
+		distance 14362
 		period 5048.87
 		object
 			sprite planet/tethys
@@ -30598,7 +30598,7 @@ system Sol
 			period 16
 	object
 		sprite planet/uranus
-		distance 10373
+		distance 28723
 		period 12858.9
 		object
 			sprite planet/miranda
@@ -30610,7 +30610,7 @@ system Sol
 			period 13
 	object
 		sprite planet/neptune
-		distance 15730
+		distance 45179
 		period 24012.7
 
 system "Sol Arach"
