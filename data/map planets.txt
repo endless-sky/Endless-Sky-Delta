@@ -2766,6 +2766,25 @@ planet "Merask Fortuno"
 	bribe 0
 	security 0
 
+planet "Mercury"
+	attributes factory moon "near earth" tourism
+	landscape land/earthrise
+	description `In the early days of space travel one of the earliest forms of interstellar travel proposed was to create massive laser arrays that could be used to push ships equipped with expansive solar sails. Such lasers would need massive power sources, and what better source than the Sun?`
+	description `	Thus began humanity's first megaproject: To create a solar installation that would slowly roll around the planet, always keeping its solar fields in view of the sun in order to power massive laser arrays that were perpetually on the dark side of the planet.`
+	description `	The advent of hyperdrives nullified the purpose of this equipment, but such massive source of power and machinery was able to be turned to industrial use in serving as a raw-processing plant for turning asteroids into usable material. This, in turn, has supported a small outfit and ship manufacturing industry.`
+	spaceport `The spaceport is rudimentary, and the main pressurized dome of the facility is probably at least half a millennium old. So many metal foil patches have been cemented to its outer wall to stop slow air leaks that in places they entirely cover the surface.`
+	spaceport `	Everything is so ancient and ramshackle that it feels almost like you have stepped back in time to the early days of human space flight. Perhaps that's what the tourists come here to experience.`
+	shipyard "Basic Ships"
+	shipyard "Navy Basics"
+	shipyard "Tycho Crater Advanced"
+	outfitter "Common Outfits"
+	outfitter "Ammo North"
+	bribe 0.05
+	security 0.2
+	tribute 2500
+		threshold 7500
+		fleet "Large Republic" 10
+
 planet Mere
 	attributes fishing rim
 	landscape land/sea7
@@ -4838,6 +4857,18 @@ planet Veliante
 	attributes ka'het uninhabited
 	landscape land/fog9
 	description `Veliante may have been habitable once, but no longer. Part of its southern hemisphere is filled with deadly levels of radiation, but even elsewhere on the planet, it isn't safe to remain on the surface without adequate protection for too long. While animal life on the planet seems to have disappeared almost completely, plants and trees cover the surface in vast, colorful patches of flora.`
+
+planet Venus
+	attributes "near earth" tourism
+	landscape land/earthrise
+	description `Some people initially thought that Venus could be terraformed. Solar shades, various chemicals to reduce the acidity, perhaps dropping a few icy comets on it to cool things off... Some were potential ideas, others not so much. All required a starting point, and that was this aerostat station, floating far above the acid clouds.`
+	description `	This station has changed very little over the past millenia, although the scientific equipment within it has improved considerably.`
+	spaceport `The spaceport is simply pads with docking tubes to allow passengers and cargo to be directly transported inside the station. A small tavern provides meals to travelers, but is mostly frequented by research teams monitoring the planet below.`
+	bribe 0.05
+	security 0.2
+	tribute 2500
+		threshold 7500
+		fleet "Large Republic" 10
 
 planet "Vibrant Water"
 	attributes farming saryd
