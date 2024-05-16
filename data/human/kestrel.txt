@@ -278,7 +278,7 @@ ship "Unknown Ship Type"
 		"hull" 7200
 		"required crew" 64
 		"bunks" 128
-		"mass" 740
+		"mass" 5920
 		"drag" 11
 		"heat dissipation" .6
 		"fuel capacity" 500
@@ -286,6 +286,9 @@ ship "Unknown Ship Type"
 		"outfit space" 810
 		"weapon capacity" 390
 		"engine capacity" 210
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 260
 			"shield damage" 2600
@@ -335,7 +338,7 @@ ship "Kestrel"
 		"hull" 7200
 		"required crew" 64
 		"bunks" 128
-		"mass" 740
+		"mass" 5920
 		"drag" 11
 		"heat dissipation" .6
 		"fuel capacity" 500
@@ -343,6 +346,9 @@ ship "Kestrel"
 		"outfit space" 810
 		"weapon capacity" 390
 		"engine capacity" 210
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 260
 			"shield damage" 2600
