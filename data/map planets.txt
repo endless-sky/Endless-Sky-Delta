@@ -2984,7 +2984,7 @@ planet Nepheritis
 planet Neptune
 	attributes "gas giant" "requires: gaslining" uninhabited
 	landscape land/nasa16
-	description `While Neptune is a gas giant with a similar atmosphere to Saturn and Jupiter, the additional presence of ices icluding water, ammonia, and methane. This later is the predominant reason for its bluish tinge.`
+	description `While Neptune is a gas giant with a similar atmosphere to Saturn and Jupiter, the additional presence of ices including water, ammonia, and methane. This later is the predominant reason for its bluish tinge.`
 	description `	Few spacefarers have reason to visit Neptune, but there is the constant presence of satellites allowing researchers from nearby stations to continue their studies. Despite centuries of study, the mystery of Neptune's abnormally high atmospheric temperatures. Some have speculated it may be connected to the dark spot that is sometimes visible.`
 	government Uninhabited
 
@@ -3315,7 +3315,7 @@ planet "Oberon"
 	landscape land/moon0
 	description `Located on Oberon, a moon orbiting Uranus, this forlorn outpost is scarcely big enough to visit. The majority of it is dedicated to servicing the Republic Navy's resupply stockpile, which occupy vast fields of bunkers surrounding it.`
 	description `	While extremely valuable to have in the early days when hyperspace travel was costly and timeconsuming, it is now a relic of bygone eras. As an extension of the Navy's resupply capabilities, the local quartermaster grudgingly also reloads the few mercantile ships that frequent this lonely port.`
-	spaceport `This spaceport carries a heavy Navy theme, with a mix of images of old 20th century naval ships and regalia from logistics and support units of the past half millenia.`
+	spaceport `This spaceport carries a heavy Navy theme, with a mix of images of old 20th century naval ships and regalia from logistics and support units of the past half millennia.`
 	outfitter "Ammo North"a
 	security 0.5
 	tribute 100
@@ -3511,7 +3511,7 @@ planet Placer
 planet Pluto
 	attributes moon "near earth"
 	landscape land/moon1
-	description `Pluto has been the subject of significant debate over the years. Originally termed a planet, it was reclassified as a dwarf planet back at the dawn of the third millenium. Over a thousand years later, there are still some who term it the ninth planet in the Sol system. Given that most navigational systems can track everything of gravitational significance in a system, what exactly the category of an object is has become a discussion without much interest to modern spacefarers.`
+	description `Pluto has been the subject of significant debate over the years. Originally termed a planet, it was reclassified as a dwarf planet back at the dawn of the third millennium. Over a thousand years later, there are still some who term it the ninth planet in the Sol system. Given that most navigational systems can track everything of gravitational significance in a system, what exactly the category of an object is has become a discussion without much interest to modern spacefarers.`
 	description `	This planet is best known for its eccentric and inclined orbit that takes it inside the orbit of Neptune. This, combined with the fact that it is considered to be a binary system, as the barycenter of its orbit does not lie within it, but instead is at a point in between Pluto and Charon's surfaces.`
 	government Uninhabited
 
@@ -3881,7 +3881,7 @@ planet "Sasirka Gatru"
 planet Saturn
 	attributes "gas giant" "requires: gaslining" uninhabited
 	landscape land/nasa13
-	description `For over a millenia the main attraction of Saturn has been the rings that encircle it. For some, however, the hexagonal storm cells hold a greater fascination, and have been the source of countless theories. One popular idea posits that they are created by the force fields protecting an alien installation just under the surface.`
+	description `For over a millennia the main attraction of Saturn has been the rings that encircle it. For some, however, the hexagonal storm cells hold a greater fascination, and have been the source of countless theories. One popular idea posits that they are created by the force fields protecting an alien installation just under the surface.`
 	description `	While your sensors do not reveal any unusual energy fields or structures, the visual of the cloud formations whipping past and the vast storms are certainly impressive.`
 	government Uninhabited
 
@@ -4621,7 +4621,7 @@ planet Triton
 	attributes moon "near earth"
 	landscape land/snow22
 	description `Triton attracted attention early in humanity's exploration efforts as being one of the most geologically active planets in the solar system. Its icy shell is predominantly water and nitrogen, and is frequently the site of tall geyser plumes.`
-	description `	Despite the early attention it received, Triton was too reluctant to give up its secrets. As extra-solar planets became more available and economic concerns started to dominate space travel, Triton's once thriving research base has shrunk to being a mere shadow of itself. Now it is home only to a few long-term scientists and the ocasional graduate student, and the skeleton staff to keep it operational.`
+	description `	Despite the early attention it received, Triton was too reluctant to give up its secrets. As extra-solar planets became more available and economic concerns started to dominate space travel, Triton's once thriving research base has shrunk to being a mere shadow of itself. Now it is home only to a few long-term scientists and the occasional graduate student, and the skeleton staff to keep it operational.`
 	spaceport `The spaceport bar was once a large food court, but most of it has been sealed off and is now home to only a single noodle shop. A small group of people sit at a table off to the side, loudly discussing humanity's problems. Several vocally proclaim that everything started going wrong when researchers started chasing money instead of data back in the 24th century. Several others roll their eyes as if they had heard this many times already.`
 	security 0.01
 
@@ -4716,7 +4716,7 @@ planet Uranus
 	attributes "gas giant" "requires: gaslining" uninhabited
 	landscape land/nasa15
 	description `Uranus has long been an outlier in astronomy textbooks, noted for its axial tilt of roughly 90 degrees. As such, when most planets are presented as spinning around Sol like tops, Uranus rolls around like a ball. Despite this notoriety, it has little impact on stellar navigation or visible impact.`
-	description `	For the curious and the paranoid, the main attraction to Uranus is its low internal heat and erratic cloud formation. Both have stymied science's ability to explain or predict them for almost a millenia. Notably, Uranus has a dark spot very similar to the one found on Neptune.`
+	description `	For the curious and the paranoid, the main attraction to Uranus is its low internal heat and erratic cloud formation. Both have stymied science's ability to explain or predict them for almost a millennia. Notably, Uranus has a dark spot very similar to the one found on Neptune.`
 	government Uninhabited
 
 planet Vail
@@ -4929,7 +4929,7 @@ planet Venus
 	attributes "near earth" tourism
 	landscape land/earthrise
 	description `Some people initially thought that Venus could be terraformed. Solar shades, various chemicals to reduce the acidity, perhaps dropping a few icy comets on it to cool things off... Some were potential ideas, others not so much. All required a starting point, and that was this aerostat station, floating far above the acid clouds.`
-	description `	This station has changed very little over the past millenia, although the scientific equipment within it has improved considerably.`
+	description `	This station has changed very little over the past millennia, although the scientific equipment within it has improved considerably.`
 	spaceport `The spaceport is simply pads with docking tubes to allow passengers and cargo to be directly transported inside the station. A small tavern provides meals to travelers, but is mostly frequented by research teams monitoring the planet below.`
 	bribe 0.05
 	security 0.2
