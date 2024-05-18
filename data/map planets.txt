@@ -1394,6 +1394,16 @@ planet Esstch
 	bribe 0
 	security 0
 
+planet Europa
+	attributes moon "near earth"
+	landscape land/snow15
+	description `Europa is distinctive within the solar system as having the smoothest surface of any known solid stellar object. It also famously has a water ocean beneath the surface that is the home of the first extraterrestrial life that humanity ever found. Bacteria and algea-like life forms, to be specific.`
+	description `	This moon also has the distinction of being the location of more crashed outpost ships than anywhere else in civilized space. To date, 17 attempts have been made to establish permanent outposts here, ranging from research to agricultural. None have managed to get past the initial setup before everyone perished and the equipment damaged beyond repair. So far all deaths & damage appear to be accidental, although the number of deaths in a single place defies statistical odds.`
+	spaceport `This spaceport is echoes with your footsteps. There is no-one around, and nothing of value remains here. Your suit reports that the atmosphere is breathable, but so thin that it would immediately leave you gasping for breath. It also advises that there are unknown contaminents that defy its capacity to analyze.`
+	government Uninhabited
+	bribe 0
+	security 0
+
 planet Everhope
 	attributes hai station
 	landscape land/station35
@@ -4589,6 +4599,23 @@ planet Tinker
 	tribute 1100
 		threshold 4000
 		fleet "Large Syndicate" 7
+
+planet Titan
+	attributes moon "near earth"
+	landscape land/snow18
+	description `Titan is known as being the first place in the Sol system where bodies of liquid have been observed on the surface. This, combined with an atmosphere thicker than Earth's made it a prime destination for early spacefarers. Unfortunately for them, the liquid oceans were composed of hydrocarbons, and the atmosphere is quite toxic. Nonetheless, these components enable it to have similar features to Earth, including rain, dunes, rivers, lakes, deltas, erosion, and other factors.`
+	description `	Despite its reputation as the most Earthlike place in the solar system, venturing outside is not recommended. The ambient temperature of 94 K combined with the active methane cycle challenge most equipment.`
+	spaceport `The spaceport is functional and well maintained, filled with hundreds of people going about their lives. Judging from the signs and snippets of conversation, it seems likely that most of the people here are trying to figure out how to enable this outpost to become a self-sufficient city with an industry tapping the vast hydrocarbon reservoirs.`
+	shipyard "Basic Ships"
+	shipyard "Tycho Crater Advanced"
+	outfitter "Common Outfits"
+	outfitter "Lovelace Basics"
+	outfitter "Ammo North"
+	bribe 0.05
+	security 0.2
+	tribute 1000
+		threshold 7500
+		fleet "Large Republic" 5
 
 planet Topkapi
 	attributes moon uninhabited

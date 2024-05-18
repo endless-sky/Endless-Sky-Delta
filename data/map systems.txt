@@ -30609,7 +30609,7 @@ system Sol
 			sprite planet/io
 			distance 238.221
 			period 10.614
-		object
+		object Europa
 			sprite planet/europa
 			distance 379.078
 			period 21.306
@@ -30633,7 +30633,7 @@ system Sol
 			sprite planet/rhea
 			distance 791
 			period 4.5
-		object
+		object Titan
 			sprite planet/titan
 			distance 1222
 			period 16
