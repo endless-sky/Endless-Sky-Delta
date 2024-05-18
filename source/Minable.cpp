@@ -168,8 +168,10 @@ void Minable::Place(double energy, double beltRadius)
 	// apoapsis distance (scale / (1 - e)) is no farther than 4.: scale <= 4. * (1 - e)
 	// periapsis distance is no farther than 1.3: scale <= 1.3 * (1 + e)
 	// apoapsis distance is no closer than .8: scale >= .8 * (1 - e)
-	double sMin = max(.8 * (1. + eccentricity), .9 * (1. - eccentricity));
-	double sMax = min(1.5 * (1. - eccentricity), 1.1 * (1. + eccentricity));
+	// These two formula lines removed as they added too much spread 
+	// and prevented formation of actual belts.
+	// double sMin = max(.8 * (1. + eccentricity), .9 * (1. - eccentricity));
+	// double sMax = min(1.5 * (1. - eccentricity), 1.1 * (1. + eccentricity));
 	orbitScale = beltRadius;
 
 	// At periapsis, the object should have this velocity:
