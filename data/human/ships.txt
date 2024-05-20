@@ -407,7 +407,7 @@ ship "Barb"
 		"required crew" 1
 		"bunks" 2
 		"mass" 20
-		"drag" .8
+		"drag" .70
 		"heat dissipation" .78
 		"outfit space" 85
 		"weapon capacity" 28
@@ -1485,7 +1485,7 @@ ship "Dagger"
 		"required crew" 1
 		"bunks" 1
 		"mass" 20
-		"drag" .63
+		"drag" .65
 		"heat dissipation" .9
 		"outfit space" 90
 		"weapon capacity" 20

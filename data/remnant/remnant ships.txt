@@ -28,7 +28,7 @@ ship "Albatross"
 		"bunks" 75
 		"cargo space" 124
 		"mass" 4880
-		"drag" 14.2
+		"drag" 12.0
 		"heat dissipation" 0.4
 		"fuel capacity" 600
 		"ramscoop" 2.75
@@ -493,7 +493,7 @@ ship "Gull"
 		"required crew" 3
 		"bunks" 20
 		"mass" 540
-		"drag" 7.5
+		"drag" 6.
 		"heat dissipation" 0.56
 		"fuel capacity" 600
 		"ramscoop" 1.75
@@ -826,7 +826,7 @@ ship "Ibis"
 		"required crew" 16
 		"bunks" 36
 		"mass" 1400
-		"drag" 7.4
+		"drag" 7.0
 		"heat dissipation" 0.49
 		"fuel capacity" 700
 		"ramscoop" 2.75
@@ -916,7 +916,7 @@ ship "Merganser"
 		"fuel capacity" 600
 		"ramscoop" 1.75
 		"mass" 80
-		"drag" 1.8
+		"drag" 1.5
 		"heat dissipation" .75
 		"gaslining" 1
 		"outfit space" 219
@@ -1020,7 +1020,7 @@ ship "Pelican"
 		"bunks" 35
 		"cargo space" 302
 		"mass" 1200
-		"drag" 10.1
+		"drag" 9.0
 		"heat dissipation" 0.5
 		"fuel capacity" 600
 		"ramscoop" 2.75
@@ -1103,7 +1103,7 @@ ship "Penguin"
 		"required crew" 1
 		"bunks" 3
 		"mass" 89
-		"drag" 1.37
+		"drag" 1.25
 		"heat dissipation" 0.82
 		"fuel capacity" 800
 		"energy capacity" 300
@@ -1212,7 +1212,7 @@ ship "Peregrine"
 		"required crew" 9
 		"bunks" 25
 		"mass" 1400
-		"drag" 6.5
+		"drag" 6.0
 		"heat dissipation" 0.57
 		"fuel capacity" 1100
 		"ramscoop" 3.25
@@ -1334,7 +1334,7 @@ ship "Petrel"
 		"required crew" 2
 		"bunks" 3
 		"mass" 68
-		"drag" 1.7
+		"drag" 1.40
 		"heat dissipation" .73
 		"outfit space" 133
 		"weapon capacity" 33
@@ -1393,7 +1393,7 @@ ship "Puffin"
 		"required crew" 1
 		"bunks" 2
 		"mass" 46
-		"drag" 1.33
+		"drag" 1.27
 		"heat dissipation" 0.86
 		"fuel capacity" 700
 		"energy capacity" 150
@@ -1449,7 +1449,7 @@ ship "Smew"
 		"required crew" 1
 		"bunks" 8
 		"mass" 56.5
-		"drag" 1.84
+		"drag" 1.65
 		"heat dissipation" .62
 		"fuel capacity" 100
 		"cargo space" 70
@@ -1537,7 +1537,7 @@ ship "Starling"
 		"required crew" 6
 		"bunks" 15
 		"mass" 540
-		"drag" 4.6
+		"drag" 4.4
 		"heat dissipation" 0.59
 		"fuel capacity" 900
 		"ramscoop" 1.75
