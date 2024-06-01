@@ -4694,16 +4694,16 @@ system "Alpha Centauri"
 	attributes "near earth"
 	arrival 5000
 	habitable 1190
-	belt 1116
+	belt 16500
 	haze _menu/haze-67
 	link Sol
 	asteroids "small rock" 1 1.944
 	asteroids "medium rock" 2 5.04
 	asteroids "large rock" 1 1.8
-	asteroids "medium metal" 10 4.428
+	asteroids "medium metal" 6 4.428
 	asteroids "large metal" 1 3.168
-	minables copper 1 5.07974
-	minables lead 4 6.13217
+	minables copper 20 5.07974
+	minables lead 80 6.13217
 	trade Clothing 262
 	trade Electronics 695
 	trade Equipment 523
