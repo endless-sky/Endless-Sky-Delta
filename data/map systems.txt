@@ -4698,9 +4698,9 @@ system "Alpha Centauri"
 	haze _menu/haze-67
 	link Sol
 	asteroids "small rock" 1 1.944
-	asteroids "medium rock" 2 5.04
+	asteroids "medium rock" 1 5.04
 	asteroids "large rock" 1 1.8
-	asteroids "medium metal" 6 4.428
+	asteroids "medium metal" 3 4.428
 	asteroids "large metal" 1 3.168
 	minables copper 20 5.07974
 	minables lead 80 6.13217
