@@ -37,6 +37,9 @@ test-data "Flagship Attribute Autoconditions Save"
 				"cloaking fuel" 0.05
 				drag 4.3
 				"engine capacity" 171
+				"reverse thruster slot" 1
+				"steering slot" 1
+				"thruster slot" 1
 				"fuel capacity" 1100
 				gaslining 1
 				"gun ports" 5
