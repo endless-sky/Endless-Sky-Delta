@@ -37,9 +37,6 @@ test-data "Flagship Attribute Autoconditions Save"
 				"cloaking fuel" 0.05
 				drag 4.3
 				"engine capacity" 171
-				"reverse thruster slot" 1
-				"steering slot" 1
-				"thruster slot" 2
 				"fuel capacity" 1100
 				gaslining 1
 				"gun ports" 5
@@ -55,11 +52,14 @@ test-data "Flagship Attribute Autoconditions Save"
 				ramscoop 2.5
 				"remnant node" 5
 				"required crew" 9
+				"reverse thruster slot" 1
 				"shield energy" 3
 				"shield generation" 4.9
 				shields 16400
 				"slowing protection" 0.25
+				"steering slot" 1
 				"tactical scan power" 50
+				"thruster slot" 2
 				"turret mounts" 2
 				"weapon capacity" 220
 			outfits
