@@ -39,7 +39,7 @@ test-data "Flagship Attribute Autoconditions Save"
 				"engine capacity" 171
 				"reverse thruster slot" 1
 				"steering slot" 1
-				"thruster slot" 1
+				"thruster slot" 2
 				"fuel capacity" 1100
 				gaslining 1
 				"gun ports" 5
