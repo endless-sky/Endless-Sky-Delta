@@ -280,7 +280,7 @@ outfit "Thermal Scanner"
 	"mass" 2
 	"outfit space" -2
 	"thermal scan power" 35
-	description "While thermal signatures have always been useful as a means of identifying and tracking ships, determining a ship's effective average thermal load was functionally useless until recently. With the development of the plasma canon and then the flamethrower, attempting to overheat a ship has become a viable combat technique. As such, engineers with the Free World have begun assembling these sensor packages to support the daring captains who choose to use this tactic."
+	description "While thermal signatures have always been useful as a means of identifying and tracking ships, determining a ship's effective average thermal load was functionally useless until recently. With the development of the plasma cannon and then the flamethrower, attempting to overheat a ship has become a viable combat technique. As such, engineers with the Free World have begun assembling these sensor packages to support the daring captains who choose to use this tactic."
 
 outfit "Surveillance Pod"
 	category "Systems"
