@@ -172,6 +172,6 @@ test "Flagship Attribute Autoconditions"
 			"flagship attribute: drag" == 4300
 			"flagship attribute: engine capacity" == 882100
 			"flagship attribute: gun ports" == 0
-			"flagship attribute: heast generation" == 32300
+			"flagship attribute: heat generation" == 32300
 			"flagship attribute: outfit space" == 20000
 			"flagship attribute: weapon capacity" == 58000
