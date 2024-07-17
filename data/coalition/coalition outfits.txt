@@ -277,6 +277,7 @@ outfit "Scanning Module"
 	"outfit scan efficiency" 18
 	"cargo scan power" 25
 	"cargo scan efficiency" 18
+	"range finder power" 45
 	"weapon scan power" 45
 	description "This system allows the Heliarchs to scan nearby ships, enabling them to detect weapons or illegal goods."
 
