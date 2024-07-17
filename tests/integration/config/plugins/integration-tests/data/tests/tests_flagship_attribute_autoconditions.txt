@@ -132,7 +132,7 @@ test "Flagship Attribute Autoconditions"
 		inject "Flagship Attribute Autoconditions Save"
 		call "Load First Savegame"
 		assert
-			"flagship base attribute: cost" == 41627000
+			"flagship base attribute: cost" == 41627000000
 			"flagship base attribute: mass" == 350000
 			"flagship base attribute: bunks" == 25000
 			"flagship base attribute: cargo space" == 59000
