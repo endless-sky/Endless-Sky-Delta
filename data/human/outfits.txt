@@ -230,8 +230,8 @@ outfit "Asteroid Scanner"
 	category "Systems"
 	cost 61000
 	thumbnail "outfit/asteroid scanner"
-	"mass" 6
-	"outfit space" -6
+	"mass" 5
+	"outfit space" -5
 	"asteroid scan power" 43
 	description "This highly specialized scanning system can analyze the mineral composition of nearby asteroids and identify the ones that contain valuable materials."
 
@@ -267,8 +267,8 @@ outfit "Tactical Scanner"
 	category "Systems"
 	cost 144000
 	thumbnail "outfit/tactical scanner"
-	"mass" 4
-	"outfit space" -4
+	"mass" 2
+	"outfit space" -2
 	"velocity scan power" 35
 	"energy scan power" 35
 	description "A tactical scanner allows your ship to analyze the current velocity and energy levels of nearby targets, giving commanders useful information on the target's current movement. For centuries tactical scanners were only employed by the Navy, but recently Kraz Cybernetics has begun manufacturing them for use by militia ships."
