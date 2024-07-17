@@ -287,7 +287,10 @@ outfit "Outskirts Gauger"
 	"mass" 8
 	"outfit space" -8
 	"unique" 1
-	"tactical scan power" 169
+	"crew scan power" 169
+	"energy scan power" 169
+	"range finder power" 169
+	"thermal scan power" 169
 	"energy consumption" .2
 	description "Completed with the data from one of their long-lost satellites, the newest scanner of House Idriss excels at reading various energy signatures across vast distances."
 	description "	Constantly running its calculations about every little thing it detects within its impressive range, the gauger needs a steady supply of energy to function."
