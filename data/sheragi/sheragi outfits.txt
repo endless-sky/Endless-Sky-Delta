@@ -155,7 +155,6 @@ outfit "Electronic Warfare System"
 	"fuel scan power" 30
 	"maneuver scan power" 25
 	"range finder power" 1
-	"strategic scan power" 20
 	"thermal scan power" 22
 	"weapon scan power" 29
 	"scan interference" 2
