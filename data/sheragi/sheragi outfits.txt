@@ -151,9 +151,6 @@ outfit "Electronic Warfare System"
 	"unique" 1
 	"radar jamming" 10
 	"crew scan power" 20
-	"energy scan power" 40
-	"fuel scan power" 30
-	"maneuver scan power" 25
 	"range finder power" 1
 	"thermal scan power" 22
 	"weapon scan power" 29
