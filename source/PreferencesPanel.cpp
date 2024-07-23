@@ -57,8 +57,6 @@ namespace {
 	const string AUTO_FIRE_SETTING = "Automatic firing";
 	const string SCREEN_MODE_SETTING = "Screen mode";
 	const string VSYNC_SETTING = "VSync";
-	const string CAMERA_ACCELERATION = "Camera acceleration";
-	const string CLOAK_OUTLINE = "Cloaked ship outlines";
 	const string STATUS_OVERLAYS_ALL = "Show status overlays";
 	const string STATUS_OVERLAYS_FLAGSHIP = "   Show flagship overlay";
 	const string STATUS_OVERLAYS_ESCORT = "   Show escort overlays";
@@ -79,7 +77,6 @@ namespace {
 	const string BACKGROUND_PARALLAX = "Parallax background";
 	const string EXTENDED_JUMP_EFFECTS = "Extended jump effects";
 	const string ALERT_INDICATOR = "Alert indicator";
-	const string HUD_SHIP_OUTLINES = "Ship outlines in HUD";
 
 	// How many pages of controls and settings there are.
 	const int CONTROLS_PAGE_COUNT = 2;
@@ -357,9 +354,9 @@ bool PreferencesPanel::Scroll(double dx, double dy)
 		{
 			int speed = Preferences::ScrollSpeed();
 			if(dy < 0.)
-				speed = max(10, speed - 10);
+				speed = max(20, speed - 20);
 			else
-				speed = min(60, speed + 10);
+				speed = min(60, speed + 20);
 			Preferences::SetScrollSpeed(speed);
 		}
 		return true;
@@ -493,7 +490,6 @@ void PreferencesPanel::DrawControls()
 		Command::SCAN,
 		Command::NONE,
 		Command::PRIMARY,
-		Command::TURRET_TRACKING,
 		Command::SELECT,
 		Command::SECONDARY,
 		Command::CLOAK,
@@ -635,7 +631,6 @@ void PreferencesPanel::DrawSettings()
 		VIEW_ZOOM_FACTOR,
 		SCREEN_MODE_SETTING,
 		VSYNC_SETTING,
-		CAMERA_ACCELERATION,
 		"",
 		"Performance",
 		"Show CPU / GPU load",
@@ -647,8 +642,6 @@ void PreferencesPanel::DrawSettings()
 		"Show hyperspace flash",
 		EXTENDED_JUMP_EFFECTS,
 		SHIP_OUTLINES,
-		HUD_SHIP_OUTLINES,
-		CLOAK_OUTLINE,
 		"\t",
 		"HUD",
 		STATUS_OVERLAYS_ALL,
@@ -678,7 +671,6 @@ void PreferencesPanel::DrawSettings()
 		FIGHTER_REPAIR,
 		"Fighters transfer cargo",
 		"Rehire extra crew when lost",
-		"Automatically unpark flagship",
 		"",
 		"Map",
 		"Deadline blink by distance",
@@ -769,11 +761,6 @@ void PreferencesPanel::DrawSettings()
 			text = Preferences::StatusOverlaysSetting(Preferences::OverlayType::ALL);
 			isOn = text != "off";
 		}
-		else if(setting == CAMERA_ACCELERATION)
-		{
-			text = Preferences::CameraAccelerationSetting();
-			isOn = text != "off";
-		}
 		else if(setting == STATUS_OVERLAYS_FLAGSHIP)
 		{
 			text = Preferences::StatusOverlaysSetting(Preferences::OverlayType::FLAGSHIP);
@@ -793,11 +780,6 @@ void PreferencesPanel::DrawSettings()
 		{
 			text = Preferences::StatusOverlaysSetting(Preferences::OverlayType::NEUTRAL);
 			isOn = text != "off" && text != "--";
-		}
-		else if(setting == CLOAK_OUTLINE)
-		{
-			text = Preferences::Has(CLOAK_OUTLINE) ? "fancy" : "fast";
-			isOn = true;
 		}
 		else if(setting == AUTO_AIM_SETTING)
 		{
@@ -835,11 +817,6 @@ void PreferencesPanel::DrawSettings()
 		{
 			isOn = true;
 			text = Preferences::Has(SHIP_OUTLINES) ? "fancy" : "fast";
-		}
-		else if(setting == HUD_SHIP_OUTLINES)
-		{
-			isOn = true;
-			text = Preferences::Has(HUD_SHIP_OUTLINES) ? "fancy" : "fast";
 		}
 		else if(setting == BOARDING_PRIORITY)
 		{
@@ -969,11 +946,13 @@ void PreferencesPanel::DrawPlugins()
 			table.DrawHighlight(back);
 
 		const Sprite *sprite = box[plugin.currentState];
-		const Point topLeft = table.GetRowBounds().TopLeft() - Point(sprite->Width(), 0.);
+		Point topLeft = table.GetRowBounds().TopLeft() - Point(sprite->Width(), 0.);
 		Rectangle spriteBounds = Rectangle::FromCorner(topLeft, Point(sprite->Width(), sprite->Height()));
 		SpriteShader::Draw(sprite, spriteBounds.Center());
 
-		Rectangle zoneBounds = spriteBounds + pluginListBox.Center();
+		topLeft.X() += 6.;
+		topLeft.Y() += 7.;
+		Rectangle zoneBounds = Rectangle::FromCorner(pluginListBox.Center() + topLeft, {sprite->Width(), sprite->Height()});
 
 		// Only include the zone as clickable if it's within the drawing area.
 		bool displayed = table.GetPoint().Y() > pluginListClip->Top() - 20 &&
@@ -1083,7 +1062,7 @@ void PreferencesPanel::RenderPluginDescription(const Plugin &plugin)
 	WrappedText wrap(font);
 	wrap.SetWrapWidth(box.Width());
 	static const string EMPTY = "(No description given.)";
-	wrap.Wrap(plugin.aboutText.empty() ? EMPTY : plugin.CreateDescription());
+	wrap.Wrap(plugin.aboutText.empty() ? EMPTY : plugin.aboutText);
 
 	descriptionHeight += wrap.Height();
 
@@ -1203,8 +1182,6 @@ void PreferencesPanel::HandleSettingsString(const string &str, Point cursorPosit
 			GetUI()->Push(new Dialog(
 				"Unable to change VSync state. (Your system's graphics settings may be controlling it instead.)"));
 	}
-	else if(str == CAMERA_ACCELERATION)
-		Preferences::ToggleCameraAcceleration();
 	else if(str == STATUS_OVERLAYS_ALL)
 		Preferences::CycleStatusOverlays(Preferences::OverlayType::ALL);
 	else if(str == STATUS_OVERLAYS_FLAGSHIP)
@@ -1232,10 +1209,10 @@ void PreferencesPanel::HandleSettingsString(const string &str, Point cursorPosit
 	}
 	else if(str == SCROLL_SPEED)
 	{
-		// Toggle between six different speeds.
-		int speed = Preferences::ScrollSpeed() + 10;
+		// Toggle between three different speeds.
+		int speed = Preferences::ScrollSpeed() + 20;
 		if(speed > 60)
-			speed = 10;
+			speed = 20;
 		Preferences::SetScrollSpeed(speed);
 	}
 	else if(str == DATE_FORMAT)

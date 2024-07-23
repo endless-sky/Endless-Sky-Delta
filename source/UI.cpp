@@ -44,11 +44,11 @@ bool UI::Handle(const SDL_Event &event)
 		if(event.type == SDL_MOUSEMOTION)
 		{
 			if(event.motion.state & SDL_BUTTON(1))
-				handled = (*it)->DoDrag(
+				handled = (*it)->Drag(
 					event.motion.xrel * 100. / Screen::Zoom(),
 					event.motion.yrel * 100. / Screen::Zoom());
 			else
-				handled = (*it)->DoHover(
+				handled = (*it)->Hover(
 					Screen::Left() + event.motion.x * 100 / Screen::Zoom(),
 					Screen::Top() + event.motion.y * 100 / Screen::Zoom());
 		}
@@ -60,23 +60,23 @@ bool UI::Handle(const SDL_Event &event)
 			{
 				handled = (*it)->ZoneClick(Point(x, y));
 				if(!handled)
-					handled = (*it)->DoClick(x, y, event.button.clicks);
+					handled = (*it)->Click(x, y, event.button.clicks);
 			}
 			else if(event.button.button == 3)
-				handled = (*it)->DoRClick(x, y);
+				handled = (*it)->RClick(x, y);
 		}
 		else if(event.type == SDL_MOUSEBUTTONUP)
 		{
 			int x = Screen::Left() + event.button.x * 100 / Screen::Zoom();
 			int y = Screen::Top() + event.button.y * 100 / Screen::Zoom();
-			handled = (*it)->DoRelease(x, y);
+			handled = (*it)->Release(x, y);
 		}
 		else if(event.type == SDL_MOUSEWHEEL)
-			handled = (*it)->DoScroll(event.wheel.x, event.wheel.y);
+			handled = (*it)->Scroll(event.wheel.x, event.wheel.y);
 		else if(event.type == SDL_KEYDOWN)
 		{
 			Command command(event.key.keysym.sym);
-			handled = (*it)->DoKeyDown(event.key.keysym.sym, event.key.keysym.mod, command, !event.key.repeat);
+			handled = (*it)->KeyDown(event.key.keysym.sym, event.key.keysym.mod, command, !event.key.repeat);
 		}
 
 		// If this panel does not want anything below it to receive events, do
@@ -121,7 +121,7 @@ void UI::DrawAll()
 			break;
 
 	for( ; it != stack.end(); ++it)
-		(*it)->DoDraw();
+		(*it)->Draw();
 }
 
 
@@ -136,8 +136,8 @@ void UI::Push(Panel *panel)
 
 void UI::Push(const shared_ptr<Panel> &panel)
 {
-	toPush.push_back(panel);
 	panel->SetUI(this);
+	toPush.push_back(panel);
 }
 
 
@@ -291,8 +291,4 @@ void UI::PushOrPop()
 			}
 	}
 	toPop.clear();
-
-	// Each panel potentially has its own children, which could be modified.
-	for(auto &panel : stack)
-		panel->AddOrRemove();
 }

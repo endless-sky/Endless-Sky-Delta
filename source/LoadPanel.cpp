@@ -43,6 +43,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include <algorithm>
 #include <cstdlib>
+#include <iomanip>
+#include <sstream>
 #include <stdexcept>
 #include <utility>
 
@@ -69,17 +71,17 @@ namespace {
 	string TimestampString(time_t timestamp)
 	{
 		pair<const char*, const char*> format = TimestampFormatString(Preferences::GetDateFormat());
-		static const size_t BUF_SIZE = 25;
-		char str[BUF_SIZE];
+		stringstream ss;
 
 #ifdef _WIN32
 		tm date;
 		localtime_s(&date, &timestamp);
-		return string(str, std::strftime(str, BUF_SIZE, format.second, &date));
+		ss << std::put_time(&date, format.second);
 #else
 		const tm *date = localtime(&timestamp);
-		return string(str, std::strftime(str, BUF_SIZE, format.first, date));
+		ss << std::put_time(date, format.first);
 #endif
+		return ss.str();
 	}
 
 	// Extract the date from this pilot's most recent save.

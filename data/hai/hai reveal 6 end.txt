@@ -631,3 +631,4 @@ event "hai-human resolution announced"
 		remove fleet "Smuggler (Hai Traffickers)"
 	system "Almach"
 		remove fleet "Smuggler (Hai Traffickers)"
+

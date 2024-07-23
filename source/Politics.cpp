@@ -258,38 +258,9 @@ string Politics::Fine(PlayerInfo &player, const Government *gov, int scan, const
 
 		int failedMissions = 0;
 
-		// Illegal passengers can only be detected by planetary security.
-		if(!scan)
-		{
-			int64_t fine = ship->Cargo().IllegalPassengersFine(gov, player);
-			if((fine > maxFine && maxFine >= 0) || fine < 0)
-			{
-				maxFine = fine;
-				reason = " for carrying illegal passengers.";
-
-				for(const Mission &mission : player.Missions())
-				{
-					if(mission.IsFailed(player))
-						continue;
-
-					string fineMessage = mission.FineMessage();
-					if(!fineMessage.empty())
-					{
-						reason = ".\n\t";
-						reason.append(fineMessage);
-					}
-					// Fail any missions with illegal passengers and "stealth" set.
-					if(mission.Fine() > 0 && mission.Passengers() && mission.FailIfDiscovered())
-					{
-						player.FailMission(mission);
-						++failedMissions;
-					}
-				}
-			}
-		}
 		if((!scan || (scan & ShipEvent::SCAN_CARGO)) && !EvadesCargoScan(*ship))
 		{
-			int64_t fine = ship->Cargo().IllegalCargoFine(gov, player);
+			int64_t fine = ship->Cargo().IllegalCargoFine(gov);
 			if((fine > maxFine && maxFine >= 0) || fine < 0)
 			{
 				maxFine = fine;
@@ -297,18 +268,18 @@ string Politics::Fine(PlayerInfo &player, const Government *gov, int scan, const
 
 				for(const Mission &mission : player.Missions())
 				{
-					if(mission.IsFailed(player))
+					if(mission.IsFailed())
 						continue;
 
-					// Append the fineMessage from each applicable mission, if available.
-					string fineMessage = mission.FineMessage();
-					if(!fineMessage.empty())
+					// Append the illegalCargoMessage from each applicable mission, if available
+					string illegalCargoMessage = mission.IllegalCargoMessage();
+					if(!illegalCargoMessage.empty())
 					{
 						reason = ".\n\t";
-						reason.append(fineMessage);
+						reason.append(illegalCargoMessage);
 					}
-					// Fail any missions with illegal cargo and "stealth" set.
-					if(mission.Fine() > 0 && mission.CargoSize() && mission.FailIfDiscovered())
+					// Fail any missions with illegal cargo and "Stealth" set
+					if(mission.IllegalCargoFine() > 0 && mission.FailIfDiscovered())
 					{
 						player.FailMission(mission);
 						++failedMissions;

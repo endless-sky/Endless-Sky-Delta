@@ -433,4 +433,6 @@ fleet "Scin Science"
 	variant
 		"Kyanite (Guile)"
 		"Tridymite"
-
+	variant
+		"Kyanite (Acumen)"
+		"Tridymite"

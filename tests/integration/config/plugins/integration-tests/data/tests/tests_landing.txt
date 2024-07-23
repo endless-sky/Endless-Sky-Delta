@@ -42,3 +42,4 @@ test "Landing in a system with multiple planets"
 		call "Land"
 		assert
 			"flagship planet: Earth" == 1
+

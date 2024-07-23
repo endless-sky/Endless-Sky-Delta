@@ -29,7 +29,7 @@ phrase "pug"
 		"Klar"
 		"Brek"
 	word
-		" " 3
+		" "
 		" Kim "
 		" Wor "
 		" Moof "
@@ -43,6 +43,8 @@ phrase "pug"
 		" a "
 		" io "
 		" el "
+		" "
+		" "
 	word
 		"Glorf"
 		"Florp"

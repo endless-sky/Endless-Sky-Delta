@@ -176,7 +176,7 @@ SCENARIO( "Applying changes to conditions", "[ConditionSet][Usage]" ) {
 		THEN( "the condition list is updated via Apply" ) {
 			applySet.Apply(store);
 			REQUIRE_FALSE( store.PrimariesSize() == 0 );
-			REQUIRE( store.Get("year") );
+			REQUIRE( store.Has("year") );
 			CHECK( store["year"] == 3013 );
 		}
 	}

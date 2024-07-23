@@ -47,12 +47,5 @@ copyright:
 changelog:
   - changelog
 
-ci_config:
-  - '.github/workflows/ci.yml'
-  - '.github/path-filters.yml'
-  - '.github/workflows/compute-changes.yml'
-
-projects_check_config:
-  - '.github/workflows/projects_check.yml'
-  - '.github/path-filters.yml'
-  - '.github/workflows/compute-changes.yml'
+parse_script:
+  - utils/test_parse.ps1

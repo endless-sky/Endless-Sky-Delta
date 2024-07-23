@@ -75,8 +75,6 @@ public:
 	double Distance(const Point &point) const;
 	double DistanceSquared(const Point &point) const;
 
-	Point Lerp(const Point &to, const double c) const;
-
 	// Take the absolute value of both coordinates.
 	friend Point abs(const Point &p);
 	// Use the min of each x and each y coordinates.

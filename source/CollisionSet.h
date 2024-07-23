@@ -47,18 +47,18 @@ public:
 
 	// Get all possible collisions for the given projectile. Collisions are not necessarily
 	// sorted by distance.
-	void Line(const Projectile &projectile, std::vector<Collision> &result) const;
+	const std::vector<Collision> &Line(const Projectile &projectile) const;
 
 	// Get all possible collisions along a line. Collisions are not necessarily sorted by
 	// distance.
-	void Line(const Point &from, const Point &to, std::vector<Collision> &result,
+	const std::vector<Collision> &Line(const Point &from, const Point &to,
 		const Government *pGov = nullptr, const Body *target = nullptr) const;
 
 	// Get all objects within the given range of the given point.
-	void Circle(const Point &center, double radius, std::vector<Body *> &result) const;
+	const std::vector<Body *> &Circle(const Point &center, double radius) const;
 	// Get all objects touching a ring with a given inner and outer range
 	// centered at the given point.
-	void Ring(const Point &center, double inner, double outer, std::vector<Body *> &result) const;
+	const std::vector<Body *> &Ring(const Point &center, double inner, double outer) const;
 
 	// Get all objects within this collision set.
 	const std::vector<Body *> &All() const;
@@ -99,6 +99,15 @@ private:
 	std::vector<Entry> sorted;
 	// After Finish(), counts[index] is where a certain bin begins.
 	std::vector<unsigned> counts;
+
+	// Vector for returning the result of a circle query.
+	mutable std::vector<Body *> circleResult;
+	// Vector for returning the result of a line query.
+	mutable std::vector<Collision> lineResult;
+
+	// Keep track of which objects we've already considered
+	mutable std::vector<unsigned> seen;
+	mutable unsigned seenEpoch = 0;
 };
 
 

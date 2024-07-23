@@ -16,9 +16,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #ifndef SPRITE_SHADER_H_
 #define SPRITE_SHADER_H_
 
-#include "Point.h"
-
 class Sprite;
+class Point;
 
 #include <cstdint>
 
@@ -51,10 +50,10 @@ public:
 	static void Init();
 
 	// Draw a sprite.
-	static void Draw(const Sprite *sprite, const Point &position, float zoom = 1.f,
-		int swizzle = 0, float frame = 0.f, const Point &unit = Point(0., -1.));
-	static Item Prepare(const Sprite *sprite, const Point &position, float zoom = 1.f,
-		int swizzle = 0, float frame = 0.f, const Point &unit = Point(0., -1.));
+	static void Draw(const Sprite *sprite, const Point &position, float zoom = 1.f, int swizzle = 0,
+		float frame = 0.f);
+	static Item Prepare(const Sprite *sprite, const Point &position, float zoom = 1.f, int swizzle = 0,
+		float frame = 0.f);
 
 	static void Bind();
 	static void Add(const Item &item, bool withBlur = false);

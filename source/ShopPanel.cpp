@@ -296,11 +296,7 @@ bool ShopPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &command, boo
 	else if(command.Has(Command::HELP))
 	{
 		if(player.Ships().size() > 1)
-		{
-			if(isOutfitter)
-				DoHelp("outfitter with multiple ships", true);
 			DoHelp("multiple ships", true);
-		}
 		if(isOutfitter)
 		{
 			DoHelp("uninstalling and storage", true);
@@ -692,7 +688,6 @@ const Outfit *ShopPanel::Zone::GetOutfit() const
 void ShopPanel::DrawShipsSidebar()
 {
 	const Font &font = FontSet::Get(14);
-	const Color &dark = *GameData::Colors().Get("dark");
 	const Color &medium = *GameData::Colors().Get("medium");
 	const Color &bright = *GameData::Colors().Get("bright");
 
@@ -774,7 +769,7 @@ void ShopPanel::DrawShipsSidebar()
 
 		if(mouse.Y() < Screen::Bottom() - BUTTON_HEIGHT && shipZones.back().Contains(mouse))
 		{
-			shipName = ship->Name() + (ship->IsParked() ? "\n" + GameData::Tooltip("parked") : "");
+			shipName = ship->Name();
 			hoverPoint = shipZones.back().TopLeft();
 		}
 
@@ -791,13 +786,6 @@ void ShopPanel::DrawShipsSidebar()
 		if(isSelected && playerShips.size() > 1 && ship->OutfitCount(selectedOutfit))
 			PointerShader::Draw(Point(point.X() - static_cast<int>(ICON_TILE / 3), point.Y()),
 				Point(1., 0.), 14.f, 12.f, 0., Color(.9f, .9f, .9f, .2f));
-
-		if(ship->IsParked())
-		{
-			static const Point CORNER = .35 * Point(ICON_TILE, ICON_TILE);
-			FillShader::Fill(point + CORNER, Point(6., 6.), dark);
-			FillShader::Fill(point + CORNER, Point(4., 4.), isSelected ? bright : medium);
-		}
 
 		point.X() += ICON_TILE;
 	}
@@ -1275,12 +1263,9 @@ void ShopPanel::MainUp()
 		return;
 
 	vector<Zone>::const_iterator it = Selected();
-	// Special case: nothing is selected. Start from the first item.
+	// Special case: nothing is selected.  Start from the first item.
 	if(it == zones.end())
-	{
 		it = zones.begin();
-		previousX = it->Center().X();
-	}
 
 	const double previousY = it->Center().Y();
 	while(it != zones.begin() && it->Center().Y() == previousY)
@@ -1313,10 +1298,8 @@ void ShopPanel::MainDown()
 	if(it == zones.end())
 	{
 		mainScroll = 0.;
-		it = zones.begin();
-		selectedShip = it->GetShip();
-		selectedOutfit = it->GetOutfit();
-		previousX = it->Center().X();
+		selectedShip = zones.begin()->GetShip();
+		selectedOutfit = zones.begin()->GetOutfit();
 		return;
 	}
 

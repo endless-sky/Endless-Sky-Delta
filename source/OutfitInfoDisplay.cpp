@@ -53,8 +53,6 @@ namespace {
 		{"cloaking energy", 0},
 		{"cloaking fuel", 0},
 		{"cloaking heat", 0},
-		{"cloaking shields", 0},
-		{"cloaked firing", 0},
 		{"cooling", 0},
 		{"cooling energy", 0},
 		{"corrosion resistance energy", 0},
@@ -78,10 +76,6 @@ namespace {
 		{"hull energy", 0},
 		{"hull fuel", 0},
 		{"hull heat", 0},
-		{"delayed hull repair rate", 0},
-		{"delayed hull energy", 0},
-		{"delayed hull fuel", 0},
-		{"delayed hull heat", 0},
 		{"ion resistance energy", 0},
 		{"ion resistance fuel", 0},
 		{"ion resistance heat", 0},
@@ -103,10 +97,6 @@ namespace {
 		{"shield energy", 0},
 		{"shield fuel", 0},
 		{"shield heat", 0},
-		{"delayed shield generation", 0},
-		{"delayed shield energy", 0},
-		{"delayed shield fuel", 0},
-		{"delayed shield heat", 0},
 		{"slowing resistance energy", 0},
 		{"slowing resistance fuel", 0},
 		{"slowing resistance heat", 0},
@@ -173,7 +163,6 @@ namespace {
 		{"leak resistance", 2},
 		{"burn resistance", 2},
 
-		{"cloak by mass", 3},
 		{"shield multiplier", 3},
 		{"hull multiplier", 3},
 		{"hull repair multiplier", 3},
@@ -209,16 +198,11 @@ namespace {
 		{"piercing protection", 4},
 		{"shield protection", 4},
 		{"slowing protection", 4},
-		{"cloak hull protection", 4},
-		{"cloak shield protection", 4},
 
 		{"repair delay", 5},
-		{"cloaking repair delay", 5},
 		{"disabled repair delay", 5},
 		{"shield delay", 5},
-		{"cloaking shield delay", 5},
-		{"depleted shield delay", 5},
-		{"disabled recovery time", 5}
+		{"depleted shield delay", 5}
 	};
 
 	const map<string, string> BOOLEAN_ATTRIBUTES = {
@@ -228,13 +212,7 @@ namespace {
 		{"jump drive", "Lets you jump to any nearby system."},
 		{"minable", "This item is mined from asteroids."},
 		{"atrocity", "This outfit is considered an atrocity."},
-		{"unique", "This item is unique."},
-		{"cloaked afterburner", "You may use your afterburner when cloaked."},
-		{"cloaked boarding", "You may board even when cloaked."},
-		{"cloaked communication", "You may make hails when cloaked."},
-		{"cloaked deployment", "You may deploy drones and fighters without revealing your location."},
-		{"cloaked pickup", "You may pickup items with this cloak."},
-		{"cloaked scanning", "You may scan other ships when cloaked."}
+		{"unique", "This item is unique."}
 	};
 
 	bool IsNotRequirement(const string &label)
@@ -624,13 +602,6 @@ void OutfitInfoDisplay::UpdateAttributes(const Outfit &outfit)
 	{
 		attributeLabels.emplace_back("turret turn rate:");
 		attributeValues.emplace_back(Format::Number(turretTurn));
-		attributesHeight += 20;
-	}
-	double arc = outfit.Arc();
-	if(arc < 360.)
-	{
-		attributeLabels.emplace_back("arc:");
-		attributeValues.emplace_back(Format::Number(arc));
 		attributesHeight += 20;
 	}
 	int homing = outfit.Homing();

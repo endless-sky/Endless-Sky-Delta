@@ -515,8 +515,7 @@ void NPC::Do(const ShipEvent &event, PlayerInfo &player, UI *ui, const Mission *
 
 	// Check if the success status has changed. If so, display a message.
 	if(isVisible && !alreadyFailed && HasFailed())
-		Messages::Add("Mission failed" + (caller ? ": \"" + caller->Name() + "\"" : "") + ".",
-			Messages::Importance::Highest);
+		Messages::Add("Mission failed.", Messages::Importance::Highest);
 	else if(ui && !alreadySucceeded && HasSucceeded(player.GetSystem(), false))
 	{
 		// If "completing" this NPC displays a conversation, reference
@@ -632,8 +631,8 @@ bool NPC::HasFailed() const
 
 // Create a copy of this NPC but with the fleets replaced by the actual
 // ships they represent, wildcards in the conversation text replaced, etc.
-NPC NPC::Instantiate(const ConditionsStore &conditions, map<string, string> &subs, const System *origin,
-		const System *destination, int jumps, int64_t payload) const
+NPC NPC::Instantiate(map<string, string> &subs, const System *origin, const System *destination,
+		int jumps, int64_t payload) const
 {
 	NPC result;
 	result.government = government;
@@ -665,7 +664,7 @@ NPC NPC::Instantiate(const ConditionsStore &conditions, map<string, string> &sub
 		return result;
 	}
 	for(const auto &it : npcActions)
-		result.npcActions[it.first] = it.second.Instantiate(conditions, subs, origin, jumps, payload);
+		result.npcActions[it.first] = it.second.Instantiate(subs, origin, jumps, payload);
 
 	// Pick the system for this NPC to start out in.
 	result.system = system;

@@ -140,8 +140,7 @@ int main(int argc, char *argv[])
 
 		// Begin loading the game data.
 		bool isConsoleOnly = loadOnly || printTests || printData;
-		auto dataFuture = GameData::BeginLoad(queue, isConsoleOnly, debugMode,
-			isConsoleOnly || (isTesting && !debugMode));
+		auto dataFuture = GameData::BeginLoad(queue, isConsoleOnly, debugMode, isTesting && !debugMode);
 
 		// If we are not using the UI, or performing some automated task, we should load
 		// all data now.
@@ -504,7 +503,7 @@ void PrintHelp()
 void PrintVersion()
 {
 	cerr << endl;
-	cerr << "Endless Sky ver. 0.10.9-alpha" << endl;
+	cerr << "Endless Sky ver. 0.10.7-alpha" << endl;
 	cerr << "License GPLv3+: GNU GPL version 3 or later: <https://gnu.org/licenses/gpl.html>" << endl;
 	cerr << "This is free software: you are free to change and redistribute it." << endl;
 	cerr << "There is NO WARRANTY, to the extent permitted by law." << endl;
@@ -540,7 +539,6 @@ Conversation LoadConversation()
 		{"<passengers>", "[your passengers]"},
 		{"<planet>", "[Planet]"},
 		{"<ship>", "[Ship]"},
-		{"<model>", "[Ship Model]"},
 		{"<system>", "[Star]"},
 		{"<tons>", "[N tons]"}
 	};

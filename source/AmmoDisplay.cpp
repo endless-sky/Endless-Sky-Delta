@@ -39,16 +39,9 @@ AmmoDisplay::AmmoDisplay(PlayerInfo &player)
 
 
 
-void AmmoDisplay::Reset()
-{
-	ammo.clear();
-}
-
-
-
 void AmmoDisplay::Update(const Ship &flagship)
 {
-	Reset();
+	ammo.clear();
 	for(const auto &it : flagship.Weapons())
 	{
 		const Outfit *secWeapon = it.GetOutfit();
@@ -151,3 +144,4 @@ bool AmmoDisplay::Click(const Rectangle &clickBox)
 		}
 	return reselected;
 }
+

@@ -47,8 +47,6 @@ public:
 
 	// Save the contents to a file.
 	void SaveToPath(const std::string &path);
-	// Get the contents as a string.
-	std::string SaveToString();
 
 	// The Write() function can take any number of arguments. Each argument is
 	// converted to a token. Arguments may be strings or numeric values.
@@ -76,9 +74,6 @@ public:
 	// Write a token of any arithmetic type.
 	template <class A>
 	void WriteToken(const A &a);
-
-	// Enclose a string in the correct quotation marks.
-	static std::string Quote(const std::string &text);
 
 
 private:

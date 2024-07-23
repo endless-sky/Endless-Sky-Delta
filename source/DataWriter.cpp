@@ -63,14 +63,6 @@ void DataWriter::SaveToPath(const std::string &filepath)
 
 
 
-// Get the contents as a string.
-string DataWriter::SaveToString()
-{
-	return out.str();
-}
-
-
-
 // Write a DataNode with all its children.
 void DataWriter::Write(const DataNode &node)
 {
@@ -121,8 +113,7 @@ void DataWriter::EndChild()
 // Write a comment line, at the current indentation level.
 void DataWriter::WriteComment(const string &str)
 {
-	out << *before << "# " << str;
-	Write();
+	out << indent << "# " << str << '\n';
 }
 
 
@@ -138,29 +129,21 @@ void DataWriter::WriteToken(const char *a)
 // Write a token, given as a string object.
 void DataWriter::WriteToken(const string &a)
 {
+	// Figure out what kind of quotation marks need to be used for this string.
+	bool hasSpace = any_of(a.begin(), a.end(), [](char c) { return isspace(c); });
+	bool hasQuote = any_of(a.begin(), a.end(), [](char c) { return (c == '"'); });
+	// If the token is an empty string, it needs to be wrapped in quotes as if it had a space.
+	hasSpace |= a.empty();
+	// Write the token, enclosed in quotes if necessary.
 	out << *before;
-	out << Quote(a);
+	if(hasQuote)
+		out << '`' << a << '`';
+	else if(hasSpace)
+		out << '"' << a << '"';
+	else
+		out << a;
 
 	// The next token written will not be the first one on this line, so it only
 	// needs to have a single space before it.
 	before = &space;
-}
-
-
-
-string DataWriter::Quote(const std::string &a)
-{
-	// Figure out what kind of quotation marks need to be used for this string.
-	bool hasSpace = any_of(a.begin(), a.end(), [](unsigned char c) { return isspace(c); });
-	bool hasQuote = any_of(a.begin(), a.end(), [](char c) { return (c == '"'); });
-	bool hasBacktick = any_of(a.begin(), a.end(), [](char c) { return (c == '`'); });
-	// If the token is an empty string, it needs to be wrapped in quotes as if it had a space.
-	hasSpace |= a.empty();
-
-	if(hasQuote)
-		return '`' + a + '`';
-	else if(hasSpace || hasBacktick)
-		return '"' + a + '"';
-	else
-		return a;
 }

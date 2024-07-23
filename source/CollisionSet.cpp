@@ -39,8 +39,6 @@ namespace {
 	constexpr int USED_MAX_VELOCITY = MAX_VELOCITY - 1;
 	// Warn the user only once about too-large projectile velocities.
 	bool warned = false;
-
-	thread_local vector<bool> seen;
 }
 
 
@@ -131,13 +129,18 @@ void CollisionSet::Finish()
 		sorted[counts[index]++] = entry;
 	}
 	// Now, counts[index] is where a certain bin begins.
+
+	// Initialize 'seen' with 0
+	seen.clear();
+	seen.resize(all.size());
+	seenEpoch = 0;
 }
 
 
 
 // Get all possible collisions for the given projectile. Collisions are not necessarily
 // sorted by distance.
-void CollisionSet::Line(const Projectile &projectile, vector<Collision> &result) const
+const vector<Collision> &CollisionSet::Line(const Projectile &projectile) const
 {
 	// What objects the projectile hits depends on its government.
 	const Government *pGov = projectile.GetGovernment();
@@ -145,14 +148,14 @@ void CollisionSet::Line(const Projectile &projectile, vector<Collision> &result)
 	// Convert the projectile to a line represented by its start and end points.
 	Point from = projectile.Position();
 	Point to = from + projectile.Velocity();
-	Line(from, to, result, pGov, projectile.Target());
+	return Line(from, to, pGov, projectile.Target());
 }
 
 
 
 // Get all possible collisions along a line. Collisions are not necessarily sorted by
 // distance.
-void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &lineResult,
+const vector<Collision> &CollisionSet::Line(const Point &from, const Point &to,
 		const Government *pGov, const Body *target) const
 {
 	const int x = from.X();
@@ -165,6 +168,8 @@ void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &l
 	int gy = y >> SHIFT;
 	const int endGX = endX >> SHIFT;
 	const int endGY = endY >> SHIFT;
+
+	lineResult.clear();
 
 	// Special case, very common: the projectile is contained in one grid cell.
 	// In this case, all the complicated code below can be skipped.
@@ -195,7 +200,7 @@ void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &l
 				lineResult.emplace_back(it->body, collisionType, range);
 		}
 
-		return;
+		return lineResult;
 	}
 
 	const Point pVelocity = (to - from);
@@ -209,8 +214,7 @@ void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &l
 		}
 		Point newEnd = from + pVelocity.Unit() * USED_MAX_VELOCITY;
 
-		Line(from, newEnd, lineResult, pGov, target);
-		return;
+		return Line(from, newEnd, pGov, target);
 	}
 
 	// When stepping from one grid cell to the next, we'll go in this direction.
@@ -234,8 +238,7 @@ void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &l
 	if(stepY > 0)
 		ry = fullScale - ry;
 
-	seen.clear();
-	seen.resize(all.size());
+	++seenEpoch;
 
 	while(true)
 	{
@@ -250,9 +253,9 @@ void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &l
 			if(it->x != gx || it->y != gy)
 				continue;
 
-			if(seen[it->seenIndex])
+			if(seen[it->seenIndex] == seenEpoch)
 				continue;
-			seen[it->seenIndex] = true;
+			seen[it->seenIndex] = seenEpoch;
 
 			// Check if this projectile can hit this object. If either the
 			// projectile or the object has no government, it will always hit.
@@ -304,21 +307,23 @@ void CollisionSet::Line(const Point &from, const Point &to, vector<Collision> &l
 			gy += stepY;
 		}
 	}
+
+	return lineResult;
 }
 
 
 
 // Get all objects within the given range of the given point.
-void CollisionSet::Circle(const Point &center, double radius, vector<Body *> &result) const
+const vector<Body *> &CollisionSet::Circle(const Point &center, double radius) const
 {
-	Ring(center, 0., radius, result);
+	return Ring(center, 0., radius);
 }
 
 
 
 // Get all objects touching a ring with a given inner and outer range
 // centered at the given point.
-void CollisionSet::Ring(const Point &center, double inner, double outer, vector<Body *> &circleResult) const
+const vector<Body *> &CollisionSet::Ring(const Point &center, double inner, double outer) const
 {
 	// Calculate the range of (x, y) grid coordinates this ring covers.
 	const int minX = static_cast<int>(center.X() - outer) >> SHIFT;
@@ -326,9 +331,9 @@ void CollisionSet::Ring(const Point &center, double inner, double outer, vector<
 	const int maxX = static_cast<int>(center.X() + outer) >> SHIFT;
 	const int maxY = static_cast<int>(center.Y() + outer) >> SHIFT;
 
-	seen.clear();
-	seen.resize(all.size());
+	++seenEpoch;
 
+	circleResult.clear();
 	for(int y = minY; y <= maxY; ++y)
 	{
 		const auto gy = y & WRAP_MASK;
@@ -346,9 +351,9 @@ void CollisionSet::Ring(const Point &center, double inner, double outer, vector<
 				if(it->x != x || it->y != y)
 					continue;
 
-				if(seen[it->seenIndex])
+				if(seen[it->seenIndex] == seenEpoch)
 					continue;
-				seen[it->seenIndex] = true;
+				seen[it->seenIndex] = seenEpoch;
 
 				const Mask &mask = it->body->GetMask(step);
 				Point offset = center - it->body->Position();
@@ -359,6 +364,7 @@ void CollisionSet::Ring(const Point &center, double inner, double outer, vector<
 			}
 		}
 	}
+	return circleResult;
 }
 
 

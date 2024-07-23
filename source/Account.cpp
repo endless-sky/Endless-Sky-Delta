@@ -207,7 +207,6 @@ string Account::Step(int64_t assets, int64_t salaries, int64_t maintenance)
 	// or skipped completely (accruing interest and reducing your credit score).
 	int64_t mortgagesPaid = 0;
 	int64_t finesPaid = 0;
-	int64_t debtPaid = 0;
 	for(Mortgage &mortgage : mortgages)
 	{
 		int64_t payment = mortgage.Payment();
@@ -222,13 +221,11 @@ string Account::Step(int64_t assets, int64_t salaries, int64_t maintenance)
 		{
 			payment = mortgage.MakePayment();
 			credits -= payment;
-			// For the status text, keep track of whether this is a mortgage, fine, or debt.
+			// For the status text, keep track of whether this is a mortgage or a fine.
 			if(mortgage.Type() == "Mortgage")
 				mortgagesPaid += payment;
-			else if(mortgage.Type() == "Fine")
-				finesPaid += payment;
 			else
-				debtPaid += payment;
+				finesPaid += payment;
 		}
 		assets -= mortgage.Principal();
 	}
@@ -252,7 +249,7 @@ string Account::Step(int64_t assets, int64_t salaries, int64_t maintenance)
 	creditScore = max(200, min(800, creditScore + (missedPayment ? -5 : 1)));
 
 	// If you didn't make any payments, no need to continue further.
-	if(!(salariesPaid + maintenancePaid + mortgagesPaid + finesPaid + debtPaid))
+	if(!(salariesPaid + maintenancePaid + mortgagesPaid + finesPaid))
 		return out.str();
 	else if(missedPayment)
 		out << " ";
@@ -268,8 +265,6 @@ string Account::Step(int64_t assets, int64_t salaries, int64_t maintenance)
 		typesPaid["mortgages"] = mortgagesPaid;
 	if(finesPaid)
 		typesPaid["fines"] = finesPaid;
-	if(debtPaid)
-		typesPaid["debt"] = debtPaid;
 
 	// If you made payments of three or more types, the punctuation needs to
 	// include commas, so just handle that separately here.
@@ -287,18 +282,15 @@ string Account::Step(int64_t assets, int64_t salaries, int64_t maintenance)
 	{
 		if(salariesPaid)
 			out << Format::CreditString(salariesPaid) << " in crew salaries"
-				<< ((mortgagesPaid || finesPaid || debtPaid || maintenancePaid) ? " and " : ".");
+				<< ((mortgagesPaid || finesPaid || maintenancePaid) ? " and " : ".");
 		if(maintenancePaid)
 			out << Format::CreditString(maintenancePaid) << "  in maintenance"
-				<< ((mortgagesPaid || finesPaid || debtPaid) ? " and " : ".");
+				<< ((mortgagesPaid || finesPaid) ? " and " : ".");
 		if(mortgagesPaid)
 			out << Format::CreditString(mortgagesPaid) << " in mortgages"
-				<< ((finesPaid || debtPaid) ? " and " : ".");
+				<< (finesPaid ? " and " : ".");
 		if(finesPaid)
-			out << Format::CreditString(finesPaid) << " in fines"
-				<< (debtPaid ? " and " : ".");
-		if(debtPaid)
-			out << Format::CreditString(debtPaid) << " in debt.";
+			out << Format::CreditString(finesPaid) << " in fines.";
 	}
 	return out.str();
 }
@@ -381,7 +373,7 @@ const vector<Mortgage> &Account::Mortgages() const
 // your credit score.
 void Account::AddMortgage(int64_t principal)
 {
-	mortgages.emplace_back("Mortgage", principal, creditScore);
+	mortgages.emplace_back(principal, creditScore);
 	credits += principal;
 }
 
@@ -390,19 +382,7 @@ void Account::AddMortgage(int64_t principal)
 // Add a "fine" with a high, fixed interest rate and a short term.
 void Account::AddFine(int64_t amount)
 {
-	mortgages.emplace_back("Fine", amount, 0, 60);
-}
-
-
-
-// Add debt with the given interest rate and term. If no interest rate is
-// given then the player's credit score is used to determine the interest rate.
-void Account::AddDebt(int64_t amount, optional<double> interest, int term)
-{
-	if(interest)
-		mortgages.emplace_back("Debt", amount, *interest, term);
-	else
-		mortgages.emplace_back("Debt", amount, creditScore, term);
+	mortgages.emplace_back(amount, 0, 60);
 }
 
 
@@ -444,8 +424,7 @@ int Account::CreditScore() const
 
 
 
-// Get the total amount owed for a specific type of mortgage, or all
-// mortgages if a blank string is provided.
+// Get the total amount owed for "Mortgage", "Fine", or both.
 int64_t Account::TotalDebt(const string &type) const
 {
 	int64_t total = 0;

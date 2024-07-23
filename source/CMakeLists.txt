@@ -104,7 +104,6 @@ target_sources(EndlessSkyLib PRIVATE
 	EscortDisplay.cpp
 	EscortDisplay.h
 	ExclusiveItem.h
-	FighterHitHelper.h
 	File.cpp
 	File.h
 	Files.cpp
@@ -123,8 +122,6 @@ target_sources(EndlessSkyLib PRIVATE
 	FogShader.h
 	FormationPattern.cpp
 	FormationPattern.h
-	FormationPositioner.cpp
-	FormationPositioner.h
 	FrameTimer.cpp
 	FrameTimer.h
 	Galaxy.cpp
@@ -228,8 +225,6 @@ target_sources(EndlessSkyLib PRIVATE
 	OutlineShader.h
 	Panel.cpp
 	Panel.h
-	Paragraphs.cpp
-	Paragraphs.h
 	Person.cpp
 	Person.h
 	Personality.cpp
@@ -320,8 +315,6 @@ target_sources(EndlessSkyLib PRIVATE
 	StartConditionsPanel.h
 	StellarObject.cpp
 	StellarObject.h
-	StringInterner.cpp
-	StringInterner.h
 	System.cpp
 	System.h
 	SystemEntry.h
@@ -333,8 +326,6 @@ target_sources(EndlessSkyLib PRIVATE
 	TestContext.h
 	TestData.cpp
 	TestData.h
-	TextArea.cpp
-	TextArea.h
 	TextReplacements.cpp
 	TextReplacements.h
 	Trade.cpp

@@ -125,8 +125,10 @@ void AsteroidField::Draw(DrawList &draw, const Point &center, double zoom) const
 
 
 // Check if the given projectile collides with any asteroids. This excludes minables.
-void AsteroidField::CollideAsteroids(const Projectile &projectile, vector<Collision> &result) const
+const vector<Collision> &AsteroidField::CollideAsteroids(const Projectile &projectile) const
 {
+	result.clear();
+
 	// Check for collisions with ordinary asteroids, which are tiled.
 	// Rather than tiling the collision set, tile the projectile.
 	Point from = projectile.Position();
@@ -148,16 +150,19 @@ void AsteroidField::CollideAsteroids(const Projectile &projectile, vector<Collis
 		for(int x = 0; x < tileX; ++x)
 		{
 			Point offset = Point(x, y) * WRAP;
-			asteroidCollisions.Line(from + offset, to + offset, result);
+			const vector<Collision> &newHits = asteroidCollisions.Line(from + offset, to + offset);
+			result.insert(result.end(), newHits.begin(), newHits.end());
 		}
+
+	return result;
 }
 
 
 
 // Check if the given projectile collides with any minables.
-void AsteroidField::CollideMinables(const Projectile &projectile, vector<Collision> &result) const
+const vector<Collision> &AsteroidField::CollideMinables(const Projectile &projectile) const
 {
-	minableCollisions.Line(projectile, result);
+	return minableCollisions.Line(projectile);
 }
 
 

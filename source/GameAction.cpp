@@ -15,7 +15,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "GameAction.h"
 
-#include "Audio.h"
 #include "DataNode.h"
 #include "DataWriter.h"
 #include "Dialog.h"
@@ -24,11 +23,9 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "GameEvent.h"
 #include "Messages.h"
 #include "Outfit.h"
-#include "Planet.h"
 #include "PlayerInfo.h"
 #include "Random.h"
 #include "Ship.h"
-#include "System.h"
 #include "UI.h"
 
 #include <cstdlib>
@@ -58,7 +55,7 @@ namespace {
 		string message;
 		if(isSingle)
 		{
-			char c = tolower(static_cast<unsigned char>(nameWas.front()));
+			char c = tolower(nameWas.front());
 			bool isVowel = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
 			message = (isVowel ? "An " : "A ");
 		}
@@ -185,38 +182,15 @@ void GameAction::LoadSingle(const DataNode &child)
 		else
 			child.PrintTrace("Error: Skipping invalid \"fine\" with non-positive value:");
 	}
-	else if(key == "debt" && hasValue)
-	{
-		GameAction::Debt &debtEntry = debt.emplace_back(max<int64_t>(0, child.Value(1)));
-		for(const DataNode &grand : child)
-		{
-			const string &grandKey = grand.Token(0);
-			bool grandHasValue = (grand.Size() > 1);
-			if(grandKey == "term" && grandHasValue)
-				debtEntry.term = max<int>(1, grand.Value(1));
-			else if(grandKey == "interest" && grandHasValue)
-				debtEntry.interest = clamp(grand.Value(1), 0., 0.999);
-			else
-				grand.PrintTrace("Error: Skipping unrecognized \"debt\" attribute:");
-		}
-	}
 	else if(key == "event" && hasValue)
 	{
-		int minDays = (child.Size() >= 3 ? child.Value(2) : 1);
+		int minDays = (child.Size() >= 3 ? child.Value(2) : 0);
 		int maxDays = (child.Size() >= 4 ? child.Value(3) : minDays);
 		if(maxDays < minDays)
 			swap(minDays, maxDays);
 		events[GameData::Events().Get(child.Token(1))] = make_pair(minDays, maxDays);
 	}
-	else if(key == "music" && hasValue)
-		music = child.Token(1);
-	else if(key == "mute")
-		music = "";
-	else if(key == "mark" && hasValue)
-		mark.insert(GameData::Systems().Get(child.Token(1)));
-	else if(key == "unmark" && hasValue)
-		unmark.insert(GameData::Systems().Get(child.Token(1)));
-	else if(key == "fail" && hasValue)
+	else if(key == "fail" && child.Size() >= 2)
 		fail.insert(child.Token(1));
 	else if(key == "fail")
 		failCaller = true;
@@ -259,34 +233,12 @@ void GameAction::Save(DataWriter &out) const
 		out.Write("payment", payment);
 	if(fine)
 		out.Write("fine", fine);
-	for(auto &&debtEntry : debt)
-	{
-		out.Write("debt", debtEntry.amount);
-		out.BeginChild();
-		{
-			if(debtEntry.interest)
-				out.Write("interest", *debtEntry.interest);
-			out.Write("term", debtEntry.term);
-		}
-		out.EndChild();
-	}
 	for(auto &&it : events)
 		out.Write("event", it.first->Name(), it.second.first, it.second.second);
-	for(const System *system : mark)
-		out.Write("mark", system->Name());
-	for(const System *system : unmark)
-		out.Write("unmark", system->Name());
 	for(const string &name : fail)
 		out.Write("fail", name);
 	if(failCaller)
 		out.Write("fail");
-	if(music.has_value())
-	{
-		if(music->empty())
-			out.Write("mute");
-		else
-			out.Write("music", music.value());
-	}
 
 	conditions.Save(out);
 }
@@ -312,14 +264,6 @@ string GameAction::Validate() const
 	for(auto &&outfit : giftOutfits)
 		if(!outfit.first->IsDefined())
 			return "gift outfit \"" + outfit.first->TrueName() + "\"";
-
-	// Marked and unmarked system must be valid.
-	for(auto &&system : mark)
-		if(!system->IsValid())
-			return "system \"" + system->Name() + "\"";
-	for(auto &&system : unmark)
-		if(!system->IsValid())
-			return "system \"" + system->Name() + "\"";
 
 	// It is OK for this action to try to fail a mission that does not exist.
 	// (E.g. a plugin may be designed for interoperability with other plugins.)
@@ -405,16 +349,9 @@ void GameAction::Do(PlayerInfo &player, UI *ui, const Mission *caller) const
 	}
 	if(fine)
 		player.Accounts().AddFine(fine);
-	for(const auto &debtEntry : debt)
-		player.Accounts().AddDebt(debtEntry.amount, debtEntry.interest, debtEntry.term);
 
 	for(const auto &it : events)
 		player.AddEvent(*it.first, player.GetDate() + it.second.first);
-
-	for(const System *system : mark)
-		caller->Mark(system);
-	for(const System *system : unmark)
-		caller->Unmark(system);
 
 	if(!fail.empty())
 	{
@@ -427,18 +364,6 @@ void GameAction::Do(PlayerInfo &player, UI *ui, const Mission *caller) const
 	}
 	if(failCaller && caller)
 		player.FailMission(*caller);
-	if(music.has_value())
-	{
-		if(*music == "<ambient>")
-		{
-			if(player.GetPlanet())
-				Audio::PlayMusic(player.GetPlanet()->MusicName());
-			else
-				Audio::PlayMusic(player.GetSystem()->MusicName());
-		}
-		else
-			Audio::PlayMusic(music.value());
-	}
 
 	// Check if applying the conditions changes the player's reputations.
 	conditions.Apply(player.Conditions());
@@ -463,8 +388,6 @@ GameAction GameAction::Instantiate(map<string, string> &subs, int jumps, int pay
 	result.giftShips = giftShips;
 	result.giftOutfits = giftOutfits;
 
-	result.music = music;
-
 	result.payment = payment + (jumps + 1) * payload * paymentMultiplier;
 	if(result.payment)
 		subs["<payment>"] = Format::CreditString(abs(result.payment));
@@ -472,8 +395,6 @@ GameAction GameAction::Instantiate(map<string, string> &subs, int jumps, int pay
 	result.fine = fine;
 	if(result.fine)
 		subs["<fine>"] = Format::CreditString(result.fine);
-
-	result.debt = debt;
 
 	if(!logText.empty())
 		result.logText = Format::Replace(logText, subs);
@@ -485,9 +406,6 @@ GameAction GameAction::Instantiate(map<string, string> &subs, int jumps, int pay
 	result.failCaller = failCaller;
 
 	result.conditions = conditions;
-
-	result.mark = mark;
-	result.unmark = unmark;
 
 	return result;
 }

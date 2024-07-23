@@ -25,7 +25,6 @@ class DataWriter;
 class Government;
 class Mission;
 class Outfit;
-class PlayerInfo;
 class System;
 
 
@@ -108,10 +107,9 @@ public:
 
 	// If anything you are carrying is illegal, return the maximum fine you can
 	// be charged for any illegal outfits plus the sum of the fines for all
-	// missions. If the returned value is negative, you are carrying something
-	// or someone that warrants a death sentence for you.
-	int IllegalCargoFine(const Government *government, const PlayerInfo &player) const;
-	int IllegalPassengersFine(const Government *government, const PlayerInfo &player) const;
+	// missions. If the returned value is negative, you are carrying something so
+	// bad that it warrants a death sentence.
+	int IllegalCargoFine(const Government *government) const;
 
 	// Returns the amount tons of illegal cargo.
 	int IllegalCargoAmount() const;

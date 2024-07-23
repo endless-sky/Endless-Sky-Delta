@@ -63,7 +63,7 @@ TaskQueue::~TaskQueue()
 
 
 
-// Queue a function to execute in parallel, with another optional function that
+// Queue a function to execute in parallel, with an another optional function that
 // will get executed on the main thread after the first function finishes.
 // Returns a future representing the future result of the async call. Ignores
 // any main thread task that still need to be executed!
@@ -105,20 +105,28 @@ void TaskQueue::ProcessSyncTasks()
 
 
 
-// Waits for all of this queue's task to finish. Ignores any sync tasks to be processed.
-void TaskQueue::Wait()
+// Whether there are any outstanding tasks left in this queue, including any outstanding tasks
+// that need to be executed on the main thread.
+bool TaskQueue::IsDone() const
 {
-	while(!IsDone())
-		this_thread::yield();
+	{
+		lock_guard<mutex> lock(asyncMutex);
+		if(!futures.empty())
+			return false;
+	}
+
+	lock_guard lock(syncMutex);
+	return syncTasks.empty();
 }
 
 
 
-// Whether there are any outstanding async tasks left in this queue.
-bool TaskQueue::IsDone() const
+// Waits for all of this queue's task to finish while properly processing any outstanding main thread tasks.
+void TaskQueue::Wait()
 {
-	lock_guard<mutex> lock(asyncMutex);
-	return futures.empty();
+	// Process tasks while any task is still being executed.
+	while(!IsDone())
+		ProcessSyncTasks();
 }
 
 
@@ -134,7 +142,7 @@ void TaskQueue::ThreadLoop() noexcept
 			// Check whether it is time for this thread to quit.
 			if(shouldQuit)
 				return;
-			// No more tasks to execute, just go to sleep.
+			// No more tasks to execute, just to to sleep.
 			if(tasks.empty())
 				break;
 
@@ -147,8 +155,7 @@ void TaskQueue::ThreadLoop() noexcept
 
 			// Execute the task.
 			try {
-				if(task.async)
-					task.async();
+				task.async();
 			}
 			catch(...)
 			{
