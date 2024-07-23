@@ -57,7 +57,7 @@ public:
 	TaskQueue &operator=(const TaskQueue &) = delete;
 	~TaskQueue();
 
-	// Queue a function to execute in parallel, with an another optional function that
+	// Queue a function to execute in parallel, with another optional function that
 	// will get executed on the main thread after the first function finishes.
 	// Returns a future representing the future result of the async call. Ignores
 	// any main thread task that still need to be executed!
@@ -66,12 +66,13 @@ public:
 	// Process any tasks to be scheduled to be executed on the main thread.
 	void ProcessSyncTasks();
 
-	// Whether there are any outstanding tasks left in this queue, including any outstanding tasks
-	// that need to be executed on the main thread.
-	bool IsDone() const;
-
-	// Waits for all of this queue's task to finish while properly processing any outstanding main thread tasks.
+	// Waits for all of this queue's task to finish. Ignores any sync tasks to be processed.
 	void Wait();
+
+
+private:
+	// Whether there are any outstanding async tasks left in this queue.
+	bool IsDone() const;
 
 
 public:
