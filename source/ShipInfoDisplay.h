@@ -13,8 +13,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef SHIP_INFO_DISPLAY_H_
-#define SHIP_INFO_DISPLAY_H_
+#pragma once
 
 #include "ItemInfoDisplay.h"
 
@@ -24,6 +23,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 class Depreciation;
 class PlayerInfo;
 class Point;
+class Rectangle;
 class Ship;
 
 
@@ -54,6 +54,19 @@ public:
 	virtual void DrawAttributes(const Point &topLeft) const override;
 	virtual void DrawAttributes(const Point &topLeft, const bool sale) const;
 	void DrawOutfits(const Point &topLeft) const;
+	// Methods for drawing all the ship stats as small pieces
+	void DrawShipName(const Ship &ship, const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipModelStats(const Ship &ship, const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipCosts(const Ship &ship, const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipHealthStats(const Ship &ship, const Rectangle &bounds, int &infoPanelLine);
+	void DrawShipCarryingCapacities(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipManeuverStats(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipOutfitStat(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipCapacities(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipPropulsionCapacities(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipHardpointStats(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipBayStats(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
+	void DrawShipEnergyHeatStats(const Ship &ship, const Rectangle & bounds, int & infoPanelLine);
 
 
 private:
@@ -77,7 +90,3 @@ private:
 	std::vector<std::string> saleValues;
 	int saleHeight = 0;
 };
-
-
-
-#endif

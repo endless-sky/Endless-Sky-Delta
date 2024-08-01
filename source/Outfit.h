@@ -13,8 +13,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef OUTFIT_H_
-#define OUTFIT_H_
+#pragma once
 
 #include "Weapon.h"
 
@@ -86,6 +85,7 @@ public:
 	const std::vector<std::pair<Body, int>> &FlareSprites() const;
 	const std::vector<std::pair<Body, int>> &ReverseFlareSprites() const;
 	const std::vector<std::pair<Body, int>> &SteeringFlareSprites() const;
+	const std::vector<std::pair<Body, int>>& LateralFlareSprites() const;
 	const std::map<const Sound *, int> &FlareSounds() const;
 	const std::map<const Sound *, int> &ReverseFlareSounds() const;
 	const std::map<const Sound *, int> &SteeringFlareSounds() const;
@@ -135,6 +135,7 @@ private:
 	std::vector<std::pair<Body, int>> flareSprites;
 	std::vector<std::pair<Body, int>> reverseFlareSprites;
 	std::vector<std::pair<Body, int>> steeringFlareSprites;
+	std::vector<std::pair<Body, int>> lateralFlareSprites;
 	std::map<const Sound *, int> flareSounds;
 	std::map<const Sound *, int> reverseFlareSounds;
 	std::map<const Sound *, int> steeringFlareSounds;
@@ -156,7 +157,3 @@ private:
 // These get called a lot, so inline them for speed.
 inline int64_t Outfit::Cost() const { return cost; }
 inline double Outfit::Mass() const { return mass; }
-
-
-
-#endif

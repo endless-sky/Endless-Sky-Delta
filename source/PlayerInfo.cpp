@@ -16,7 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "PlayerInfo.h"
 
 #include "AI.h"
-#include "Audio.h"
+#include "audio/Audio.h"
 #include "ConversationPanel.h"
 #include "DataFile.h"
 #include "DataWriter.h"
@@ -1682,7 +1682,7 @@ bool PlayerInfo::TakeOff(UI *ui, const bool distributeCargo)
 		if(!ship->IsParked() && !ship->IsDisabled())
 		{
 			// Recalculate the weapon cache in case a mass-less change had an effect.
-			ship->GetAICache().Calibrate(*ship.get());
+			ship->UpdateCaches(true);
 			if(ship->GetSystem() != system)
 			{
 				ship->Recharge(Port::RechargeType::None, false);

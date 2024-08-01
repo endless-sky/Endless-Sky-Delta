@@ -13,12 +13,12 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef ANGLE_H_
-#define ANGLE_H_
+#pragma once
 
 #include "Point.h"
 
 #include <cstdint>
+#include <utility>
 
 
 
@@ -67,6 +67,7 @@ public:
 	bool IsInRange(const Angle &base, const Angle &limit) const;
 
 
+
 private:
 	explicit Angle(int32_t angle);
 
@@ -78,5 +79,3 @@ private:
 	// to the range of 0 to 360 degrees can be done via a bit mask.
 	int32_t angle = 0;
 };
-
-#endif

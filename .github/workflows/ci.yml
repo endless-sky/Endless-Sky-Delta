@@ -5,6 +5,9 @@ on:
     # Run for pushes to master or a release branch, e.g. a PR was merged ...
     branches:
       - master
+      - mirror
+      - main
+      - experimental
       - releases/v[0-9]+.[0-9]+.[0-9]+
     # ... and only when we've possibly changed how the game will function.
     paths:
@@ -56,7 +59,7 @@ jobs:
     - name: Install development dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y --no-install-recommends libxmu-dev libxi-dev libgl-dev libglu1-mesa-dev libgles2-mesa-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libosmesa6 mesa-utils libglvnd-dev x11-utils
+        sudo apt-get install -y --no-install-recommends libxmu-dev libxi-dev libgl-dev libglu1-mesa-dev libgles2-mesa-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libosmesa6 mesa-utils libglvnd-dev x11-utils catch2
     - name: Disable VM sound card
       run: |
         sudo sh -c 'echo "pcm.!default { type plug slave.pcm \"null\" }"  >> /etc/asound.conf'

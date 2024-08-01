@@ -13,8 +13,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef SYSTEM_H_
-#define SYSTEM_H_
+#pragma once
 
 #include "Hazard.h"
 #include "Point.h"
@@ -243,7 +242,7 @@ private:
 	std::vector<RandomEvent<Hazard>> hazards;
 	double habitable = 1000.;
 	WeightedList<double> belts;
-	double invisibleFenceRadius = 10000.;
+	double invisibleFenceRadius = 64000.; // vanilla is 10000
 	double jumpRange = 0.;
 	double solarPower = 0.;
 	double solarWind = 0.;
@@ -274,7 +273,3 @@ private:
 	// Attributes, for use in location filters.
 	std::set<std::string> attributes;
 };
-
-
-
-#endif

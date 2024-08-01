@@ -15,7 +15,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "Hardpoint.h"
 
-#include "Audio.h"
+#include "audio/Audio.h"
 #include "Body.h"
 #include "Effect.h"
 #include "Flotsam.h"
@@ -479,6 +479,7 @@ void Hardpoint::UpdateArc()
 	// Restore the initial value (from baseAttributes).
 	isOmnidirectional = baseAttributes.isOmnidirectional;
 	baseAngle = baseAttributes.baseAngle;
+
 	if(isOmnidirectional)
 	{
 		const Angle opposite = baseAngle + Angle(180.);
