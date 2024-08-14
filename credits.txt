@@ -21,7 +21,7 @@ Credits Wanted!
   missions that they gave to others
   to formally upload. (GitHub and
   the PR process have had problems)
-  
+
   I have added a "Writers" section,
   as well as a Special Thanks. If
   you or someone you know has
