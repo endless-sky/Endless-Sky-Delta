@@ -386,7 +386,7 @@ ship "Derecho"
 	sprite "ship/derecho"
 	thumbnail "thumbnail/derecho"
 	attributes
-		category "Light Warship"
+		category "Medium Warship"
 		licenses
 			"Wanderer Military"
 		"cost" 30500000
