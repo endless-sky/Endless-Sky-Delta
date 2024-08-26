@@ -180,6 +180,6 @@ test "Spawn Limit Tests"
 		assert
 			"test: fleet count by name Disabled Shuttle" == 0
 			"test: fleet count by name Expensive Ship" > 5
-			"test: fleet count by name Staying Scarab" ==  1
+			"test: fleet count by name Staying Scarab" == 1
 			"test: fleet count by name Disabled Aphid" == 0
 			"test: fleet count by name Disabled Star Barge" == 1
