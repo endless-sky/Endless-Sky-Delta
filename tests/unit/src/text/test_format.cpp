@@ -30,6 +30,26 @@ namespace { // test namespace
 
 // Insert file-local data here, e.g. classes, structs, or fixtures that will be useful
 // to help test this class/method.
+	std::map<std::string, int64_t> conditions = {
+		{ "zero", 0 }, // "0"
+		{ "negative", -5 }, // "-5"
+		{ "positive", 61 }, // "61"
+		{ "twelve thousand", 12000 }, // "twelve thousand", "12,000"
+		{ "mass test", 4361000 }, // "4,361,000 tons"
+		{ "scaled test", 3361000000 }, // "3.361B"
+		{ "raw test", 1810244 }, // "1810224"
+		{ "big test", 30103010301 }, // "30,103,010,301"
+		{ "credits test", -2361000 }, // "-2.361M credits"
+		{ "playtime test", 5000000 }, // "50d 11h 23m 20s"
+		{ "balanced[][[]][]", 4361000 }, // 4361000, 4,361,000, 4.361M, 4.361M credits, 4,361,000 tons, 50d 11h 23m 20s
+		{ "balanced at [[@]]", 33104 }, // "33,104"
+		{ "@", 38 } // "38"
+	};
+	Format::ConditionGetter getter = [](const std::string &string, size_t start, size_t size)
+	{
+		auto found = conditions.find(string.substr(start, size));
+		return found == conditions.end() ? 0 : found->second;
+	};
 
 // #endregion mock data
 
@@ -88,19 +108,19 @@ SCENARIO("A unit of playing time is to be made human-readable", "[Format][PlayTi
 SCENARIO("A player-entered quantity can be parsed to a number", "[Format][Parse]") {
 	GIVEN( "The string 123.45" ) {
 		THEN( "parses to 123.45" ) {
-			CHECK( Format::Parse("123.45") == Approx(123.45) );
+			CHECK_THAT( Format::Parse("123.45"), Catch::Matchers::WithinAbs(123.45, 0.0001) );
 		}
 	}
 
 	GIVEN( "The string 1,234K" ) {
 		THEN( "parses to 1234000" ) {
-			CHECK( Format::Parse("1,234K") == Approx(1234000.) );
+			CHECK_THAT( Format::Parse("1,234K"), Catch::Matchers::WithinAbs(1234000., 0.0001) );
 		}
 	}
 
 	GIVEN( "The string 1 523 004" ) {
 		THEN( "parses to 1523004" ) {
-			CHECK( Format::Parse("1 523 004") == Approx(1523004.) );
+			CHECK_THAT( Format::Parse("1 523 004"), Catch::Matchers::WithinAbs(1523004., 0.0001) );
 		}
 	}
 }
@@ -139,6 +159,11 @@ TEST_CASE( "Format::Number", "[Format][Number]") {
 		CHECK( Format::Number(0) == "0" );
 		CHECK( Format::Number(-.0) == "0" );
 		CHECK( Format::Number(.0) == "0" );
+	}
+	SECTION( "Non-finite inputs" ) {
+		CHECK( Format::Number(0./0.) == "???" );
+		CHECK( Format::Number(1./0.) == "infinity" );
+		CHECK( Format::Number(-1./0.) == "-infinity" );
 	}
 	SECTION( "Integral inputs" ) {
 		CHECK( Format::Number(1) == "1" );
@@ -241,6 +266,14 @@ TEST_CASE( "Format::Number", "[Format][Number]") {
 		CHECK( Format::Number(1000.03) == "1,000" );
 		CHECK( Format::Number(107.09) == "107.09" );
 		CHECK( Format::Number(0.0123) == "0.01" );
+	}
+	SECTION( "Large numbers" ) {
+		CHECK( Format::Number(1e15) == "1,000,000,000,000,000" );
+		CHECK( Format::Number(1e15 + 1) == "1e+15" );
+		CHECK( Format::Number(1e19) == "1e+19" );
+		CHECK( Format::Number(-1e19) == "-1e+19" );
+		CHECK( Format::Number(9223372036854775807.) == "9.22e+18" ); // Maximum and minimum values of 64-bit integers
+		CHECK( Format::Number(-9223372036854775808.) == "-9.22e+18" );
 	}
 }
 
@@ -350,6 +383,74 @@ TEST_CASE( "Format::CargoString", "[Format][CargoString]") {
 	SECTION( "Fractional mass" ) {
 		CHECK( Format::CargoString(2.5, "cargo") == "2.5 tons of cargo" );
 		CHECK( Format::CargoString(0.1, "cargo") == "0.1 tons of cargo" );
+	}
+}
+
+TEST_CASE( "Format::ExpandConditions", "[Format][ExpandConditions]") {
+	SECTION( "no format@ specified" ) {
+		CHECK( Format::ExpandConditions("__&[zero]__&[negative]__", getter) == "__0__-5__" );
+		CHECK( Format::ExpandConditions("__&[zero]__&[negative]", getter) == "__0__-5" );
+		CHECK( Format::ExpandConditions("__&[zero]&[negative]__", getter) == "__0-5__" );
+		CHECK( Format::ExpandConditions("&[zero]__&[negative]__", getter) == "0__-5__" );
+	}
+	SECTION( "unbalanced []" ) {
+		CHECK( Format::ExpandConditions("&[positive]__&[", getter) == "61__&[" );
+		CHECK( Format::ExpandConditions("&[positive]__&[@", getter) == "61__&[@" );
+		CHECK( Format::ExpandConditions("&[positive]__&[-@", getter) == "61__&[-@" );
+		CHECK( Format::ExpandConditions("&[positive]__&[[[-][]]@", getter) == "61__&[[[-][]]@" );
+		CHECK( Format::ExpandConditions("&[positive]__&[[]@[", getter) == "61__&[[]@[" );
+	}
+	SECTION( "specify the format@" ) {
+		CHECK( Format::ExpandConditions("__&[number@negative]__", getter) == "__-5__" );
+		CHECK( Format::ExpandConditions("__&[number@big test]__", getter) == "__30,103,010,301__" );
+		CHECK( Format::ExpandConditions("__&[raw@raw test]__", getter) == "__1810244__" );
+		CHECK( Format::ExpandConditions("__&[tons@mass test]__", getter) == "__4,361,000 tons__" );
+		CHECK( Format::ExpandConditions("__&[scaled@scaled test]__", getter) == "__3.361B__" );
+		CHECK( Format::ExpandConditions("__&[credits@credits test]__", getter) == "__-2.361M credits__" );
+		CHECK( Format::ExpandConditions("__&[playtime@playtime test]__", getter) == "__57d 20h 53m 20s__" );
+	}
+	SECTION( "balanced []" ) {
+		CHECK( Format::ExpandConditions("__&[balanced[][[]][]]__", getter) == "__4,361,000__" );
+		CHECK( Format::ExpandConditions("__&[raw@balanced[][[]][]]__", getter) == "__4361000__" );
+		CHECK( Format::ExpandConditions("__&[number@balanced[][[]][]]__", getter) == "__4,361,000__" );
+		CHECK( Format::ExpandConditions("__&[scaled@balanced[][[]][]]__", getter) == "__4.361M__" );
+		CHECK( Format::ExpandConditions("__&[credits@balanced[][[]][]]__", getter) == "__4.361M credits__" );
+		CHECK( Format::ExpandConditions("__&[tons@balanced[][[]][]]__", getter) == "__4,361,000 tons__" );
+		CHECK( Format::ExpandConditions("__&[playtime@balanced[][[]][]]__", getter) == "__50d 11h 23m 20s__" );
+	}
+	SECTION( "corner cases" ) {
+		CHECK( Format::ExpandConditions("&[]", getter) == "0" );
+		CHECK( Format::ExpandConditions("[tons@positive]", getter) == "[tons@positive]" );
+		CHECK( Format::ExpandConditions("&tons@positive", getter) == "&tons@positive" );
+		CHECK( Format::ExpandConditions("&]tons@positive[", getter) == "&]tons@positive[" );
+		CHECK( Format::ExpandConditions("&[@]", getter) == "0" );
+		CHECK( Format::ExpandConditions("&[@@]", getter) == "38" );
+		CHECK( Format::ExpandConditions("&[[@invalid@]@positive]", getter) == "61" );
+		CHECK( Format::ExpandConditions("__&[balanced at [[@]]]__", getter) == "__33,104__" );
+		CHECK( Format::ExpandConditions("", getter) == "" );
+		CHECK( Format::ExpandConditions("I AM A PRETTY CHICKEN", getter) == "I AM A PRETTY CHICKEN");
+	}
+	SECTION( "word form" ) {
+		CHECK( Format::ExpandConditions("&[words@zero]", getter) == "zero" );
+		CHECK( Format::ExpandConditions("&[chicago@zero]", getter) == "zero" );
+		CHECK( Format::ExpandConditions("&[mla@zero]", getter) == "zero" );
+		CHECK( Format::ExpandConditions("&[words@negative]", getter) == "negative five" );
+		CHECK( Format::ExpandConditions("&[chicago@negative]", getter) == "negative five" );
+		CHECK( Format::ExpandConditions("&[mla@negative]", getter) == "negative five" );
+		CHECK( Format::ExpandConditions("&[words@big test]", getter) ==
+			"thirty billion one hundred three million ten thousand three hundred one");
+		CHECK( Format::ExpandConditions("&[chicago@big test]", getter) == "30,103,010,301" );
+		CHECK( Format::ExpandConditions("&[mla@big test]", getter) == "30,103,010,301" );
+		CHECK( Format::ExpandConditions("&[Words@big test]", getter) ==
+			"Thirty billion one hundred three million ten thousand three hundred one");
+		CHECK( Format::ExpandConditions("&[Chicago@big test]", getter) ==
+			"Thirty billion one hundred three million ten thousand three hundred one");
+		CHECK( Format::ExpandConditions("&[Mla@big test]", getter) ==
+			"Thirty billion one hundred three million ten thousand three hundred one");
+		CHECK( Format::ExpandConditions("&[words@twelve thousand]", getter) == "twelve thousand" );
+		CHECK( Format::ExpandConditions("&[chicago@twelve thousand]", getter) == "twelve thousand" );
+		CHECK( Format::ExpandConditions("&[mla@twelve thousand]", getter) == "12,000" );
+		CHECK( Format::ExpandConditions("&[mla@credits test]", getter) == "negative 2.361 million" );
 	}
 }
 

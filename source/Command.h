@@ -13,8 +13,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef COMMAND_H_
-#define COMMAND_H_
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -43,6 +42,7 @@ public:
 	static const Command LATERALLEFT;
 	static const Command LATERALRIGHT;
 	static const Command PRIMARY;
+	static const Command TURRET_TRACKING;
 	static const Command SECONDARY;
 	static const Command SELECT;
 	static const Command LAND;
@@ -60,12 +60,15 @@ public:
 	// UI controls:
 	static const Command MAP;
 	static const Command INFO;
+	static const Command MESSAGE_LOG;
 	static const Command FULLSCREEN;
 	static const Command FASTFORWARD;
+	static const Command HELP;
 	// Escort commands:
 	static const Command FIGHT;
 	static const Command GATHER;
-	static const Command HOLD;
+	static const Command HOLD_FIRE;
+	static const Command HOLD_POSITION;
 	static const Command AMMO;
 	static const Command HARVEST;
 	// This command is given in combination with JUMP or LAND and tells a ship
@@ -107,6 +110,7 @@ public:
 	// a combination of more than one command, an empty string is returned.
 	const std::string &Description() const;
 	const std::string &KeyName() const;
+	bool HasBinding() const;
 	bool HasConflict() const;
 
 	// Load this command from an input file (for testing or scripted missions).
@@ -157,7 +161,3 @@ private:
 	double thrust = 0.;
 	double lateralThrust = 0.;
 };
-
-
-
-#endif

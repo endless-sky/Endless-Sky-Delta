@@ -13,8 +13,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef HARDPOINT_H_
-#define HARDPOINT_H_
+#pragma once
 
 #include "Angle.h"
 #include "Point.h"
@@ -22,6 +21,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include <utility>
 #include <vector>
 
+class Body;
+class Flotsam;
 class Outfit;
 class Projectile;
 class Ship;
@@ -47,6 +48,8 @@ public:
 		Angle minArc;
 		Angle maxArc;
 	};
+
+
 
 public:
 	// Constructor. Hardpoints may or may not specify what weapon is in them.
@@ -76,7 +79,7 @@ public:
 	bool IsOmnidirectional() const;
 	bool IsUnder() const;
 	bool IsHoming() const;
-	bool IsAntiMissile() const;
+	bool IsSpecial() const;
 	bool CanAim() const;
 
 	// Check if this weapon is ready to fire.
@@ -97,6 +100,8 @@ public:
 	void Fire(Ship &ship, std::vector<Projectile> &projectiles, std::vector<Visual> &visuals);
 	// Fire an anti-missile. Returns true if the missile should be killed.
 	bool FireAntiMissile(Ship &ship, const Projectile &projectile, std::vector<Visual> &visuals);
+	// Fire a tractor beam. Returns true if the flotsam was hit.
+	bool FireTractorBeam(Ship &ship, const Flotsam &flotsam, std::vector<Visual> &visuals);
 	// This weapon jammed. Increase its reload counters, but don't fire.
 	void Jam();
 
@@ -113,6 +118,9 @@ public:
 
 
 private:
+	// Check whether a projectile or flotsam is within the range of the anti-missile
+	// or tractor beam system and create visuals if it is.
+	bool FireSpecialSystem(Ship &ship, const Body &body, std::vector<Visual> &visuals);
 	// Reset the reload counters and expend ammunition, if any.
 	void Fire(Ship &ship, const Point &start, const Angle &aim);
 
@@ -151,7 +159,3 @@ private:
 	bool isFiring = false;
 	bool wasFiring = false;
 };
-
-
-
-#endif

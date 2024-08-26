@@ -17,7 +17,7 @@
 
 mission "Hai Building Mountaintop [1] Construction Fleet"
 	name "Escort construction fleet to Ultima Thule"
-	description "Meet a construction fleet at <stopovers> and escort them to to <destination> to prevent a confrontation."
+	description "Meet a construction fleet at <stopovers> and escort them to <destination> to prevent a confrontation."
 	autosave
 	landing
 	source "Hai-home"
@@ -33,12 +33,12 @@ mission "Hai Building Mountaintop [1] Construction Fleet"
 				has "Building Mountaintop Deferred"
 			`	"I am very glad to see you returned, Captain <last>. Sayari said you were away on an important errand, but I've been hoping for a day now that you would reappear. I think you might be the solution to the current impasse."`
 			`	"You see," says Sayari, "while you've been away it's been decided that a 'tourist trap type theme park destination' is a critical part of the cover story." Despite her Hai inflections, you can still hear the air quotes around that phrase in the tone of her voice. "So far it seems the movie cover has been circulating quite successfully, so we're leaning into it.`
-			`	"This means we need a station, on your side of the wormhole in Ultima Thule. It also means we need it fast, much faster than your people could ever hope to assemble it. The Hai can build it much quicker than humanity can; we actually considered the possibility of needing to raise a station quickly a while back. The alien look that the station will have if we build it has been considered just another favorable aspect of the movie and it provides a long-term commercial justification for the whole idea; the, uh, 'tourist trap'."`
+			`	"This means we need a station, on your side of the wormhole in Ultima Thule. It also means we need it fast, much faster than your people could ever hope to assemble it. The Hai can build it much quicker than humanity can; we actually considered the possibility of needing to raise a station quickly a while back. The alien look that the station will have if we build it has been considered just another favorable aspect of the movie and it provides a long-term commercial justification for the whole idea; the, uh, 'tourist trap.'"`
 			choice
 				`	"It would help if I oversaw the construction, wouldn't it?"`
 					goto oversee
 				`	"Good idea. Let me know when the station is complete."`
-			`	"It's not so simple," Sayari responds. "In the light of the recent civil war your species has had, some of the Elders are less than keen on allowing a partisan observer to see the inner workings of a station in its earliest phases, especially when we haven't actually built one in so, so long."`
+			`	"It's not so simple," Sayari responds. "In the light of the recent civil war your species has had, some of the elders are less than keen on allowing a partisan observer to see the inner workings of a station in its earliest phases, especially when we haven't actually built one in so, so long."`
 			`	Now that she mentions it, all of the stations in Hai space do seem to be very, very old.`
 			`	"However, therein lies a problem," says Xilin.`
 			`	"The Republic will not allow the Hai to build a station on our side of the wormhole without some oversight by someone we trust. This has now been a point of contention for some days, and multiple suggestions have been rejected."`
@@ -47,21 +47,21 @@ mission "Hai Building Mountaintop [1] Construction Fleet"
 			`	"Anyway," she continues, "thanks to a little Freedom of Information request to the Republic, I have been looking at things, and I think I have the solution."`
 			choice
 				`	"Is it me?"`
-			`	Sayari winks at you. "Catch on quick, don't you? The actions you're recorded as having taken show a certain conscience for the good of your species as a whole, despite your affiliations. I have convinced the other diplomats and our Elders that you might be a viable solution to this impasse. The human diplomats have already agreed, but the Elders wish to speak with you first."`
+			`	Sayari winks at you. "Catch on quick, don't you? The actions you're recorded as having taken show a certain conscience for the good of your species as a whole, despite your affiliations. I have convinced the other diplomats and our elders that you might be a viable solution to this impasse. The human diplomats have already agreed, but the elders wish to speak with you first."`
 				goto elders
 			label oversee
-			`	"You're learning to navigating the maze of galactic politics quickly, Captain <last>," says Sayari. "We are at an impasse. The Elders are less than keen on allowing a partisan observer to see the construction."`
+			`	"You're learning to navigating the maze of galactic politics quickly, Captain <last>," says Sayari. "We are at an impasse. The elders are less than keen on allowing a partisan observer to see the construction."`
 			`	Xilin continues her thought. "The Republic won't let the Hai build a station on our side of the wormhole without a trusted observer monitoring construction.`
 			`	"Both sides trust you, though," he says, as Sayari nods.`
 			label elders
 			choice
-				`	"Who are these Elders?"`
+				`	"Who are these elders?"`
 				`	"Of course, that's natural."`
 					goto main
-			`	Sayari explains, "The Hai are ruled by an elected council of elders. They are not responsible for every administrative decision that occurs, but they are the highest authority of our government. Their decisions are final, at least for the term of an election."`
+			`	Sayari explains, "The Hai are ruled by an elected Council of Elders. They are not responsible for every administrative decision that occurs, but they are the highest authority of our government. Their decisions are final, at least for the term of an election."`
 				goto main
 			label buildingdeferred
-			`	Xilin addresses you, "Not a great deal of progress has been made in your absence. We have maintained our position, so the other diplomats and the Elders still accept that you might be a viable solution to this impasse. It is unavoidable though that the Elders must speak with you first."`
+			`	Xilin addresses you, "Not a great deal of progress has been made in your absence. We have maintained our position, so the other diplomats and the elders still accept that you might be a viable solution to this impasse. It is unavoidable though that the elders must speak with you first."`
 			label main
 			`	"If you're willing, there will be a council meeting in an hour, and I can put you first on the agenda. Will you do this?" asks Sayari.`
 			choice
@@ -114,7 +114,7 @@ mission "Hai Building Mountaintop [1] Construction Fleet"
 			`	No sooner has she finished than there is a knock at the door, and an aide looks in. "The Council will see you now."`
 			choice
 				`	(Walk into the Council chambers.)`
-			`	The next twenty minutes prove to be an exercise in tedium as various members of the council interrogate you over apparently mundane details of your recent actions as recorded in the Freedom of Information report. You're not really sure what most of it has to do with anything, but eventually one of the Elders stands up.`
+			`	The next twenty minutes prove to be an exercise in tedium as various members of the council interrogate you over apparently mundane details of your recent actions as recorded in the Freedom of Information report. You're not really sure what most of it has to do with anything, but eventually one of the elders stands up.`
 			`	"I think we've generally had enough of this here. Answer me two questions, and then we shall make our decision. Firstly, do you think that a diplomatic post should be able to defend itself? Or should it trust to the strength of those who meet there to ensure its protection?"`
 			`	This seems like a very strange question...`
 			choice
@@ -125,12 +125,12 @@ mission "Hai Building Mountaintop [1] Construction Fleet"
 			label trust
 			action
 				set haitrust
-			`	You seem to get no reaction, and the Elder follows up with, "What is the gravest threat, in your opinion, facing humanity?"`
+			`	You seem to get no reaction, and the elder follows up with, "What is the gravest threat, in your opinion, facing humanity?"`
 				goto return
 			label caution
 			action
 				set haicaution
-			`	You seem to get no reaction, and the Elder follows up with, "What is the gravest threat, in your opinion, facing humanity?"`
+			`	You seem to get no reaction, and the elder follows up with, "What is the gravest threat, in your opinion, facing humanity?"`
 			label return
 			choice
 				`	"The Pug."`
@@ -155,7 +155,7 @@ mission "Hai Building Mountaintop [1] Construction Fleet"
 		"Building Mountaintop Deferred" ++
 	on accept
 		event "role-play station before construction"
-		log `The diplomats have elected to double down on the movie production angle, with the costumed community "focus group," citing its success. This requires a station to be built; however, the Hai are unwilling to trust a human government to see the inner workings of a station under construction in the wake of the civil war, and the Republic will not allow a station to be built on their side unsupervised. Agreed to fulfill the role of supervisor after being asked by the diplomats and completing some sort of test by the Hai Elders involving some odd questions.`
+		log `The diplomats have elected to double down on the movie production angle, with the costumed community "focus group," citing its success. This requires a station to be built; however, the Hai are unwilling to trust a human government to see the inner workings of a station under construction in the wake of the civil war, and the Republic will not allow a station to be built on their side unsupervised. Agreed to fulfill the role of supervisor after being asked by the diplomats and completing some sort of test by the Hai elders involving some odd questions.`
 	on stopover
 		dialog `A fleet of eight Geocoris is waiting to accompany you when you arrive, with just the final items being loaded as you come in to land. They will follow you to the site where the new station will be built.`
 	to complete
@@ -241,10 +241,6 @@ event "role-play station after construction"
 
 
 
-event "hai dog and pony done"
-	clear "hai dog and pony final stop"
-
-
 mission "Hai Building Mountaintop [2] Recruits"
 	name "Encourage recruits for Mountaintop"
 	description "Now that the station is going ahead, the Hai need to recruit people to be actors in this movie production. Someone needs to sell it to them, and apparently that someone is you."
@@ -303,13 +299,13 @@ mission "Hai Building Mountaintop [2] Recruits"
 			choice
 				`	"And that is?"`
 				`	"What's the deal then?"`
-			`	Terry crosses her arms and leans back against the bulkhead. "We need a recruitment campaign. We need to attract Hai who've lived in shared urban environments with humans enough to be able to fake being humans pretending to be Hai. Which means we need a human touch to this; it can't just come from the Hai's own advertising networks, and we need some star power. Oh, and if you haven't guessed already, you're the one to do it. The Syndicate will offer you a sum of 10,000,000 credits to visit every planet in Hai space and do glossies. I'll obviously stage manage your image, and will have promotional material ready inside of 3 hours."`
+			`	Terry crosses her arms and leans back against the bulkhead. "We need a recruitment campaign. We need to attract Hai who've lived in shared urban environments with humans enough to be able to fake being humans pretending to be Hai. Which means we need a human touch to this; it can't just come from the Hai's own advertising networks, and we need some star power. Oh, and if you haven't guessed already, you're the one to do it. The Syndicate will offer you a sum of 10,000,000 credits to visit every planet in Hai space and do glossies. I'll obviously stage-manage your image, and will have promotional material ready inside of 3 hours."`
 			choice
 				`	"That's it? Straight into it?"`
 			`	She stares you down. "Right now you are the linchpin. Potentially the only human in the entire galaxy that stands between peace and crisis... and we're already behind schedule."`
 			choice
 				`	"I don't really have a choice in this matter, do I?"`
-			`	Terry's answering grin is best described as "predatory".`
+			`	Terry's answering grin is best described as "predatory."`
 				accept
 	on stopover
 		set "hai dog and pony final stop"
@@ -321,6 +317,9 @@ mission "Hai Building Mountaintop [2] Recruits"
 		log `Had to go on a lengthy promotional tour to rustle up volunteers for the new station. Terry took care of all the details and seemed especially keen. Presumably she has some marketing background, which may explain her success within the Syndicate.`
 		payment 10000000
 		dialog `You finally dock at <planet>, your tedious tour complete. Shortly after, you receive a ping informing you that <payment> has been deposited into your account. Terry must've set it up to happen automatically.`
+
+event "hai dog and pony done"
+	clear "hai dog and pony final stop"
 
 
 mission "ZZ Hai Building Mountaintop [2a] Sales Job"
@@ -399,7 +398,7 @@ mission "Hai Building Mountaintop [3] Furnishings"
 		payment 300000
 		event "role-play station active" 12
 		event "ladybug surveillance" 32 42
-		event "news: hai video clip debunked"
+		# event "news: hai video clip debunked"
 		log `Of all the hilariously mundane things that could trip up a deception, it turned out to be Hai-made furniture. Acquired a large shipment of human-made furniture from Prime in order to complete the station.`
 		conversation
 			`By the time you return, you are shocked to notice that the station seems to be rapidly approaching a completed state. Some four thousand people have already arrived, though some are still on board ships docked at the station. Once you register your delivery amidst the station chaos, it's only a few minutes later that you get a "thank you" message from Sayari.`

@@ -147,15 +147,23 @@ outfit "RG15 Torch Thruster"
 		"Gegno Civilian"
 	cost 17000
 	thumbnail "outfit/small torch thruster vi"
+	"thruster slot" -1
+	"engine mod space" 1.04
 	"mass" 31
 	"outfit space" -31
 	"engine capacity" -31
-	"thrust" 9.7
+	"thrust" 17
 	"thrusting energy" 0.7
 	"thrusting heat" 1.5
 	"flare sprite" "effect/vi flare/small"
 		"frame rate" 2.5
 	"flare sound" "ion torch small"
+	"reverse thrust" 1.7
+	"reverse thrusting energy" 0.07
+	"reverse thrusting heat" 0.15
+	"reverse flare sprite" "effect/vi flare/small"
+		"frame rate" 2.5
+	"reverse flare sound" "ion torch small"
 	description `The RG15 Ion Torch Thruster is the Gegno Vi's smallest torch thruster, found almost exclusively on the Slate. It is somewhat inefficient, weighing more and producing more heat than most thrusters of a similar size in exchange for using slightly less energy.`
 
 
@@ -165,10 +173,11 @@ outfit "RG15 Torch Steering"
 		"Gegno Civilian"
 	cost 15000
 	thumbnail "outfit/small torch steering vi"
+	"steering slot" -1
 	"mass" 25
 	"outfit space" -25
 	"engine capacity" -25
-	"turn" 287
+	"turn" 430
 	"turning energy" 0.4
 	"turning heat" 0.85
 	"steering flare sprite" "effect/vi flare/small"
@@ -183,15 +192,23 @@ outfit "RG18 Torch Thruster"
 		"Gegno Civilian"
 	cost 38000
 	thumbnail "outfit/medium torch thruster vi"
+	"thruster slot" -1
+	"engine mod space" 1.2
 	"mass" 51
 	"outfit space" -51
 	"engine capacity" -51
-	"thrust" 18.7
+	"thrust" 30
 	"thrusting energy" 1.25
 	"thrusting heat" 2.9
 	"flare sprite" "effect/vi flare/medium"
 		"frame rate" 2.4
 	"flare sound" "ion torch medium"
+	"reverse thrust" 3.0
+	"reverse thrusting energy" 0.125
+	"reverse thrusting heat" 0.29
+	"reverse flare sprite" "effect/vi flare/small"
+		"frame rate" 2.5
+	"reverse flare sound" "ion torch small"
 	description `The RG18 is a moderately large thruster used by the Gegno Vi. Ion Torch Thrusters are similar to human ion thrusters, but their explosive exhaust causes them to run hotter. However, they also require slightly less energy.`
 
 
@@ -201,10 +218,11 @@ outfit "RG18 Torch Steering"
 		"Gegno Civilian"
 	cost 32000
 	thumbnail "outfit/medium torch steering vi"
+	"steering slot" -1
 	"mass" 39
 	"outfit space" -39
 	"engine capacity" -39
-	"turn" 523
+	"turn" 784
 	"turning energy" 0.65
 	"turning heat" 1.5
 	"steering flare sprite" "effect/vi flare/medium"
@@ -222,15 +240,23 @@ outfit "RG3 Torch Thruster"
 		"Vi Lord"
 	cost 84000
 	thumbnail "outfit/large torch thruster vi"
+	"thruster slot" -1
+	"engine mod space" 1.38
 	"mass" 83
 	"outfit space" -83
 	"engine capacity" -83
-	"thrust" 36
+	"thrust" 54
 	"thrusting energy" 2.2
 	"thrusting heat" 5.4
 	"flare sprite" "effect/vi flare/large"
 		"frame rate" 2.3
 	"flare sound" "ion torch large"
+	"reverse thrust" 5.4
+	"reverse thrusting energy" 0.22
+	"reverse thrusting heat" 0.54
+	"reverse flare sprite" "effect/vi flare/small"
+		"frame rate" 2.5
+	"reverse flare sound" "ion torch small"
 	description `Derived from the massive thrusters that powered early Gegno generation ships, RG3 Ion Torch Thrusters are the Gegno's largest thrusters and the oldest still used. Smaller ships that attempt to use these engines often end up overheating themselves.`
 
 
@@ -243,10 +269,11 @@ outfit "RG3 Torch Steering"
 		"Vi Lord"
 	cost 70000
 	thumbnail "outfit/large torch steering vi"
+	"steering slot" -1
 	"mass" 64
 	"outfit space" -64
 	"engine capacity" -64
-	"turn" 1004
+	"turn" 1506
 	"turning energy" 1.15
 	"turning heat" 2.8
 	"steering flare sprite" "effect/vi flare/large"
@@ -264,21 +291,30 @@ outfit "SC-1 Plasma Engines"
 		"Scin Architect"
 	cost 21200
 	thumbnail "outfit/tiny plasma engines scin"
+	"steering slot" -1
+	"thruster slot" -1
+	"engine mod space" 0.92
 	"mass" 21
 	"outfit space" -21
 	"engine capacity" -21
-	"thrust" 5.1
+	"thrust" 9
 	"thrusting energy" 0.4
 	"thrusting heat" 1
 	"flare sprite" "effect/scin flare/tiny"
 		"frame rate" 0.6
 	"flare sound" "scplasma tiny"
-	"turn" 160
+	"turn" 240
 	"turning energy" 0.35
 	"turning heat" 0.8
 	"steering flare sprite" "effect/scin flare/tiny"
 		"frame rate" 0.6
 	"steering flare sound" "scplasma tiny"
+	"reverse thrust" 0.9
+	"reverse thrusting energy" 0.04
+	"reverse thrusting heat" 0.1
+	"reverse flare sprite" "effect/scin flare/tiny"
+		"frame rate" 0.6
+	"reverse flare sound" "scplasma tiny"
 	description `In order to power the tiny Halite frame, the Gegno Scin developed this smaller engine system. Based on their larger plasma thrusters, these engines are much more efficient than the Vi's bigger, more sluggish ion engines, which would never be compact or light enough to run on a fighter.`
 
 
@@ -289,15 +325,23 @@ outfit "SC-12 Plasma Thruster"
 		"Scin Adjutant"
 	cost 20900
 	thumbnail "outfit/small plasma thruster scin"
+	"thruster slot" -1
+	"engine mod space" 0.96
 	"mass" 25
 	"outfit space" -25
 	"engine capacity" -25
-	"thrust" 11.1
+	"thrust" 20
 	"thrusting energy" 0.85
 	"thrusting heat" 2.25
 	"flare sprite" "effect/scin flare/small"
 		"frame rate" 0.5
 	"flare sound" "scplasma small"
+	"reverse thrust" 2
+	"reverse thrusting energy" 0.085
+	"reverse thrusting heat" 0.225
+	"reverse flare sprite" "effect/scin flare/tiny"
+		"frame rate" 0.6
+	"reverse flare sound" "scplasma tiny"
 	description `Rather than developing on the Ion Torch design of the Vi, the Scin began work on a plasma-based thruster. They are more compact, weigh less, and produce significantly more thrust. However, since Ion Torches expel some of their heat in their thrust, the more stable and powerful SC thrusters tend to run hotter.`
 
 
@@ -308,16 +352,17 @@ outfit "SC-12 Plasma Steering"
 		"Scin Adjutant"
 	cost 17000
 	thumbnail "outfit/small plasma steering scin"
+	"steering slot" -1
 	"mass" 19
 	"outfit space" -19
 	"engine capacity" -19
-	"turn" 297
+	"turn" 445
 	"turning energy" 0.45
 	"turning heat" 1.15
 	"steering flare sprite" "effect/scin flare/small"
 		"frame rate" 0.5
 	"steering flare sound" "scplasma small"
-	description `The new SC plasma engines allow Gegno Scin ships to outmanoeuvre their opposing brothers. What might take a Vi ship a long time takes only a moment on a Scin ship.`
+	description `The new SC plasma engines allow Gegno Scin ships to outmaneuver their opposing brothers. What might take a Vi ship a long time takes only a moment on a Scin ship.`
 
 
 outfit "SC-14 Plasma Thruster"
@@ -327,15 +372,23 @@ outfit "SC-14 Plasma Thruster"
 		"Scin Adjutant"
 	cost 52500
 	thumbnail "outfit/medium plasma thruster scin"
+	"thruster slot" -1
+	"engine mod space" 1.18
 	"mass" 45
 	"outfit space" -45
 	"engine capacity" -45
-	"thrust" 24
+	"thrust" 39
 	"thrusting energy" 1.7
 	"thrusting heat" 4.95
 	"flare sprite" "effect/scin flare/med"
 		"frame rate" 0.4
 	"flare sound" "scplasma medium"
+	"reverse thrust" 3.9
+	"reverse thrusting energy" 0.17
+	"reverse thrusting heat" 0.495
+	"reverse flare sprite" "effect/scin flare/tiny"
+		"frame rate" 0.6
+	"reverse flare sound" "scplasma tiny"
 	description `SC-14 class thrusters power the Scin's average gunboat or transport, giving their ships reliable speed. They can quickly propel any medium-sized ship forward with reasonable efficiency.`
 
 
@@ -346,10 +399,11 @@ outfit "SC-14 Plasma Steering"
 		"Scin Adjutant"
 	cost 41500
 	thumbnail "outfit/medium plasma steering scin"
+	"steering slot" -1
 	"mass" 34
 	"outfit space" -34
 	"engine capacity" -34
-	"turn" 638
+	"turn" 957
 	"turning energy" 1
 	"turning heat" 2.95
 	"steering flare sprite" "effect/scin flare/med"
@@ -367,10 +421,13 @@ outfit "SC-15 Plasma Thrusters"
 		"Scin Architect"
 	cost 170400
 	thumbnail "outfit/large plasma engines scin"
+	"reverse thruster slot" -1
+	"thruster slot" -1
+	"engine mod space" 1.45
 	"mass" 112
 	"outfit space" -112
 	"engine capacity" -112
-	"thrust" 48.6
+	"thrust" 72
 	"thrusting energy" 3.1
 	"thrusting heat" 9.5
 	"flare sprite" "effect/scin flare/large"
@@ -411,7 +468,7 @@ outfit "Irate Cannon"
 		"firing heat" 9
 		"shield damage" 6
 		"hull damage" 16
-		"hit force" 40
+		"hit force" 60
 	description `Irate Cannons are a rudimentary cannon technology that fire explosive projectiles made out of condensed scrap metal, making them effective against armor. They fire decently fast, but one cannon alone is barely enough to output any sort of meaningful damage, which is why they are often found clustered together in numbers.`
 
 
@@ -444,7 +501,7 @@ outfit "Irate Cannon Turret"
 		"firing heat" 9
 		"shield damage" 6
 		"hull damage" 16
-		"hit force" 40
+		"hit force" 60
 	description `While the Irate Cannon Turret originally saw little use due to Vi ships having enough space to field larger caliber weapons in their turret mounts, this turret has become more popular as the Vi produce smaller ships with more limited weapon space. To offset the lack of raw firepower from a single cannon, the turret boasts two mounted on a rotating platform, doubling its rate of fire in a single mount.`
 
 effect "irate fire"
@@ -491,7 +548,7 @@ outfit "Choleric Cannon"
 		"firing heat" 222
 		"shield damage" 106
 		"hull damage" 311
-		"hit force" 180
+		"hit force" 270
 	description `A higher caliber than the Irate Cannon, Choleric Cannons fire larger, slower rounds that do a noticeable chunk of damage to a ship's hull. However, due to the nature of the cannon, it is, along with other Gegno weaponry, very ineffective against any sort of shielding.`
 
 
@@ -525,7 +582,7 @@ outfit "Choleric Cannon Turret"
 		"firing heat" 222
 		"shield damage" 106
 		"hull damage" 311
-		"hit force" 180
+		"hit force" 270
 	description `Mounted on a turret, a Choleric Cannon is much more devastating without the need to keep a target in front of the ship to land shots. It can consistently put out damage to a target's hull, and with multiple turrets, any shieldless vessel is forced to retreat after a decent enough bombardment lest they be destroyed.`
 	
 effect "choleric fire"
@@ -573,7 +630,7 @@ outfit "Ballistic Cannon"
 		"firing heat" 566
 		"shield damage" 181
 		"hull damage" 970
-		"hit force" 360
+		"hit force" 540
 		"stream"
 		"missile strength" 18
 	description `The Gegno Vi Ballistic Cannon tops its sister cannons as the highest caliber weapon that the Gegno field. Each cannon round can inflict tremendous damage to a target's exposed hull. Due to the size and power of these cannons, their shells have a slow reload time and travel speed. As such, they can often be dodged by faster or smaller craft, but if able to be equipped in numbers, they can create a deadly wall of fire.`
@@ -610,7 +667,7 @@ outfit "Ballistic Cannon Turret"
 		"firing heat" 537
 		"shield damage" 181
 		"hull damage" 970
-		"hit force" 360
+		"hit force" 540
 		"missile strength" 18
 	description `As the largest caliber cannon in the Gegno Vi's arsenal, Ballistic Cannons require a lot of work to be fitted on even the largest of ships. A huge, self-sustaining base with its own vent ports is necessary for one of these cannons to even be fitted on a turret mount, provided there are crew to operate it. Combining destructive force with adjustable aim, Ballistic Cannon Turrets are the deadliest weapons of Vi warships.`
 
@@ -708,7 +765,7 @@ outfit "Acuit Artillery"
 		"firing heat" 306
 		"shield damage" 195
 		"hull damage" 332
-		"hit force" 40
+		"hit force" 60
 	description `With a better grasp on plasma and energy weaponry, the Gegno Scin developed a larger blaster weapon to mount on the Feldspar Carrier as a counter to the Gegno Vi's huge cannon weaponry. Acuit Artillery turrets outrange most weapons in Gegno space, while having a higher rate of fire as well, making them very efficient bombardment weapons.`
 
 effect "acuit hit"
@@ -744,7 +801,7 @@ outfit "Acumen Bolt Cannon"
 		"firing heat" 66
 		"shield damage" 46
 		"hull damage" 60
-		"hit force" 86
+		"hit force" 129
 	description `Further progressing their research in energy weaponry, the Gegno Scin recently designed the Acumen Bolt Cannon - a proof-of-concept neutron cannon that fires dangerous balls of plasma capable of dealing decent damage to armor and shielding alike.`
 	description `	Although more powerful than Astuit blaster projectiles, Acumen plasma bolts are harder to fire accurately, travel much slower, and require more energy to fire.`
 
@@ -817,8 +874,9 @@ outfit "Excavator"
 		"shield damage" 6
 		"hull damage" 14
 		"minable damage" 104
-		"hit force" -4
-	description `Excavator Drills are large drills designed by the Gegno that rip materials out of asteroids in an efficient manner. These types of drill systems are only found on ships specifically designed around them as they require substantial infrastructure to be functional.`
+		"prospecting" 145
+		"hit force" -6
+	description `Excavators are large drills designed by the Gegno that rip materials out of asteroids in an efficient manner. These types of drill systems are only found on ships specifically designed around them as they require substantial infrastructure to be functional.`
 
 effect "excavate"
 	sprite "effect/smoke"
@@ -860,7 +918,8 @@ outfit "Burrower"
 		"shield damage" .4
 		"hull damage" 6
 		"minable damage" 3
-		"hit force" 4
+		"prospecting" 10.5
+		"hit force" 6
 	description `Burrower Drills are longer, thinner, and more precise than the larger Excavator Drill system, although they are nowhere near as powerful. Burrowers can mine asteroids more carefully, preserving more materials in the process. Rather than constructing the spaceship around the base system, these drills are more compact and are mounted on self-sustaining drill spars, resulting in lower required internal space and machinery.`
 	description `	This mining outfit requires a drill spar port, in addition to a gun port, in order to be mounted.`
 
@@ -889,7 +948,7 @@ outfit "Ion Torch"
 	"weapon capacity" -32
 	"gun ports" -1
 	"drill spar" -1
-	"reverse thrust" 4.6
+	"reverse thrust" 6.9
 	"reverse thrusting energy" 0.4
 	"reverse thrusting heat" 0.9
 	weapon
@@ -935,7 +994,7 @@ outfit "Savagery Bludgeon"
 		"reload" 40
 		"shield damage" 8
 		"hull damage" 40
-		"hit force" 500
+		"hit force" 750
 	description `A Savagery Bludgeon is a mace-like weapon found jammed into the Gegno Vi's Dunite duelist ships. They are used as melee weapons for close-quarter rams and jousts during duels. However, they have hardly any use as a weapon outside of this as they merely scratch larger ship's hulls and barely put a dent into anything shielded.`
 	
 effect "bludgeon impact"

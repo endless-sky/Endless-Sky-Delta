@@ -214,6 +214,57 @@ outfit "Fuel Module"
 	description "In their early days of space exploration, the Saryds developed the Fuel Module to travel far from Saros without worrying about becoming stranded without fuel, or sudden fuel leaks."
 	description "	Nowadays, nearly every system in the Coalition has refueling facilities, but some captains still find use in the extra jumps these modules offer."
 
+outfit "Decoy Plating"
+	category "Systems"
+	cost 93000
+	thumbnail "outfit/decoy plating"
+	"mass" 7
+	"outfit space" -7
+	"scan interference" 2
+	"radar jamming" 5
+	description "This plating takes advantage of a ship's scan logs and reproduces the data of other ships nearby, effectively deflecting attempts to scan a ship's true cargo and equipment."
+	description "	Out of a need to protect themselves against destructive Heliarch torpedoes, the Lunarium incorporated small, independent radar jamming systems in each section of the plating, if only to act as a last line of defense."
+
+outfit "Refueling Module"
+	category "Systems"
+	cost 822000
+	thumbnail "outfit/refueling module"
+	"mass" 10
+	"outfit space" -10
+	"fuel capacity" -100
+	"fuel generation" .05
+	"energy consumption" .11
+	description "To avoid the risk of being inspected by the Heliarchs as they refuel on planets, Lunarium captains employ this outfit when carrying supplies or stolen outfits."
+	description "	The outfit's mechanisms need a partitioned amount of fuel set aside to allow it to work properly, so a ship can only install so many of these before becoming incapable of jumping to another system."
+
+outfit "Shield Refactor Module"
+	category "Systems"
+	cost 3248000
+	thumbnail "outfit/shield refactor module"
+	"mass" 7
+	"outfit space" -7
+	"hull repair rate" -.25
+	"shield energy multiplier" .2
+	"shield heat" .32
+	"shield generation multiplier" .2
+	"hull repair multiplier" -.2
+	description "In theory, all shield generators can operate at a much faster rate than normal, if pushed to their true limit. However, the constant need to reform shields during a heated battle quickly overloads shield generators and damages them in the process. By relocating dedicated hull repair systems to focus exclusively on repairing such damage, this compact device allows shield generators to reach their true potential."
+	description "	A much needed boon against the Heliarch torpedoes' devastating effects on hull plating, the Lunarium highly favors production of this expensive piece due to its advantages over other shield generators."
+
+outfit "Small Recovery Module"
+	category "Systems"
+	cost 625000
+	thumbnail "outfit/small recovery module"
+	"mass" 25
+	"outfit space" -25
+	"shield generation" .97
+	"shield energy" .43
+	"shield heat" .7
+	"hull repair rate" .43
+	"hull energy" .97
+	"hull heat" .07
+	description "By combining the Coalition's shield generation and hull repair technologies into one piece of equipment, the Lunarium has increased the effectiveness of both, allowing for better defenses against Heliarch weaponry."
+
 outfit "Scanning Module"
 	category "Systems"
 	licenses
@@ -226,7 +277,8 @@ outfit "Scanning Module"
 	"outfit scan efficiency" 18
 	"cargo scan power" 25
 	"cargo scan efficiency" 18
-	"tactical scan power" 25
+	"range finder power" 45
+	"weapon scan power" 45
 	description "This system allows the Heliarchs to scan nearby ships, enabling them to detect weapons or illegal goods."
 
 outfit "Outskirts Gauger"
@@ -235,7 +287,11 @@ outfit "Outskirts Gauger"
 	thumbnail "outfit/outskirts gauger"
 	"mass" 8
 	"outfit space" -8
-	"tactical scan power" 169
+	"unique" 1
+	"crew scan power" 169
+	"energy scan power" 169
+	"range finder power" 169
+	"thermal scan power" 169
 	"energy consumption" .2
 	description "Completed with the data from one of their long-lost satellites, the newest scanner of House Idriss excels at reading various energy signatures across vast distances."
 	description "	Constantly running its calculations about every little thing it detects within its impressive range, the gauger needs a steady supply of energy to function."
@@ -246,16 +302,25 @@ outfit "Small Thrust Module"
 		Coalition
 	"cost" 66000
 	thumbnail "outfit/small thrust module"
+	"thruster slot" -0.25
+	"engine mod space" 0.76
 	"mass" 9
 	"outfit space" -9
 	"engine capacity" -9
-	"thrust" 6.6
+	"thrust" 11
 	"thrusting energy" 0.46
 	"thrusting heat" 3
 	"flare sprite" "effect/coalition flare/small"
 		"frame rate" 10
 	"flare sound" "atomic tiny"
+	"reverse thrust" 1.1
+	"reverse thrusting energy" 0.046
+	"reverse thrusting heat" 0.3
+	"reverse flare sprite" "effect/coalition flare/small"
+		"frame rate" 10
+	"reverse flare sound" "atomic tiny"
 	description "This tiny thruster produces a considerable amount of thrust... but also a considerable amount of heat."
+	description "In order to optimize the production costs of propulsion systems for their vast transportation network, Coalition engineers opted to perfect a single thrust module that could be installed in varying configurations. As a result, up to four of these can be installed in a typical thruster slot."
 
 outfit "Large Thrust Module"
 	category "Engines"
@@ -263,16 +328,25 @@ outfit "Large Thrust Module"
 		Coalition
 	"cost" 292000
 	thumbnail "outfit/large thrust module"
+	"thruster slot" -0.5
+	"engine mod space" 1.06
 	"mass" 32
 	"outfit space" -32
 	"engine capacity" -32
-	"thrust" 26.2
-	"thrusting energy" 1.7
-	"thrusting heat" 11
+	"thrust" 33
+	"thrusting energy" 1.38
+	"thrusting heat" 9
 	"flare sprite" "effect/coalition flare/large"
 		"frame rate" 7
 	"flare sound" "atomic small"
-	description "Coalition engineers prefer to focus on perfecting a few versatile designs rather than producing a wide range of them. This thruster is quite efficient, but large ships will need several of them stacked together to produce sufficient thrust."
+	"reverse thrust" 3.3
+	"reverse thrusting energy" 0.138
+	"reverse thrusting heat" 0.9
+	"reverse flare sprite" "effect/coalition flare/small"
+		"frame rate" 10
+	"reverse flare sound" "atomic tiny"
+	description "Coalition engineers prefer to focus on perfecting a few versatile designs rather than producing a wide range of them. As their large ships would require many of them stacked together to produce sufficient thrust, they created an array installation that incorporates three modules into a single mounting framework. Since two of these modules can be installed in a typical slot, it allows ships that require large amounts of thrust to incorporate six modules in a standard slot."
+	description "In order to facilitate the utilization of their modular designs, most ships of Coalition design have additional mounting brackets beyond the typical single standard slot."
 
 outfit "Small Reverse Module"
 	category "Engines"
@@ -280,16 +354,18 @@ outfit "Small Reverse Module"
 		Coalition
 	"cost" 66000
 	thumbnail "outfit/small reverse module"
+	"reverse thruster slot" -0.25
 	"mass" 9
 	"outfit space" -9
 	"weapon capacity" -9
-	"reverse thrust" 6.6
+	"reverse thrust" 11
 	"reverse thrusting energy" 0.46
 	"reverse thrusting heat" 3
 	"reverse flare sprite" "effect/coalition flare/small"
 		"frame rate" 10
 	"reverse flare sound" "atomic tiny"
 	description "Placing this tiny thruster in the front of a freighter or transport allows Coalition merchants to considerably improve their energy efficiency, which is of great benefit when relying on solar power."
+	description "Thanks to the modular design, four of these modules can be stacked in the standard reverse thruster slot."
 	description "	Because a reverse thruster must be facing forwards, it must be installed in the weapon section of your ship instead of the engine section."
 
 outfit "Large Reverse Module"
@@ -298,16 +374,18 @@ outfit "Large Reverse Module"
 		Coalition
 	"cost" 292000
 	thumbnail "outfit/large reverse module"
+	"reverse thruster slot" -0.5
 	"mass" 32
 	"outfit space" -32
 	"weapon capacity" -32
-	"reverse thrust" 26.2
-	"reverse thrusting energy" 1.7
-	"reverse thrusting heat" 11
+	"reverse thrust" 33
+	"reverse thrusting energy" 1.38
+	"reverse thrusting heat" 9
 	"reverse flare sprite" "effect/coalition flare/large"
 		"frame rate" 7
 	"reverse flare sound" "atomic small"
-	description "With their significant weapons capacity left unused in peacetime, captains of larger Coalition freighters and transports can use Large Reverse Modules to rapidly slow their ships, allowing them to save both time and energy."
+	description "Like their large thruster modules, these are actually a framework array that incorporates three small reverse modules. With their significant weapons capacity left unused in peacetime, captains of larger Coalition freighters and transports can use Large Reverse Modules to rapidly slow their ships, allowing them to save both time and energy."
+	description "Thanks to the modular design, two of these modules can be stacked in the standard reverse thruster slot. This effectively allows 6 reverse thrust modules to be installed in a standard slot."
 	description "	Because a reverse thruster must be facing forwards, it must be installed in the weapon section of your ship instead of the engine section."
 
 outfit "Small Steering Module"
@@ -316,10 +394,11 @@ outfit "Small Steering Module"
 		Coalition
 	"cost" 60000
 	thumbnail "outfit/small steering module"
+	"steering slot" -0.25
 	"mass" 7
 	"outfit space" -7
 	"engine capacity" -7
-	"turn" 178.8
+	"turn" 214
 	"turning energy" 0.26
 	"turning heat" 1.8
 	"steering flare sprite" "effect/coalition flare/small"
@@ -333,16 +412,18 @@ outfit "Large Steering Module"
 		Coalition
 	"cost" 269000
 	thumbnail "outfit/large steering module"
+	"steering slot" -0.5
 	"mass" 25
 	"outfit space" -25
 	"engine capacity" -25
-	"turn" 747
-	"turning energy" 1.0
-	"turning heat" 6.5
+	"turn" 642
+	"turning energy" 0.78
+	"turning heat" 5.4
 	"steering flare sprite" "effect/coalition flare/large"
 		"frame rate" 7
 	"steering flare sound" "atomic small"
 	description "By focusing on small, modular engines rather than the massive capital ship drives that most other species develop, the Coalition loses some of the potential efficiency for very large ships, but gains a considerable amount of flexibility."
+	description "Like the large thruster module, the large steering module is actually trio of small steering modules with a mounting framework that takes up half a standard steering mounting slot."
 
 outfit "Enforcer Confrontation Gear"
 	category "Hand to Hand"
@@ -353,7 +434,7 @@ outfit "Enforcer Confrontation Gear"
 	"capture attack" 3.1
 	"capture defense" 4.9
 	"unplunderable" 1
-	description "The peak of Heliarch combat engineering, this weapon uses condensed blasts of energy to dispatch any who dare threaten the Coalition safety."
+	description "The peak of Heliarch combat engineering, this weapon uses condensed blasts of energy to dispatch any who dare threaten the safety of the Coalition."
 
 outfit "Enforcer Riot Staff"
 	category "Hand to Hand"
@@ -366,7 +447,21 @@ outfit "Enforcer Riot Staff"
 	"unplunderable" 1
 	description "Made to deal with the occasional dissidents that pop up around Coalition space in a non-lethal manner, these weapons see minimal use in shipbound combat, but are carried anyway in the event a dissident gets aboard."
 
+outfit "Anti-Materiel Gun"
+	category "Hand to Hand"
+	cost 257200
+	thumbnail "outfit/anti-materiel gun"
+	"capture attack" 3.4
+	"capture defense" 1.9
+	"unplunderable" 1
+	description "Easy to use and relatively cheap to manufacture, these weapons were born by refurbishing the Heliarchs' favored arms, with the new barrel shaping the energy into deadly blasts that make short work of even the toughest body armor."
+
 outfit "Coalition License"
 	category "Licenses"
 	thumbnail "outfit/coalition license"
 	description "Completed a lot of Coalition jobs and received permission to purchase civilian technology and ships."
+
+outfit "Heliarch License"
+	category "Licenses"
+	thumbnail "outfit/heliarch license"
+	description "An ornate circlet of gold and platinum, it serves as both a symbol of rank and as a license to access exclusive Heliarch facilities. Custom-made to fit a human's head, it's surprisingly light and comfortable."

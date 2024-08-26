@@ -18,14 +18,13 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Angle.h"
 #include "Body.h"
 #include "DrawList.h"
-#include "Engine.h"
 #include "pi.h"
 #include "Point.h"
 #include "Preferences.h"
 #include "Random.h"
 #include "Screen.h"
-#include "Sprite.h"
-#include "SpriteSet.h"
+#include "image/Sprite.h"
+#include "image/SpriteSet.h"
 #include "System.h"
 
 #include <algorithm>
@@ -137,6 +136,10 @@ void StarField::Draw(const Point &pos, const Point &vel, double zoom, const Syst
 	int layers = (parallaxSetting == Preferences::BackgroundParallax::FANCY) ? 3 : 1;
 	bool isParallax = (parallaxSetting == Preferences::BackgroundParallax::FANCY ||
 						parallaxSetting == Preferences::BackgroundParallax::FAST);
+
+	// This slows down the effect of the player's zoom when they go past 0.25 to prevent tiling
+	if(baseZoom < 0.35)
+		baseZoom = baseZoom + ((0.35 - baseZoom) / 2);
 
 	// Draw the starfield unless it is disabled in the preferences.
 	if(Preferences::Has("Draw starfield") && density > 0.)

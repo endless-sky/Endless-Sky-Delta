@@ -53,37 +53,41 @@ const Command Command::LEFT(ONE << 2, "Turn left");
 const Command Command::RIGHT(ONE << 3, "Turn right");
 const Command Command::BACK(ONE << 4, "Reverse");
 const Command Command::MOUSE_TURNING_HOLD(ONE << 5, "Mouse turning (hold)");
-const Command Command::AUTOSTEER(ONE << 6, "Auto steer");
-const Command Command::LATERALLEFT(ONE << 7, "Lateral left thrust");
-const Command Command::LATERALRIGHT(ONE << 8, "Lateral right thrust");
-const Command Command::PRIMARY(ONE << 9, "Fire primary weapon");
-const Command Command::SECONDARY(ONE << 10, "Fire secondary weapon");
-const Command Command::SELECT(ONE << 11, "Select secondary weapon");
-const Command Command::LAND(ONE << 12, "Land on planet / station");
-const Command Command::BOARD(ONE << 13, "Board selected ship");
-const Command Command::HAIL(ONE << 14, "Talk to selected ship");
-const Command Command::SCAN(ONE << 15, "Scan selected ship");
-const Command Command::JUMP(ONE << 16, "Initiate hyperspace jump");
-const Command Command::FLEET_JUMP(ONE << 17, "");
-const Command Command::TARGET(ONE << 18, "Select next ship");
-const Command Command::NEAREST(ONE << 19, "Select nearest hostile ship");
-const Command Command::NEAREST_ASTEROID(ONE << 20, "Select nearest asteroid");
-const Command Command::DEPLOY(ONE << 21, "Deploy / recall fighters");
-const Command Command::AFTERBURNER(ONE << 22, "Fire afterburner");
-const Command Command::CLOAK(ONE << 23, "Toggle cloaking device");
-const Command Command::MAP(ONE << 24, "View star map");
-const Command Command::INFO(ONE << 25, "View player info");
-const Command Command::FULLSCREEN(ONE << 26, "Toggle fullscreen");
-const Command Command::FASTFORWARD(ONE << 27, "Toggle fast-forward");
+const Command Command::PRIMARY(ONE << 6, "Fire primary weapon");
+const Command Command::TURRET_TRACKING(ONE << 7, "Toggle turret tracking");
+const Command Command::SECONDARY(ONE << 8, "Fire secondary weapon");
+const Command Command::SELECT(ONE << 9, "Select secondary weapon");
+const Command Command::LAND(ONE << 10, "Land on planet / station");
+const Command Command::BOARD(ONE << 11, "Board selected ship");
+const Command Command::HAIL(ONE << 12, "Talk to selected ship");
+const Command Command::SCAN(ONE << 13, "Scan selected ship");
+const Command Command::JUMP(ONE << 14, "Initiate hyperspace jump");
+const Command Command::FLEET_JUMP(ONE << 15, "");
+const Command Command::TARGET(ONE << 16, "Select next ship");
+const Command Command::NEAREST(ONE << 17, "Select nearest hostile ship");
+const Command Command::NEAREST_ASTEROID(ONE << 18, "Select nearest asteroid");
+const Command Command::DEPLOY(ONE << 19, "Deploy / recall fighters");
+const Command Command::AFTERBURNER(ONE << 20, "Fire afterburner");
+const Command Command::CLOAK(ONE << 21, "Toggle cloaking device");
+const Command Command::MAP(ONE << 22, "View star map");
+const Command Command::INFO(ONE << 23, "View player info");
+const Command Command::MESSAGE_LOG(ONE << 24, "View message log");
+const Command Command::FULLSCREEN(ONE << 25, "Toggle fullscreen");
+const Command Command::FASTFORWARD(ONE << 26, "Toggle fast-forward");
+const Command Command::HELP(ONE << 27, "Show help");
 const Command Command::FIGHT(ONE << 28, "Fleet: Fight my target");
 const Command Command::GATHER(ONE << 29, "Fleet: Gather around me");
-const Command Command::HOLD(ONE << 30, "Fleet: Hold position");
-const Command Command::HARVEST(ONE << 31, "Fleet: Harvest Flotsam");
-const Command Command::AMMO(ONE << 32, "Fleet: Toggle ammo usage");
-const Command Command::WAIT(ONE << 33, "");
-const Command Command::STOP(ONE << 34, "");
-const Command Command::SHIFT(ONE << 35, "");
-const Command Command::CTRL(ONE << 36, "");
+const Command Command::HOLD_FIRE(ONE << 30, "Fleet: Toggle hold fire");
+const Command Command::HOLD_POSITION(ONE << 31, "Fleet: Hold position");
+const Command Command::HARVEST(ONE << 32, "Fleet: Harvest flotsam");
+const Command Command::AMMO(ONE << 33, "Fleet: Toggle ammo usage");
+const Command Command::AUTOSTEER(ONE << 34, "Auto steer");
+const Command Command::LATERALLEFT(ONE << 35, "Lateral left thrust");
+const Command Command::LATERALRIGHT(ONE << 36, "Lateral right thrust");
+const Command Command::WAIT(ONE << 37, "");
+const Command Command::STOP(ONE << 38, "");
+const Command Command::SHIFT(ONE << 39, "");
+const Command Command::CTRL(ONE << 40, "");
 
 
 
@@ -218,9 +222,24 @@ const string &Command::Description() const
 // a combination of more than one command, an empty string is returned.
 const string &Command::KeyName() const
 {
-	static const string empty;
+	static const string empty = "(none)";
 	auto it = keyName.find(*this);
-	return (it == keyName.end() ? empty : it->second);
+
+	return (!HasBinding() ? empty : it->second);
+}
+
+
+
+// Check if the key has no binding.
+bool Command::HasBinding() const
+{
+	auto it = keyName.find(*this);
+
+	if(it == keyName.end())
+		return false;
+	if(it->second.empty())
+		return false;
+	return true;
 }
 
 
@@ -260,7 +279,7 @@ void Command::Load(const DataNode &node)
 			{"hail", Command::HAIL},
 			{"scan", Command::SCAN},
 			{"jump", Command::JUMP},
-			{"mouseturninghold", Command::MOUSE_TURNING_HOLD},
+			{"mouse turning hold", Command::MOUSE_TURNING_HOLD},
 			{"fleet jump", Command::FLEET_JUMP},
 			{"target", Command::TARGET},
 			{"nearest", Command::NEAREST},
@@ -273,7 +292,8 @@ void Command::Load(const DataNode &node)
 			{"fastforward", Command::FASTFORWARD},
 			{"fight", Command::FIGHT},
 			{"gather", Command::GATHER},
-			{"hold", Command::HOLD},
+			{"hold fire", Command::HOLD_FIRE},
+			{"hold position", Command::HOLD_POSITION},
 			{"ammo", Command::AMMO},
 			{"nearest asteroid", Command::NEAREST_ASTEROID},
 			{"wait", Command::WAIT},
