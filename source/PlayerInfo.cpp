@@ -3906,11 +3906,6 @@ void PlayerInfo::RegisterDerivedConditions()
 	});
 
 	auto &&fleetCountProvider = conditions.GetProviderPrefixed("fleet count by name: ");
-	fleetCountProvider.SetHasFunction([this](const string &name) -> bool
-	{
-		string fleetName = name.substr(strlen("fleet count by name: "));
-		return fleetCounters.find(fleetName) != fleetCounters.end();
-	});
 	fleetCountProvider.SetGetFunction([this](const string &name) -> int64_t
 	{
 		string fleetName = name.substr(strlen("fleet count by name: "));

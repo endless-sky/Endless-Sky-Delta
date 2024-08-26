@@ -64,4 +64,3 @@ int &RandomEvent<T>::Period() noexcept
 
 
 
-#endif
