@@ -13,8 +13,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef ANGLE_H_
-#define ANGLE_H_
+#pragma once
 
 #include "Point.h"
 
@@ -66,8 +65,7 @@ public:
 	// Judge whether this is inside from "base" to "limit."
 	// The range from "base" to "limit" is expressed by "clock" orientation.
 	bool IsInRange(const Angle &base, const Angle &limit) const;
-	// The "range" is a pair of "base" and "limit."
-	bool IsInRange(const std::pair<Angle, Angle>& range) const;
+
 
 
 private:
@@ -81,5 +79,3 @@ private:
 	// to the range of 0 to 360 degrees can be done via a bit mask.
 	int32_t angle = 0;
 };
-
-#endif

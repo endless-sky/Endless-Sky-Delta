@@ -113,9 +113,9 @@ outfit "Ion Cannon"
 		"lifetime" 50
 		"reload" 60
 		"firing energy" 120
-		"firing force" 10
+		"firing force" 15
 		"firing heat" 150
-		"hit force" 120
+		"hit force" 180
 		"shield damage" 168
 		"hull damage" 60
 		"ion damage" 6
@@ -152,9 +152,9 @@ outfit "Ionic Blaster Prototype"
 		"lifetime" 30
 		"reload" 30
 		"firing energy" 72
-		"firing force" 12
+		"firing force" 18
 		"firing heat" 108
-		"hit force" 72
+		"hit force" 108
 		"shield damage" 70
 		"hull damage" 30
 		"ion damage" .5
@@ -184,9 +184,9 @@ outfit "Ionic Turret Prototype"
 		"lifetime" 70
 		"reload" 70
 		"firing energy" 371
-		"firing force" 8
+		"firing force" 12
 		"firing heat" 259
-		"hit force" 60
+		"hit force" 90
 		"shield damage" 100
 		"hull damage" 50
 		"ion damage" 17.5
@@ -250,7 +250,7 @@ outfit "Railgun"
 		"reload" 12
 		"firing energy" 3.5
 		"firing heat" 7.2
-		"firing force" 70
+		"firing force" 105
 		"stream"
 		"submunition" "rslug" 1
 	description "The Hai designed this weapon to best complement their Flea drones. Each Skipper Railgun provides a significant amount of force upon firing, pushing the Flea drone backwards and therefore forcing it to keep its distance from its target."
@@ -271,7 +271,7 @@ outfit "rslug"
 		"hull damage" 8.4
 		"ion damage" .3
 		"scrambling damage" .3
-		"hit force" 15
+		"hit force" 22.5
 
 effect "rail sparks"
 	sprite "effect/railspark"
@@ -336,7 +336,7 @@ outfit "Hai Tracker Pod"
 		"infrared tracking" .4
 		"shield damage" 200
 		"hull damage" 160
-		"hit force" 350
+		"hit force" 525
 		"missile strength" 16
 	description "Trackers are fast and accurate homing weapons. Although not as powerful as most human missiles, Trackers boast a significant hit force, helping to prevent the escape of whoever is unfortunate enough to be on the receiving end. Their only weakness is their large turning radius: if a Tracker misses its target, it takes a long time to turn around."
 
@@ -489,7 +489,10 @@ outfit "Value Detector"
 	"outfit space" -5
 	"cargo scan power" 75
 	"cargo scan efficiency" 10
-	"tactical scan power" 35
+	"acceleration scan power" 42
+	"energy scan power" 95
+	"fuel scan power" 42
+	"range finder power" 42
 	"heat generation" 2
 	description "The Unfettered developed this scanner in order to determine which ships are worth plundering, or which lack the capacity to stand up to their ion weapons. Some Hai consider it rather rudimentary, but it is sufficient to identify the cargo on a ship from afar and provide more detailed information about the tactical condition of enemy vessels. This dual function is useful when fielding experimental weaponry."
 
@@ -590,13 +593,16 @@ outfit `"Baellie" Atomic Engines`
 	category "Engines"
 	"cost" 230000
 	thumbnail "outfit/tiny atomic engines hai"
+	"steering slot" -1
+	"thruster slot" -1
+	"engine mod space" 0.82
 	"mass" 22
 	"outfit space" -22
 	"engine capacity" -22
 	"thrust" 16
 	"thrusting energy" .87
 	"thrusting heat" 1.7
-	"turn" 488
+	"turn" 366
 	"turning energy" .64
 	"turning heat" 1.28
 	"flare sprite" "effect/atomic flare/tiny"
@@ -605,12 +611,20 @@ outfit `"Baellie" Atomic Engines`
 	"steering flare sprite" "effect/atomic flare/tiny"
 		"frame rate" 14
 	"steering flare sound" "atomic tiny"
+	"reverse thrust" 1.6
+	"reverse thrusting energy" 0.087
+	"reverse thrusting heat" 0.17
+	"reverse flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"reverse flare sound" "atomic tiny"
 	description `While the Hai were designing the Flea, it quickly became apparent that even the "Basrem" engine set was too large for the purpose. As a result, a combined thruster steering set was created: "Baellie."`
 
 outfit `"Basrem" Atomic Thruster`
 	category "Engines"
 	"cost" 150000
 	thumbnail "outfit/tiny atomic thruster hai"
+	"thruster slot" -1
+	"engine mod space" 0.82
 	"mass" 18
 	"outfit space" -18
 	"engine capacity" -18
@@ -620,12 +634,20 @@ outfit `"Basrem" Atomic Thruster`
 	"flare sprite" "effect/atomic flare/tiny"
 		"frame rate" 14
 	"flare sound" "atomic tiny"
+	"reverse thrust" 2.3
+	"reverse thrusting energy" 0.14
+	"reverse thrusting heat" 0.28
+	"reverse flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"reverse flare sound" "atomic tiny"
 	description "Unbeknownst to the scientists of the Deep, the Hai have been using atomic engine technology for many millennia. Hai atomic engines are still much more energy hungry than other engines, but exhibit greater efficiency than their human counterparts."
 
 outfit `"Benga" Atomic Thruster`
 	category "Engines"
 	"cost" 300000
 	thumbnail "outfit/small atomic thruster hai"
+	"thruster slot" -1
+	"engine mod space" 1.02
 	"mass" 28
 	"outfit space" -28
 	"engine capacity" -28
@@ -635,12 +657,20 @@ outfit `"Benga" Atomic Thruster`
 	"flare sprite" "effect/atomic flare/tiny"
 		"frame rate" 14
 	"flare sound" "atomic tiny"
+	"reverse thrust" 3.7
+	"reverse thrusting energy" 0.25
+	"reverse thrusting heat" 0.48
+	"reverse flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"reverse flare sound" "atomic tiny"
 	description "Unlike human space where atomic engines are a rare sight to see and a luxury to have, many years of being confined to a relatively small pocket of the Galaxy has allowed all Hai ships to be outfitted with atomic engines."
 
 outfit `"Biroo" Atomic Thruster`
 	category "Engines"
 	"cost" 610000
 	thumbnail "outfit/medium atomic thruster hai"
+	"thruster slot" -1
+	"engine mod space" 1.17
 	"mass" 44
 	"outfit space" -44
 	"engine capacity" -44
@@ -650,27 +680,43 @@ outfit `"Biroo" Atomic Thruster`
 	"flare sprite" "effect/atomic flare/small"
 		"frame rate" 13
 	"flare sound" "atomic small"
+	"reverse thrust" 6.2
+	"reverse thrusting energy" 0.4
+	"reverse thrusting heat" 0.82
+	"reverse flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"reverse flare sound" "atomic tiny"
 	description "This thruster is the standard thruster on most Hai light warships, providing enough thrust to make them usable in combat, but it is not quite big enough to suffice for something as large as a Hai Shield Beetle."
 
 outfit `"Bondir" Atomic Thruster`
 	category "Engines"
 	"cost" 1100000
 	thumbnail "outfit/large atomic thruster hai"
+	"thruster slot" -1
+	"engine mod space" 1.29
 	"mass" 63
 	"outfit space" -63
 	"engine capacity" -63
-	"thrust" 93
+	"thrust" 94
 	"thrusting energy" 6.1
 	"thrusting heat" 12.7
 	"flare sprite" "effect/atomic flare/medium"
 		"frame rate" 12
 	"flare sound" "atomic medium"
+	"reverse thrust" 9.3
+	"reverse thrusting energy" 0.61
+	"reverse thrusting heat" 1.27
+	"reverse flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"reverse flare sound" "atomic tiny"
 	description "While Deep Sky was busy developing the combat atomic engines, the Hai were working on making theirs even better. Because of this, Hai atomic engines are highly efficient compared to their human variants, requiring less energy to fire and producing less heat in the process."
 
 outfit `"Bufaer" Atomic Thruster`
 	category "Engines"
 	"cost" 2400000
 	thumbnail "outfit/huge atomic thruster hai"
+	"thruster slot" -1
+	"engine mod space" 1.44
 	"mass" 104
 	"outfit space" -104
 	"engine capacity" -104
@@ -680,16 +726,23 @@ outfit `"Bufaer" Atomic Thruster`
 	"flare sprite" "effect/atomic flare/large"
 		"frame rate" 11
 	"flare sound" "atomic large"
+	"reverse thrust" 16.3
+	"reverse thrusting energy" 1.04
+	"reverse thrusting heat" 2.26
+	"reverse flare sprite" "effect/atomic flare/tiny"
+		"frame rate" 14
+	"reverse flare sound" "atomic tiny"
 	description "These thrusters are the largest of the Hai atomic thrusters, and one of the most powerful thrusters in known space. Beat out by only the largest human atomic thrusters, these massive engines provide enough thrust to push around even the largest of ships as if they were fighters."
 
 outfit `"Basrem" Reverse Thruster`
 	category "Engines"
 	"cost" 150000
 	thumbnail "outfit/tiny atomic reverse hai"
+	"reverse thruster slot" -1
 	"mass" 18
 	"outfit space" -18
 	"weapon capacity" -18
-	"reverse thrust" 30.44
+	"reverse thrust" 23
 	"reverse thrusting energy" 1.4
 	"reverse thrusting heat" 2.8
 	"reverse flare sprite" "effect/atomic flare/tiny"
@@ -701,25 +754,27 @@ outfit `"Benga" Reverse Thruster`
 	category "Engines"
 	"cost" 300000
 	thumbnail "outfit/small atomic reverse hai"
+	"reverse thruster slot" -1
 	"mass" 28
 	"outfit space" -28
 	"weapon capacity" -28
-	"reverse thrust" 50.3
+	"reverse thrust" 37
 	"reverse thrusting energy" 2.5
 	"reverse thrusting heat" 4.8
 	"reverse flare sprite" "effect/atomic flare/tiny"
 		"frame rate" 14
-	"flare sound" "atomic tiny"
+	"reverse flare sound" "atomic tiny"
 	description "Considering them to be well worth the steep cost, many Hai freighter pilots install reverse thrusters such as these to supplement the often poor steering on larger Hai vessels."
 
 outfit `"Biroo" Reverse Thruster`
 	category "Engines"
 	"cost" 610000
 	thumbnail "outfit/medium atomic reverse hai"
+	"reverse thruster slot" -1
 	"mass" 44
 	"outfit space" -44
 	"weapon capacity" -44
-	"reverse thrust" 83.3
+	"reverse thrust" 62
 	"reverse thrusting energy" 4
 	"reverse thrusting heat" 8.2
 	"reverse flare sprite" "effect/atomic flare/small"
@@ -731,10 +786,11 @@ outfit `"Basrem" Atomic Steering`
 	category "Engines"
 	"cost" 120000
 	thumbnail "outfit/tiny atomic steering hai"
+	"steering slot" -1
 	"mass" 12
 	"outfit space" -12
 	"engine capacity" -12
-	"turn" 602
+	"turn" 451
 	"turning energy" .7
 	"turning heat" 1.5
 	"steering flare sprite" "effect/atomic flare/tiny"
@@ -746,10 +802,11 @@ outfit `"Benga" Atomic Steering`
 	category "Engines"
 	"cost" 250000
 	thumbnail "outfit/small atomic steering hai"
+	"steering slot" -1
 	"mass" 20
 	"outfit space" -20
 	"engine capacity" -20
-	"turn" 1126
+	"turn" 844
 	"turning energy" 1.1
 	"turning heat" 2.85
 	"steering flare sprite" "effect/atomic flare/tiny"
@@ -761,10 +818,11 @@ outfit `"Biroo" Atomic Steering`
 	category "Engines"
 	"cost" 530000
 	thumbnail "outfit/medium atomic steering hai"
+	"steering slot" -1
 	"mass" 32
 	"outfit space" -32
 	"engine capacity" -32
-	"turn" 2056
+	"turn" 1542
 	"turning energy" 2.0
 	"turning heat" 5.1
 	"steering flare sprite" "effect/atomic flare/small"
@@ -776,10 +834,11 @@ outfit `"Bondir" Atomic Steering`
 	category "Engines"
 	"cost" 950000
 	thumbnail "outfit/large atomic steering hai"
+	"steering slot" -1
 	"mass" 49
 	"outfit space" -49
 	"engine capacity" -49
-	"turn" 3428
+	"turn" 2571
 	"turning energy" 3.2
 	"turning heat" 8.2
 	"steering flare sprite" "effect/atomic flare/medium"
@@ -791,10 +850,11 @@ outfit `"Bufaer" Atomic Steering`
 	category "Engines"
 	"cost" 2100000
 	thumbnail "outfit/huge atomic steering hai"
+	"steering slot" -1
 	"mass" 76
 	"outfit space" -76
 	"engine capacity" -76
-	"turn" 5934
+	"turn" 4450
 	"turning energy" 5.2
 	"turning heat" 13.8
 	"steering flare sprite" "effect/atomic flare/large"

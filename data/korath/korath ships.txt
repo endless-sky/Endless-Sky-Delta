@@ -24,13 +24,16 @@ ship "Rano'erek"
 		"required crew" 137
 		"bunks" 357
 		"mass" 12024
-		"drag" 17.1
-		"heat dissipation" .45
+		"drag" 32.5
+		"heat dissipation" .24
 		"fuel capacity" 900
 		"cargo space" 675
 		"outfit space" 763
 		"weapon capacity" 276
 		"engine capacity" 206
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 300
 			"shield damage" 4600
@@ -107,13 +110,16 @@ ship "Palavret"
 		"required crew" 145
 		"bunks" 250
 		"mass" 2880
-		"drag" 12
-		"heat dissipation" .5
+		"drag" 20.4
+		"heat dissipation" .3
 		"fuel capacity" 600
 		"cargo space" 175
 		"outfit space" 777
 		"weapon capacity" 339
 		"engine capacity" 159
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 250
 			"shield damage" 3600
@@ -182,8 +188,8 @@ ship "Tubfalet"
 		"required crew" 157
 		"bunks" 250
 		"mass" 3808
-		"drag" 15
-		"heat dissipation" .6
+		"drag" 25.5
+		"heat dissipation" .36
 		"heat protection" 0.1
 		"hull protection" 0.1
 		"fuel capacity" 700
@@ -191,6 +197,9 @@ ship "Tubfalet"
 		"outfit space" 871
 		"weapon capacity" 377
 		"engine capacity" 212
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 250
 			"shield damage" 3700
@@ -212,7 +221,7 @@ ship "Tubfalet"
 		"Thermal Repeater Rifle" 196
 		
 		"Thruster (Planetary Class)"
-		"Thruster (Lunar Class)"
+		# "Thruster (Lunar Class)" # Extra thrustera
 		"Steering (Planetary Class)"
 		"Jump Drive"
 	
@@ -297,13 +306,16 @@ ship "'nra'ret"
 		"required crew" 193
 		"bunks" 221
 		"mass" 7832
-		"drag" 11.3
-		"heat dissipation" .63
+		"drag" 18.7
+		"heat dissipation" .39
 		"fuel capacity" 900
 		"cargo space" 50
 		"outfit space" 943
 		"weapon capacity" 407
 		"engine capacity" 177
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 300
 			"shield damage" 4400
@@ -377,6 +389,9 @@ ship "'olofez"
 		"outfit space" 92
 		"weapon capacity" 25
 		"engine capacity" 30
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 48
 			"shield damage" 320
@@ -417,6 +432,9 @@ ship "Kas'ik Tek 7"
 		"cargo space" 4
 		"outfit space" 48
 		"engine capacity" 18
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"atmosphere scan" 100
 		"outfit scan power" 18
 		"outfit scan efficiency" 20
@@ -454,14 +472,17 @@ ship "Rai'alorej"
 		"required crew" 523
 		"bunks" 1433
 		"mass" 13280
-		"drag" 27.6
-		"heat dissipation" .36
+		"drag" 53.8
+		"heat dissipation" .19
 		"fuel capacity" 700
 
 		"cargo space" 351
 		"outfit space" 856
 		"weapon capacity" 237
 		"engine capacity" 195
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 600
 			"shield damage" 9000
@@ -536,13 +557,16 @@ ship "Ikatila'ej"
 		"required crew" 957
 		"bunks" 1933
 		"mass" 32280
-		"drag" 58
-		"heat dissipation" .29
+		"drag" 133.4
+		"heat dissipation" .13
 		"fuel capacity" 800
 		"cargo space" 845
 		"outfit space" 1314
 		"weapon capacity" 440
 		"engine capacity" 259
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"spinal mount" 1
 		weapon
 			"blast radius" 600
@@ -603,6 +627,7 @@ ship "Ikatila'ej"
 
 
 ship "Lor'kas Ik 577"
+	"display name" "Karek A'awoj"
 	sprite "ship/world-ship a"
 	thumbnail "thumbnail/world-ship a"
 	attributes
@@ -613,13 +638,16 @@ ship "Lor'kas Ik 577"
 		"required crew" 234
 		"bunks" 453
 		"mass" 15080
-		"drag" 19
-		"heat dissipation" .4
+		"drag" 39
+		"heat dissipation" .2
 		"fuel capacity" 1000
 		"cargo space" 1375
 		"outfit space" 883
 		"weapon capacity" 338
 		"engine capacity" 238
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 400
 			"shield damage" 8000
@@ -674,11 +702,12 @@ ship "Lor'kas Ik 577"
 	explode "large explosion" 40
 	explode "huge explosion" 50
 	"final explode" "final explosion large"
-	description "The largest of Korath production vessels are derived from a common and ancient chassis. This simple ship has been adapted for hauling materials between refinery and factory stations."
+	description "The largest of Korath production vessels are derived from a common and ancient chassis. The simplest are adapted to haul materials between refinery and factory stations. Fittingly, they're named after a productive colony of the Efreti, to honor their focus on peaceful industry."
 
 
 
 ship "Ra'gru Ik 618"
+	"display name" "Sapira A'awoj"
 	sprite "ship/world-ship b"
 	thumbnail "thumbnail/world-ship b"
 	attributes
@@ -689,13 +718,16 @@ ship "Ra'gru Ik 618"
 		"required crew" 619
 		"bunks" 794
 		"mass" 13960
-		"drag" 21
-		"heat dissipation" .48
+		"drag" 44.1
+		"heat dissipation" .23
 		"fuel capacity" 1000
 		"cargo space" 191
 		"outfit space" 1278
 		"weapon capacity" 633
 		"engine capacity" 263
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 400
 			"shield damage" 8000
@@ -759,11 +791,12 @@ ship "Ra'gru Ik 618"
 	explode "large explosion" 40
 	explode "huge explosion" 50
 	"final explode" "final explosion large"
-	description "The largest of Korath production vessels are derived from a common and ancient chassis. This deceptively spindly ship bristles with weapon emplacements for heavy raiding or defending other vessels."
+	description "The largest of Korath production vessels are derived from a common and ancient chassis. This deceptively spindly ship bristles with weapon emplacements for heavy raiding or defending other vessels. It is named after the Mereti's capital planet, where they made powerful warships out of modular components."
 
 
 
 ship "Kas'lor Ik 582"
+	"display name" "Dathnak A'awoj"
 	sprite "ship/world-ship c"
 	thumbnail "thumbnail/world-ship c"
 	attributes
@@ -774,14 +807,17 @@ ship "Kas'lor Ik 582"
 		"required crew" 314
 		"bunks" 551
 		"mass" 15208
-		"drag" 17
-		"heat dissipation" .35
+		"drag" 34.9
+		"heat dissipation" .18
 		"solar collection" 3.8
 		"fuel capacity" 32700
 		"cargo space" 734
 		"outfit space" 839
 		"weapon capacity" 321
 		"engine capacity" 241
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 400
 			"shield damage" 8000
@@ -832,11 +868,12 @@ ship "Kas'lor Ik 582"
 	explode "large explosion" 40
 	explode "huge explosion" 50
 	"final explode" "final explosion large"
-	description "The largest of Korath production vessels are derived from a common and ancient chassis. This relatively streamlined ship has been adapted to collect, refine, and transport hyperspace fuel."
+	description "The largest of Korath production vessels are derived from a common and ancient chassis. This relatively streamlined ship has been adapted to collect, refine, and transport hyperspace fuel. Its name refers to the delicious squids that lived in their gas giants, and especially Deka Dathnak."
 
 
 
 ship "Lor'nag Ik 590"
+	"display name" "Spera A'awoj"
 	sprite "ship/world-ship d"
 	thumbnail "thumbnail/world-ship d"
 	attributes
@@ -847,14 +884,17 @@ ship "Lor'nag Ik 590"
 		"required crew" 538
 		"bunks" 1492
 		"mass" 15432
-		"drag" 18
-		"heat dissipation" .37
+		"drag" 36.9
+		"heat dissipation" .19
 		"solar collection" 5.6
 		"fuel capacity" 1000
 		"cargo space" 264
 		"outfit space" 856
 		"weapon capacity" 321
 		"engine capacity" 241
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 400
 			"shield damage" 8000
@@ -908,11 +948,12 @@ ship "Lor'nag Ik 590"
 	explode "large explosion" 40
 	explode "huge explosion" 50
 	"final explode" "final explosion large"
-	description "The largest of Korath production vessels are derived from a common and ancient chassis. This bulbous ship has been adapted to carry passengers between stations, or boarding parties into enemy strongholds."
+	description "The largest of Korath production vessels are derived from a common and ancient chassis. This bulbous ship has been adapted to carry passengers between stations, or boarding parties into enemy strongholds. Its name is in memory of the Anatruskor, who invented the jump drive."
 
 
 
 ship "Ra'at Ik 621"
+	"display name" "Ikfar A'awoj"
 	sprite "ship/world-ship e"
 	thumbnail "thumbnail/world-ship e"
 	attributes
@@ -923,13 +964,16 @@ ship "Ra'at Ik 621"
 		"required crew" 794
 		"bunks" 1037
 		"mass" 14040
-		"drag" 27
-		"heat dissipation" .41
+		"drag" 55.4
+		"heat dissipation" .2
 		"fuel capacity" 1000
 		"cargo space" 228
 		"outfit space" 999
 		"weapon capacity" 407
 		"engine capacity" 277
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 400
 			"shield damage" 8000
@@ -996,7 +1040,7 @@ ship "Ra'at Ik 621"
 	explode "large explosion" 40
 	explode "huge explosion" 50
 	"final explode" "final explosion large"
-	description "The largest of Korath production vessels are derived from a common and ancient chassis. This many-lobed ship has been adapted to carry fighters into large-scale raids, or mining craft into asteroid belts. Its radial arrangements of hangars allows fighters a maximum variety of safe approach patterns in combat."
+	description "The largest of Korath production vessels are derived from a common and ancient chassis. This many-lobed ship has been adapted to carry fighters into large-scale raids, or mining craft into asteroid belts. Its radial arrangements of hangars allows fighters a maximum variety of safe approach patterns in combat. Sestor exiles, who had a great affinity for carriers and fighters, bequeathed this variant its name after their capital world."
 
 
 
@@ -1011,14 +1055,17 @@ ship "Kasichara A'awoj"
 		"required crew" 543
 		"bunks" 1997
 		"mass" 16840
-		"drag" 24
-		"heat dissipation" .43
+		"drag" 50.4
+		"heat dissipation" .21
 		"solar collection" 12.7
 		"fuel capacity" 600
 		"cargo space" 532
 		"outfit space" 1038
 		"weapon capacity" 331
 		"engine capacity" 251
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
 			"blast radius" 400
 			"shield damage" 8000
@@ -1064,7 +1111,7 @@ ship "Kasichara A'awoj"
 	explode "large explosion" 40
 	explode "huge explosion" 50
 	"final explode" "final explosion large"
-	description `Originally designed as a luxury habitat for those wealthy enough to escape living on the polluted surface of Korath worlds, when the Korath were exiled, it was into these gargantuan "world-ships" they first crammed themselves into and fled to the core on. Nostalgically, the class was then renamed after the devastated and now forbidden Korath homeworld.`
+	description `Originally designed as a luxury habitat for those wealthy enough to escape living on the polluted surface of Korath worlds, when the Korath were exiled, it was into these gargantuan "world-ships" they first crammed themselves into and fled to the core on. Nostalgically, the class was then renamed after the devastated and now forbidden Korath homeworld in honor of the Korsmanathi, ancestors of all Korath.`
 	description `	Since the introduction of purpose-built city ships, these ancient vessels have mostly been decommissioned, turned into stations, or reconfigured into smaller, specialized vessels. Yet a few still ply the starlanes, crewed by those too restless to live on stations yet not bold enough to go on raids.`
 
 
@@ -1081,20 +1128,23 @@ ship "Korsmanath A'awoj"
 		"required crew" 1940
 		"bunks" 31920
 		"mass" 60000
-		"drag" 84
-		"heat dissipation" .22
+		"drag" 231
+		"heat dissipation" .08
 		"solar collection" 4.2
 		"fuel capacity" 1000
 		"cargo space" 1864
 		"outfit space" 3180
 		"weapon capacity" 1148
 		"engine capacity" 480
+		"reverse thruster slot" 2
+		"steering slot" 2
+		"thruster slot" 2
 		"atmosphere scan" 100
 		weapon
-			"blast radius" 400
-			"shield damage" 8000
-			"hull damage" 4000
-			"hit force" 12000
+			"blast radius" 800
+			"shield damage" 15000
+			"hull damage" 7500
+			"hit force" 22500
 	outfits
 		"Banisher Grav-Turret" 7
 		"Langrage Hyper-Heaver" 3
@@ -1317,18 +1367,21 @@ ship "Echo-Galleon"
 		"required crew" 243
 		"bunks" 972
 		"mass" 12280
-		"drag" 21
-		"heat dissipation" .6
+		"drag" 42
+		"heat dissipation" .3
 		"fuel capacity" 600
 		"cargo space" 734
 		"outfit space" 721
 		"weapon capacity" 285
 		"engine capacity" 155
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		weapon
-			"blast radius" 1000
-			"shield damage" 4000
-			"hull damage" 2000
-			"hit force" 6000
+			"blast radius" 360
+			"shield damage" 7200
+			"hull damage" 3600
+			"hit force" 10800
 	outfits
 		"Digger Mining Beam" 4
 		"Grab-Strike Turret" 2
@@ -1379,13 +1432,16 @@ ship "Arch-Carrack"
 		"required crew" 54
 		"bunks" 97
 		"mass" 8616
-		"drag" 14.9
-		"heat dissipation" .5
+		"drag" 22.3
+		"heat dissipation" .34
 		"fuel capacity" 600
 		"cargo space" 635
 		"outfit space" 582
 		"weapon capacity" 193
 		"engine capacity" 147
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"disruption resistance" 0.24
 		"disruption resistance energy" 2.4
 		"disruption resistance heat" 2.4
@@ -1407,7 +1463,7 @@ ship "Arch-Carrack"
 		"Thermal Repeater Rifle" 55
 		
 		"Gaktem GP Hybrid Thruster"
-		"Farves GP Hybrid Thruster"
+		# "Farves GP Hybrid Thruster" # Extra thruster
 		"Gaktem GP Hybrid Steering"
 		"Scram Drive"
 
@@ -1443,13 +1499,16 @@ ship "Charm-Shallop"
 		"required crew" 65
 		"bunks" 203
 		"mass" 990
-		"drag" 7.5
-		"heat dissipation" .7
+		"drag" 10.5
+		"heat dissipation" .5
 		"fuel capacity" 500
 		"cargo space" 194
 		"outfit space" 473
 		"weapon capacity" 158
 		"engine capacity" 129
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"disruption resistance" 0.2
 		"disruption resistance energy" 2
 		"disruption resistance heat" 2
@@ -1502,13 +1561,16 @@ ship "Kar Ik Vot 349"
 		"automaton" 1
 		"crew equivalent" 150
 		"mass" 10800
-		"drag" 16.8
-		"heat dissipation" .5
+		"drag" 33.6
+		"heat dissipation" .25
 		"fuel capacity" 400
 		"cargo space" 87
 		"outfit space" 1054
 		"weapon capacity" 447
 		"engine capacity" 173
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .8
 		"ramscoop" 3
 		weapon
@@ -1570,13 +1632,16 @@ ship "Tek Far 71 - Lek"
 		"automaton" 1
 		"crew equivalent" 50
 		"mass" 2440
-		"drag" 9.6
-		"heat dissipation" .6
+		"drag" 14.9
+		"heat dissipation" .39
 		"fuel capacity" 400
 		"cargo space" 36
 		"outfit space" 533
 		"weapon capacity" 235
 		"engine capacity" 102
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .7
 		"ramscoop" 3
 		weapon
@@ -1651,13 +1716,16 @@ ship "Tek Far 78 - Osk"
 		"automaton" 1
 		"crew equivalent" 50
 		"mass" 2760
-		"drag" 10.2
-		"heat dissipation" .55
+		"drag" 16.3
+		"heat dissipation" .35
 		"fuel capacity" 400
 		"cargo space" 43
 		"outfit space" 611
 		"weapon capacity" 272
 		"engine capacity" 117
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .7
 		"ramscoop" 3
 		weapon
@@ -1732,13 +1800,16 @@ ship "Tek Far 109"
 		"automaton" 1
 		"crew equivalent" 100
 		"mass" 2160
-		"drag" 9.1
-		"heat dissipation" .65
+		"drag" 13.7
+		"heat dissipation" .44
 		"fuel capacity" 400
 		"cargo space" 31
 		"outfit space" 491
 		"weapon capacity" 217
 		"engine capacity" 98
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .7
 		"ramscoop" 3
 		weapon
@@ -1821,13 +1892,16 @@ ship "Met Par Tek 53"
 		"automaton" 1
 		"crew equivalent" 25
 		"mass" 840
-		"drag" 5.7
-		"heat dissipation" .8
+		"drag" 8.6
+		"heat dissipation" .54
 		"fuel capacity" 400
 		"cargo space" 26
 		"outfit space" 610
 		"weapon capacity" 213
 		"engine capacity" 110
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .65
 		"ramscoop" 3
 		weapon
@@ -1886,6 +1960,9 @@ ship "Far Lek 14"
 		"outfit space" 65
 		"weapon capacity" 11
 		"engine capacity" 24
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .6
 		weapon
 			"blast radius" 5
@@ -1925,8 +2002,11 @@ ship "Far Osk 27"
 		"drag" 1.1
 		"heat dissipation" 1.0
 		"outfit space" 99
-		"weapon capacity" 22
+		"weapon capacity" 33
 		"engine capacity" 24
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .6
 		weapon
 			"blast radius" 12
@@ -1948,7 +2028,7 @@ ship "Far Osk 27"
 	gun 13 -8
 	explode "tiny explosion" 25
 	explode "small explosion" 15
-	description "Because it is piloted by a computer and has no need for a cockpit or life support systems, the FS27 fighter is able to carry far more weaponry than any comparable human ship."
+	description "Because it is piloted by a computer and has no need for a cockpit or life support systems, the FS27 fighter is able to support a thicker hull, more shields, and more weaponry than any comparable human ship."
 	description "	Fighters do not come equipped with a hyperdrive. You cannot carry a fighter unless you have a ship in your fleet with a fighter bay."
 
 
@@ -1963,14 +2043,17 @@ ship "Model 8"
 		"hull" 3320
 		"automaton" 1
 		"crew equivalent" 5
-		"mass" 110
-		"drag" 3.2
-		"heat dissipation" 1.5
+		"mass" 160
+		"drag" 3.7
+		"heat dissipation" 1.3
 		"fuel capacity" 200
 		"cargo space" 29
 		"outfit space" 220
 		"weapon capacity" 49
 		"engine capacity" 60
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .60
 		"ramscoop" 3
 		weapon
@@ -2012,13 +2095,16 @@ ship "Model 16"
 		"automaton" 1
 		"crew equivalent" 10
 		"mass" 500
-		"drag" 6.9
-		"heat dissipation" 1.3
+		"drag" 8.3
+		"heat dissipation" 1.09
 		"fuel capacity" 400
 		"cargo space" 7
 		"outfit space" 426
 		"weapon capacity" 149
 		"engine capacity" 107
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .65
 		"ramscoop" 3
 		weapon
@@ -2067,13 +2153,16 @@ ship "Model 32"
 		"automaton" 1
 		"crew equivalent" 25
 		"mass" 740
-		"drag" 9.0
-		"heat dissipation" 1.3
+		"drag" 11.7
+		"heat dissipation" 1.0
 		"fuel capacity" 400
 		"cargo space" 16
 		"outfit space" 481
 		"weapon capacity" 205
 		"engine capacity" 110
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .70
 		"ramscoop" 3
 		weapon
@@ -2123,13 +2212,16 @@ ship "Model 64"
 		"automaton" 1
 		"crew equivalent" 50
 		"mass" 2320
-		"drag" 11.1
-		"heat dissipation" 1.1
+		"drag" 16.1
+		"heat dissipation" .76
 		"fuel capacity" 400
 		"cargo space" 34
 		"outfit space" 567
 		"weapon capacity" 263
 		"engine capacity" 114
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .74
 		"ramscoop" 3
 		weapon
@@ -2150,7 +2242,7 @@ ship "Model 64"
 		"Reasoning Node" 2
 		
 		"Thruster (Lunar Class)"
-		"Thruster (Asteroid Class)"
+		# "Thruster (Asteroid Class)" # Extra thruster
 		"Steering (Planetary Class)"
 		Hyperdrive
 	
@@ -2181,13 +2273,16 @@ ship "Model 128"
 		"automaton" 1
 		"crew equivalent" 75
 		"mass" 3120
-		"drag" 13.2
-		"heat dissipation" 1.0
+		"drag" 20.5
+		"heat dissipation" .65
 		"fuel capacity" 400
 		"cargo space" 53
 		"outfit space" 713
 		"weapon capacity" 344
 		"engine capacity" 132
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .77
 		"ramscoop" 3
 		weapon
@@ -2208,7 +2303,7 @@ ship "Model 128"
 		
 		"Thruster (Planetary Class)"
 		"Steering (Planetary Class)"
-		"Steering (Asteroid Class)"
+		# "Steering (Asteroid Class)" # Extra steering
 		Hyperdrive
 
 	engine -14 178
@@ -2240,13 +2335,16 @@ ship "Model 256"
 		"automaton" 1
 		"crew equivalent" 100
 		"mass" 7760
-		"drag" 15.3
-		"heat dissipation" .9
+		"drag" 26.8
+		"heat dissipation" .52
 		"fuel capacity" 400
 		"cargo space" 78
 		"outfit space" 857
 		"weapon capacity" 393
 		"engine capacity" 145
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .79
 		"ramscoop" 3
 		weapon
@@ -2268,7 +2366,7 @@ ship "Model 256"
 		
 		"Thruster (Planetary Class)"
 		"Steering (Planetary Class)"
-		"Steering (Comet Class)"
+		# "Steering (Comet Class)" # Extra steering
 		Hyperdrive
 
 	engine -60 147
@@ -2301,13 +2399,16 @@ ship "Model 512"
 		"automaton" 1
 		"crew equivalent" 150
 		"mass" 9200
-		"drag" 17.4
-		"heat dissipation" .8
+		"drag" 33.9
+		"heat dissipation" .42
 		"fuel capacity" 400
 		"cargo space" 107
 		"outfit space" 994
 		"weapon capacity" 440
 		"engine capacity" 161
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
 		"self destruct" .80
 		"ramscoop" 3
 		weapon

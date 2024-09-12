@@ -11,6 +11,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <https://www.gnu.org/licenses/>.
 
+
 # Colors used to reflect the active or hovered interface button.
 color "hover" 1. 1. 1. 0.
 color "active" .75 .75 .75 0.
@@ -74,6 +75,8 @@ color "escort split energy" .3 .3 .3 0.
 color "escort split fuel" .35 .31 .215 0.
 
 color "flagship highlight" .5 .8 .2 0.
+
+color "cloak highlight" .45 0. 0. .65
 
 color "drag select" .2 1. 0. 0.
 
@@ -191,6 +194,11 @@ color "map travel ok none" .55 .1 0. 0.
 color "map wormhole" .5 .2 .9 1.
 color "map orbits fleet destination" 1. 1. 1. 1.
 color "map danger none" .1 .6 0. .4
+
+# Colors used for the routing issue text in the map panel when
+# a route to the selected system cannot be determined.
+color "map route error text" 1. 0. 0. 1.
+color "map route error shadow" 0. 0. 0. 1.
 
 # Miscellaneous colors
 color "wormholes: Ember Waste" .7 .1 .3
@@ -933,13 +941,45 @@ interface "hud"
 
 interface "main view"
 	list "zooms"
+		.008
+		.009
+		.011
+		.013
+		.016
+		.019
+		.022
+		.026
+		.031
+		.037
+		.044
+		.053
+		.063
+		.074
+		.088
+		.105
+		.125
+		.149
+		.177
+		.21
 		.25
+		.30
 		.35
+		.42
 		.5
-		.7
+		.59
+		.71
+		.84
 		1.
-		1.4
+		1.19
+		1.41
+		1.68
 		2.
+		2.38
+		2.83
+		3.36
+		4.
+		4.76
+		5.66
 
 
 
@@ -1443,9 +1483,14 @@ interface "bank"
 
 
 interface "mission" bottom
+	visible if "has description"
 	sprite "ui/mission"
 		align bottom
-	
+	visible if "!has description"
+	sprite "ui/mission empty"
+		align bottom
+
+	visible
 	label "cargo space free:"
 		center -130 -85
 	string "cargo free"
@@ -1573,8 +1618,18 @@ interface "map buttons (small screen)" bottom right
 
 
 interface "map"
-	value "max zoom" 2
-	value "min zoom" -2
+	value "max zoom" 3
+	value "min zoom" -3
+
+	anchor top
+	string "route error"
+		center 1 59
+		size 18
+		color "map route error shadow"
+	string "route error"
+		center 0 58
+		size 18
+		color "map route error text"
 
 
 
@@ -1598,9 +1653,33 @@ interface "info panel"
 	box "outfits"
 		from -250 -290 to 500 30
 	box "weapons"
-		from -250 30 to 250 280
+		from -250 -270 to 500 280
+	box "ship info thumbnail"
+		from -250 30 to 125 280
+	box "ship info sprite"
+		from 125 30 to 500 280
 	box "cargo"
 		from 250 -290 to 500 280
+	
+	visible if "hardpoint tab"
+	button R
+		center -375 -270
+		dimensions 250 30
+	sprite "ui/hardpoint tab"
+		center 0 -310
+	label "Hardpoint Info"
+		center -180 -305
+		color "bright"
+	label "_Ship Info"
+		center -300 -305
+	label "Player _Info"
+		center -420 -305
+	button i
+		center -420 -305
+		dimensions 120 30
+	button s
+		center -300 -305
+		dimensions 120 30
 	
 	visible if "ship tab"
 	button R
@@ -1608,11 +1687,16 @@ interface "info panel"
 		dimensions 250 30
 	sprite "ui/ship tab"
 		center 0 -310
+	label "_Hardpoint Info"
+		center -180 -305
 	label "Ship Info"
 		center -300 -305
 		color "bright"
 	label "Player _Info"
 		center -420 -305
+	button h
+		center -180 -305
+		dimensions 120 30
 	button i
 		center -420 -305
 		dimensions 120 30
@@ -1620,11 +1704,16 @@ interface "info panel"
 	visible if "player tab"
 	sprite "ui/player tab"
 		center 0 -310
+	label "_Hardpoint Info"
+		center -180 -305
 	label "_Ship Info"
 		center -300 -305
 	label "Player Info"
 		center -420 -305
 		color "bright"
+	button h
+		center -180 -305
+		dimensions 120 30
 	button s
 		center -300 -305
 		dimensions 120 30
@@ -1717,6 +1806,11 @@ interface "info panel"
 
 interface "message log"
 	value "width" 570
+
+	visible if "empty"
+	label "(The message log is empty.)"
+		from 300 0 left
+		color medium
 
 
 

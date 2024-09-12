@@ -32,8 +32,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Point.h"
 #include "Screen.h"
 #include "Ship.h"
-#include "Sprite.h"
-#include "SpriteSet.h"
+#include "image/Sprite.h"
+#include "image/SpriteSet.h"
 #include "SpriteShader.h"
 #include "text/truncate.hpp"
 #include "UI.h"
@@ -69,7 +69,7 @@ namespace {
 		for(auto &&it : ship.Outfits())
 		{
 			const Outfit *outfit = it.first;
-			if(outfit->Ammo() && !outfit->IsWeapon() && !armed.count(outfit))
+			if(outfit->Ammo() && !outfit->IsWeapon() && !armed.contains(outfit))
 				toRefill.emplace(outfit->Ammo());
 		}
 		return toRefill;
@@ -255,7 +255,7 @@ double OutfitterPanel::DrawDetails(const Point &center)
 
 	if(selectedOutfit)
 	{
-		outfitInfo.Update(*selectedOutfit, player, CanSell(), collapsed.count(DESCRIPTION));
+		outfitInfo.Update(*selectedOutfit, player, CanSell(), collapsed.contains(DESCRIPTION));
 		selectedItem = selectedOutfit->DisplayName();
 
 		const Sprite *thumbnail = selectedOutfit->Thumbnail();
@@ -276,8 +276,7 @@ double OutfitterPanel::DrawDetails(const Point &center)
 
 		if(hasDescription)
 		{
-			// Maintenance note: This can be replaced with collapsed.contains() in C++20
-			if(!collapsed.count(DESCRIPTION))
+			if(!collapsed.contains(DESCRIPTION))
 			{
 				descriptionOffset = outfitInfo.DescriptionHeight();
 				outfitInfo.DrawDescription(startPoint);
@@ -440,6 +439,30 @@ ShopPanel::BuyResult OutfitterPanel::CanBuy(bool onlyOwned) const
 				"You cannot install this outfit, because it takes up "
 				+ Format::CargoString(engineNeeded, "engine space") + ", and this ship has "
 				+ Format::MassString(engineSpace) + " free.";
+
+		int propulsionAccessorySlotNeeded = -selectedOutfit->Get("engine mod space");
+		int propulsionAccessorySlotFree = playerShip->Attributes().Get("engine mod space");
+		if(propulsionAccessorySlotNeeded && !propulsionAccessorySlotFree)
+			return "This afterbuner is designed to be installed in a dedicated slot, "
+				"but your ship does not have any unused propulsion accessory slots available.";
+
+		int reverseThrusterSlotNeeded = -selectedOutfit->Get("reverse thruster slot");
+		int reverseThrusterSlotFree = playerShip->Attributes().Get("reverse thruster slot");
+		if(reverseThrusterSlotNeeded && !reverseThrusterSlotFree)
+			return "This reverse thruster is designed to be installed in a dedicated slot, "
+				"but your ship does not have any unused reverse thruster slots available.";
+
+		int steeringSlotNeeded = -selectedOutfit->Get("steering slot");
+		int steeringSlotFree = playerShip->Attributes().Get("steering slot");
+		if(steeringSlotNeeded && !steeringSlotFree)
+			return "This steering is designed to be installed in a dedicated slot, "
+				"but your ship does not have any unused steering slots available.";
+
+		int thrusterSlotNeeded = -selectedOutfit->Get("thruster slot");
+		int thrusterSlotFree = playerShip->Attributes().Get("thruster slot");
+		if(thrusterSlotNeeded && !thrusterSlotFree)
+			return "This thruster is designed to be installed in a dedicated slot, "
+				"but your ship does not have any unused thruster slots available.";
 
 		if(selectedOutfit->Category() == "Ammunition")
 			return !playerShip->OutfitCount(selectedOutfit) ?
