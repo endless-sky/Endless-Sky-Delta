@@ -2547,7 +2547,7 @@ void AI::StrikeThrough(Ship& ship, Command& command, const Ship& target)
 	// Point velocity = ship.Velocity();
 	bool inFront = direction.Unit().Dot(target.Facing().Unit()) > .9;
 	bool isFacing = direction.Unit().Dot(ship.Facing().Unit()) < 0;
-	bool outerRadius = direction.Length() < targetTurretRange * 1.2; // should be max target gun & turget turret range
+	bool outerRadius = direction.Length() < targetTurretRange * 1.2; // should be max target gun & turret range
 	// double speed = ship.MaxVelocity();
 
 	if(outerRadius)
