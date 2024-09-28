@@ -229,7 +229,7 @@ elseif(WIN32)
 	set_target_properties(EndlessSky PROPERTIES OUTPUT_NAME "Endless Sky")
 else()
 	add_executable(EndlessSky source/main.cpp)
-	set_target_properties(EndlessSky PROPERTIES OUTPUT_NAME "endless-sky-delta")
+	set_target_properties(EndlessSky PROPERTIES OUTPUT_NAME "endless-sky")
 endif()
 
 # Link with the library dependencies.
