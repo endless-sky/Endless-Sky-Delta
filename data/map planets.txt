@@ -4345,14 +4345,13 @@ planet "Sasirka Gatru"
 	landscape land/desert7
 	description `This was probably a habitable world at one point. It is no longer. Nothing lives or grows here, and the atmosphere is full of toxic chemicals.`
 
-<<<<<<< HEAD
 planet Saturn
 	attributes "gas giant" "requires: gaslining" uninhabited
 	landscape land/nasa13
 	description `For over a millennia the main attraction of Saturn has been the rings that encircle it. For some, however, the hexagonal storm cells hold a greater fascination, and have been the source of countless theories. One popular idea posits that they are created by the force fields protecting an alien installation just under the surface.`
 	description `	While your sensors do not reveal any unusual energy fields or structures, the visual of the cloud formations whipping past and the vast storms are certainly impressive.`
 	government Uninhabited
-=======
+
 planet Saska-Aa-Noorr
 	attributes station successor wealthy
 	landscape land/space7
@@ -4363,7 +4362,6 @@ planet Saska-Aa-Noorr
 	government "House Myurej"
 	"required reputation" 3
 	bribe 0
->>>>>>> master
 
 planet "Sebarep Atarkis"
 	attributes "gas giant" "requires: gaslining" uninhabited
@@ -5300,14 +5298,13 @@ planet "Typhon Station"
 		threshold 2000
 		fleet "Large Militia" 8
 
-<<<<<<< HEAD
 planet Uranus
 	attributes "gas giant" "requires: gaslining" uninhabited
 	landscape land/nasa15
 	description `Uranus has long been an outlier in astronomy textbooks, noted for its axial tilt of roughly 90 degrees. As such, when most planets are presented as spinning around Sol like tops, Uranus rolls around like a ball. Despite this notoriety, it has little impact on stellar navigation or visible impact.`
 	description `	For the curious and the paranoid, the main attraction to Uranus is its low internal heat and erratic cloud formation. Both have stymied science's ability to explain or predict them for almost a millennia. Notably, Uranus has a dark spot very similar to the one found on Neptune.`
 	government Uninhabited
-=======
+
 planet Uo-Oraa-Vayya
 	attributes quiet successor
 	landscape land/snow24
@@ -5317,7 +5314,6 @@ planet Uo-Oraa-Vayya
 	government Successor
 	"required reputation" 2
 	bribe 0
->>>>>>> master
 
 planet "Ut Divitas"
 	attributes "incipias quarg" quarg
