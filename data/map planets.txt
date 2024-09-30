@@ -4345,6 +4345,17 @@ planet "Sasirka Gatru"
 	landscape land/desert7
 	description `This was probably a habitable world at one point. It is no longer. Nothing lives or grows here, and the atmosphere is full of toxic chemicals.`
 
+planet Saska-Aa-Noorr
+	attributes station successor wealthy
+	landscape land/space7
+	description `Though the Successors invest in few truly massive constructions, this station is one of them. Originally built over three thousand years ago as a support platform for the Predecessors' early colonization efforts, Saska-Aa-Noorr has been a consistent fixture of the star cluster and one of House Myurej's most important assets.`
+	description `	In the present day it serves a primarily residential role, housing almost five million Successors in rotating cylindrical segments of its arms. The gentler gravity and tightly controlled climate these offer makes living stationside quite desirable to many Successors, but the limited space available combined with the high taxes that House Myurej levies here mean that usually only the wealthiest Successors can afford to take up residence.`
+	spaceport `The spaceport takes full advantage of its zero-gravity nature; loading docks extend into the distance at all angles and magnetic cargo trains circle and arch around the interior. Most of the walkable areas of the port are enclosed in a giant cylindrical shell rotating around the docks such that you can watch your docked ship pass by overhead every couple of minutes.`
+	spaceport `	There is no "dry" access to any of the residential areas of the station; instead of normal corridors or elevators, large tubes of gently circulating water carry the Successors to other sections. The station directory indicates that outfitting services are among those separated from the main port by one of these tubes; unfortunately, it doesn't seem like they're going to be accessible to you.`
+	government "House Myurej"
+	"required reputation" 3
+	bribe 0
+
 planet Saturn
 	attributes "gas giant" "requires: gaslining" uninhabited
 	landscape land/nasa13
@@ -5297,6 +5308,16 @@ planet "Typhon Station"
 	tribute 500
 		threshold 2000
 		fleet "Large Militia" 8
+
+planet Uo-Oraa-Vayya
+	attributes quiet successor
+	landscape land/snow24
+	description `This small planet is in the midst of an ice age, and nearly its entire surface is covered in ice sheets several kilometers thick. There are next to no permanent inhabitants, but the Successors maintain a significant research presence here to study the planet's unique conditions.`
+	description `	It is rumored that the navies of the New Houses will send recruits on missions here to test their fortitude, though that is unequivocally denied by official sources.`
+	spaceport `The spaceport, if you can call it that, is nothing more than an approximately flat area in a mountain valley with a small research base serving as a control tower. The air outside is bitterly cold, and while the Successors do not seem to mind it as much as you, even they express discomfort at being out in the open for too long.`
+	government Successor
+	"required reputation" 2
+	bribe 0
 
 planet Uranus
 	attributes "gas giant" "requires: gaslining" uninhabited
