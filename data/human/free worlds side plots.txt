@@ -428,7 +428,7 @@ ship "Fury" "Doombat"
 
 mission "FW Thermal Scanner 1"
 	landing
-	name "Testing"
+	name "Go visit Barmy Edward"
 	description "When you have time, report to <destination>, where Barmy Edward has another device he would like you to test."
 	source
 		near "Kraz" 1 100
@@ -456,21 +456,32 @@ mission "FW Thermal Scanner 2"
 				`	(Yes.)`
 				`	(No.)`
 					defer
-			`	You give your name to the receptionist, and she directs you to the hangar where the weapons group does their design and prototyping. Barmy Edward shakes your hand warmly and says, "Here's the deal. We've got a new scanner that theoretically will scan ships and give information on the heat levels inside them. Interested in helping us?"`
+			`	You give your name to the receptionist, and she directs you to the hangar where the weapons group does their design and prototyping. Barmy Edward shakes your hand warmly and says, "We've got a new scanner that theoretically will scan ships and give information on the heat levels inside them. Are you interested in helping us test this?"`
 			choice
 				`	"Sure!"`
 				`	"No thanks."`
 					decline
-			`	"So here's the deal. We need you to fly to <waypoints> and disable the Doombat, which is still armed with flamethrowers. Another Fury, the <npc>, will fly with you with the new scanners installed, and take readings on the battle. Then come back here and report."`
+			`	"We need you to fly to <waypoints> and disable the Doombat, which is still armed with flamethrowers. Another <npc model>, the <npc>, will fly by you with the new scanners installed and take readings on the battle. Then come back here and report."`
+			`	"Make sure to protect the <npc model> escorting you, because it is key to the whole mission."`
 				accept
 	
 	npc disable save
-		personality disables heroic staying
+		personality disables launching heroic quiet staying target unconstrained swarming
 		government "Test Dummy"
+		system "Ildaria"
 		ship "Doombat" "Doombat"
+		on encounter
+			conversation
+				`	The captain of the Doombat hails you as you jump into the system. "Now remember," they say. "This is a battle for testing, so be careful not to destroy my ship. I'll make sure not to destroy you either."`
+		on destroy
+			conversation
+				`	As the Doombat begins to explode, you receive a message from Barmy Edward. "Hey! You said you wouldn't destroy that ship! Do you realize what you have done?" He hangs up. It's clear that, at leadt for a while, you won't get any more missions from Kraz Cybernetics.`
+		on capture
+			conversation
+				`	Just as the boarding action has been successfully concluded, a message from Barmy Edward, who sounds very angry, comes in. "Hey! Do you know what you have done?" Before you can answer, he hangs up. It's clear you won't be getting any more missions from Kraz Cybernetics in the near future.`
 
-	npc save
-		personality surveillance
+	npc accompany save
+		personality disables escort quiet surveillance timid unconstrained
 		government "Kraz Cybernetics"
 		fleet
 			names "free worlds small"
@@ -478,7 +489,7 @@ mission "FW Thermal Scanner 2"
 				"Fury (Thermal Scanner)"
 				
 	on visit
-		dialog `You've landed on <planet>, but you have not disabled the Doombat yet, or else the <npc> is not in the system.`
+		dialog `You've landed on <planet>, but you have not disabled the Doombat yet, or else the <npc> is not yet in the system.`
 	on complete
 		event "thermal scanner available" 30
 		log "Assisted Barmy Edward with another test: this time a scanner to give information on how hot a ship is running."
