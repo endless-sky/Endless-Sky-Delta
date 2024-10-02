@@ -43,7 +43,7 @@ ship "Kaiken"
 		"Small Shield Relay"
 		"Shield Relay Limiter" 6
 		
-		"Chiisana Rift Thruster" # Extra thruster
+		"Chiisana Rift Thruster"
 		"Chiisana Rift Steering"
 	
 	engine -5.5 30.5
@@ -146,7 +146,7 @@ ship "Tanto"
 		"engine capacity" 102
 		"reverse thruster slot" 1
 		"steering slot" 1
-		"thruster slot" 1
+		"thruster slot" 2
 		weapon
 			"blast radius" 120
 			"shield damage" 1200
@@ -161,7 +161,7 @@ ship "Tanto"
 		
 		"Ookii Rift Thruster"
 		"Ookii Rift Steering"
-		# "Chiisana Rift Thruster" # Extra thruster
+		"Chiisana Rift Thruster"
 		"Hyperdrive"
 		
 	engine -20 148
@@ -329,7 +329,7 @@ ship "Kunai"
 		"weapon capacity" 158
 		"engine capacity" 102
 		"reverse thruster slot" 1
-		"steering slot" 1
+		"steering slot" 2
 		"thruster slot" 1
 		weapon
 			"blast radius" 210
@@ -349,7 +349,7 @@ ship "Kunai"
 		
 		"Ookii Rift Thruster"
 		"Ookii Rift Steering"
-		# "Chiisana Rift Steering" # Extra steering
+		"Chiisana Rift Steering"
 		"Hyperdrive"
 	
 	engine -8 49
