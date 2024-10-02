@@ -461,7 +461,7 @@ mission "FW Thermal Scanner 2"
 				`	"Sure!"`
 				`	"No thanks."`
 					decline
-			`	"We need you to fly to <waypoints> and disable the Doombat, which is still armed with flamethrowers. Another <npc model>, the <npc>, will fly by you with the new scanners installed and take readings on the battle. Then come back here and report."`
+			`	"We need you to fly to <waypoints> and disable the Doombat, which is still armed with flamethrowers. Another <npc model>, the <npc>, will fly by you with the new scanners installed and take readings on the battle. Then come back here and report.`
 			`	"Make sure to protect the <npc model> escorting you, because it is key to the whole mission."`
 				accept
 	
