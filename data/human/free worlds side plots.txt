@@ -491,8 +491,18 @@ mission "FW Thermal Scanner 2"
 	on visit
 		dialog `You've landed on <planet>, but you have not disabled the Doombat yet, or else the <npc> is not yet in the system.`
 	on complete
-		event "thermal scanner available" 30
+		event "thermal scanner available" 60
 		log "Assisted Barmy Edward with another test: this time a scanner to give information on how hot a ship is running."
+		conversation
+			`Barmy Edward greets you as you step out of <ship>'s airlock. "Well, how did it go?" he asks. "Rhetorical question, of course. It's nice to know that there's someone willing to help us, even when from their point of view the goal is the same as last mission's." He grins.`
+			choice
+				`	"Any time."`
+				`	"So when will these scanners be available for sale?"`
+					goto sale
+			`	"Good! It means a lot to me. Now about the scanner..." he gives a long discourse on how the scanner works. Finally you hear something you're interested in.`
+			label sale
+			`	"We plan to start selling the Thermal Scanner in about two months. You'll be able to buy one then.`
+			`	"It's been a pleasure working with you, <first>. I probably need to go now, but see you later!" He walks off, leaving you to your own business.`
 
 
 
