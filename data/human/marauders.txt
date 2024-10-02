@@ -254,7 +254,7 @@ ship "Marauder Falcon"
 		"engine capacity" 165
 		"reverse thruster slot" 1
 		"steering slot" 1
-		"thruster slot" 2
+		"thruster slot" 1
 		"self destruct" .15
 		weapon
 			"blast radius" 170
@@ -797,7 +797,7 @@ ship "Marauder Quicksilver"
 		"weapon capacity" 85
 		"engine capacity" 75
 		"reverse thruster slot" 1
-		"steering slot" 2
+		"steering slot" 1
 		"thruster slot" 1
 		"self destruct" .25
 		weapon
