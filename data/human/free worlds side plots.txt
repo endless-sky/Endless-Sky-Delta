@@ -466,7 +466,7 @@ mission "FW Thermal Scanner 2"
 				accept
 	
 	npc disable save
-		personality disables launching heroic quiet staying target unconstrained swarming
+		personality disables launching heroic quiet staying target unconstrained
 		government "Test Dummy"
 		system "Ildaria"
 		ship "Doombat" "Doombat"
@@ -481,7 +481,7 @@ mission "FW Thermal Scanner 2"
 				`	Just as the boarding action has been successfully concluded, a message from Barmy Edward, who sounds very angry, comes in. "Hey! Do you know what you have done?" Before you can answer, he hangs up. It's clear you won't be getting any more missions from Kraz Cybernetics in the near future.`
 
 	npc accompany save
-		personality disables escort quiet surveillance timid unconstrained
+		personality disables escort quiet surveillance swarming timid unconstrained
 		government "Kraz Cybernetics"
 		fleet
 			names "free worlds small"
