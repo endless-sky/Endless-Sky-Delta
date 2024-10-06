@@ -447,6 +447,7 @@ mission "FW Thermal Scanner 2"
 	name "Scanner Testing"
 	description "A test ship with flamethrowers is in the <waypoints> system. Fight and disable it, keeping <npc> safe, and then go back to <destination> to give Barmy Edward the scanner logs."
 	source "Rust"
+	waypoint "Ildaria"
 	to offer
 		has "FW Thermal Scanner 1: done"
 	on offer
