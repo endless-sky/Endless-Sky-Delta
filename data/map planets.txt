@@ -693,7 +693,7 @@ planet Charon
 	security 0.01
 	tribute 200
 		threshold 2100
-		fleet "Sol-Bound Defense Fleet" 4
+		fleet "Sol Defense Fleet" 4
 
 planet "Charon Station"
 	attributes south station
@@ -5231,7 +5231,7 @@ planet Triton
 	security 0.01
 	tribute 100
 		threshold 1200
-		fleet "Sol-Bound Defense Fleet" 2
+		fleet "Sol Defense Fleet" 2
 
 planet "Triton Station"
 	attributes military north station
