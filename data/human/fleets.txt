@@ -3645,6 +3645,13 @@ fleet "Independent (Korath-Allied) Defense"
 		"Firebird (Missile)"
 
 fleet "Sol Defense Fleet"
+	government "Republic"
+	names "republic small"
+	fighters
+		names "republic fighter"
+	cargo 0
+	personality
+		heroic
 	variant 2
 		"Barb" 2
 	variant 2
