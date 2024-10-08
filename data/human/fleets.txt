@@ -3648,8 +3648,6 @@ fleet "Sol Defense Fleet"
 	variant 2
 		"Barb" 2
 	variant 2
-		"Barb (Proton)" 2
-	variant 2
 		"Combat Drone" 5
 	variant
 		"Combat Drone" 10
