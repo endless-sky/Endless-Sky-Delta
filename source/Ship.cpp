@@ -328,7 +328,7 @@ void Ship::Load(const DataNode &node)
 				}
 			}
 		}
-		else if(key == "gun" || key == "turret")
+		else if(key == "gun" || key == "turret" || key == "pylon")
 		{
 			if(!hasArmament)
 			{
@@ -399,8 +399,10 @@ void Ship::Load(const DataNode &node)
 			}
 			if(key == "gun")
 				armament.AddGunPort(hardpoint, attributes, drawUnder, outfit);
-			else
+			else if(key == "turret")
 				armament.AddTurret(hardpoint, attributes, drawUnder, outfit);
+			else if(key == "pylon")
+				armament.AddPylon(hardpoint, attributes, drawUnder, outfit);
 		}
 		else if(key == "never disabled")
 			neverDisabled = true;
@@ -664,11 +666,12 @@ void Ship::FinishLoading(bool isNewInstance)
 			auto bend = base->Weapons().end();
 			auto nextGun = armament.Get().begin();
 			auto nextTurret = armament.Get().begin();
+			auto nextPylon = armament.Get().begin();
 			auto end = armament.Get().end();
 			Armament merged;
 			for( ; bit != bend; ++bit)
 			{
-				if(!bit->IsTurret())
+				if(!bit->IsTurret() && !bit->IsPylon())
 				{
 					while(nextGun != end && nextGun->IsTurret())
 						++nextGun;
@@ -677,7 +680,7 @@ void Ship::FinishLoading(bool isNewInstance)
 					if(nextGun != end)
 						++nextGun;
 				}
-				else
+				else if(bit->IsTurret())
 				{
 					while(nextTurret != end && !nextTurret->IsTurret())
 						++nextTurret;
@@ -685,6 +688,16 @@ void Ship::FinishLoading(bool isNewInstance)
 					merged.AddTurret(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
 					if(nextTurret != end)
 						++nextTurret;
+				}
+				else if (bit->IsPylon())
+				{
+					while nextPylon != end && !nextPylon->IsPylon())
+						++nextPylon;
+					const Outfit* outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
+					merged.AddPylon(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
+					if (nextPylon != end)
+						++equipped[outfit];
+					++nextPylon;
 				}
 			}
 			armament = merged;
@@ -726,6 +739,7 @@ void Ship::FinishLoading(bool isNewInstance)
 
 	baseAttributes.Set("gun ports", armament.GunCount());
 	baseAttributes.Set("turret mounts", armament.TurretCount());
+	baseAttributes.Set("pylon mounts", armament.PylonCount());
 
 	if(addAttributes)
 	{

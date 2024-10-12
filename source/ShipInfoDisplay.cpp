@@ -293,7 +293,8 @@ void ShipInfoDisplay::UpdateAttributes(const Ship &ship, const PlayerInfo &playe
 		"    weapon capacity:", "weapon capacity",
 		"    engine capacity:", "engine capacity",
 		"gun ports free:", "gun ports",
-		"turret mounts free:", "turret mounts"
+		"turret mounts free:", "turret mounts",
+		"pylon mounts free:", "pylon mounts"
 	};
 	for(unsigned i = 1; i < NAMES.size(); i += 2)
 		chassis[NAMES[i]] = attributes.Get(NAMES[i]);
