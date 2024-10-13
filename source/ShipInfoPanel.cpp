@@ -513,8 +513,10 @@ void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
 
 		bool isRight = (hardpoint.GetPoint().X() >= 0.);
 		bool isTurret = hardpoint.IsTurret();
+		bool isPylon = hardpoint.IsPylon();
 
-		double &y = nextY[isRight][isTurret];
+		int type = isPylon ? 2 : isTurret ? 1 : 0;
+		double &y = nextY[isRight][type];
 		double x = centerX + (isRight ? LABEL_DX : -LABEL_DX - LABEL_WIDTH);
 		bool isHover = (index == hoverIndex);
 		layout.align = isRight ? Alignment::LEFT : Alignment::RIGHT;
@@ -527,6 +529,9 @@ void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
 		if(isTurret)
 			color = *GameData::Colors().Get(isHover ? "player info hardpoint turret hover"
 			: "player info hardpoint turret");
+		else if(isPylon)
+			color = * GameData::Colors().Get(isHover ? "player info hardpoint pylon hover"
+				: "player info hardpoint pylon");
 		else
 			color = *GameData::Colors().Get(isHover ? "player info hardpoint gun hover"
 			: "player info hardpoint gun");
@@ -686,10 +691,12 @@ bool ShipInfoPanel::Hover(const Point &point)
 	hoverIndex = -1;
 	const vector<Hardpoint> &weapons = (**shipIt).Weapons();
 	bool dragIsTurret = (draggingIndex >= 0 && weapons[draggingIndex].IsTurret());
+	bool dragIsPylon = (draggingIndex >= 0 && weapons[draggingIndex].IsPylon());
 	for(const auto &zone : zones)
 	{
 		bool isTurret = weapons[zone.Value()].IsTurret();
-		if(zone.Contains(hoverPoint) && (draggingIndex == -1 || isTurret == dragIsTurret))
+		bool isPylon = weapons[zone.Value()].IsPylon()];
+		if(zone.Contains(hoverPoint) && (draggingIndex == -1 || isTurret == dragIsTurret && isPylon ==dragIsPylon))
 			hoverIndex = zone.Value();
 	}
 
