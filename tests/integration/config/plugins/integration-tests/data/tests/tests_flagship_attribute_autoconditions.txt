@@ -49,6 +49,7 @@ test-data "Flagship Attribute Autoconditions Save"
 				"outfit scan power" 18
 				"outfit scan efficiency" 22
 				"outfit space" 552
+				"pylon mounts" 0
 				ramscoop 2.5
 				"remnant node" 5
 				"required crew" 9
