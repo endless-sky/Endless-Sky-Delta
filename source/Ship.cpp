@@ -671,7 +671,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			Armament merged;
 			for( ; bit != bend; ++bit)
 			{
-				if(!bit->IsTurret() && !bit->IsPylon())
+				if(bit->IsGun())
 				{
 					while(nextGun != end && nextGun->IsTurret())
 						++nextGun;
@@ -691,13 +691,12 @@ void Ship::FinishLoading(bool isNewInstance)
 				}
 				else if (bit->IsPylon())
 				{
-					while nextPylon != end && !nextPylon->IsPylon())
+					while(nextPylon != end && !nextPylon->IsPylon())
 						++nextPylon;
 					const Outfit* outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
 					merged.AddPylon(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
 					if (nextPylon != end)
-						++equipped[outfit];
-					++nextPylon;
+						++nextPylon;
 				}
 			}
 			armament = merged;
@@ -822,14 +821,14 @@ void Ship::FinishLoading(bool isNewInstance)
 		}
 		if (outfit && (hardpoint.IsPylon() != (outfit->Get("pylon mounts") != 0.)))
 		{
-			string warning = modelName;
+			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
 			if (!name.empty())
 				warning += " \"" + name + "\"";
-			warning += ": outfit \"" + outfit->Name() + "\" installed as a ";
+			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
 			warning += (hardpoint.IsPylon() ? "pylon but is a gun.\n\tpylon" : "gun but is a pylon.\n\tgun");
 			warning += to_string(2. * hardpoint.GetPoint().X()) + " " + to_string(2. * hardpoint.GetPoint().Y());
-			warning += " \"" + outfit->Name() + "\"";
-			Files::LogError(warning);
+			warning += " \"" + outfit->TrueName() + "\"";
+			Logger::LogError(warning);
 		}
 	}
 	cargo.SetSize(attributes.Get("cargo space"));
@@ -1090,7 +1089,7 @@ void Ship::Save(DataWriter &out) const
 		{
 			// This sets *type to one of turret, pylon, or gun based on which hardpoint.Is_____ it matches.
 			// When we have a means to just test for guns directly, remember to add it here.
-			const char *type = (hardpoint.IsTurret() ? "turret" : hadpoint.IsPylon() ? "pylon" : "gun");
+			const char *type = (hardpoint.IsTurret() ? "turret" : hardpoint.IsPylon() ? "pylon" : "gun");
 			if(hardpoint.GetOutfit())
 				out.Write(type, 2. * hardpoint.GetPoint().X(), 2. * hardpoint.GetPoint().Y(),
 					hardpoint.GetOutfit()->TrueName());

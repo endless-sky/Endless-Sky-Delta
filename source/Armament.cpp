@@ -51,7 +51,7 @@ void Armament::AddTurret(const Point &point, const Hardpoint::BaseAttributes &at
 void Armament::AddPylon(const Point& point, const Hardpoint::BaseAttributes& attributes,
 	bool isUnder, const Outfit* outfit)
 {
-	hardpoints.emplace_back(point, attributes, false, true, isUnder, false, outfit);
+	hardpoints.emplace_back(point, attributes, false, isUnder, false, outfit);
 }
 
 
@@ -69,8 +69,9 @@ int Armament::Add(const Outfit *outfit, int count)
 	int added = 0;
 	bool isTurret = outfit->Get("turret mounts");
 	bool isPylon = outfit->Get("pylon mounts");
+	bool isGun = outfit->Get("gun mounts");
 	// Do not equip weapons that do not define how they are mounted.
-	if(!isTurret && !isPylon && !outfit->Get("gun ports"))
+	if(!isTurret && !isPylon && !isGun)
 	{
 		Logger::LogError("Error: Skipping unmountable outfit \"" + outfit->TrueName() + "\"."
 			" Weapon outfits must specify \"gun ports\", \"turret mounts\" or \"pylons\".");
@@ -96,7 +97,7 @@ int Armament::Add(const Outfit *outfit, int count)
 			else
 				++existing;
 		}
-		else if(!hardpoint.GetOutfit() && hardpoint.IsTurret() == isTurret && hardpoint.isPylon() == isPylon)
+		else if(!hardpoint.GetOutfit() && hardpoint.IsTurret() == isTurret && hardpoint.IsPylon() == isPylon)
 		{
 			// If this is an empty, compatible slot, and we're adding outfits,
 			// install one of them here and decrease the count of how many we
