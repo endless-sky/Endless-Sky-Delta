@@ -1112,7 +1112,7 @@ void Ship::Save(DataWriter &out) const
 		}
 		for(const Hardpoint &hardpoint : armament.Get())
 		{
-			// This sets *type to one of turret, pylon, or gun based on which hardpoint.Is_____ it matches.
+			// This sets *type to one of turret, pylon, or gun based on which hardpoint Is_____ it matches.
 			// When we have a means to just test for guns directly, remember to add it here.
 			const char *type = (hardpoint.IsTurret() ? "turret" : hardpoint.IsPylon() ? "pylon" : "gun");
 			if(hardpoint.GetOutfit())
