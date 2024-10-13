@@ -945,6 +945,7 @@ void ShipInfoDisplay::DrawShipHardpointStats(const Ship &ship, const Rectangle &
 	static const vector<string> NAMES = {
 		"gun ports free:", "gun ports",
 		"turret mounts free:", "turret mounts"
+		"pylon mounts free:", "pylon mounts"
 	};
 
 	for(unsigned i = 1; i < NAMES.size(); i += 2)

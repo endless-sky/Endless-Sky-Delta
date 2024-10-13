@@ -819,6 +819,18 @@ void Ship::FinishLoading(bool isNewInstance)
 	{
 		const Outfit *outfit = hardpoint.GetOutfit();
 		if(outfit && outfit->IsDefined()
+				&& (hardpoint.IsGun() != (outfit->Get("gun ports") != 0.)))
+		{
+			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
+			if(!name.empty())
+				warning += " \"" + name + "\"";
+			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
+			warning += (hardpoint.IsGun() ? "gun but is a turret.\n\tgun" : "turret but is a gun.\n\tturret");
+			warning += to_string(2. * hardpoint.GetPoint().X()) + " " + to_string(2. * hardpoint.GetPoint().Y());
+			warning += " \"" + outfit->TrueName() + "\"";
+			Logger::LogError(warning);
+		}
+		if(outfit && outfit->IsDefined()
 				&& (hardpoint.IsTurret() != (outfit->Get("turret mounts") != 0.)))
 		{
 			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
@@ -1114,7 +1126,8 @@ void Ship::Save(DataWriter &out) const
 		{
 			// This sets *type to one of turret, pylon, or gun based on which hardpoint Is_____ it matches.
 			// When we have a means to just test for guns directly, remember to add it here.
-			const char *type = (hardpoint.IsTurret() ? "turret" : hardpoint.IsPylon() ? "pylon" : "gun");
+			const char *type = (hardpoint.IsTurret() ? "turret" : hardpoint.IsPylon() ? "pylon" :
+				hardpoint.IsGun() ? "gun" : "gun");
 			if(hardpoint.GetOutfit())
 				out.Write(type, 2. * hardpoint.GetPoint().X(), 2. * hardpoint.GetPoint().Y(),
 					hardpoint.GetOutfit()->TrueName());

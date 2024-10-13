@@ -144,6 +144,7 @@ private:
 	// The base attributes of a hardpoint, without considering additional limitations of the installed outfit.
 	BaseAttributes baseAttributes;
 	// This hardpoint is for a turret, ammunition weapon, or gun.
+	bool isGun = false;
 	bool isTurret = false;
 	bool isPylon = false;
 	// bool isGun = false; For future use positively identifying guns.

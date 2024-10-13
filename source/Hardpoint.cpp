@@ -143,7 +143,7 @@ bool Hardpoint::IsPylon() const
 
 bool Hardpoint::IsGun() const
 {
-	return !isPylon && !isTurret;
+	return isGun;
 }
 
 
