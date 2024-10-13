@@ -97,7 +97,8 @@ int Armament::Add(const Outfit *outfit, int count)
 			else
 				++existing;
 		}
-		else if(!hardpoint.GetOutfit() && hardpoint.IsTurret() == isTurret && hardpoint.IsPylon() == isPylon && hardpoint.IsGun() == isGun)
+		else if(!hardpoint.GetOutfit() && hardpoint.IsTurret() == isTurret && hardpoint.IsPylon() == isPylon
+			&& hardpoint.IsGun() == isGun)
 		{
 			// If this is an empty, compatible slot, and we're adding outfits,
 			// install one of them here and decrease the count of how many we
