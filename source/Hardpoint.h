@@ -143,7 +143,7 @@ private:
 	Angle maxArc;
 	// The base attributes of a hardpoint, without considering additional limitations of the installed outfit.
 	BaseAttributes baseAttributes;
-	// This hardpoint is for a turret, projectile, or a gun.
+	// This hardpoint is for a turret, ammunition weapon, or gun.
 	bool isTurret = false;
 	bool isPylon = false;
 	bool isGun = false;

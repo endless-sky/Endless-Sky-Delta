@@ -133,7 +133,7 @@ bool Hardpoint::IsTurret() const
 
 
 
-// Find out if this is a pylon hardpoint (whether or not it has a projectile installed).
+// Find out if this is a pylon hardpoint (whether or not it has a weapon installed).
 bool Hardpoint::IsPylon() const
 {
 	return isPylon;
