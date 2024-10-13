@@ -69,7 +69,7 @@ int Armament::Add(const Outfit *outfit, int count)
 	int added = 0;
 	bool isTurret = outfit->Get("turret mounts");
 	bool isPylon = outfit->Get("pylon mounts");
-	bool isGun = outfit->Get("gun mounts");
+	bool isGun = outfit->Get("gun ports");
 	// Do not equip weapons that do not define how they are mounted.
 	if(!isTurret && !isPylon && !isGun)
 	{
