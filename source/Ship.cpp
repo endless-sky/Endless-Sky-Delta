@@ -700,7 +700,7 @@ void Ship::FinishLoading(bool isNewInstance)
 					if(nextTurret != end)
 						++nextTurret;
 				}
-				else if (bit->IsPylon())
+				else if(bit->IsPylon())
 				{
 					while(nextPylon != end && !nextPylon->IsPylon())
 						++nextPylon;
