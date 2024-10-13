@@ -49,7 +49,7 @@ void Armament::AddTurret(const Point &point, const Hardpoint::BaseAttributes &at
 
 // Add a pylon (for missiles).
 void Armament::AddPylon(const Point& point, const Hardpoint::BaseAttributes& attributes,
-	bool isUnder, const Outfit* outfit)
+	bool isUnder, const Outfit * outfit)
 {
 	hardpoints.emplace_back(point, attributes, false, isUnder, false, outfit);
 }
@@ -221,7 +221,7 @@ int Armament::TurretCount() const
 int Armament::PylonCount() const
 {
 	int count = 0;
-	for(const Hardpoint& hardpoint : hardpoints)
+	for(const Hardpoint & hardpoint : hardpoints)
 		count += hardpoint.IsPylon();
 	return count;
 }

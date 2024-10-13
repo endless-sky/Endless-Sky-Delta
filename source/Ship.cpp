@@ -704,9 +704,9 @@ void Ship::FinishLoading(bool isNewInstance)
 				{
 					while(nextPylon != end && !nextPylon->IsPylon())
 						++nextPylon;
-					const Outfit* outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
+					const Outfit *outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
 					merged.AddPylon(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
-					if (nextPylon != end)
+					if(nextPylon != end)
 						++nextPylon;
 				}
 			}
@@ -830,10 +830,10 @@ void Ship::FinishLoading(bool isNewInstance)
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
 		}
-		if (outfit && (hardpoint.IsPylon() != (outfit->Get("pylon mounts") != 0.)))
+		if(outfit && (hardpoint.IsPylon() != (outfit->Get("pylon mounts") != 0.)))
 		{
 			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
-			if (!name.empty())
+			if(!name.empty())
 				warning += " \"" + name + "\"";
 			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
 			warning += (hardpoint.IsPylon() ? "pylon but is a gun.\n\tpylon" : "gun but is a pylon.\n\tgun");
