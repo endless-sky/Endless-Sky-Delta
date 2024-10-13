@@ -201,7 +201,10 @@ const vector<Hardpoint> &Armament::Get() const
 // Determine how many fixed gun hardpoints are on this ship.
 int Armament::GunCount() const
 {
-	return hardpoints.size() - TurretCount() - PylonCount();
+	int count = 0;
+	for(const Hardpoint &hardpoint : hardpoints)
+		count += hardpoint.IsGun();
+	return count;
 }
 
 
