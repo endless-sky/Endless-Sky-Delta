@@ -33,7 +33,7 @@ using namespace std;
 void Armament::AddGunPort(const Point &point, const Hardpoint::BaseAttributes &attributes,
 	bool isUnder, const Outfit *outfit)
 {
-	hardpoints.emplace_back(point, attributes, false, isUnder, outfit);
+	hardpoints.emplace_back(point, attributes, false, false,isUnder, outfit);
 }
 
 
@@ -51,7 +51,7 @@ void Armament::AddTurret(const Point &point, const Hardpoint::BaseAttributes &at
 void Armament::AddPylon(const Point& point, const Hardpoint::BaseAttributes& attributes,
 	bool isUnder, const Outfit * outfit)
 {
-	hardpoints.emplace_back(point, attributes, false, isUnder, false, outfit);
+	hardpoints.emplace_back(point, attributes, false, true, isUnder, outfit);
 }
 
 
