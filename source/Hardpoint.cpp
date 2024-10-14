@@ -45,9 +45,9 @@ namespace {
 
 // Constructor.
 Hardpoint::Hardpoint(const Point &point, const BaseAttributes &attributes,
-	bool isTurret, bool isPylon, bool isUnder, const Outfit *outfit)
+	 bool isTurret, bool isPylon, bool isUnder, const Outfit *outfit)
 	: outfit(outfit), point(point * .5), baseAngle(attributes.baseAngle), baseAttributes(attributes),
-	isTurret(isTurret), isPylon(isPylon), isParallel(baseAttributes.isParallel), isUnder(isUnder)
+	 isTurret(isTurret), isPylon(isPylon), isParallel(baseAttributes.isParallel), isUnder(isUnder)
 {
 	UpdateArc();
 }

@@ -483,11 +483,11 @@ ShopPanel::BuyResult OutfitterPanel::CanBuy(bool onlyOwned) const
 			return "This weapon is designed to be installed in a gun port, "
 				"but your ship does not have any unused gun ports available.";
 
-		int pylonsNeeded = -selectedOutfit->Get("pylon mounts");
-		int pylonsFree = playerShip->Attributes().Get("pylon mounts");
+		int pylonsNeeded = -selectedOutfit->Get("pylons");
+		int pylonsFree = playerShip->Attributes().Get("pylons");
 		if(pylonsNeeded && !pylonsFree)
-			return "This weapon is designed to be installed on a pylon mount, "
-				"but your ship does not have any unused pylon mounts available.";
+			return "This weapon is designed to be installed on a pylon, "
+				"but your ship does not have any unused pylons available.";
 
 		if(selectedOutfit->Get("installable") < 0.)
 			return "This item is not an outfit that can be installed in a ship.";

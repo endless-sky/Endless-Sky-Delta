@@ -68,7 +68,7 @@ int Armament::Add(const Outfit *outfit, int count)
 	int existing = 0;
 	int added = 0;
 	bool isTurret = outfit->Get("turret mounts");
-	bool isPylon = outfit->Get("pylon mounts");
+	bool isPylon = outfit->Get("pylons");
 	bool isGun = outfit->Get("gun ports");
 	// Do not equip weapons that do not define how they are mounted.
 	if(!isTurret && !isPylon && !isGun)
@@ -202,10 +202,7 @@ const vector<Hardpoint> &Armament::Get() const
 // Determine how many fixed gun hardpoints are on this ship.
 int Armament::GunCount() const
 {
-	int count = 0;
-	for(const Hardpoint &hardpoint : hardpoints)
-		count += hardpoint.IsGun();
-	return count;
+	return hardpoints.size() - TurretCount() - PylonCount();
 }
 
 
@@ -321,7 +318,7 @@ void Armament::Step(const Ship &ship)
 	{
 		int count = ship.OutfitCount(it.first);
 		// If this weapon mounts on a pylon don't count the number to determine the reload speed.
-		bool pylon = it.first->Get("pylon mounts");
+		bool pylon = it.first->Get("pylons");
 		it.second -= pylon ? 1 : count;
 		// Always reload to the quickest firing interval.
 		it.second = max(it.second, 1 - count);

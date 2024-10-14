@@ -749,7 +749,7 @@ void Ship::FinishLoading(bool isNewInstance)
 
 	baseAttributes.Set("gun ports", armament.GunCount());
 	baseAttributes.Set("turret mounts", armament.TurretCount());
-	baseAttributes.Set("pylon mounts", armament.PylonCount());
+	baseAttributes.Set("pylons", armament.PylonCount());
 
 	if(addAttributes)
 	{
@@ -842,7 +842,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
 		}
-		if(outfit && (hardpoint.IsPylon() != (outfit->Get("pylon mounts") != 0.)))
+		if(outfit && (hardpoint.IsPylon() != (outfit->Get("pylons") != 0.)))
 		{
 			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
 			if(!name.empty())
