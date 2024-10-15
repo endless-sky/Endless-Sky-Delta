@@ -69,9 +69,9 @@ int Armament::Add(const Outfit *outfit, int count)
 	int added = 0;
 	bool isTurret = outfit->Get("turret mounts");
 	bool isPylon = outfit->Get("pylons");
-	bool isGun = outfit->Get("gun ports");
+	// bool isGun = outfit->Get("gun ports");
 	// Do not equip weapons that do not define how they are mounted.
-	if(!isTurret && !isPylon && !isGun)
+	if(!isTurret && !isPylon && !outfit->Get("gun ports"))
 	{
 		Logger::LogError("Error: Skipping unmountable outfit \"" + outfit->TrueName() + "\"."
 			" Weapon outfits must specify \"gun ports\", \"turret mounts\", or \"pylons\".");
@@ -97,8 +97,7 @@ int Armament::Add(const Outfit *outfit, int count)
 			else
 				++existing;
 		}
-		else if(!hardpoint.GetOutfit() && hardpoint.IsTurret() == isTurret && hardpoint.IsPylon() == isPylon
-			&& hardpoint.IsGun() == isGun)
+		else if(!hardpoint.GetOutfit() && hardpoint.IsTurret() == isTurret && hardpoint.IsPylon() == isPylon)
 		{
 			// If this is an empty, compatible slot, and we're adding outfits,
 			// install one of them here and decrease the count of how many we
@@ -318,7 +317,7 @@ void Armament::Step(const Ship &ship)
 	{
 		int count = ship.OutfitCount(it.first);
 		// If this weapon mounts on a pylon don't count the number to determine the reload speed.
-		bool pylon = it.first->Get("pylons");
+		bool pylon = it.first->Get("pylon");
 		it.second -= pylon ? 1 : count;
 		// Always reload to the quickest firing interval.
 		it.second = max(it.second, 1 - count);
