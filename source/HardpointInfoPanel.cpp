@@ -471,7 +471,7 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle & bounds)
 		bool isTurret = hardpoint.IsTurret();
 		bool isPylon = hardpoint.IsPylon();
 
-		double& y = nextY[isRight][isTurret];
+		double & y = nextY[isRight][isTurret];
 		double x = centerX + (isRight ? LABEL_DX : -LABEL_DX - LABEL_WIDTH);
 		bool isHover = (index == hoverIndex);
 		layout.align = isRight ? Alignment::LEFT : Alignment::RIGHT;

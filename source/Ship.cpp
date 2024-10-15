@@ -691,13 +691,13 @@ void Ship::FinishLoading(bool isNewInstance)
 					if(nextGun != end)
 						++nextGun;
 				}
-				else if (bit->IsPylon())
+				else if(bit->IsPylon())
 				{
 					while (nextPylon != end && !nextPylon->IsPylon())
 						++nextPylon;
-					const Outfit* outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
+					const Outfit * outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
 					merged.AddPylon(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
-					if (nextPylon != end)
+					if(nextPylon != end)
 						++nextPylon;
 				}
 				else
