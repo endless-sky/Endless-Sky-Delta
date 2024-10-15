@@ -408,10 +408,10 @@ void Ship::Load(const DataNode &node)
 			}
 			if(key == "gun")
 				armament.AddGunPort(hardpoint, attributes, drawUnder, outfit);
-			else if(key == "turret")
-				armament.AddTurret(hardpoint, attributes, drawUnder, outfit);
 			else if(key == "pylon")
 				armament.AddPylon(hardpoint, attributes, drawUnder, outfit);
+			else
+				armament.AddTurret(hardpoint, attributes, drawUnder, outfit);
 		}
 		else if(key == "never disabled")
 			neverDisabled = true;
@@ -682,7 +682,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			Armament merged;
 			for( ; bit != bend; ++bit)
 			{
-				if(bit->IsGun())
+				if(!bit->IsTurret())
 				{
 					while(nextGun != end && nextGun->IsTurret())
 						++nextGun;
@@ -691,7 +691,16 @@ void Ship::FinishLoading(bool isNewInstance)
 					if(nextGun != end)
 						++nextGun;
 				}
-				else if(bit->IsTurret())
+				else if (bit->IsPylon())
+				{
+					while (nextPylon != end && !nextPylon->IsPylon())
+						++nextPylon;
+					const Outfit* outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
+					merged.AddPylon(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
+					if (nextPylon != end)
+						++nextPylon;
+				}
+				else
 				{
 					while(nextTurret != end && !nextTurret->IsTurret())
 						++nextTurret;
@@ -699,15 +708,6 @@ void Ship::FinishLoading(bool isNewInstance)
 					merged.AddTurret(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
 					if(nextTurret != end)
 						++nextTurret;
-				}
-				else if(bit->IsPylon())
-				{
-					while(nextPylon != end && !nextPylon->IsPylon())
-						++nextPylon;
-					const Outfit *outfit = (nextPylon == end) ? nullptr : nextPylon->GetOutfit();
-					merged.AddPylon(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
-					if(nextPylon != end)
-						++nextPylon;
 				}
 			}
 			armament = merged;

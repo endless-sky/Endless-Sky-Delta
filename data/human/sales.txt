@@ -171,6 +171,12 @@ shipyard "Independent (Korath-Allied)"
 	"Valkyrie"
 	"Cutthroat"
 	"Mammoth"
+	
+	# Variants added for testing.
+	"Aerie (Miner)"
+	"Argosy (Laser)"
+	"Berserker (Afterburner)"
+	"Bounder (Hai)"
 
 
 # See note above about capabilities and limitations of "Independent (Korath-Allied)"

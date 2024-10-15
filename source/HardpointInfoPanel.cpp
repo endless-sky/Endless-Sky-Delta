@@ -72,7 +72,7 @@ HardpointInfoPanel::HardpointInfoPanel(PlayerInfo& player, InfoPanelState state)
 	{
 		// Find the player's flagship. It may not be first in the list, if the
 		// first item in the list cannot be a flagship.
-		while(shipIt != this->panelState.Ships().end() && shipIt->get() != player.Flagship())
+		while (shipIt != this->panelState.Ships().end() && shipIt->get() != player.Flagship())
 			++shipIt;
 	}
 
@@ -470,10 +470,8 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle & bounds)
 		}
 		bool isTurret = hardpoint.IsTurret();
 		bool isPylon = hardpoint.IsPylon();
-		bool isGun = hardpoint.IsGun();
 
-		int type = isPylon ? 2 : isTurret ? 1 : 0;
-		double & y = nextY[isRight][type];
+		double& y = nextY[isRight][isTurret];
 		double x = centerX + (isRight ? LABEL_DX : -LABEL_DX - LABEL_WIDTH);
 		bool isHover = (index == hoverIndex);
 		layout.align = isRight ? Alignment::LEFT : Alignment::RIGHT;
@@ -489,9 +487,6 @@ void HardpointInfoPanel::DrawWeapons(const Rectangle & bounds)
 		else if(isPylon)
 			color = *GameData::Colors().Get(isHover ? "player info hardpoint pylon hover"
 				: "player info hardpoint pylon");
-		else if(isGun)
-			color = *GameData::Colors().Get(isHover ? "player info hardpoint gun hover"
-				: "player info hardpoint gun");
 		else
 			color = *GameData::Colors().Get(isHover ? "player info hardpoint gun hover"
 				: "player info hardpoint gun");
