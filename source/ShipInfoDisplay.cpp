@@ -954,7 +954,7 @@ void ShipInfoDisplay::DrawShipHardpointStats(const Ship &ship, const Rectangle &
 		for(auto & cit : chassis)
 			cit.second -= min(0., it.second * it.first->Get(cit.first));
 
-	for(unsigned i = 0; i < NAMES.size(); i += 2)
+	for(unsigned i = 0; i < NAMES.size(); i += 3)
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
