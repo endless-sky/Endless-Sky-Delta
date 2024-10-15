@@ -944,7 +944,7 @@ void ShipInfoDisplay::DrawShipHardpointStats(const Ship &ship, const Rectangle &
 	map<string, double> chassis;
 	static const vector<string> NAMES = {
 		"gun ports free:", "gun ports",
-		"turret mounts free:", "turret mounts"
+		"turret mounts free:", "turret mounts",
 		"pylons free:", "pylons"
 	};
 
@@ -954,7 +954,7 @@ void ShipInfoDisplay::DrawShipHardpointStats(const Ship &ship, const Rectangle &
 		for(auto & cit : chassis)
 			cit.second -= min(0., it.second * it.first->Get(cit.first));
 
-	for(unsigned i = 0; i < NAMES.size(); i += 3)
+	for(unsigned i = 0; i < NAMES.size(); i += 2)
 	{
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
