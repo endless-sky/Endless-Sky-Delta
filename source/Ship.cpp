@@ -825,7 +825,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			if(!name.empty())
 				warning += " \"" + name + "\"";
 			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
-			warning += (hardpoint.IsGun() ? "gun but is a turret.\n\tgun" : "turret but is a gun.\n\tturret");
+			warning += (hardpoint.IsGun() ? "gun but is a turret.\n\tgun" : "turret Test Phrase Indicator but is a gun.\n\tturret");
 			warning += to_string(2. * hardpoint.GetPoint().X()) + " " + to_string(2. * hardpoint.GetPoint().Y());
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
