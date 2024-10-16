@@ -825,7 +825,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			if(!name.empty())
 				warning += " \"" + name + "\"";
 			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
-			warning += (hardpoint.IsGun() ? "gun but is a turret.\n\tgun" : "turret Test Phrase Indicator but is a gun.\n\tturret");
+			warning += (hardpoint.IsGun() ? "gun but is a turret.\n\tgun" : "turret TestGun but is a gun.\n\tturret");
 			warning += to_string(2. * hardpoint.GetPoint().X()) + " " + to_string(2. * hardpoint.GetPoint().Y());
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
@@ -837,7 +837,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			if(!name.empty())
 				warning += " \"" + name + "\"";
 			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
-			warning += (hardpoint.IsTurret() ? "turret but is a gun.\n\tturret" : "gun but is a turret.\n\tgun");
+			warning += (hardpoint.IsTurret() ? "turret but is a gun.\n\tturret" : "gun but is a Testyturret.\n\tgun");
 			warning += to_string(2. * hardpoint.GetPoint().X()) + " " + to_string(2. * hardpoint.GetPoint().Y());
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
@@ -848,7 +848,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			if(!name.empty())
 				warning += " \"" + name + "\"";
 			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
-			warning += (hardpoint.IsPylon() ? "pylon but is a gun.\n\tpylon" : "gun but is a pylon.\n\tgun");
+			warning += (hardpoint.IsPylon() ? "pylon but is a Trickygun.\n\tpylon" : "gun but is a pylon.\n\tgun");
 			warning += to_string(2. * hardpoint.GetPoint().X()) + " " + to_string(2. * hardpoint.GetPoint().Y());
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
