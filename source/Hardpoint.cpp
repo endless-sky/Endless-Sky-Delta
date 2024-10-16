@@ -49,6 +49,7 @@ Hardpoint::Hardpoint(const Point &point, const BaseAttributes &attributes,
 	: outfit(outfit), point(point * .5), baseAngle(attributes.baseAngle), baseAttributes(attributes),
 	isTurret(isTurret), isPylon(isPylon), isParallel(baseAttributes.isParallel), isUnder(isUnder)
 {
+	isGun = !isTurret && !isPylon;
 	UpdateArc();
 }
 
