@@ -682,9 +682,9 @@ void Ship::FinishLoading(bool isNewInstance)
 			Armament merged;
 			for( ; bit != bend; ++bit)
 			{
-				if(!bit->IsTurret())
+				if(!bit->IsTurret() && !bit->IsPylon())
 				{
-					while(nextGun != end && nextGun->IsTurret())
+					while(nextGun != end && (nextGun->IsTurret() || nextGun->IsPylon()))
 						++nextGun;
 					const Outfit *outfit = (nextGun == end) ? nullptr : nextGun->GetOutfit();
 					merged.AddGunPort(bit->GetPoint() * 2., bit->GetBaseAttributes(), bit->IsUnder(), outfit);
