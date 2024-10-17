@@ -619,8 +619,12 @@ ship "Berserker"
 	engine 10 45
 	gun -20 12 "Energy Blaster"
 	gun 20 12 "Energy Blaster"
-	gun -44 10 "Javelin Mini Pod"
-	gun 44 10 "Javelin Mini Pod"
+	gun -44 10
+	gun 44 10
+	pylon -20 23 "Javelin Mini Pod"
+		over
+	pylon 20 23 "Javelin Mini Pod"
+		over
 	leak "leak" 60 50
 	leak "flame" 80 80
 	explode "tiny explosion" 10
@@ -1144,10 +1148,10 @@ ship "Clipper"
 	engine 22 47
 	gun -21.5 -18
 	gun 21.5 -18
-	pylon -23 -18 "Javelin Mini Pod"
-	pylon 23 -18 "Javelin Mini Pod"
 	gun -11 -8.5 "Beam Laser"
 	gun 11 -8.5 "Beam Laser"
+	pylon -43 35 "Javelin Mini Pod"
+	pylon 43 35 "Javelin Mini Pod"
 	leak "leak" 60 50
 	leak "flame" 50 80
 	explode "tiny explosion" 15
@@ -1517,8 +1521,10 @@ ship "Dagger"
 	engine -8 34
 	engine 8 34
 	gun 0 -35 "Beam Laser"
-	gun -11 -21 "Javelin Mini Pod"
-	gun 11 -21 "Javelin Mini Pod"
+	gun -11 -21
+	gun 11 -21
+	pylon -15 -19 "Javelin Mini Pod"
+	pylon 15 -19 "Javelin Mini Pod"
 	leak "leak" 60 50
 	explode "tiny explosion" 15
 	explode "small explosion" 5
@@ -1811,8 +1817,10 @@ ship "Finch"
 	engine -5 32
 	engine 5 32
 	gun 0 -31.5 "Beam Laser"
-	gun -7 -14 "Javelin Mini Pod"
-	gun 7 -14 "Javelin Mini Pod"
+	gun -7 -14
+	gun 7 -14
+	pylon -23 3 "Javelin Mini Pod"
+	pylon 23 3 "Javelin Mini Pod"
 	leak "flame" 60 80
 	explode "tiny explosion" 15
 	explode "small explosion" 5
@@ -2105,6 +2113,8 @@ ship "Fury"
 	gun 17 -19.5
 	gun -5.5 -33
 	gun 5.5 -33
+	pylon -37 27
+	pylon 37 27
 	leak "flame" 50 80
 	explode "tiny explosion" 10
 	explode "small explosion" 20
@@ -3539,8 +3549,12 @@ ship "Saber"
 	gun -10.5 -105 "Beam Laser"
 	gun 0 -105 "Beam Laser"
 	gun 10.5 -105 "Beam Laser"
-	gun -5 -104 "Javelin Pod"
-	gun 5 -104 "Javelin Pod"
+	gun -5 -104
+	gun 5 -104
+	pylon -30 77 "Javelin Pod"
+		over
+	pylon 30 77 "Javelin Pod"
+		over
 	turret 0 27.5 "Blaster Turret"
 	leak "leak" 60 60
 	leak "flame" 40 80
@@ -4290,6 +4304,8 @@ ship "Wasp"
 	gun 13.5 -35 "Energy Blaster"
 	gun -18.5 -27
 	gun 18.5 -27
+	pylon -19 -14.5
+	pylon 19 -14.5
 	leak "leak" 60 50
 	explode "tiny explosion" 20
 	explode "small explosion" 10
