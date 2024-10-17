@@ -749,7 +749,7 @@ void Ship::FinishLoading(bool isNewInstance)
 
 	baseAttributes.Set("gun ports", armament.GunCount());
 	baseAttributes.Set("turret mounts", armament.TurretCount());
-	baseAttributes.Set("pylons", armament.PylonCount());
+	baseAttributes.Set("pylon", armament.PylonCount());
 
 	if(addAttributes)
 	{

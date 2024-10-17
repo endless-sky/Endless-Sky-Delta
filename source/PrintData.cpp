@@ -216,7 +216,7 @@ namespace {
 				<< DataWriter::Quote("energy capacity") << ',' << DataWriter::Quote("idle/max heat") << ','
 				<< DataWriter::Quote("max heat generation") << ',' << DataWriter::Quote("max heat dissipation") << ','
 				<< DataWriter::Quote("gun mounts") << ',' << DataWriter::Quote("turret mounts") << ','
-				<< DataWriter::Quote("pylons") << ','
+				<< DataWriter::Quote("pylon") << ','
 				<< DataWriter::Quote("fighter bays") << ',' << DataWriter::Quote("drone bays") << ',' << "deterrence" << '\n';
 
 			for(auto &it : GameData::Ships())
