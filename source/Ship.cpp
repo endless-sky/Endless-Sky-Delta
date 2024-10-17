@@ -850,7 +850,7 @@ void Ship::FinishLoading(bool isNewInstance)
 		}
 		if(outfit && (hardpoint.IsPylon() != (outfit->Get("pylons") != 0.)))
 		{
-			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;S
+			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
 			if(!name.empty())
 				warning += " \"" + name + "\"";
 			warning += ": outfit \"" + outfit->TrueName() + "\" installed as a ";
