@@ -2468,6 +2468,10 @@ ship "Headhunter"
 	gun 17.5 -17
 	gun -12 -25.5 "Heavy Laser"
 	gun 12 -25.5 "Heavy Laser"
+	pylon -24 21
+	pylon 24 21
+	pylon -31 28
+	pylon 31 28
 	turret 0 9 "Heavy Anti-Missile Turret"
 	leak "leak" 60 50
 	leak "flame" 80 80
