@@ -3735,10 +3735,12 @@ ship "Wasp" "Wasp (Javelin)"
 		"X2200 Ion Steering"
 		"Hyperdrive"
 	gun
-	gun "Javelin Pod"
-	gun "Javelin Pod"
 	gun
 	gun
+	gun
+	gun
+	pylon "Javelin Pod"
+	pylon "Javelin Pod"
 	
 
 ship "Wasp" "Wasp (Meteor)"
