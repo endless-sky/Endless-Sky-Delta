@@ -848,7 +848,7 @@ void Ship::FinishLoading(bool isNewInstance)
 			warning += " \"" + outfit->TrueName() + "\"";
 			Logger::LogError(warning);
 		}
-		if(outfit && (hardpoint.IsPylon() != (outfit->Get("pylons") != 0.)))
+		if(outfit && (hardpoint.IsPylon() != (outfit->Get("pylon") != 0.)))
 		{
 			string warning = (!isYours && !variantName.empty()) ? "variant \"" + variantName + "\"" : trueModelName;
 			if(!name.empty())

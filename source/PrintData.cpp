@@ -151,7 +151,7 @@ namespace {
 				<< DataWriter::Quote("engine mod space") << ',' << DataWriter::Quote("reverse thruster slot") << ','
 				<< DataWriter::Quote("steering slot") << ',' << DataWriter::Quote("thruster slot") << ','
 				<< DataWriter::Quote("gun mounts") << ',' << DataWriter::Quote("turret mounts") << ','
-				<< DataWriter::Quote("pylons") << ','
+				<< DataWriter::Quote("pylon") << ','
 				<< DataWriter::Quote("fighter bays") << ',' << DataWriter::Quote("drone bays") << '\n';
 
 			for(auto &it : GameData::Ships())

@@ -1142,10 +1142,10 @@ ship "Clipper"
 		
 	engine -22 47
 	engine 22 47
-	gun -21.5 -18 "Javelin Mini Pod"
-	gun 21.5 -18 "Javelin Mini Pod"
-	pylon -22.5 -18
-	pylon 22.5 -18
+	gun -21.5 -18
+	gun 21.5 -18
+	pylon -23 -18 "Javelin Mini Pod"
+	pylon 23 -18 "Javelin Mini Pod"
 	gun -11 -8.5 "Beam Laser"
 	gun 11 -8.5 "Beam Laser"
 	leak "leak" 60 50
