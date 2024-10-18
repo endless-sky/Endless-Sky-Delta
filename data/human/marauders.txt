@@ -164,6 +164,7 @@ ship "Marauder Bounder"
 	engine -10 44
 	engine 10 44
 	gun 0 -84.5 "Particle Cannon"
+	pylon 0 -80
 	turret -38 12 "Quad Blaster Turret"
 	turret 38 12 "Quad Blaster Turret"
 	explode "tiny explosion" 10
@@ -558,6 +559,10 @@ ship "Marauder Leviathan"
 	gun 39.5 -33 "Particle Cannon"
 	gun -51 -21 "Particle Cannon"
 	gun 51 -21 "Particle Cannon"
+	pylon -39.5 -33
+	pylon 39.5 -33
+	pylon -51 -21
+	pylon 51 -21
 	turret -14.5 -11.5 "Quad Blaster Turret"
 	turret 14.5 -11.5 "Quad Blaster Turret"
 	turret -26 11.5 "Heavy Laser Turret"
