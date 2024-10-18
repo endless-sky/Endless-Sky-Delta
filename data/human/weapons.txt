@@ -1340,7 +1340,7 @@ outfit "Heavy Rocket Launcher"
 	"mass" 15
 	"outfit space" -25
 	"weapon capacity" -25
-	"gun ports" -1
+	"pylon" -1
 	"rocket capacity" 20
 	weapon
 		sprite "projectile/rocket"
@@ -1373,7 +1373,7 @@ outfit "Heavy Rocket Pod"
 	"mass" 3
 	"outfit space" -6
 	"weapon capacity" -6
-	"gun ports" -1
+	"pylon" -1
 	"rocket capacity" 2
 	weapon
 		sprite "projectile/rocket"

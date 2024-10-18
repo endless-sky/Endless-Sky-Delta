@@ -475,10 +475,12 @@ ship "Bastion" "Bastion (Scanner)"
 		"Impala Plasma Thruster"
 		"Impala Plasma Steering"
 		"Hyperdrive"
-	gun "Heavy Rocket Launcher"
+	gun
 	gun "Plasma Cannon"
-	gun "Heavy Rocket Launcher"
+	gun
 	gun "Plasma Cannon"
+	pylon "Heavy Rocket Launcher"
+	pylon "Heavy Rocket Launcher"
 
 
 
@@ -1275,8 +1277,12 @@ ship "Cruiser" "Cruiser (Heavy)"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
-	gun "Heavy Rocket Launcher"
-	gun "Heavy Rocket Launcher"
+	gun
+	gun
+	pylon "Heavy Rocket Launcher"
+	pylon "Heavy Rocket Launcher"
+	pylon
+	pylon
 	turret "Quad Blaster Turret"
 	turret "Heavy Laser Turret"
 	turret "Heavy Laser Turret"
@@ -1305,12 +1311,17 @@ ship "Cruiser" "Cruiser (Jump)"
 		"A520 Atomic Thruster"
 		"A525 Atomic Steering"
 		"Jump Drive"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
+	gun
+	gun
 	gun "Typhoon Launcher"
 	gun "Typhoon Launcher"
 	gun
 	gun
+	pylon
+	pylon
+	pylon
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
 	turret "Electron Turret"
 	turret "Electron Turret"
 	turret "Electron Turret"
@@ -1339,12 +1350,17 @@ ship "Cruiser" "Cruiser (Mark II)"
 		"A525 Atomic Steering"
 		"Hyperdrive"
 		"Outfits Expansion"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
 	gun
-	gun "Typhoon Launcher"
-	gun "Typhoon Launcher"
+	gun
+	gun
+	gun
+	gun
+	gun
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Typhoon Launcher"
+	pylon "Typhoon Launcher"
 	turret "Heavy Anti-Missile Turret"
 	turret "Electron Turret"
 	turret "Electron Turret"
@@ -1376,12 +1392,17 @@ ship "Cruiser" "Cruiser (Republic Intelligence)"
 		"Cargo Scanner" 2
 		"Catalytic Ramscoop"
 		"Outfits Expansion"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
 	gun
-	gun "Typhoon Launcher"
-	gun "Typhoon Launcher"
+	gun
+	gun
+	gun
+	gun
+	gun
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Typhoon Launcher"
+	pylon "Typhoon Launcher"
 	turret "Heavy Anti-Missile Turret"
 	turret "Electron Turret"
 	turret "Electron Turret"
@@ -1451,10 +1472,12 @@ ship "Cutthroat" "Cutthroat (Jousting)"
 		"A520 Atomic Thruster"
 		"A255 Atomic Steering"
 		"Hyperdrive"
-	gun -21.5 -18 "Heavy Rocket Pod"
-	gun 21.5 -18 "Heavy Rocket Pod"
+	gun -21.5 -18
+	gun 21.5 -18
 	gun -11 -8.5 "Twin Modified Blaster"
 	gun 11 -8.5 "Twin Modified Blaster"
+	pylon -21.5 -18 "Heavy Rocket Pod"
+	pylon 21.5 -18 "Heavy Rocket Pod"
 
 
 
@@ -3105,10 +3128,14 @@ ship "Osprey" "Osprey (Missile)"
 		"A520 Atomic Thruster"
 		"A375 Atomic Steering"
 		"Hyperdrive"
-	gun "Heavy Rocket Launcher"
-	gun "Heavy Rocket Launcher"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
+	gun
+	gun
+	gun
+	gun
+	pylon "Heavy Rocket Launcher"
+	pylon "Heavy Rocket Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
 
 
 # This variant uses outfits acquired in the post-war condition that were surplus or black market for diversity *after* the main campaign.

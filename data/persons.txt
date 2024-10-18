@@ -409,14 +409,6 @@ person "Captain Nate"
 			parallel
 		gun 0 -130.5 "Proton Gun"
 			parallel
-		gun -24 -122 "Heavy Rocket Launcher"
-			parallel
-		gun -24 -122 "Heavy Rocket Launcher"
-			parallel
-		gun 24 -122 "Heavy Rocket Launcher"
-			parallel
-		gun 24 -122 "Heavy Rocket Launcher"
-			parallel
 		gun -40 -46 "Proton Gun"
 			parallel
 		gun -40 -46 "Proton Gun"
@@ -432,6 +424,14 @@ person "Captain Nate"
 		gun 34.5 -43 "Proton Gun"
 			parallel
 		gun 34.5 -43 "Proton Gun"
+			parallel
+		pylon -24 -122 "Heavy Rocket Launcher"
+			parallel
+		pylon -24 -122 "Heavy Rocket Launcher"
+			parallel
+		pylon 24 -122 "Heavy Rocket Launcher"
+			parallel
+		pylon 24 -122 "Heavy Rocket Launcher"
 			parallel
 		turret 0 42 "Anti-Missile Turret"
 		explode "tiny explosion" 18
