@@ -1857,10 +1857,14 @@ ship "Firebird" "Firebird (Missile)"
 		"Impala Plasma Thruster"
 		"A375 Atomic Steering"
 		"Hyperdrive"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
+	gun
+	gun
+	gun
+	gun
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
 	turret "Laser Turret"
 	turret "Heavy Laser Turret"
 

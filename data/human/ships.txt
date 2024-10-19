@@ -1895,8 +1895,16 @@ ship "Firebird"
 	engine 31.5 67
 	gun -27 -28 "Particle Cannon"
 	gun 27 -28 "Particle Cannon"
-	gun -38 -13 "Meteor Missile Launcher"
-	gun 38 -13 "Meteor Missile Launcher"
+	gun -38 -13
+	gun 38 -13
+	pylon -39 37 "Meteor Missile Launcher"
+		over
+	pylon 39 37 "Meteor Missile Launcher"
+		over
+	pylon -10 20
+		over
+	pylon 10 20
+		over
 	turret 0 -38 "Anti-Missile Turret"
 	turret 0 3 "Quad Blaster Turret"
 	leak "leak" 50 50
@@ -1952,6 +1960,8 @@ ship "Flivver"
 	engine 16.5 26
 	gun -6 -35.5
 	gun 6 -35.5
+	pylon -6 -35.5
+	pylon 6 -35.5
 	leak "leak" 60 50
 	explode "tiny explosion" 10
 	explode "small explosion" 10
