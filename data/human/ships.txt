@@ -1773,8 +1773,12 @@ ship "Falcon"
 	engine 16.5 143
 	gun -16 -86.5 "Plasma Cannon"
 	gun 16 -86.5 "Plasma Cannon"
-	gun -19 -76.5 "Torpedo Launcher"
-	gun 19 -76.5 "Torpedo Launcher"
+	gun -19 -76.5
+	gun 19 -76.5
+	pylon -47 5 "Torpedo Launcher"
+	pylon 47 5 "Torpedo Launcher"
+	pylon -51 84
+	pylon 51 84
 	turret -16 -29 "Heavy Anti-Missile Turret"
 	turret 16 -29 "Quad Blaster Turret"
 	turret -50 39.5 "Quad Blaster Turret"
