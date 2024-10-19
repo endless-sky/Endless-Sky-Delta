@@ -34,6 +34,8 @@ ship "Aerie" "Aerie (Miner)"
 		"Hyperdrive"
 	gun "Mining Laser"
 	gun "Mining Laser"
+	pylon
+	pylon
 	turret "Tractor Beam"
 	turret "Mining Laser Turret"
 	turret "Mining Laser Turret"
@@ -124,6 +126,52 @@ ship "Arrow" "Arrow (Hai)"
 		`"Biroo" Atomic Steering`
 		"Hyperdrive"
 
+
+
+ship "Auxiliary" "Auxiliary (Cargo)"
+	plural "Auxiliaries"
+	sprite "ship/auxiliaryc"
+	thumbnail "thumbnail/auxiliaryc"
+	add attributes
+		"bunks" -112
+		"cargo space" 200
+	pylon -12 -186
+	pylon 12.5 -186
+	turret 0 -72 "Heavy Anti-Missile Turret"
+	turret 0 -20
+	turret 0 32
+	turret 0 83 "Heavy Anti-Missile Turret"
+	bay "Fighter" 0 -72
+		"launch effect" "human internal"
+	bay "Fighter" 0 -20
+		"launch effect" "human internal"
+	bay "Fighter" 0 32
+		"launch effect" "human internal"
+	bay "Fighter" 0 83
+		"launch effect" "human internal"
+
+
+ship "Auxiliary" "Auxiliary (Transport)"
+	plural "Auxiliaries"
+	sprite "ship/auxiliaryt"
+	thumbnail "thumbnail/auxiliaryt"
+	add attributes
+		"bunks" 112
+		"cargo space" -200
+	pylon -12 -186
+	pylon 12.5 -186
+	turret 0 -74 "Heavy Anti-Missile Turret"
+	turret 0 -17
+	turret 0 20
+	turret 0 78 "Heavy Anti-Missile Turret"
+	bay "Fighter" 0 -74
+		"launch effect" "human internal"
+	bay "Fighter" 0 -17
+		"launch effect" "human internal"
+	bay "Fighter" 0 20
+		"launch effect" "human internal"
+	bay "Fighter" 0 78
+		"launch effect" "human internal"
 
 
 ship "Auxiliary" "Auxiliary (Mark II)"
@@ -226,8 +274,8 @@ ship "Auxiliary" "Auxiliary (Jump Transport)"
 		"A525 Atomic Steering"
 		"Laser Rifle" 362
 		"Fragmentation Grenades" 500
-	gun -12 -186
-	gun 12.5 -186
+	pylon -12 -186
+	pylon 12.5 -186
 	turret 0 -74 "Heavy Anti-Missile Turret"
 	turret 0 -17
 	turret 0 20
@@ -281,8 +329,12 @@ ship "Bactrian" "Bactrian (Hai Weapons)"
 		"Hyperdrive"
 	gun "Pulse Cannon"
 	gun "Pulse Cannon"
-	gun "Hai Tracker Pod"
-	gun "Hai Tracker Pod"
+	gun
+	gun
+	pylon "Hai Tracker Pod"
+	pylon "Hai Tracker Pod"
+	pylon
+	pylon
 	turret "Chameleon Anti-Missile"
 	turret "Heavy Laser Turret"
 	turret "Pulse Turret"
@@ -899,12 +951,12 @@ ship "Carrier" "Carrier (Jump)"
 		"Jump Drive"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
 	turret "Heavy Anti-Missile Turret"
 	turret "Electron Turret"
 	turret "Heavy Anti-Missile Turret"
@@ -934,12 +986,12 @@ ship "Carrier" "Carrier (Mark II)"
 		"Hyperdrive"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
 	turret "Heavy Anti-Missile Turret"
 	turret "Electron Turret"
 	turret "Heavy Anti-Missile Turret"
@@ -1283,6 +1335,8 @@ ship "Cruiser" "Cruiser (Heavy)"
 	pylon "Heavy Rocket Launcher"
 	pylon
 	pylon
+	pylon
+	pylon
 	turret "Quad Blaster Turret"
 	turret "Heavy Laser Turret"
 	turret "Heavy Laser Turret"
@@ -1313,15 +1367,16 @@ ship "Cruiser" "Cruiser (Jump)"
 		"Jump Drive"
 	gun
 	gun
-	gun "Typhoon Launcher"
-	gun "Typhoon Launcher"
+	gun
+	gun
 	gun
 	gun
 	pylon
 	pylon
-	pylon
 	pylon "Sidewinder Missile Launcher"
 	pylon "Sidewinder Missile Launcher"
+	pylon "Typhoon Launcher"
+	pylon "Typhoon Launcher"
 	turret "Electron Turret"
 	turret "Electron Turret"
 	turret "Electron Turret"
@@ -1356,6 +1411,7 @@ ship "Cruiser" "Cruiser (Mark II)"
 	gun
 	gun
 	gun
+	pylon
 	pylon "Sidewinder Missile Launcher"
 	pylon "Sidewinder Missile Launcher"
 	pylon "Sidewinder Missile Launcher"
@@ -1398,6 +1454,7 @@ ship "Cruiser" "Cruiser (Republic Intelligence)"
 	gun
 	gun
 	gun
+	pylon
 	pylon "Sidewinder Missile Launcher"
 	pylon "Sidewinder Missile Launcher"
 	pylon "Sidewinder Missile Launcher"
