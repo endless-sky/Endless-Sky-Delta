@@ -918,10 +918,12 @@ ship "Bulwark" "Bulwark (Heavy)"
 		"Impala Plasma Steering"
 		"Hyperdrive"
 	
-	gun "Torpedo Launcher"
+	gun
 	gun "Plasma Cannon"
-	gun "Torpedo Launcher"
+	gun
 	gun "Plasma Cannon"
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
 	turret "Heavy Laser Turret"
 	turret "Anti-Missile Turret"
 	turret "Anti-Missile Turret"
@@ -1212,10 +1214,14 @@ ship "Corvette" "Corvette (Missile)"
 		"A370 Atomic Thruster"
 		"A375 Atomic Steering"
 		"Hyperdrive"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
+	gun
+	gun
+	gun
+	gun
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
 	turret "Anti-Missile Turret"
 	turret "Heavy Anti-Missile Turret"
 
