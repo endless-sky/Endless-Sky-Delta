@@ -1657,10 +1657,14 @@ ship "Falcon" "Falcon (Heavy)"
 		"Hyperdrive"
 		"Supercapacitor"
 		"Outfits Expansion"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
+	gun
+	gun
+	gun
+	gun
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
 
 
 ship "Falcon" "Falcon (Prisoner Transport)"
@@ -1748,6 +1752,10 @@ ship "Falcon" "Falcon (Tractor Beam)"
 	gun "Proton Gun"
 	gun "Proton Gun"
 	gun "Proton Gun"
+	pylon
+	pylon
+	pylon
+	pylon
 	turret "Heavy Anti-Missile Turret"
 	turret "Tractor Beam"
 	turret "Quad Blaster Turret"
