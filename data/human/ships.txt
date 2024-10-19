@@ -809,7 +809,7 @@ ship "Bulk Freighter"
 	engine -22 198
 	engine 22 198
 	pylon -11 -8 "Sidewinder Missile Launcher"
-		"angle 270"
+		"angle" 270
 	pylon 11 -8
 		"angle" 90
 	turret -12 -155 "Laser Turret"
@@ -1048,7 +1048,7 @@ ship "Class C Freighter"
 	engine -20 195.5
 	engine 20 195.5
 	pylon -11 -8 "Sidewinder Missile Launcher"
-		"angle 270"
+		"angle" 270
 	pylon 11 -8
 		"angle" 90
 	turret -12 -155 "Quad Blaster Turret"
@@ -1657,8 +1657,8 @@ ship "Dropship"
 	engine -13 26
 	gun 2 -27 "Beam Laser"
 	gun -2 -27 "Beam Laser"
-	pod 2 -27
-	pod -2 -27
+	pylon 2 -27
+	pylon -2 -27
 	leak "leak" 60 50
 	explode "tiny explosion" 15
 	explode "small explosion" 5
