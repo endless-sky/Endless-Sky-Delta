@@ -2719,12 +2719,12 @@ ship "Manta" "Manta (Mark II)"
 		"A375 Atomic Steering"
 		"Hyperdrive"
 		"Ionic Afterburner"
-	gun "Sidewinder Missile Launcher"
-	gun
 	gun "Particle Cannon"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
+	pylon "Sidewinder Missile Launcher"
+	pylon
 
 
 ship "Manta" "Manta (Nuclear)"
@@ -2739,12 +2739,12 @@ ship "Manta" "Manta (Nuclear)"
 		"A250 Atomic Thruster"
 		"A375 Atomic Steering"
 		"Hyperdrive"
-	gun "Nuclear Missile"
-	gun "Nuclear Missile"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
+	pylon "Nuclear Missile"
+	pylon "Nuclear Missile"
 
 
 ship "Manta" "Manta (Proton)"
@@ -2759,13 +2759,13 @@ ship "Manta" "Manta (Proton)"
 		"X3700 Ion Thruster"
 		"X3200 Ion Steering"
 		"Hyperdrive"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
 	gun "Proton Gun"
 	gun "Proton Gun"
 	gun "Proton Gun"
 	gun "Proton Gun"
-
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
+	
 
 ship "Manta" "Manta (Miner)"
 	outfits
@@ -2787,8 +2787,8 @@ ship "Manta" "Manta (Miner)"
 	gun "Heavy Laser"
 	gun "Heavy Laser"
 	gun "Heavy Laser"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
 
 
 
