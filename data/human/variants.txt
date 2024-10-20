@@ -2625,10 +2625,14 @@ ship "Leviathan" "Leviathan (Heavy)"
 		"Volcano Afterburner"
 		"Scram Drive"
 		"Ramscoop"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
+	gun
+	gun
+	gun
+	gun
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
 	turret "Heavy Laser Turret"
 	turret "Heavy Laser Turret"
 	turret "Heavy Anti-Missile Turret"
