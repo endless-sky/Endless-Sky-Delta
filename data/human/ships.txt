@@ -2076,8 +2076,12 @@ ship "Frigate"
 	engine 26 96.5
 	gun -11 -84.5 "Particle Cannon"
 	gun 11 -84.5 "Particle Cannon"
-	gun -11 -84.5 "Torpedo Launcher"
-	gun 11 -84.5 "Torpedo Launcher"
+	gun -11 -84.5
+	gun 11 -84.5
+	pylon -11 -37 "Torpedo Launcher"
+		over
+	pylon 11 -37 "Torpedo Launcher"
+		over
 	turret 0 -37.5 "Anti-Missile Turret"
 	turret -15.5 -12.5 "Blaster Turret"
 	turret 15.5 -12.5 "Blaster Turret"
@@ -2144,6 +2148,8 @@ ship "Fury"
 	gun 5.5 -33
 	pylon -37 27
 	pylon 37 27
+	pylon -13 -2
+	pylon 13 -2
 	leak "flame" 50 80
 	explode "tiny explosion" 10
 	explode "small explosion" 20
@@ -2200,6 +2206,10 @@ ship "Gunboat"
 	engine 12 57.5 0.7
 	gun -28.5 -27.5 "Heavy Laser"
 	gun 28.5 -27.5 "Heavy Laser"
+	pylon -10 -14
+		over
+	pylon 10 -14
+		over
 	turret 0 -1 "Heavy Laser Turret"
 	leak "leak" 50 50
 	leak "flame" 80 80
@@ -2255,8 +2265,10 @@ ship "Hauler"
 
 	engine -45 122.5
 	engine 45 122.5
-	gun -14.5 -92.5
-	gun 14.5 -92.5
+	pylon -30 -48
+		"angle" 270
+	pylon 30 -48
+		"angle" 90
 	turret -21.5 -48 "Quad Blaster Turret"
 	turret 21.5 -48 "Heavy Anti-Missile Turret"
 	turret -18.5 78.5 "Heavy Anti-Missile Turret"
@@ -2319,8 +2331,10 @@ ship "Hauler II"
 		
 	engine -45 159.5
 	engine 45 159.5
-	gun -14.5 -129.5
-	gun 14.5 -129.5
+	pylon -30 -86
+		"angle" 270
+	pylon 30 -86
+		"angle" 90
 	turret -21.5 -84.5 "Quad Blaster Turret"
 	turret 21.5 -84.5 "Heavy Anti-Missile Turret"
 	turret -18.5 115.5 "Heavy Anti-Missile Turret"
@@ -2383,8 +2397,10 @@ ship "Hauler III"
 
 	engine -45 196.5
 	engine 45 196.5
-	gun -14.5 -166.5
-	gun 14.5 -166.5
+	pylon -30 -122
+		"angle" 270
+	pylon 30 -122
+		"angle" 90
 	turret -21.5 -122 "Quad Blaster Turret"
 	turret 21.5 -122 "Heavy Anti-Missile Turret"
 	turret -18.5 152.5 "Heavy Anti-Missile Turret"
@@ -2444,6 +2460,8 @@ ship "Hawk"
 	engine 23.5 41
 	gun -8.5 -17.5
 	gun 8.5 -17.5
+	pylon -38 26
+	pylon 38 26
 	leak "leak" 60 50
 	explode "tiny explosion" 15
 	explode "small explosion" 5
@@ -2497,6 +2515,10 @@ ship "Headhunter"
 	gun 17.5 -17
 	gun -12 -25.5 "Heavy Laser"
 	gun 12 -25.5 "Heavy Laser"
+	pylon -46 51
+		over
+	pylon 46 51
+		over
 	pylon -24 21
 	pylon 24 21
 	pylon -31 28
@@ -2659,8 +2681,10 @@ ship "Lance"
 	engine -14.5 30.5 0.5
 	engine 14.5 30.5 0.5
 	gun 0 -34 "Energy Blaster"
-	gun -13.5 -6.5 "Sidewinder Missile Pod"
-	gun 13.5 -6.5 "Sidewinder Missile Pod"
+	gun -13.5 -6.5
+	gun 13.5 -6.5
+	pylon -19 18 "Sidewinder Missile Pod"
+	pylon 19 18 "Sidewinder Missile Pod"
 	explode "tiny explosion" 15
 	explode "small explosion" 5
 	description "The Lance is the primary fighter used by the Republic Navy. As with all fighters, it is weak by itself but very effective as part of a larger squadron."
@@ -2715,6 +2739,18 @@ ship "Leviathan"
 	gun 37.5 -31.5 "Particle Cannon"
 	gun -49 -19.5 "Particle Cannon"
 	gun 49 -19.5 "Particle Cannon"
+	pylon -43 46
+		angle 315
+		over
+	pylon 43 46
+		angle 45
+		over
+	pylon -47 56
+		angle 315
+		over
+	pylon 47 56
+		angle 45
+		over
 	turret -14 -10 "Quad Blaster Turret"
 	turret 14 -10 "Quad Blaster Turret"
 	turret -25.5 12.5 "Quad Blaster Turret"
@@ -2787,6 +2823,10 @@ ship "Mammoth"
 	engine 56 148.5 0.6
 	gun -47.5 -57.5
 	gun 47.5 -57.5
+	pylon -55 35
+		angle 270
+	pylon 55 35
+		angle 90
 	turret -31 -50 "Anti-Missile Turret"
 	turret 31 -50 "Anti-Missile Turret"
 	turret -14.5 0 "Quad Blaster Turret"
