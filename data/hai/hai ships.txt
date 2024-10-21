@@ -815,6 +815,7 @@ ship "Pond Strider"
 	gun 0 -76 "Railgun"
 	gun -15 -72 "Ion Cannon"
 	gun 15 -72 "Ion Cannon"
+	pylon 0 -60
 	turret -18 -53 "Bullfrog Anti-Missile"
 	turret 18 -53 "Bullfrog Anti-Missile"
 	turret 0 14 "Chameleon Anti-Missile"
@@ -981,10 +982,10 @@ ship "Sea Scorpion"
 		zoom 0.55
 		angle 90
 		left
-	gun -13 -77.5
-	gun 13 -77.5
-	gun -27 -56
-	gun 27 -56
+	pylon -13 -77.5
+	pylon 13 -77.5
+	pylon -27 -56
+	pylon 27 -56
 	turret -35.5 24.5
 	turret 35.5 24.5
 	leak "leak" 40 50
@@ -1015,6 +1016,16 @@ ship "Sea Scorpion" "Sea Scorpion (Tracker)"
 
 
 ship "Sea Scorpion" "Sea Scorpion (Pulse)"
+	remove attributes
+		pylon -13 -77.5
+		pylon 13 -77.5
+		pylon -27 -56
+		pylon 27 -56
+	add attributes
+		gun -13 -77.5
+		gun 13 -77.5
+		gun -27 -56
+		gun 27 -56
 	outfits
 		"Pulse Cannon" 4
 		"Pulse Turret" 2

@@ -184,6 +184,8 @@ shipyard "Independent (Korath-Allied)"
 	"Bactrian"
 	"Bactrian (Hai Weapons)"
 	"'nra'ret"
+	"Sea Scorpion (Pulse)"
+	"Sea Scorpion"
 
 
 # See note above about capabilities and limitations of "Independent (Korath-Allied)"
