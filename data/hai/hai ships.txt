@@ -129,8 +129,10 @@ ship "Centipede"
 		
 	engine -15 113
 	engine 15 113
-	pylon -11 -113 "Hai Tracker Pod"
-	pylon 11 -113 "Hai Tracker Pod"
+	gun -11 -113
+	gun 11 -113
+	pylon -31 -2 "Hai Tracker Pod"
+	pylon 31 -2 "Hai Tracker Pod"
 	turret 0 -19 "Bullfrog Anti-Missile"
 	turret -41 67 "Bullfrog Anti-Missile"
 	turret 41 67 "Bullfrog Anti-Missile"
@@ -661,10 +663,10 @@ ship "Ladybug"
 		`"Biroo" Atomic Thruster`
 		"Hyperdrive"
 
-	gun 0 -69.5 "Hai Tracker Pod"
+	gun 0 -69.5
 	gun -12 -68.5 "Ion Cannon"
 	gun 12 -68.5 "Ion Cannon"
-	pylon 0 -30
+	pylon 0 -30 "Hai Tracker Pod"
 	pylon -46 -40
 		"angle" 20
 	pylon 46 -40

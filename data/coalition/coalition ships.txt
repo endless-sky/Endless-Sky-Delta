@@ -1824,6 +1824,10 @@ ship "Kimek Thistle"
 	engine 13 120 .7
 	gun -11 -92
 	gun 11 -92
+	pylon -19 3.5
+		"angle" 270
+	pylon 19 3.5
+		"angle" 90
 	turret -13 3
 	turret 13 3
 	explode "small explosion" 10
