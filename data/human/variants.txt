@@ -3796,13 +3796,20 @@ ship "Vanguard" "Vanguard (Missile)"
 		"X3700 Ion Thruster"
 		"X4200 Ion Steering"
 		"Hyperdrive"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
-	gun "Torpedo Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
+	gun
+	gun
+	gun
+	gun
+	gun
+	gun
+	gun
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Torpedo Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
 
 
 ship "Vanguard" "Vanguard (Particle)"
@@ -3869,8 +3876,10 @@ ship "Wasp" "Wasp (Meteor)"
 		"X2200 Ion Steering"
 		"Hyperdrive"
 	gun "Energy Blaster"
-	gun "Meteor Missile Pod"
-	gun "Meteor Missile Pod"
+	gun
+	gun
+	pylon "Meteor Missile Pod"
+	pylon "Meteor Missile Pod"
 
 
 ship "Wasp" "Wasp (Plasma)"

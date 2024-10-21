@@ -2740,16 +2740,16 @@ ship "Leviathan"
 	gun -49 -19.5 "Particle Cannon"
 	gun 49 -19.5 "Particle Cannon"
 	pylon -43 46
-		angle 315
+		"angle" 315
 		over
 	pylon 43 46
-		angle 45
+		"angle" 45
 		over
 	pylon -47 56
-		angle 315
+		"angle" 315
 		over
 	pylon 47 56
-		angle 45
+		"angle" 45
 		over
 	turret -14 -10 "Quad Blaster Turret"
 	turret 14 -10 "Quad Blaster Turret"
@@ -2824,9 +2824,9 @@ ship "Mammoth"
 	gun -47.5 -57.5
 	gun 47.5 -57.5
 	pylon -55 35
-		angle 270
+		"angle" 270
 	pylon 55 35
-		angle 90
+		"angle" 90
 	turret -31 -50 "Anti-Missile Turret"
 	turret 31 -50 "Anti-Missile Turret"
 	turret -14.5 0 "Quad Blaster Turret"
@@ -3064,9 +3064,9 @@ ship "Mule"
 	gun -11 -125
 	gun 11 -125
 	pylon 42.5 23.5 "Sidewinder Missile Launcher"
-		angle 90
+		"angle" 90
 	pylon 43 36 "Sidewinder Missile Launcher"
-		angle 90
+		"angle" 90
 	turret -22 -53.5 "Heavy Laser Turret"
 	turret 19.5 -39 "Anti-Missile Turret"
 	turret 20 33 "Heavy Laser Turret"
@@ -3929,6 +3929,10 @@ ship "Sparrow"
 	gun 7 -10
 	gun -10.5 -8.5
 	gun 10.5 -8.5
+	pylon -20 -3.5
+	pylon 20 -3.5
+	pylon -29 -3
+	pylon 29 -3
 	leak "flame" 60 80
 	explode "tiny explosion" 15
 	explode "small explosion" 5
@@ -3983,6 +3987,8 @@ ship "Splinter"
 	engine 15.5 115
 	gun -12 -93 "Proton Gun"
 	gun 12 -93 "Proton Gun"
+	pylon -22.5 -42
+	pylon 22.5 -42
 	turret -13 42 "Blaster Turret"
 	turret 0 9 "Anti-Missile Turret"
 	turret 13 42 "Blaster Turret"
@@ -4094,9 +4100,10 @@ ship "Star Queen"
 		over
 	"reverse engine" 19 51
 		over
-	gun 0 -113
-	gun -24 -76 "Sidewinder Missile Launcher"
-	gun 24 -76
+	pylon -24 -76 "Sidewinder Missile Launcher"
+	pylon 24 -76
+	pylon 0 113
+		"angle" 180
 	turret -21.5 2.5 "Heavy Anti-Missile Turret"
 	turret 21.5 2.5 "Heavy Anti-Missile Turret"
 	leak "leak" 50 50
@@ -4260,8 +4267,10 @@ ship "Valkyrie"
 	engine -15 97
 	gun -12 -78 "Particle Cannon"
 	gun 12 -78 "Particle Cannon"
-	gun -64 -19 "Torpedo Launcher"
-	gun 64 -19 "Torpedo Launcher"
+	gun -64 -19
+	gun 64 -19
+	pylon -71 31 "Torpedo Launcher"
+	pylon 71 31 "Torpedo Launcher"
 	turret -31 15.5
 	turret 31 15.5
 	bay "Fighter" -43.5 2
@@ -4334,6 +4343,13 @@ ship "Vanguard"
 		parallel
 	gun 35 -44.5 "Proton Gun"
 		parallel
+	pylon 0 -72
+	pylon -18 -75
+	poylon 18 -75
+	pylon -26 5
+	pylon 26 5
+	pylon -20 4
+	pylon 20 4
 	turret 0 42 "Anti-Missile Turret"
 	leak "leak" 60 50
 	leak "flame" 30 80
