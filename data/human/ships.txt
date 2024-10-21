@@ -3699,6 +3699,8 @@ ship "Scout"
 	engine 7 40
 	gun -18.5 -6 "Energy Blaster"
 	gun 18.5 -6 "Energy Blaster"
+	pylon -27 30
+	pylon 27 30
 	turret 0 -2.5 "Anti-Missile Turret"
 	explode "tiny explosion" 10
 	explode "small explosion" 20
@@ -3854,8 +3856,8 @@ ship "Skein"
 
 	engine -45 196.5
 	engine 45 196.5
-	gun -14.5 -166.5
-	gun 14.5 -166.5
+	pylon -14.5 -166.5
+	pylon 14.5 -166.5
 	turret -21.5 -122 "Quad Blaster Turret"
 	turret 21.5 -122 "Heavy Anti-Missile Turret"
 	turret -18.5 152.5 "Anti-Missile Turret"
