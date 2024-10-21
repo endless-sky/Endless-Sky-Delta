@@ -1022,10 +1022,6 @@ ship "Sea Scorpion" "Sea Scorpion (Pulse)"
 		pylon -27 -56
 		pylon 27 -56
 	add attributes
-		gun -13 -77.5
-		gun 13 -77.5
-		gun -27 -56
-		gun 27 -56
 	outfits
 		"Pulse Cannon" 4
 		"Pulse Turret" 2
@@ -1039,6 +1035,12 @@ ship "Sea Scorpion" "Sea Scorpion (Pulse)"
 		"Value Detector"
 		"Hyperdrive"
 		"Pulse Rifle" 15
+	gun -13 -77.5
+	gun 13 -77.5
+	gun -27 -56
+	gun 27 -56
+	turret -35.5 24.5
+	turret 35.5 24.5
 
 
 ship "Sea Scorpion" "Sea Scorpion (Ion)"
@@ -1055,6 +1057,12 @@ ship "Sea Scorpion" "Sea Scorpion (Ion)"
 		"Value Detector"
 		"Hyperdrive"
 		"Pulse Rifle" 15
+	pylon -13 -77.5
+	gun 13 -77.5
+	gun -27 -56
+	gun 27 -56
+	turret -35.5 24.5
+	turret 35.5 24.5
 
 
 ship "Sea Scorpion" "Sea Scorpion (Ionic)"
@@ -1071,6 +1079,12 @@ ship "Sea Scorpion" "Sea Scorpion (Ionic)"
 		"Ionic Blaster Prototype" 2
 		"Ionic Turret Prototype"
 		"Pulse Rifle" 15
+	gun -13 -77.5
+	gun 13 -77.5
+	gun -27 -56
+	gun 27 -56
+	turret -35.5 24.5
+	turret 35.5 24.5
 
 
 ship "Sea Scorpion" "Sea Scorpion (Shredder)"
@@ -1088,6 +1102,12 @@ ship "Sea Scorpion" "Sea Scorpion (Shredder)"
 		"Pulse Turret"
 		"Quantum Keystone"
 		"Tripulse Shredder" 2
+	gun -13 -77.5
+	gun 13 -77.5
+	gun -27 -56
+	gun 27 -56
+	turret -35.5 24.5
+	turret 35.5 24.5
 
 
 
@@ -1700,12 +1720,20 @@ ship "Emperor Beetle"
 	"steering engine" 43 131
 		zoom 0.45
 		left
-	gun 12.5 -128
 	gun -10 -128
+	gun 12.5 -128
 	gun -23 -102.5
 	gun 24.5 -102.5
 	gun -42.5 -53.5 "Tripulse Shredder"
 	gun 43.5 -54.5 "Tripulse Shredder"
+	pylon 43.5 -54
+		"angle" 340
+	pylon 43.5 -54
+		"angle" 20
+	pylon -60 -20
+		"angle" 315
+	pylon 60 -20
+		"angle" 45
 	turret 0.5 -25.5 "Warder Anti-Missile"
 	turret -47.5 11.5
 	turret 48.5 11.5
@@ -1775,7 +1803,7 @@ ship "Solifuge"
 		
 	engine -28 135.5
 	engine 28 135.5
-	gun 0 -140 "Hai Tracker Pod"
+	pylon 0 -140 "Hai Tracker Pod"
 	gun -11.5 -138.5 "Ion Cannon"
 	gun 11.5 -138.5 "Ion Cannon"
 	gun -9.5 -101 "Ion Cannon"
@@ -1846,11 +1874,18 @@ ship "Solifuge" "Solifuge (Jump, Pulse)"
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Jump Drive"
-	gun "Pulse Cannon"
-	gun "Pulse Cannon"
-	gun "Pulse Cannon"
-	gun "Ion Cannon"
-	gun "Ion Cannon"
+	gun 0 -140 "Pulse Cannon"
+	gun -11.5 -138.5 "Ion Cannon"
+	gun 11.5 -138.5 "Ion Cannon"
+	gun -9.5 -101 "Pulse Cannon"
+	gun 9.5 -101 "Pulse Cannon"
+	turret 0 -109.5 "Pulse Turret"
+	turret 54.5 -48.5 "Bullfrog Anti-Missile"
+	turret -54.5 -48.5 "Bullfrog Anti-Missile"
+	turret 55 1 "Pulse Turret"
+	turret -55 1 "Pulse Turret"
+	turret 54.5 50.5 "Pulse Turret"
+	turret -54.5 50.5 "Pulse Turret"
 
 
 ship "Solifuge" "Solifuge (Jump, Tracker)"
@@ -1870,6 +1905,18 @@ ship "Solifuge" "Solifuge (Jump, Tracker)"
 		`"Bufaer" Atomic Steering`
 		`"Bondir" Atomic Thruster`
 		"Jump Drive"
+	pylon 0 -140 "Hai Tracker Pod"
+	pylon -11.5 -138.5 "Hai Tracker Pod"
+	pylon 11.5 -138.5 "Hai Tracker Pod"
+	pylon -9.5 -101 "Hai Tracker Pod"
+	pylon 9.5 -101 "Hai Tracker Pod"
+	turret 0 -109.5 "Chameleon Anti-Missile"
+	turret 54.5 -48.5 "Pulse Turret"
+	turret -54.5 -48.5 "Pulse Turret"
+	turret 55 1 "Pulse Turret"
+	turret -55 1 "Pulse Turret"
+	turret 54.5 50.5 "Bullfrog Anti-Missile"
+	turret -54.5 50.5 "Bullfrog Anti-Missile"
 
 
 ship "Solifuge" "Solifuge (Pulse)"
