@@ -3061,8 +3061,12 @@ ship "Mule"
 		
 	engine 11 128
 	engine -8 128
-	gun -11 -125 "Sidewinder Missile Launcher"
-	gun 11 -125 "Sidewinder Missile Launcher"
+	gun -11 -125
+	gun 11 -125
+	pylon 42.5 23.5 "Sidewinder Missile Launcher"
+		angle 90
+	pylon 43 36 "Sidewinder Missile Launcher"
+		angle 90
 	turret -22 -53.5 "Heavy Laser Turret"
 	turret 19.5 -39 "Anti-Missile Turret"
 	turret 20 33 "Heavy Laser Turret"
@@ -3124,8 +3128,8 @@ ship "Nest"
 		
 	engine -45 122.5
 	engine 45 122.5
-	gun -14.5 -92.5
-	gun 14.5 -92.5
+	pylon -14.5 -92.5
+	pylon 14.5 -92.5
 	turret -21.5 -48 "Quad Blaster Turret"
 	turret 21.5 -48 "Heavy Anti-Missile Turret"
 	turret -18.5 78.5 "Heavy Anti-Missile Turret"
@@ -3321,8 +3325,8 @@ ship "Protector"
 		
 	engine -12 122.5
 	engine 12 122.5
-	gun -17.5 -101 "Meteor Missile Launcher"
-	gun 17.5 -101 "Meteor Missile Launcher"
+	pylon -17.5 -101 "Meteor Missile Launcher"
+	pylon 17.5 -101 "Meteor Missile Launcher"
 	turret -48.5 -48.5 "Quad Blaster Turret"
 	turret 48.5 -48.5 "Quad Blaster Turret"
 	turret 0 -28.5 "Heavy Anti-Missile Turret"
@@ -3439,10 +3443,12 @@ ship "Rainmaker"
 	engine 11.5 44.5 0.4
 	gun -7.5 -36.5 "Energy Blaster"
 	gun 7.5 -36.5 "Energy Blaster"
-	gun -27 8 "Meteor Missile Launcher"
-	gun 27 8 "Meteor Missile Launcher"
-	gun -22 8 "Meteor Missile Launcher"
-	gun 22 8 "Meteor Missile Launcher"
+	pylon -27 8 "Meteor Missile Launcher"
+	pylon 27 8 "Meteor Missile Launcher"
+	pylon -23 8 "Meteor Missile Launcher"
+	pylon 23 8 "Meteor Missile Launcher"
+	pylon -20 8
+	pylon 20 8
 	leak "leak" 50 50
 	explode "tiny explosion" 10
 	explode "small explosion" 20
@@ -3499,8 +3505,10 @@ ship "Raven"
 	engine 9.5 63
 	gun -13.5 -35.5 "Heavy Laser"
 	gun 13.5 -35.5 "Heavy Laser"
-	gun -21 -28 "Torpedo Launcher"
-	gun 21 -28 "Sidewinder Missile Launcher"
+	gun -21 -28
+	gun 21 -28
+	pylon -40 -20 "Torpedo Launcher"
+	pylon 40 -20 "Sidewinder Missile Launcher"
 	leak "leak" 60 50
 	leak "flame" 50 80
 	explode "medium explosion" 24
@@ -3557,8 +3565,8 @@ ship "Roost"
 		
 	engine -45 159.5
 	engine 45 159.5
-	gun -14.5 -129.5
-	gun 14.5 -129.5
+	pylon -14.5 -129.5
+	pylon 14.5 -129.5
 	turret -21.5 -84.5 "Quad Blaster Turret"
 	turret 21.5 -84.5 "Heavy Anti-Missile Turret"
 	turret -18.5 115.5 "Heavy Anti-Missile Turret"

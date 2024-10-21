@@ -3070,8 +3070,8 @@ ship "Nest" "Nest (Miner)"
 		"Greyhound Plasma Thruster"
 		"Impala Plasma Steering"
 		"Scram Drive"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
 	turret "Mining Laser Turret"
 	turret "Tractor Beam"
 	turret "Tractor Beam"
@@ -3252,6 +3252,8 @@ ship "Protector" "Protector (Laser)"
 		"A370 Atomic Thruster"
 		"A375 Atomic Steering"
 		"Hyperdrive"
+	pylon
+	pylon
 	turret "Heavy Laser Turret"
 	turret "Heavy Laser Turret"
 	turret
@@ -3277,6 +3279,8 @@ ship "Protector" "Protector (Proton)"
 		"A370 Atomic Thruster"
 		"A375 Atomic Steering"
 		"Hyperdrive"
+	pylon
+	pylon
 	turret "Proton Turret"
 	turret "Proton Turret"
 	turret
@@ -3380,10 +3384,12 @@ ship "Rainmaker" "Rainmaker (Mark II)"
 		"Scram Drive"
 	gun
 	gun
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun "Sidewinder Missile Launcher"
-	gun
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon "Sidewinder Missile Launcher"
+	pylon
+	pylon
+	pylon
 
 
 ship "Rainmaker" "Rainmaker (Mark II Old Weapons)"
@@ -3431,8 +3437,10 @@ ship "Raven" "Raven (Heavy)"
 		"Hyperdrive"
 	gun "Particle Cannon"
 	gun "Particle Cannon"
-	gun "Meteor Missile Launcher"
-	gun "Meteor Missile Launcher"
+	gun
+	gun
+	pylon "Meteor Missile Launcher"
+	pylon "Meteor Missile Launcher"
 
 
 
