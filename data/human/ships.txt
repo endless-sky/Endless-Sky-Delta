@@ -4345,7 +4345,7 @@ ship "Vanguard"
 		parallel
 	pylon 0 -72
 	pylon -18 -75
-	poylon 18 -75
+	pylon 18 -75
 	pylon -26 5
 	pylon 26 5
 	pylon -20 4
@@ -4404,12 +4404,12 @@ ship "Wasp"
 		
 	engine -5.5 32.5
 	engine 5.5 32.5
-	gun 0 -41 "Sidewinder Missile Pod"
+	gun 0 -41
 	gun -13.5 -35 "Energy Blaster"
 	gun 13.5 -35 "Energy Blaster"
 	gun -18.5 -27
 	gun 18.5 -27
-	pylon -19 -14.5
+	pylon -19 -14.5 "Sidewinder Missile Pod"
 	pylon 19 -14.5
 	leak "leak" 60 50
 	explode "tiny explosion" 20
