@@ -39,6 +39,8 @@ public:
 	static const Command AUTOSTEER;
 	static const Command BACK;
 	static const Command MOUSE_TURNING_HOLD;
+	static const Command LATERALLEFT;
+	static const Command LATERALRIGHT;
 	static const Command PRIMARY;
 	static const Command TURRET_TRACKING;
 	static const Command SECONDARY;
@@ -65,7 +67,8 @@ public:
 	// Escort commands:
 	static const Command FIGHT;
 	static const Command GATHER;
-	static const Command HOLD;
+	static const Command HOLD_FIRE;
+	static const Command HOLD_POSITION;
 	static const Command AMMO;
 	static const Command HARVEST;
 	// This command is given in combination with JUMP or LAND and tells a ship
@@ -81,6 +84,7 @@ public:
 	// Modifier command, usually triggered by shift-key. Changes behavior of
 	// other commands like NEAREST, TARGET, HAIL and BOARD.
 	static const Command SHIFT;
+	static const Command CTRL;
 
 
 public:
@@ -123,10 +127,14 @@ public:
 	// Get the commands that are set in this and not in the given command.
 	Command AndNot(Command command) const;
 
-	// Get or set the turn amount. The amount must be between -1 and 1, but it
-	// can be a fractional value to allow finer control.
+	// Get or set the turn, thrust, and lateral thrust amount. The amount must be between -1 and 1,
+	// but it can be a fractional value to allow finer control.
 	void SetTurn(double amount);
 	double Turn() const;
+	void SetThrust(double amount);
+	double Thrust() const;
+	void SetLateralThrust(double amount);
+	double LateralThrust() const;
 
 	// Check if any bits are set in this command (including a nonzero turn).
 	explicit operator bool() const;
@@ -150,4 +158,6 @@ private:
 	uint64_t state = 0;
 	// Turning amount is stored as a separate double to allow fractional values.
 	double turn = 0.;
+	double thrust = 0.;
+	double lateralThrust = 0.;
 };
