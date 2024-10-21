@@ -2998,8 +2998,12 @@ ship "Modified Argosy"
 	gun 22.5 -37 "Heavy Laser"
 	gun -22 -37
 	gun 22.5 -37
-	pylon -20 37 "Meteor Missile Launcher"
-	pylon 20 37 "Meteor Missile Launcher"
+	pylon -22 -4 "Meteor Missile Launcher"
+	pylon 22 -4 "Meteor Missile Launcher"
+	pylon -29 35
+		"angle" 300
+	pylon 29 35
+		"angle" 60
 	turret 0 -12.5 "Heavy Anti-Missile Turret"
 	turret 0 9.5 "Heavy Laser Turret"
 	leak "leak" 70 50
