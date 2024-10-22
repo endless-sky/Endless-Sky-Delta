@@ -864,6 +864,10 @@ ship "Pond Strider" "Pond Strider (Tracker)"
 		`"Basrem" Atomic Thruster`
 		`"Biroo" Atomic Steering`
 		"Hyperdrive"
+	gun
+	gun "Railgun"
+	gun "Railgun"
+	pylon "Hai Tracker Pod"
 
 
 ship "Pond Strider" "Pond Strider (Ion)"
@@ -982,14 +986,14 @@ ship "Sea Scorpion"
 		zoom 0.55
 		angle 90
 		left
-	pylon -13 -77.5
-	pylon 13 -77.5
-	pylon -27 -56
-	pylon 27 -56
 	gun -10 -50
 	gun 10 -50
 	gun -33 -20
 	gun 33 -20
+	pylon -13 -77.5
+	pylon 13 -77.5
+	pylon -27 -56
+	pylon 27 -56
 	turret -35.5 24.5
 	turret 35.5 24.5
 	leak "leak" 40 50
