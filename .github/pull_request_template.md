@@ -4,8 +4,6 @@ NOTICE: Delete the sections that do not apply to your PR, and fill out the secti
 ----------------------
 **Content (Artwork / Missions / Jobs)**
 
-This PR addresses the bug/feature described in issue #{{insert number}}
-
 ## Summary
 {{summarize your content! Include links to related issues, in-game screenshots, etc.}}
 
