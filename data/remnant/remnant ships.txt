@@ -1123,9 +1123,11 @@ ship "Merganser" "Merganser (II)"
 		"Bellows-Class Afterburner"
 		"Scram Drive"
 		
-	gun 0 -48.5 "Teciimach Pod"
+	gun 0 -48.5
 	gun -6 -41 "Inhibitor Cannon"
 	gun 6 -41 "Inhibitor Cannon"
+	pylon -17 -12 "Teciimach Pod"
+	pylon 17 -12
 	turret 0 0
 
 

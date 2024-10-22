@@ -1037,8 +1037,6 @@ ship "Sea Scorpion" "Sea Scorpion (Pulse)"
 		"Value Detector"
 		"Hyperdrive"
 		"Pulse Rifle" 15
-	turret -35.5 24.5
-	turret 35.5 24.5
 
 
 ship "Sea Scorpion" "Sea Scorpion (Ion)"
@@ -1055,8 +1053,6 @@ ship "Sea Scorpion" "Sea Scorpion (Ion)"
 		"Value Detector"
 		"Hyperdrive"
 		"Pulse Rifle" 15
-	turret -35.5 24.5
-	turret 35.5 24.5
 
 
 ship "Sea Scorpion" "Sea Scorpion (Ionic)"
@@ -1073,8 +1069,6 @@ ship "Sea Scorpion" "Sea Scorpion (Ionic)"
 		"Ionic Blaster Prototype" 2
 		"Ionic Turret Prototype"
 		"Pulse Rifle" 15
-	turret -35.5 24.5
-	turret 35.5 24.5
 
 
 ship "Sea Scorpion" "Sea Scorpion (Shredder)"
@@ -1092,8 +1086,6 @@ ship "Sea Scorpion" "Sea Scorpion (Shredder)"
 		"Pulse Turret"
 		"Quantum Keystone"
 		"Tripulse Shredder" 2
-	turret -35.5 24.5
-	turret 35.5 24.5
 
 
 
@@ -1795,6 +1787,10 @@ ship "Solifuge"
 	gun -9.5 -101 "Ion Cannon"
 	gun 9.5 -101 "Ion Cannon"
 	pylon 0 -135 "Hai Tracker Pod"
+	pylon -39 -122
+		"angle" 315
+	pylon 39 -122
+		"angle" 45
 	pylon -63 -84
 		"angle" 345
 	pylon 63 -84
@@ -1870,6 +1866,8 @@ ship "Solifuge" "Solifuge (Jump, Pulse)"
 	gun "Ion Cannon"
 	gun "Pulse Cannon"
 	gun "Pulse Cannon"
+	pylon
+	pylon
 	pylon
 	pylon
 	pylon
