@@ -152,7 +152,7 @@ ship "Ejniisde"
 		`"Chyyra" Inductive Reverser`
 		"Hyperdrive"
 
-	pylon 0 -106
+	gun 0 -106
 	turret 22 10
 	turret -22 10
 	engine 25 67
@@ -843,8 +843,7 @@ ship "Seiitej"
 	gun -5 -86
 	gun 5 -86
 	gun 10 -78
-	pylon -10 -78
-	pylon 10 -78
+	pylon 0 -76
 	turret 0 -29
 	engine -25 44
 	engine 25 44
@@ -1130,8 +1129,7 @@ ship "Vujlet"
 	gun 6 -46 `"Ojet" Bimodal Coilgun`
 	gun -9 -30
 	gun 9 -30
-	pylon -9 26
-	pylon 9 26
+	pylon 0 44
 	engine -16 49
 		zoom .9
 	engine 16 49
