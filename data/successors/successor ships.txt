@@ -1031,8 +1031,6 @@ ship "Veusade"
 	gun 11 -64 "Drag Cannon"
 	gun 22 -34 "Drag Cannon"
 	gun 25 -32 "Drag Cannon"
-	pylon -25 -30
-	pylon 25 -30
 	engine -11 21
 		zoom .8
 	engine 11 21
