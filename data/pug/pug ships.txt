@@ -169,7 +169,7 @@ ship "Pug Maboro"
 	engine 21 134.5
 	gun -24.5 -165
 	gun 24.5 -165
-	gun -33.5 -142.5 
+	gun -33.5 -142.5
 	gun 33.5 -142.5
 	pylon -24.5 -165 "Pug Seeker"
 	pylon 24.5 -165 "Pug Seeker"
