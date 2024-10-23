@@ -180,6 +180,8 @@ ship "Telis'het"
 	gun 20.5 -90.5
 	pylon -20.5 -90.5 "Ka'het EMP Deployer"
 	pylon 20.5 -90.5 "Ka'het EMP Deployer"
+	pylon -31 -83
+	pylon 31 -83
 	turret -43 -51 "Ka'het Ravager Turret"
 	turret 43 -51 "Ka'het Ravager Turret"
 	turret -17.5 -51.5 "Ka'het Annihilator Turret"
