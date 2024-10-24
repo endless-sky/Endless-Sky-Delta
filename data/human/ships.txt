@@ -198,9 +198,9 @@ ship "Arrow"
 	gun -7.5 -36
 	gun 7.5 -36
 	pylon -9.5 38.5 "Sidewinder Missile Pod"
-		"angle" 180
+		angle 180
 	pylon 9.5 38.5 "Sidewinder Missile Pod"
-		"angle" 180
+		angle 180
 	turret 0 17.5 "Anti-Missile Turret"
 	leak "leak" 80 50
 	explode "tiny explosion" 12
@@ -343,13 +343,13 @@ ship "Bactrian"
 	gun 36.5 -197
 	gun 42 -193
 	pylon -27 -120.5 "Sidewinder Missile Launcher"
-		"angle" 300
+		angle 300
 	pylon 5.5 -119 "Sidewinder Missile Launcher"
-		"angle" 45
+		angle 45
 	pylon -29 -27.5 "Torpedo Launcher"
-		"angle" 300
+		angle 300
 	pylon 44 119
-		"angle" 90
+		angle 90
 	turret 37 -132.5 "Heavy Anti-Missile Turret"
 	turret -39 -39 "Heavy Laser Turret"
 	turret 31.5 -26 "Heavy Laser Turret"
@@ -809,9 +809,9 @@ ship "Bulk Freighter"
 	engine -22 198
 	engine 22 198
 	pylon -11 -8 "Sidewinder Missile Launcher"
-		"angle" 270
+		angle 270
 	pylon 11 -8
-		"angle" 90
+		angle 90
 	turret -12 -155 "Laser Turret"
 	turret 12 -155 "Heavy Anti-Missile Turret"
 	turret 0 5 "Laser Turret"
@@ -1048,9 +1048,9 @@ ship "Class C Freighter"
 	engine -20 195.5
 	engine 20 195.5
 	pylon -11 -8 "Sidewinder Missile Launcher"
-		"angle" 270
+		angle 270
 	pylon 11 -8
-		"angle" 90
+		angle 90
 	turret -12 -155 "Quad Blaster Turret"
 	turret 12 -155 "Heavy Anti-Missile Turret"
 	turret 0 5 "Proton Turret"
@@ -2266,9 +2266,9 @@ ship "Hauler"
 	engine -45 122.5
 	engine 45 122.5
 	pylon -30 -48
-		"angle" 270
+		angle 270
 	pylon 30 -48
-		"angle" 90
+		angle 90
 	turret -21.5 -48 "Quad Blaster Turret"
 	turret 21.5 -48 "Heavy Anti-Missile Turret"
 	turret -18.5 78.5 "Heavy Anti-Missile Turret"
@@ -2332,9 +2332,9 @@ ship "Hauler II"
 	engine -45 159.5
 	engine 45 159.5
 	pylon -30 -86
-		"angle" 270
+		angle 270
 	pylon 30 -86
-		"angle" 90
+		angle 90
 	turret -21.5 -84.5 "Quad Blaster Turret"
 	turret 21.5 -84.5 "Heavy Anti-Missile Turret"
 	turret -18.5 115.5 "Heavy Anti-Missile Turret"
@@ -2398,9 +2398,9 @@ ship "Hauler III"
 	engine -45 196.5
 	engine 45 196.5
 	pylon -30 -122
-		"angle" 270
+		angle 270
 	pylon 30 -122
-		"angle" 90
+		angle 90
 	turret -21.5 -122 "Quad Blaster Turret"
 	turret 21.5 -122 "Heavy Anti-Missile Turret"
 	turret -18.5 152.5 "Heavy Anti-Missile Turret"
@@ -2740,16 +2740,16 @@ ship "Leviathan"
 	gun -49 -19.5 "Particle Cannon"
 	gun 49 -19.5 "Particle Cannon"
 	pylon -43 46
-		"angle" 315
+		angle 315
 		over
 	pylon 43 46
-		"angle" 45
+		angle 45
 		over
 	pylon -47 56
-		"angle" 315
+		angle 315
 		over
 	pylon 47 56
-		"angle" 45
+		angle 45
 		over
 	turret -14 -10 "Quad Blaster Turret"
 	turret 14 -10 "Quad Blaster Turret"
@@ -2824,9 +2824,9 @@ ship "Mammoth"
 	gun -47.5 -57.5
 	gun 47.5 -57.5
 	pylon -55 35
-		"angle" 270
+		angle 270
 	pylon 55 35
-		"angle" 90
+		angle 90
 	turret -31 -50 "Anti-Missile Turret"
 	turret 31 -50 "Anti-Missile Turret"
 	turret -14.5 0 "Quad Blaster Turret"
@@ -3001,9 +3001,9 @@ ship "Modified Argosy"
 	pylon -22 -4 "Meteor Missile Launcher"
 	pylon 22 -4 "Meteor Missile Launcher"
 	pylon -29 35
-		"angle" 300
+		angle 300
 	pylon 29 35
-		"angle" 60
+		angle 60
 	turret 0 -12.5 "Heavy Anti-Missile Turret"
 	turret 0 9.5 "Heavy Laser Turret"
 	leak "leak" 70 50
@@ -3068,9 +3068,9 @@ ship "Mule"
 	gun -11 -125
 	gun 11 -125
 	pylon 42.5 23.5 "Sidewinder Missile Launcher"
-		"angle" 90
+		angle 90
 	pylon 43 36 "Sidewinder Missile Launcher"
-		"angle" 90
+		angle 90
 	turret -22 -53.5 "Heavy Laser Turret"
 	turret 19.5 -39 "Anti-Missile Turret"
 	turret 20 33 "Heavy Laser Turret"
@@ -4107,7 +4107,7 @@ ship "Star Queen"
 	pylon -24 -76 "Sidewinder Missile Launcher"
 	pylon 24 -76
 	pylon 0 113
-		"angle" 180
+		angle 180
 	turret -21.5 2.5 "Heavy Anti-Missile Turret"
 	turret 21.5 2.5 "Heavy Anti-Missile Turret"
 	leak "leak" 50 50
@@ -4171,7 +4171,7 @@ ship "Sunder"
 		"launch effect" "human external"
 	bay "Drone" 0 38
 		"under"
-		"angle" 180
+		angle 180
 		"launch effect" "human external"
 	leak "leak" 60 50
 	leak "flame" 50 80

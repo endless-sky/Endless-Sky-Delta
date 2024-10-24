@@ -668,9 +668,9 @@ ship "Ladybug"
 	gun 12 -68.5 "Ion Cannon"
 	pylon 0 -30 "Hai Tracker Pod"
 	pylon -46 -40
-		"angle" 20
+		angle 20
 	pylon 46 -40
-		"angle" 340
+		angle 340
 	turret -36 3 "Chameleon Anti-Missile"
 	turret 36 3 "Pulse Turret"
 	engine -36 62 0.8
@@ -1197,17 +1197,17 @@ ship "Shield Beetle"
 	gun -49 -38
 	gun 49 -38
 	pylon -34 -68 "Hai Tracker Pod"
-		"angle" 340
+		angle 340
 	pylon 34 -68 "Hai Tracker Pod"
-		"angle" 20
+		angle 20
 	pylon -61 -14 "Hai Tracker Pod"
-		"angle" 340
+		angle 340
 	pylon 61 -14 "Hai Tracker Pod"
-		"angle" 20
+		angle 20
 	pylon -39 -9
-		"angle" 20
+		angle 20
 	pylon 39 -9
-		"angle" 340
+		angle 340
 	pylon -55 72
 		"over"
 	pylon 55 72
@@ -1705,13 +1705,13 @@ ship "Emperor Beetle"
 	gun -42.5 -53.5 "Tripulse Shredder"
 	gun 43.5 -54.5 "Tripulse Shredder"
 	pylon 43.5 -54
-		"angle" 340
+		angle 340
 	pylon 43.5 -54
-		"angle" 20
+		angle 20
 	pylon -60 -20
-		"angle" 315
+		angle 315
 	pylon 60 -20
-		"angle" 45
+		angle 45
 	turret 0.5 -25.5 "Warder Anti-Missile"
 	turret -47.5 11.5
 	turret 48.5 11.5
@@ -1788,13 +1788,13 @@ ship "Solifuge"
 	gun 9.5 -101 "Ion Cannon"
 	pylon 0 -135 "Hai Tracker Pod"
 	pylon -39 -122
-		"angle" 315
+		angle 315
 	pylon 39 -122
-		"angle" 45
+		angle 45
 	pylon -63 -84
-		"angle" 345
+		angle 345
 	pylon 63 -84
-		"angle" 15
+		angle 15
 	turret 0 -109.5 "Chameleon Anti-Missile"
 	turret 54.5 -48.5 "Bullfrog Anti-Missile"
 	turret -54.5 -48.5 "Bullfrog Anti-Missile"
@@ -1993,9 +1993,9 @@ ship "Violin Spider"
 	gun 0 -31
 	pylon 0 -20 "Hai Tracker Pod"
 	pylon -7 -20
-		"angle" 350
+		angle 350
 	pylon 7 -20
-		"angle" 10
+		angle 10
 	turret 0 5
 	leak "leak" 60 50
 	explode "tiny explosion" 15
