@@ -1949,6 +1949,10 @@ ship "Met Par Tek 53"
 	gun 0 -92 "Thermal Repeater"
 	gun -10 -65 "Thermal Repeater"
 	gun 10 -65 "Thermal Repeater"
+	pylon -14 -33
+		angle 350
+	pylon 14 -33
+		angle 10
 	turret -36 -45 "Thermal Repeater Turret"
 	turret 36 -45 "Thermal Repeater Turret"
 	turret -38 -28 "Thermal Repeater Turret"
