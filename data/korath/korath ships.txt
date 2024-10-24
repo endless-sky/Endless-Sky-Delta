@@ -268,6 +268,7 @@ ship "Tubfalet"
 		angle -38
 		left
 	gun -45 -150 "Fire-Lance"
+	pylon -45 -150
 	pylon 32.5 -1 "Firelight Missile Bank"
 		angle 60
 	pylon -32.5 -1 "Firelight Missile Bank"
@@ -1680,11 +1681,17 @@ ship "Tek Far 71 - Lek"
 	gun 10 -180
 	gun 10 -180
 	pylon 18 -37 "Piercer Missile Launcher"
+		angle 90
 	pylon 18 -29
+		angle 90
 	pylon 18 -20 "Piercer Missile Launcher"
+		angle 90
 	pylon 14 150
+		angle 90
 	pylon 14 159
+		angle 90
 	pylon 14 168
+		angle 90
 	turret -10 -85 "Warder Anti-Missile"
 	turret -13 -61
 	turret -14 -38 "Banisher Grav-Turret"
@@ -1769,10 +1776,15 @@ ship "Tek Far 78 - Osk"
 	gun 0 -239 "Korath Detainer"
 	gun -9 -220
 	pylon -7.5 -73.5 "Piercer Missile Launcher"
+		angle 270
 	pylon -7 -65 "Piercer Missile Launcher"
+		angle 270
 	pylon -7 79.5
+		angle 270
 	pylon -7 88.5 "Piercer Missile Launcher"
+		angle 270
 	pylon -7 97
+		angle 270
 	turret 17 -133 "Warder Anti-Missile"
 	turret 19 -110
 	turret 21 -87
