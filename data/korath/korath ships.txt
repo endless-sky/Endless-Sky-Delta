@@ -770,8 +770,11 @@ ship "Ra'gru Ik 618"
 	"reverse engine" 19 -303 0.5
 		over
 	gun -75 -112 "Fire-Lance"
+	pylon -75 -112
 	gun 75 -112 "Fire-Lance"
+	pylon 75 -112
 	gun 0 -112 "Fire-Lance"
+	pylon 0 -112
 	pylon 42 90 "Firelight Missile Bank"
 		angle 110
 	pylon -42 90 "Firelight Missile Bank"
