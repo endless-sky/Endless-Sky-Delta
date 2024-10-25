@@ -683,6 +683,10 @@ ship "Lor'kas Ik 577"
 		over
 	gun -47 -244 "Expeller Grav-Ray"
 	gun 47 -244 "Expeller Grav-Ray"
+	pylon -75 -160
+		angle 270
+	pylon 75 -160
+		angle 90
 	turret -73 -159 "Warder Anti-Missile"
 	turret 73 -159 "Grab-Strike Turret"
 	turret -56 -137 "Warder Anti-Missile"
@@ -858,6 +862,10 @@ ship "Kas'lor Ik 582"
 		"launch effect" "korath internal"
 	bay "Fighter" 70 51 back
 		"launch effect" "korath internal"
+	pylon -54 -83
+		angle 300
+	pylon 54 -83
+		angle 30
 	turret -52.5 -80.5 "Banisher Grav-Turret"
 	turret 52.5 -80.5 "Warder Anti-Missile"
 	turret -57 -50.5 "Warder Anti-Missile"
@@ -940,6 +948,10 @@ ship "Lor'nag Ik 590"
 		"launch effect" "korath internal"
 	gun -45 -253 "Digger Mining Beam"
 	gun 45 -253 "Digger Mining Beam"
+	pylon -112 116
+		angle 270
+	pylon 112 116
+		angle 90
 	turret -77 -116.5 "Grab-Strike Turret"
 	turret 77 -116.5 "Warder Anti-Missile"
 	turret -87 -83 "Banisher Grav-Turret"
@@ -1028,9 +1040,13 @@ ship "Ra'at Ik 621"
 		"launch effect" "korath internal"
 	bay "Fighter" 50 303 back
 		"launch effect" "korath internal"
-	gun -71 -209 "Fire-Lance"
 	gun 0 -209 "Fire-Lance"
+	gun -71 -209 "Fire-Lance"
 	gun 71 -209 "Fire-Lance"
+	pylon -105 -12
+		angle 270
+	pylon 105 -12
+		angle 90
 	turret -52 -295 "Grab-Strike Turret"
 	turret 52 -295 "Warder Anti-Missile"
 	turret -104 -13 "Banisher Grav-Turret"
