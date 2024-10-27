@@ -507,12 +507,15 @@ void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
 	auto layout = Layout(static_cast<int>(LABEL_WIDTH), Truncate::BACK);
 	for(const Hardpoint &hardpoint : ship.Weapons())
 	{
-		string name = "[empty]";
+		
+		bool isRight = (hardpoint.GetPoint().X() >= 0.);
+		bool isTurret = hardpoint.IsTurret();
+		string name = "[empty510]";
+		if(isTurret == true)
+			name = "[empty turret mount]";
 		if(hardpoint.GetOutfit())
 			name = hardpoint.GetOutfit()->DisplayName();
 
-		bool isRight = (hardpoint.GetPoint().X() >= 0.);
-		bool isTurret = hardpoint.IsTurret();
 
 		double &y = nextY[isRight][isTurret];
 		double x = centerX + (isRight ? LABEL_DX : -LABEL_DX - LABEL_WIDTH);
@@ -554,7 +557,7 @@ void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
 	if(draggingIndex >= 0)
 	{
 		const Outfit *outfit = ship.Weapons()[draggingIndex].GetOutfit();
-		string name = outfit ? outfit->DisplayName() : "[empty]";
+		string name = outfit ? outfit->DisplayName() : "[empty559]";
 		Point pos(hoverPoint.X() - .5 * font.Width(name), hoverPoint.Y());
 		font.Draw(name, pos + Point(1., 1.), Color(0., 1.));
 		font.Draw(name, pos, bright);
