@@ -513,6 +513,12 @@ void ShipInfoPanel::DrawWeapons(const Rectangle &bounds)
 		string name = "[empty510]";
 		if(isTurret == true)
 			name = "[empty turret mount]";
+		bool isGun = hardpoint.IsGun();
+		if(isGun == true)
+			name = "[empty gun port]";
+		bool isPylon = hardpoint.IsPylon();
+		if(isPylon == true)
+			name = "[empty pylon]";
 		if(hardpoint.GetOutfit())
 			name = hardpoint.GetOutfit()->DisplayName();
 
