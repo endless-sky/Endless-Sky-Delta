@@ -67,7 +67,7 @@ outfit "Stagnation Beam"
 		sound "stagnation beam"
 		"hit effect" "stagnation beam impact"
 		"inaccuracy" .5
-		"turret turn" 3
+		"turret turn" 2.1
 		"velocity" 600
 		"lifetime" 1
 		"reload" 1
@@ -96,7 +96,7 @@ outfit "Star Tail"
 	mass 48
 	"outfit space" -50
 	"weapon capacity" -50
-	"gun ports" -1
+	"pylon" -1
 	thumbnail "outfit/star tail launcher"
 	"star tail capacity" 20
 	licenses

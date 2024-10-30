@@ -285,14 +285,14 @@ ship "Marauder Fury"
 	engine -12.5 41 0.35
 	engine 12.5 41 0.35
 	engine 0 46
-	gun -13.5 -36 "Meteor Missile Launcher"
-	gun 13.5 -36 "Meteor Missile Launcher"
-	gun -20 -25 "Meteor Missile Launcher"
-	gun 20 -25 "Meteor Missile Launcher"
+	pylon -13.5 -36 "Meteor Missile Launcher"
+	pylon 13.5 -36 "Meteor Missile Launcher"
+	pylon -20 -25 "Meteor Missile Launcher"
+	pylon 20 -25 "Meteor Missile Launcher"
 	gun -6 -41.5
 	gun 6 -41.5
-	gun -43.5 2 "Hai Tracker Pod"
-	gun 43.5 2 "Hai Tracker Pod"
+	pylon -43.5 2 "Hai Tracker Pod"
+	pylon 43.5 2 "Hai Tracker Pod"
 	explode "tiny explosion" 10
 	explode "small explosion" 20
 	"final explode" "final explosion small"
@@ -409,14 +409,6 @@ person "Captain Nate"
 			parallel
 		gun 0 -130.5 "Proton Gun"
 			parallel
-		gun -24 -122 "Heavy Rocket Launcher"
-			parallel
-		gun -24 -122 "Heavy Rocket Launcher"
-			parallel
-		gun 24 -122 "Heavy Rocket Launcher"
-			parallel
-		gun 24 -122 "Heavy Rocket Launcher"
-			parallel
 		gun -40 -46 "Proton Gun"
 			parallel
 		gun -40 -46 "Proton Gun"
@@ -432,6 +424,14 @@ person "Captain Nate"
 		gun 34.5 -43 "Proton Gun"
 			parallel
 		gun 34.5 -43 "Proton Gun"
+			parallel
+		pylon -24 -122 "Heavy Rocket Launcher"
+			parallel
+		pylon -24 -122 "Heavy Rocket Launcher"
+			parallel
+		pylon 24 -122 "Heavy Rocket Launcher"
+			parallel
+		pylon 24 -122 "Heavy Rocket Launcher"
 			parallel
 		turret 0 42 "Anti-Missile Turret"
 		explode "tiny explosion" 18
@@ -690,7 +690,7 @@ ship "Modified Osprey"
 	engine 45.5 64 .8
 	engine -16.5 105 .6
 	engine 16.5 105 .6
-	gun 0 -114 "Nuclear Missile"
+	pylon 0 -114 "Nuclear Missile"
 	gun -6.5 -100 "Husk-Slice"
 	gun 6.5 -100 "Husk-Slice"
 	gun -14 -91 "Husk-Slice"
@@ -699,8 +699,8 @@ ship "Modified Osprey"
 	gun 19 -59 "Korath Detainer"
 	gun -26.5 -53 "Korath Detainer"
 	gun 26.5 -53 "Korath Detainer"
-	gun -67 -1.5 "Finisher Pod"
-	gun 67 -1.5 "Finisher Pod"
+	pylon -67 -1.5 "Finisher Pod"
+	pylon 67 -1.5 "Finisher Pod"
 	turret 0 -91.5 "Point Defense Turret"
 	turret -13.5 -15.5 "Shield Disruptor Turret"
 	turret 13.5 -15.5 "Shield Disruptor Turret"
@@ -1609,12 +1609,12 @@ ship "Modified Battleship"
 	engine -21 220
 		zoom 0.8
 	gun 0 -223 "Prototype Fusion Cannon"
-	gun -59 14 "Typhoon Pod"
-	gun 59 14 "Typhoon Pod"
-	gun -72 25 "Torpedo Pod"
-	gun 72 26 "Torpedo Pod"
-	gun -84 38 "Torpedo Pod"
-	gun 84 38 "Torpedo Pod"
+	pylon -59 14 "Typhoon Pod"
+	pylon 59 14 "Typhoon Pod"
+	pylon -72 25 "Torpedo Pod"
+	pylon 72 26 "Torpedo Pod"
+	pylon -84 38 "Torpedo Pod"
+	pylon 84 38 "Torpedo Pod"
 	turret -37 -11 "Electron Turret"
 	turret 37 -11 "Electron Turret"
 	turret 0 10 "Wanderer Anti-Missile"
@@ -2070,3 +2070,187 @@ outfit "Emotional Baggage"
 	thumbnail "outfit/unknown"
 	description `The physical embodiment of everything that makes the Reviewers who they are today.`
 	description `	Unfortunately, it's not for sale.`
+
+
+
+person "Danau"
+	government "Author"
+	frequency 100
+	personality
+		heroic unconstrained opportunistic
+	formation "Vic"
+	phrase
+		word
+			"When you want to stop your ship, press shift and reverse."
+			"Your hyperdrive doesn't work? Have you tried turning it off and on again?"
+	phrase
+		word
+			"Change the orientation of your"
+		word
+			" "
+		word
+			"drone"
+			"interceptor"
+			"fighter"
+		word
+			" "
+		word
+			"bays"
+			"docking ports"
+		word
+			" "
+		word
+			"just for the fun of it."
+			"for faster deployments."
+			"on your new Marauder ship."
+			"to improve atmospheric handling."
+	phrase
+		word
+			"I have a delivery for"
+			"I'm looking for"
+		word
+			" "
+		word
+			"Arrakis"
+			"Caladan"
+			"the Eaxaw"
+			"the Gyisache"
+			"the Happy Birthday"
+			"the Laenfa"
+			"the Muursh"
+			"the Ourbools"
+			"Tycho Magnetic Anomaly 2"
+		word
+			"; "
+		word
+			"is this the right game?"
+	phrase
+		word
+			"The Hauler VI is a nice ship, "
+		word
+			"as long as you don't activate the cargo refrigeration systems."
+			"but it hasn't gotten beyond the prototype stage yet."
+			"but it is not for sale on the regular market."
+			"but using two Hauler IIIs is probably more economical."
+	phrase
+		word
+			"Automate"
+			"Extend"
+			"Improve"
+			"Streamline"
+		word
+			" "
+		word
+			"our"
+			"the ES"
+			"your"
+		word
+			" "
+		word
+			"builds"
+			"builds and tests"
+			"CI jobs"
+			"coding style checks"
+			"integration processes"
+			"merge process"
+			"software tests"
+			"test and integration processes"
+			"test processes"
+			"tests"
+		word
+			"."
+			"!"
+		word
+			" "
+		word
+			"Avoid game crashes!"
+			"Improve the quality of our codebase!"
+			"Get new features into the game faster!"
+			"Have more time for good reviews!"
+			"Have more time for playing the game!"
+			"Prevent bugs!"
+
+	ship "Modified Hauler VI" "Bouldered Sea"
+		"never disabled"
+	ship "Hauler III" "Gravelly Reservoir"
+		"never disabled"
+	ship "Hauler III" "Stony Mere"
+		"never disabled"
+	ship "Hauler II" "Rocky Lake"
+		"never disabled"
+	ship "Hauler II" "Shingly Loch"
+		"never disabled"
+	ship "Hauler" "Craggy Tarn"
+		"never disabled"
+	ship "Hauler" "Pebbly Pond"
+		"never disabled"
+
+
+
+ship "Modified Hauler VI"
+	sprite "ship/hauler vi"
+	thumbnail "thumbnail/hauler vi"
+	attributes
+		category "Heavy Freighter"
+		"shields" 13200
+		"hull" 26800
+		"required crew" 3
+		"bunks" 12
+		"mass" 1240
+		"drag" 21.7
+		"heat dissipation" .43
+		"fuel capacity" 800
+		"cargo space" 780
+		"outfit space" 900
+		"weapon capacity" 430
+		"engine capacity" 160
+		"reverse thruster slot" 1
+		"steering slot" 1
+		"thruster slot" 1
+		weapon
+			"blast radius" 100
+			"shield damage" 1000
+			"hull damage" 500
+			"hit force" 1500
+	outfits
+		"Sidewinder Missile Launcher" 4
+		"Sidewinder Missile" 180
+		"Point Defense Turret" 2
+		"Bombardment Turret" 6
+
+		"Fusion Reactor"
+		"S3 Thermionic"
+		"LP288a Battery Pack"
+		"D94-YV Shield Generator"
+		"Large Radar Jammer"
+		"Laser Rifle" 3
+		
+		"Impala Plasma Thruster"
+		"Impala Plasma Steering"
+		"Capybara Reverse Thruster"
+		"Hyperdrive"
+
+	engine -83.5 196.5
+	engine 83.5 196.5
+	engine 0 196.5
+	pylon -14.5 -168
+	pylon 14.5 -168
+	pylon -35 -128
+	pylon 35 -128
+	turret -21 -124.5
+	turret 21 -124.5 "Point Defense Turret"
+	turret -32.5 -102.5
+	turret 32.5 -102.5
+	turret -22 154 "Point Defense Turret"
+	turret 22 154
+	turret -60 154
+	turret 60 154
+	leak "leak" 70 50
+	leak "flame" 40 80
+	leak "big leak" 90 40
+	explode "small explosion" 30
+	explode "medium explosion" 60
+	explode "large explosion" 40
+	explode "huge explosion" 10
+	"final explode" "final explosion large"
+	description "The Hauler cargo ships are considered by many to be outdated, and it is unclear if upgrading the cargo space to six containers is sufficient to make this Hauler ship popular. It certainly doesn't help that the Hauler VI is more expensive than four Hauler IIIs."
