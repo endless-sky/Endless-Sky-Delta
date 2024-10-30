@@ -196,10 +196,9 @@ void OutfitterPanel::DrawItem(const string &name, const Point &point)
 			font.Draw(label, labelPos, bright);
 		}
 	}
-	// Don't show the "in stock" amount if the outfit has an unlimited stock or
-	// if it is not something that you can buy.
+	// Don't show the "in stock" amount if the outfit has an unlimited stock.
 	int stock = 0;
-	if(!outfitter.Has(outfit) && outfit->Get("installable") >= 0.)
+	if(!outfitter.Has(outfit))
 		stock = max(0, player.Stock(outfit));
 	int cargo = player.Cargo().Get(outfit);
 	int storage = player.Storage().Get(outfit);
@@ -482,6 +481,12 @@ ShopPanel::BuyResult OutfitterPanel::CanBuy(bool onlyOwned) const
 		if(gunsNeeded && !gunsFree)
 			return "This weapon is designed to be installed in a gun port, "
 				"but your ship does not have any unused gun ports available.";
+
+		int pylonNeeded = -selectedOutfit->Get("pylon");
+		int pylonFree = playerShip->Attributes().Get("pylon");
+		if(pylonNeeded && !pylonFree)
+			return "This weapon is designed to be installed on a pylon, "
+				"but your ship does not have an unused pylon available.";
 
 		if(selectedOutfit->Get("installable") < 0.)
 			return "This item is not an outfit that can be installed in a ship.";

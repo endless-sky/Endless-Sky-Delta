@@ -149,7 +149,7 @@ outfit "Ka'het Ravager Turret"
 		sound "disruptor"
 		"hit effect" "ravager impact"
 		"inaccuracy" .2
-		"turret turn" 1.8
+		"turret turn" 2.3
 		"velocity" 480
 		"lifetime" 1
 		"reload" 1
@@ -205,7 +205,7 @@ outfit "Ka'het Annihilator Turret"
 		"hardpoint offset" 15.
 		"hit effect" "bullet impact"
 		"inaccuracy" 1
-		"turret turn" 2.3
+		"turret turn" 1.8
 		"range override" 630
 		"velocity override" 18
 		"reload" 10
@@ -233,7 +233,7 @@ outfit "Ka'het EMP Deployer"
 	"mass" 18
 	"outfit space" -26
 	"weapon capacity" -26
-	"gun ports" -1
+	"pylon" -1
 	"emp torpedo capacity" 16
 	weapon
 		sprite "projectile/emp torpedo"
@@ -276,7 +276,7 @@ outfit "Ka'het Emergency Deployer"
 	thumbnail "outfit/ka'het mhd deployer"
 	"mass" 13
 	"outfit space" -17
-	"gun ports" -1
+	"pylon" -1
 	weapon
 		sprite "projectile/mhd"
 			"frame rate" 2
