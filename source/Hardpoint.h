@@ -30,7 +30,7 @@ class Visual;
 
 
 
-// A single weapon hardpoint on the ship (i.e. a gun port or turret mount),
+// A single weapon hardpoint on the ship (i.e. a gun port, turret mount, or missile pylon),
 // which may or may not have a weapon installed.
 class Hardpoint {
 public:
@@ -147,7 +147,6 @@ private:
 	bool isGun = false;
 	bool isTurret = false;
 	bool isPylon = false;
-	// bool isGun = false; For future use positively identifying guns.
 	// Indicates if this hardpoint disallows converging (guns only).
 	bool isParallel = false;
 	// Indicates if this hardpoint is omnidirectional (turret only).

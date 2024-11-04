@@ -21247,22 +21247,24 @@ system Kornephoros
 	pos -612 424
 	government Republic
 	attributes "south"
-	arrival 980
-	habitable 980
-	belt 1168
+	arrival 4000
+	habitable 2000
+	belt 1168 2
+	belt 2932 3
+	belt 4029
 	link Aldhibain
 	link Sabik
 	link Sargas
 	link Wei
-	asteroids "small rock" 127 10.44
-	asteroids "medium rock" 96 8.787
-	asteroids "large rock" 24 12.528
-	asteroids "small metal" 4 7.221
+	asteroids "small rock" 145 10.44
+	asteroids "medium rock" 130 8.787
+	asteroids "large rock" 30 12.528
+	asteroids "small metal" 7 7.221
 	asteroids "medium metal" 143 8.352
-	asteroids "large metal" 7 11.745
-	minables lead 48 18.1544
-	minables silicon 24 15.5119
-	minables silver 13 18.7077
+	asteroids "large metal" 10 11.745
+	minables lead 90 18.1544
+	minables silicon 50 15.5119
+	minables silver 25 18.7077
 	trade Clothing 311
 	trade Electronics 797
 	trade Equipment 439
@@ -21290,23 +21292,31 @@ system Kornephoros
 		period 11.9686
 	object
 		sprite planet/ganymede
-		distance 327.16
-		period 75.6113
+		distance 735.16
+		period 150.6113
 	object Deep
 		sprite planet/ocean9
-		distance 809.16
-		period 294.102
+		distance 1609.16
+		period 670.102
 		object Clink
 			sprite planet/luna
-			distance 168
+			distance 200
 			period 20.8235
 	object
 		sprite planet/ice7
-		distance 1501.2
+		distance 3201.2
 		period 743.198
 	object
+		sprite planet/forest2
+		distance 4253.302
+		period 1253.43
+	object
+		sprite planet/rock6
+		distance 5634.5474
+		period 1620.4736
+	object
 		sprite planet/gas15-b
-		distance 2966.29
+		distance 6560.29
 		period 2064.27
 		object
 			sprite planet/miranda-b
@@ -30165,21 +30175,23 @@ system Sabik
 	pos -675 379
 	government Republic
 	attributes "rim"
-	arrival 625
-	habitable 625
-	belt 1609
+	arrival 1560
+	habitable 1250
+	belt 1609 3
+	belt 2500
+	belt 2900
 	link Aldhibain
 	link Kornephoros
 	link Unukalhai
 	link Zubenelgenubi
-	asteroids "small rock" 2 5.684
-	asteroids "medium rock" 1 4.669
-	asteroids "large rock" 5 5.5622
-	asteroids "small metal" 7 5.0344
-	asteroids "medium metal" 29 5.481
-	asteroids "large metal" 2 2.233
-	minables aluminum 4 9.1736
-	minables iron 2 7.04854
+	asteroids "small rock" 5 5.684
+	asteroids "medium rock" 3 4.669
+	asteroids "large rock" 11 5.5622
+	asteroids "small metal" 15 5.0344
+	asteroids "medium metal" 50 5.481
+	asteroids "large metal" 4 2.233
+	minables aluminum 9 9.1736
+	minables iron 5 7.04854
 	trade Clothing 312
 	trade Electronics 787
 	trade Equipment 383
@@ -30199,20 +30211,28 @@ system Sabik
 		period 10
 	object
 		sprite planet/cloud2
-		distance 182.25
-		period 39.366
+		distance 420.25
+		period 75.36
+	object
+		sprite planet/ice7-b
+		distance 563.27
+		period 292.098
 	object Longjump
 		sprite planet/forest6-b
-		distance 647.5
-		period 263.620
+		distance 1424.5
+		period 513.620
 	object
 		sprite planet/gas4-b
-		distance 1280.19
-		period 732.877
+		distance 2825.19
+		period 1526.877
+	object
+		sprite planet/cloud5
+		distance 3602.62
+		period 1850.72
 	object
 		sprite planet/gas11-b
-		distance 2061.55
-		period 1497.65
+		distance 4320.55
+		period 2103.65
 
 system Sabriset
 	pos 151.724 -426.518
