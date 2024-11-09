@@ -30154,6 +30154,10 @@ system Sabik
 		sprite planet/gas4-b
 		distance 1280.19
 		period 732.877
+	object Donya
+		sprite planet/cloud0
+		distance 1594.92
+		period 1052.7301
 	object
 		sprite planet/gas11-b
 		distance 2061.55
@@ -37448,7 +37452,7 @@ system Zubenelgenubi
 		sprite planet/desert9
 		distance 730.693
 		period 250.467
-	object Donya
+	object
 		sprite planet/cloud0
 		distance 1318.13
 		period 606.856
