@@ -189,6 +189,7 @@ namespace {
 		{"overheat damage threshold", 3},
 		{"high shield permeability", 3},
 		{"low shield permeability", 3},
+		{"cloaked shield permeability", 3},
 		{"acceleration multiplier", 3},
 		{"turn multiplier", 3},
 
@@ -344,7 +345,8 @@ void OutfitInfoDisplay::UpdateRequirements(const Outfit &outfit, const PlayerInf
 	requirementsHeight += 10;
 
 	bool hasContent = false;
-	static const vector<string> BEFORE = {"outfit space", "weapon capacity", "engine capacity"};
+	static const vector<string> BEFORE = {"outfit space", "weapon capacity", "engine capacity",
+		"engine mod space", "reverse thruster slot", "steering slot", "thruster slot"};
 	for(const auto &attr : BEFORE)
 	{
 		if(outfit.Get(attr) < 0)
@@ -414,7 +416,8 @@ void OutfitInfoDisplay::UpdateAttributes(const Outfit &outfit)
 	// tag them with "added" and show them first. They conveniently
 	// don't use SCALE or BOOLEAN_ATTRIBUTES.
 	static const vector<string> EXPECTED_NEGATIVE = {
-		"outfit space", "weapon capacity", "engine capacity", "gun ports", "turret mounts"
+		"outfit space", "weapon capacity", "engine capacity", "engine mod space", "reverse thruster slot",
+		"steering slot", "thruster slot", "gun ports", "turret mounts", "missile pylons"
 	};
 
 	for(const string &attr : EXPECTED_NEGATIVE)

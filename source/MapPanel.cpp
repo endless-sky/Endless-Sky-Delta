@@ -17,6 +17,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "text/alignment.hpp"
 #include "Angle.h"
+#include "BatchDrawList.h"
 #include "CargoHold.h"
 #include "Dialog.h"
 #include "FillShader.h"
@@ -35,12 +36,14 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "MapShipyardPanel.h"
 #include "Mission.h"
 #include "MissionPanel.h"
+#include "pi.h"
 #include "Planet.h"
 #include "PlayerInfo.h"
 #include "PointerShader.h"
 #include "Politics.h"
 #include "Preferences.h"
 #include "RingShader.h"
+#include "RoutePlan.h"
 #include "Screen.h"
 #include "Ship.h"
 #include "ShipJumpNavigation.h"
@@ -67,6 +70,7 @@ namespace {
 	const std::string SHOW_STORED_OUTFITS = "Show stored outfits on map";
 	const unsigned MAX_MISSION_POINTERS_DRAWN = 12;
 	const double MISSION_POINTERS_ANGLE_DELTA = 30.;
+	const int MAX_STARS = 5;
 
 	// Struct to track per system how many pointers are drawn and still
 	// need to be drawn.
@@ -165,17 +169,17 @@ namespace {
 				if(Preferences::Has("Deadline blink by distance"))
 				{
 					DistanceMap distance(player, player.GetSystem());
-					if(distance.HasRoute(mission.Destination()->GetSystem()))
+					if(distance.HasRoute(*mission.Destination()->GetSystem()))
 					{
 						set<const System *> toVisit;
 						for(const Planet *stopover : mission.Stopovers())
 						{
-							if(distance.HasRoute(stopover->GetSystem()))
+							if(distance.HasRoute(*stopover->GetSystem()))
 								toVisit.insert(stopover->GetSystem());
 							--daysLeft;
 						}
 						for(const System *waypoint : mission.Waypoints())
-							if(distance.HasRoute(waypoint))
+							if(distance.HasRoute(*waypoint))
 								toVisit.insert(waypoint);
 
 						int systemCount = toVisit.size();
@@ -184,16 +188,16 @@ namespace {
 							const System *closest;
 							int minimalDist = numeric_limits<int>::max();
 							for(const System *sys : toVisit)
-								if(distance.Days(sys) < minimalDist)
+								if(distance.Days(*sys) < minimalDist)
 								{
 									closest = sys;
-									minimalDist = distance.Days(sys);
+									minimalDist = distance.Days(*sys);
 								}
-							daysLeft -= distance.Days(closest);
+							daysLeft -= distance.Days(*closest);
 							distance = DistanceMap(player, closest);
 							toVisit.erase(closest);
 						}
-						daysLeft -= distance.Days(mission.Destination()->GetSystem());
+						daysLeft -= distance.Days(*mission.Destination()->GetSystem());
 					}
 				}
 				int blinkFactor = min(6, max(1, daysLeft));
@@ -339,6 +343,12 @@ void MapPanel::FinishDrawing(const string &buttonCondition)
 		info.SetCondition("max zoom");
 	if(player.MapZoom() <= static_cast<int>(mapInterface->GetValue("min zoom")))
 		info.SetCondition("min zoom");
+	mapIsStarry = player.StarryMap();
+	if(mapIsStarry)
+	{
+		info.SetCondition("map is starry");
+		info.SetBar("system ring", 1.);
+	}
 	const Interface *mapButtonUi = GameData::Interfaces().Get(Screen::Width() < 1280
 		? "map buttons (small screen)" : "map buttons");
 	mapButtonUi->Draw(info, this);
@@ -406,7 +416,7 @@ void MapPanel::FinishDrawing(const string &buttonCondition)
 
 	// Draw a warning if the selected system is not routable.
 
-	if(selectedSystem != &playerSystem && !distance.HasRoute(selectedSystem))
+	if(selectedSystem != &playerSystem && !distance.HasRoute(*selectedSystem))
 	{
 		static const string UNAVAILABLE = "You have no available route to this system.";
 		static const string UNKNOWN = "You have not yet mapped a route to this system.";
@@ -575,6 +585,8 @@ bool MapPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &command, bool
 			this, &MapPanel::Find, "Search for:", "", Truncate::NONE, true));
 		return true;
 	}
+	else if(key == 'x')
+		player.SetStarryMap(!mapIsStarry);
 	else if(key == SDLK_PLUS || key == SDLK_KP_PLUS || key == SDLK_EQUALS)
 		player.SetMapZoom(min(static_cast<int>(mapInterface->GetValue("max zoom")), player.MapZoom() + 1));
 	else if(key == SDLK_MINUS || key == SDLK_KP_MINUS)
@@ -797,28 +809,23 @@ void MapPanel::Select(const System *system)
 	}
 	else if(shift)
 	{
-		DistanceMap localDistance(player, plan.front());
-		if(localDistance.Days(system) <= 0)
+		const System *planEnd = plan.front();
+		if(system == planEnd)
 			return;
 
-		auto it = plan.begin();
-		while(system != *it)
-		{
-			it = ++plan.insert(it, system);
-			system = localDistance.Route(system);
-		}
+		RoutePlan addedRoute(*planEnd, *system, &player);
+		if(!addedRoute.HasRoute())
+			return;
+
+		vector<const System *> newPlan = addedRoute.Plan();
+		plan.insert(plan.begin(), newPlan.begin(), newPlan.end());
 	}
-	else if(distance.Days(system) > 0)
+	else if(distance.HasRoute(*system))
 	{
-		plan.clear();
 		if(!isJumping)
 			flagship->SetTargetSystem(nullptr);
 
-		while(system != source)
-		{
-			plan.push_back(system);
-			system = distance.Route(system);
-		}
+		plan = distance.Plan(*system);
 		if(isJumping)
 			plan.push_back(source);
 	}
@@ -1096,10 +1103,14 @@ void MapPanel::UpdateCache()
 			}
 		}
 
+		static const vector<const Sprite *> unmappedSystem = {SpriteSet::Get("map/unexplored-star")};
+
+		const bool canViewSystem = player.CanView(system);
 		nodes.emplace_back(system.Position(), color,
 			player.KnowsName(system) ? system.Name() : "",
 			(&system == &playerSystem) ? closeNameColor : farNameColor,
-			player.CanView(system) ? system.GetGovernment() : nullptr);
+			canViewSystem ? system.GetGovernment() : nullptr,
+			canViewSystem ? system.GetMapIcons() : unmappedSystem);
 	}
 
 	// Now, update the cache of the links.
@@ -1234,8 +1245,8 @@ void MapPanel::DrawSelectedSystem()
 	auto it = find(plan.begin(), plan.end(), selectedSystem);
 	if(it != plan.end())
 		jumps = plan.end() - it;
-	else if(distance.HasRoute(selectedSystem))
-		jumps = distance.Days(selectedSystem);
+	else if(distance.HasRoute(*selectedSystem))
+		jumps = distance.Days(*selectedSystem);
 
 	if(jumps == 1)
 		text += " (1 jump away)";
@@ -1278,11 +1289,14 @@ void MapPanel::DrawEscorts()
 				// Stored outfits are drawn/indicated by 8 short rays out of the system center.
 				for(int i = 0; i < 8; ++i)
 				{
+					static constexpr float WIDTH = 1.6f;
+
 					// Starting at 7.5 degrees to intentionally mis-align with mission pointers.
 					Angle angle = Angle(7.5f + 45.f * i);
-					Point from = pos + angle.Unit() * OUTER;
-					Point to = from + angle.Unit() * 4.f;
-					LineShader::Draw(from, to, 2.f, active);
+					// Account for how rounded caps extend out by an additional WIDTH.
+					Point from = pos + angle.Unit() * (OUTER + WIDTH);
+					Point to = from + angle.Unit() * (4.f - WIDTH);
+					LineShader::Draw(from, to, WIDTH, active);
 				}
 		}
 }
@@ -1382,11 +1396,43 @@ void MapPanel::DrawSystems()
 		closeGovernments.clear();
 
 	// Draw the circles for the systems.
+	BatchDrawList starBatch;
 	double zoom = Zoom();
+	const float ringFade = mapIsStarry ? 1.5 - 1.25 * zoom : 1.;
 	for(const Node &node : nodes)
 	{
 		Point pos = zoom * (node.position + center);
-		RingShader::Draw(pos, OUTER, INNER, node.color);
+		if(!mapIsStarry)
+			RingShader::Draw(pos, OUTER, INNER, node.color);
+		else
+		{
+			// System rings fade as you zoom in if starry map is enabled.
+			const float alpha = max(ringFade, node.mapIcons.empty() ? .9f : 0.f);
+			RingShader::Draw(pos, OUTER, INNER, node.color.Additive(alpha));
+
+			// Ensures every multiple-star system has a characteristic, deterministic rotation.
+			Angle starAngle = 0;
+			Angle angularSpacing = 0;
+			Point starOffset = Point(0, 0);
+
+			const int starsToDraw = min(static_cast<int>(node.mapIcons.size()), MAX_STARS);
+			if(starsToDraw > 1)
+			{
+				starAngle = node.name.length() + node.position.Length();
+				angularSpacing = 360. / starsToDraw;
+				starOffset = starsToDraw * Point(2., 2.);
+			}
+
+			// Draw the star icons.
+			for(int i = 0; i < starsToDraw; ++i)
+			{
+				starAngle += angularSpacing;
+				const Sprite *star = node.mapIcons[i];
+				const Body starBody(star, pos + zoom * starOffset * starAngle.Unit(),
+					Point(0, 0), 0, sqrt(zoom) / 2, min(zoom + 0.3, 0.75));
+				starBatch.Add(starBody);
+			}
+		}
 
 		if(commodity == SHOW_GOVERNMENT && node.government && node.government->GetName() != "Uninhabited")
 		{
@@ -1401,6 +1447,8 @@ void MapPanel::DrawSystems()
 				it->second = min(it->second, distance);
 		}
 	}
+	starBatch.Draw();
+	starBatch.Clear();
 }
 
 

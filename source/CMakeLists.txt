@@ -158,6 +158,7 @@ target_sources(EndlessSkyLib PRIVATE
 	ItemInfoDisplay.cpp
 	ItemInfoDisplay.h
 	JumpTypes.h
+	LimitedEvents.h
 	Logger.cpp
 	Logger.h
 	LineShader.cpp
@@ -206,8 +207,6 @@ target_sources(EndlessSkyLib PRIVATE
 	NPCAction.h
 	News.cpp
 	News.h
-	Orders.cpp
-	Orders.h
 	Outfit.cpp
 	Outfit.h
 	OutfitInfoDisplay.cpp
@@ -267,6 +266,10 @@ target_sources(EndlessSkyLib PRIVATE
 	RenderBuffer.h
 	RingShader.cpp
 	RingShader.h
+	RouteEdge.cpp
+	RouteEdge.h
+	RoutePlan.cpp
+	RoutePlan.h
 	Sale.h
 	SavedGame.cpp
 	SavedGame.h
@@ -298,6 +301,8 @@ target_sources(EndlessSkyLib PRIVATE
 	ShopPanel.h
 	SpaceportPanel.cpp
 	SpaceportPanel.h
+	SpawnedFleet.cpp
+	SpawnedFleet.h
 	SpriteShader.cpp
 	SpriteShader.h
 	StarField.cpp
@@ -333,6 +338,8 @@ target_sources(EndlessSkyLib PRIVATE
 	Visual.h
 	Weapon.cpp
 	Weapon.h
+	HardpointInfoPanel.cpp
+	HardpointInfoPanel.h
 	Weather.cpp
 	Weather.h
 	WeightedList.h

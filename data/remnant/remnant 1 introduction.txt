@@ -273,9 +273,9 @@ mission "Remnant: Defense 1"
 		personality staying uninterested disables plunders
 		fleet "Large Remnant"
 	npc evade
-		government "Korath"
+		government "Kor Alaji"
 		personality staying heroic plunders harvests target
-		fleet "Korath Ember Waste Raid" 6
+		fleet "Kor Alaji Raid" 6
 	on visit
 		dialog "There are still Korath raiders circling overhead. You should take off and help the Remnant ships to fight them."
 	on complete
@@ -316,7 +316,7 @@ mission "Remnant: Defense 2"
 			`	"Thank you," she sings. "It keeps jumping between systems in our territory. Maybe its jump drive was damaged or something, and it cannot escape. I will spread the information that you've taken on the bounty for hunting it, so others will not risk their lives fighting it."`
 				accept
 	npc kill
-		government "Korath"
+		government "Kor Alaji"
 		personality coward target uninterested marked waiting
 		system
 			distance 1 2
@@ -581,7 +581,8 @@ mission "Remnant: Void Sprites 1"
 				`	"Yes, I'd be glad to."`
 					goto end
 				`	"Wait, that sounds super shady. Can you explain why you think it's safe for me to enter that star system, but not for you to do so?"`
-
+			action
+				set "remnant: void sprites 1: asked for more details"
 			`	He says, "We studied the organisms and determined that they could not possibly be sentient. Therefore we saw no moral issues with collecting, well, ah... a sample. Unexpected things happened and certain grudges have been, ah, borne against Remnant ships for centuries as a result."`
 			choice
 				`	"Well, as long as you don't ask me to do something that will get me in similar trouble, I'll help you out."`
@@ -686,7 +687,13 @@ mission "Remnant: Void Sprites 3"
 			`The Remnant researcher seems disappointed that an outfit scan didn't reveal any information about the void sprites, but he is also excited about a new idea for studying them. "I found that we have several old mothballed ships suitable for exploring the upper atmosphere of a gas giant," he says. "Until I can publish my results I will not have the resources to compensate you, but I can provide you with one of our ships. Then you could land on the void sprite worlds and observe them in their natural habitat."`
 			choice
 				`	"How much will it cost to buy one?"`
+				`	"You said before you cannot safely approach these organisms. How will I land on their planets in one of your ships?"`
+					to display
+						not "remnant: void sprites 1: asked for more details"
+					goto attack
 				`	"Didn't you say before that anyone entering that system in a Remnant ship gets attacked?"`
+					to display
+						has "remnant: void sprites 1: asked for more details"
 					goto attack
 				`	"Sorry, I'm not interested in helping you anymore."`
 					decline
@@ -1636,7 +1643,12 @@ mission "Remnant: Tech Retrieval"
 	on offer
 		"remnant met taely" ++
 		conversation
-			`As you enter the spaceport, you notice someone across the plaza appears to have been waiting for you. A tall, solidly built woman in short-sleeved coveralls stands up from where she was sitting near the information desk. With a few quick gestures at the person behind the counter, she heads towards you with a confident stride. As she approaches, you note that the crowds of people moving around the plaza seem to be staying out of her way as if she were someone important. In contrast, she reminds you of the mechanics who maintained the textile factories back on New Boston. In particular, the tools at her belt and the wear marks on her clothing suggest someone who is more comfortable inside a ship access duct than behind a desk.`
+			branch familiar
+				has "remnant met taely"
+			`As you enter the spaceport, you notice someone across the plaza appears to have been waiting for you. A tall, solidly built woman in short-sleeved coveralls stands up from where she was sitting near the information desk. With a few quick gestures at the person behind the counter, she heads towards you with a confident stride. As she approaches, you note that the crowds of people moving around the plaza seem to be staying out of her way as if she were someone important.`
+			`	In contrast, she reminds you of the mechanics who maintained the textile factories back on <starting planet>. In particular, the tools at her belt and the wear marks on her clothing suggest someone who is more comfortable inside a ship access duct than behind a desk.`
+				to display
+					has "human space start"
 			`	Before you can decide if you want to avoid this person or not, she is standing in front of you, clearing her throat. "You are captain <first> <last> of the <ship>?" She asks in a lyrical chant.`
 			choice
 				`	"That's me."`
@@ -1645,6 +1657,10 @@ mission "Remnant: Tech Retrieval"
 			`	She looks at you with an inscrutable expression for a moment. "Trying to be inconspicuous is admirable. Being oblivious to the fact that you stand out like a star in empty space is not."`
 			label admit
 			`	"I have an opportunity for you, if you are interested in being helpful to the Remnant." When you express your interest she leads you over to a balcony overlooking the primary shipyards. As she leans on the railing a cold breeze makes you shiver, but she seems oblivious to it. "I am known as Taely. As a prefect among the Remnant, I am responsible for this." She gestures at the shipyards, where you can see a myriad of the Remnant's alien-looking ships in various stages of construction or repair. "The ships we have serve us well, but they are old designs. Only the Ibis is comparatively new. We need new ideas, new inspiration." She pauses, focusing briefly on a small bay where several people appear to be pulling what looks like a supercapacitor out of a Puffin.`
+				goto question
+			label familiar
+			`As you enter the spaceport, you notice Taely across the plaza. She begins approaching you immediately, appearing to have been waiting for you. "Greetings, <first>. I hope you are not too busy as I have an opportunity for you." When you express interest, she leads you to a balcony overlooking the primary shipyards. She seems oblivious to the chilling breeze as she leans on the railing. "As you may have noticed in your time with us, many of our ships, while they do serve us well, are old designs. While we have recently made significant progress with a new concept, we still need new ideas and inspiration." She pauses, focusing briefly on a small bay where several people appear to be pulling what looks like a supercapacitor out of a Puffin.`
+			label question
 			choice
 				`	"So, what are you asking?"`
 					goto request
@@ -1949,6 +1965,17 @@ mission "Remnant: Taely Intro Log"
 
 
 
+mission "Remnant: Taely Penguin Log"
+	invisible
+	to offer
+		has "Remnant: Taely Intro Log: failed"
+		has "Remnant: Face to Maw 2: done"
+	on offer
+		log "People" "Taely" `One of Taely's main priorities is improving the maneuverability characteristics of Remnant ships. To this end she has been working on building a new prototype ship based on the void sprites.`
+		fail
+
+
+
 mission "Remnant: Chilia Intro Log"
 	invisible
 	source
@@ -2211,9 +2238,9 @@ mission "Remnant: Salvage 2"
 		personality staying uninterested disables plunders
 		fleet "Large Remnant" 2
 	npc evade
-		government "Korath"
+		government "Kor Alaji"
 		personality heroic plunders harvests target
-		fleet "Korath Ember Waste Raid" 7
+		fleet "Kor Alaji Raid" 7
 		fleet
 			names "korath"
 			cargo 3
@@ -2296,7 +2323,7 @@ mission "Remnant: Salvage 4"
 			`	"Thank you," he signs. "It is acting oddly, jumping around destroying ships instead of looting and running. If it simply looted and left we would be pleased, but now it is learning about us instead, so it has reached the end of its usefulness. Please disable it so that we can salvage parts from it." He pauses, then continues, "I doubt we'll be able to salvage the ship itself - they pack those things with soldiers - and we do not want it to be captured, even if that is possible for you. The ship and crew should remain intact, and we will salvage what we can after you have it disabled. If you salvage anything we will happily compensate you for it in the outfitter, but do not feel obliged to do so. Destroying the ship should be a last resort."`
 				accept
 	npc save disable
-		government "Korath"
+		government "Kor Alaji"
 		personality heroic vindictive target uninterested waiting marked
 		system
 			distance 1 2
@@ -2452,6 +2479,7 @@ mission "Remnant: Expanded Horizons Quarg 1"
 	minor
 	source
 		government "Remnant"
+		attributes "remnant primary"
 	destination "Wayfarer"
 	passengers 3
 	to offer
@@ -2900,7 +2928,6 @@ mission "Remnant: Face to Maw 2"
 	on accept
 		event "remnant: penguin"
 	on complete
-		log "People" "Taely" `One of Taely's main priorities is improving the maneuverability characteristics of Remnant Ships. To this end she has been working on building a new prototype ship based on the void sprites.`
 		"remnant met taely" ++
 		give ship "Penguin" "Shadow Hope"
 		conversation
@@ -3248,7 +3275,7 @@ ship "Starling" "Starling (Keystone)"
 		
 		"Forge-Class Thruster"
 		"Forge-Class Steering"
-		"Crucible-Class Steering"
+		# "Crucible-Class Steering" # Extra steering
 		"Hyperdrive"
 
 
@@ -3343,6 +3370,8 @@ mission "Remnant: Keystone Research 7"
 				`	"The Remnant sure like to eat."`
 				`	"Why do the Remnant eat so much?"`
 					goto foodvolume
+					to display
+						not "remnant symbionts info"
 				`	"Maybe I should import some spices."`
 					goto spices
 				`	"What is our next step?"`
@@ -3397,6 +3426,7 @@ mission "Remnant: Expanded Horizons Astral 1"
 	passengers 1
 	source
 		government "Remnant"
+		attributes "remnant primary"
 	destination
 		government "Remnant"
 		not distance 0
@@ -3655,6 +3685,7 @@ ship "_Ion Timer Ship"
 	# The _Ion Storm Timer: Generator outfit counteracts this until there is an ion storm
 	# sprite "ship/shuttle" # uncomment this for debugging
 	attributes
+		category "Game Mechanics"
 		"heat dissipation" 1
 		"hull" 1.0
 		"mass" 100
@@ -3676,6 +3707,7 @@ mission "Remnant: Expanded Horizons Storms 1"
 	passengers 1
 	source
 		government "Remnant"
+		attributes "remnant primary"
 	waypoint
 		system "Aescolanus"
 	to offer
