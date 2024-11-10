@@ -552,10 +552,10 @@ mission "Remnant: Shattered Light 4"
 		planet "Far Monad"
 		ship "Modified Dromedary Wreck" "Shattered Light"
 	npc evade
-		government "Kor Alaji"
+		government "Kor Isaha"
 		personality entering plunders harvests
 		system "Lucina"
-		fleet "Kor Alaji Raid"
+		fleet "Kor Isaha Raid"
 	on complete
 		payment 250000
 		outfit "NDR-114 Android" 5
@@ -675,7 +675,7 @@ mission "Remnant: Scent of Rain 1"
 			`	He nods respectfully. "Well, thank you for all that you have done for us. I will see who else is available." With that, he heads off into the starport.`
 				decline
 	npc "scan outfits"
-		government "Kor Alaji"
+		government "Korath"
 		personality staying target
 		system "Kor Zena'i"
 		ship "Tubfalet" "Ra'puk At 333"
@@ -745,13 +745,13 @@ mission "Remnant: Will Not Someone Please Think Of The Children"
 			`	He nods in acknowledgment and his gestures take on a staccato phrasing. "I feared my ask was too much. I understand the sentiment. Perhaps I was naive to think such an outcome was possible."`
 				decline
 	npc disable save
-		government "Kor Alaji"
+		government "Korath"
 		personality heroic target marked staying disables plunders
 		system "Vaticanus"
 		ship "Kas'lor Ik 582 (Stranded)" "Fligrookor"
 		dialog `You have disabled the Dathnak A'awoj. Time to report back to <planet>.`
 	npc
-		government "Kor Alaji"
+		government "Korath"
 		personality timid disables plunders swarming
 		system "Vaticanus"
 		fleet

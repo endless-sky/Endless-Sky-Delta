@@ -1200,7 +1200,7 @@ mission "Remnant: Cognizance 25"
 				`	"No."`
 					decline
 	npc kill
-		government "Kor Alaji"
+		government "Korath"
 		personality target marked waiting
 		system "Egeria"
 		fleet
