@@ -1199,7 +1199,7 @@ mission "Remnant: Cognizance 25"
 					accept
 				`	"No."`
 					decline
-	npc kill
+	npc disable
 		government "Korath"
 		personality target marked waiting
 		system "Egeria"
