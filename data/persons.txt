@@ -2400,6 +2400,8 @@ person "Sanujab"
 	frequency 100
 	personality
 		disables harvests timid
+	system
+		government "Hai" "Quarg (Hai)"
 	phrase
 		word
 			"Hey there!"
@@ -2420,7 +2422,7 @@ ship "Cicada" "Cicada (Sanujab)"
 		"hull" 200
 	outfits
 		"Ion Cannon"
-		"Pulse Turret" 3
+		"Pulse Turret"
 		"Bullfrog Anti-Missile"
 		"Geode Reactor"
 		"Hai Diamond Regenerator"
@@ -2431,5 +2433,5 @@ ship "Cicada" "Cicada (Sanujab)"
 	gun 0 -76 "Ion Cannon"
 	turret 34.5 -16.5 "Bullfrog Anti-Missile"
 	turret -34.5 -16.5 "Pulse Turret"
-	turret -20 42 "Pulse Turret"
-	turret 20 42 "Pulse Turret"
+	turret -20 42
+	turret 20 42
