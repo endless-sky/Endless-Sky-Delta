@@ -2413,6 +2413,7 @@ person "Sanujab"
 			"Do you know what time it is on Hai-home?"
 			"Nobody knows how I think. Not even myself." 2
 			"I don't like fighting the Unfettered. Their Trackers are a nuisance." 2
+			"It was very hard to get a proper gun port on this Cicada instead of a measly pylon, but I found somebody who would do it."
 	ship "Cicada (Sanujab)" "No Lee Mon"
 
 
@@ -2422,8 +2423,7 @@ ship "Cicada" "Cicada (Sanujab)"
 		"hull" 200
 	outfits
 		"Ion Cannon"
-		"Pulse Turret"
-		"Bullfrog Anti-Missile"
+		"Bullfrog Anti-Missile" 2
 		"Geode Reactor"
 		"Hai Diamond Regenerator"
 		"Quantum Keystone"
@@ -2432,6 +2432,6 @@ ship "Cicada" "Cicada (Sanujab)"
 		"Hyperdrive"
 	gun 0 -76 "Ion Cannon"
 	turret 34.5 -16.5 "Bullfrog Anti-Missile"
-	turret -34.5 -16.5 "Pulse Turret"
+	turret -34.5 -16.5 "Bullfrog Anti-Missile"
 	turret -20 42
 	turret 20 42
