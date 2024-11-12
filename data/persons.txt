@@ -2392,3 +2392,44 @@ ship "Protector" "Modified Protector"
 	explode "large explosion" 8
 	"final explode" "final explosion large"
 	description `Voted the "ugliest ship in the sky" by Stars and Starships Magazine, the Protector is a typical example of brutally efficient Syndicate engineering. It is basically nothing more than eight turrets attached to a set of engines and crew's quarters, designed as a defense platform that can accompany merchant convoys.`
+
+
+
+person "Sanujab"
+	government "Hai"
+	frequency 100
+	personality
+		disables harvests timid
+	phrase
+		word
+			"Hey there!"
+			"Vai bin so."
+			"You're a human, right?"
+			"Remember, only those of peace are allowed in Hai space." 2
+			"I've never owned a Shield Beetle, and have got no intention of ever upgrading." 2
+			"Do you know what time it is on Earth?"
+			"Do you know what time it is on Hai-home?"
+			"Nobody knows how I think. Not even myself." 2
+			"I don't like fighting the Unfettered. Their Trackers are a nuisance." 2
+	ship "Cicada (Sanujab)" "No Lee Mon"
+
+
+
+ship "Cicada" "Cicada (Sanujab)"
+	add attributes
+		"hull" 200
+	outfits
+		"Ion Cannon"
+		"Pulse Turret" 3
+		"Bullfrog Anti-Missile"
+		"Geode Reactor"
+		"Hai Diamond Regenerator"
+		"Quantum Keystone"
+		`"Benga" Atomic Thruster`
+		`"Benga" Atomic Steering`
+		"Hyperdrive"
+	gun 0 -76 "Ion Cannon"
+	turret 34.5 -16.5 "Bullfrog Anti-Missile"
+	turret -34.5 -16.5 "Pulse Turret"
+	turret -20 42 "Pulse Turret"
+	turret 20 42 "Pulse Turret"
