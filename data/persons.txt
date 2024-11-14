@@ -2419,8 +2419,6 @@ person "Sanujab"
 
 
 ship "Cicada" "Cicada (Sanujab)"
-	add attributes
-		"hull" 200
 	outfits
 		"Ion Cannon"
 		"Bullfrog Anti-Missile" 2
