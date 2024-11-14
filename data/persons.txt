@@ -2407,13 +2407,16 @@ person "Sanujab"
 			"Hey there!"
 			"Vai bin so."
 			"You're a human, right?"
-			"Remember, only those of peace are allowed in Hai space." 2
-			"I've never owned a Shield Beetle, and have got no intention of ever upgrading." 2
-			"Do you know what time it is on Earth?"
-			"Do you know what time it is on Hai-home?"
-			"Nobody knows how I think. Not even myself." 2
-			"I don't like fighting the Unfettered. Their Trackers are a nuisance." 2
-			"They say Quantum Keystones make you lucky. Guess I'm in luck." 2
+			"Remember, only those of peace are allowed in Hai space."
+			"I've never owned a Shield Beetle, and have got no intention of ever upgrading."
+			"Nobody knows how I think. Not even myself."
+			"I don't like fighting the Unfettered. Their Trackers are a nuisance."
+			"They say Quantum Keystones make you lucky. Guess I'm in luck."
+			"Do you know what time it is on ${deep planets}?" 2
+			"Better get a pen and pencil ready, I'm about to ask a whole bunch of questions!"
+			"Did you know that we Hai already had a mountain named ${mountains} before we met you?"
+			"Have you ever seen a ship named ${civilian}? It's an interesting name."
+			"I can't decide what planet I'm from. Maybe ${hai planets}?"
 	ship "Cicada (Sanujab)" "No Lee Mon"
 
 
