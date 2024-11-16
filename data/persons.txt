@@ -2437,3 +2437,46 @@ ship "Cicada" "Cicada (Sanujab)"
 	turret "Bullfrog Anti-Missile"
 	turret
 	turret
+
+
+
+person "Intola"
+	government "Merchant"
+	frequency 100
+	personality
+		disables plunders
+	system
+		government "Free Worlds" "Neutral" "Pirate" "Republic" "Syndicate"
+	phrase
+		word
+			"Do you know how useless radar jammers are?"
+			"I love exploring."
+			"I got my atomic engines from ${deep planets}. Not exactly legitimately..."
+			"The best thing in the universe to do is shoot pirates!"
+			"Pirates are sometimes annoying, but I've figured out how to deal with the scoundrels."
+			"Speed is better then power."
+			"Lots of people like weapons, but I wouldn't trade my engines for anything."
+			"Ramscoops are excellent when you're exploring, but they take up a lot of space otherwise."
+			"Never run out of power. A doomed ship is a dead ship."
+			"You want to know why I don't have any cooling? I don't like being cold."
+			"Pirates are all over the galaxy, aren't they?"
+			"Those Quarg; so powerful!"
+			"Which would you prefer, a Scout or a Bounder? Answer in five seconds, and my guns are trained on you."
+			"There are interesting anomalies in this galaxy. I wonder what lies on the other side?"
+			"Cargo hauling is the least glamorous way to make a living I've ever heard of."
+	ship "Scout (Intola)" "Intola"
+
+
+
+ship "Scout" "Scout (Intola)"
+	outfits
+		"Heavy Laser" 2
+
+		"nGVF-CC Fuel Cell"
+		"LP036a Battery Pack"
+		"D14-RN Shield Generator"
+		"Ramscoop" 2
+
+		"A250 Atomic Thruster"
+		"A255 Atomic Steering"
+		"Hyperdrive"
