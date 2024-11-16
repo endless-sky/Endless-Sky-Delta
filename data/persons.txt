@@ -2511,7 +2511,7 @@ person "Verdorve"
 			"The Splinter is Megaparsec's best ship. Those Protectors are too slow, and Quicksilvers can't hold Plasma Turrets."
 			"Plasma, plasma. Overheat, overheat. Shoot, shoot."
 			"I wish I could join the Navy, but they won't let me. I refuse to give up this Splinter."
-			"I wish I could join the Syndicate, but they won't let me. For some reason, the corporate leaders have a predjuice against Southbound-sold weapons. Poor plasma."
+			"I wish I could join the Syndicate, but they won't let me. For some reason, the corporate leaders have a prejudice against Southbound-sold weapons. Poor plasma."
 	ship "Splinter (Verdorve)" "Verdorve"
 
 
