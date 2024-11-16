@@ -2518,7 +2518,7 @@ person "Verdorve"
 
 ship "Splinter" "Splinter (Verdorve)"
 	outfits
-		"Plasma Turret" 3
+		"Plasma Turret" 2
 
 		"Liquid Sodium Cooler"
 		"RT-I Radiothermal"
