@@ -2520,10 +2520,10 @@ ship "Splinter" "Splinter (Verdorve)"
 	outfits
 		"Plasma Turret" 2
 
-		"Liquid Sodium Cooler"
+		"Liquid Sodium Cooler" 2
 		"RT-I Radiothermal"
 		"D67-TM Shield Generator"
-		"Outfits Expansion"
+		"Outfits Expansion" 2
 
 		"Impala Plasma Steering"
 		"Greyhound Plasma Thruster"
@@ -2533,6 +2533,6 @@ ship "Splinter" "Splinter (Verdorve)"
 	gun
 	pylon
 	pylon
-	turret "Plasma Turret"
+	turret
 	turret "Plasma Turret"
 	turret "Plasma Turret"
