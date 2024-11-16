@@ -2518,7 +2518,6 @@ person "Verdorve"
 
 ship "Splinter" "Splinter (Verdorve)"
 	outfits
-		"Plasma Cannon" 2
 		"Plasma Turret" 3
 
 		"Liquid Sodium Cooler"
@@ -2527,10 +2526,11 @@ ship "Splinter" "Splinter (Verdorve)"
 		"Outfits Expansion"
 
 		"Impala Plasma Steering"
-		"Impala Plasma Thruster"
+		"Greyhound Plasma Thruster"
+		"Volcano Afterburner"
 		"Hyperdrive"
-	gun "Plasma Cannon"
-	gun "Plasma Cannon"
+	gun
+	gun
 	pylon
 	pylon
 	turret "Plasma Turret"
