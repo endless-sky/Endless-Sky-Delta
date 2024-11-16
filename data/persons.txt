@@ -2480,3 +2480,59 @@ ship "Scout" "Scout (Intola)"
 		"A250 Atomic Thruster"
 		"A255 Atomic Steering"
 		"Hyperdrive"
+	gun "Heavy Laser"
+	gun "Heavy Laser"
+	pylon
+	pylon
+	turret
+
+
+
+person "Verdorve"
+	government "Merchant"
+	frequency 100
+	personality
+		vindictive
+	system
+		government "Free Worlds" "Pirate" "Republic" "Syndicate"
+	phrase
+		word
+			"When you scan my ship, you see the Power of Plasma."
+			"The default Splinter comes equipped for speed, not power. I changed that."
+			"Plasma weapons are great at overheating. The only problem is, I overheat myself."
+			"Shooting pirates is the only worthwhile thing to do."
+			"There are these strange 'bad guys' appearing out of nowhere near where I got this ship. I really like them; they seem to be overheaters. Just like me." # This allusion to the Korath may be too obvious, but it's a great reference.
+			"Guess what. The Republic leader is an Alpha. I wish I could be teleported to Earth."
+			"Nunki once paid me tribute, but no more. Or was it Bloodsea?"
+			"Shoot 'em. Bang bang."
+			"Gatling Guns are ridiculously overpowered and expensive."
+			"Exploring the Confederated Councils of the Outer Rim's former territory is a nightmare. How do they have so many Leviathans?"
+			"You'll never guess where I got my name... or what it is."
+			"The Splinter is Megaparsec's best ship. Those Protectors are too slow, and Quicksilvers can't hold Plasma Turrets."
+			"Plasma, plasma. Overheat, overheat. Shoot, shoot."
+			"I wish I could join the Navy, but they won't let me. I refuse to give up this Splinter."
+			"I wish I could join the Syndicate, but they won't let me. For some reason, the corporate leaders have a predjuice against Southbound-sold weapons. Poor plasma."
+	ship "Splinter (Verdorve)" "Verdorve"
+
+
+
+ship "Splinter" "Splinter (Verdorve)"
+	outfits
+		"Plasma Cannon" 2
+		"Plasma Turret" 3
+
+		"Liquid Sodium Cooler"
+		"RT-I Radiothermal"
+		"D67-TM Shield Generator"
+		"Outfits Expansion"
+
+		"Impala Plasma Steering"
+		"Impala Plasma Thruster"
+		"Hyperdrive"
+	gun "Plasma Cannon"
+	gun "Plasma Cannon"
+	pylon
+	pylon
+	turret "Plasma Turret"
+	turret "Plasma Turret"
+	turret "Plasma Turret"
