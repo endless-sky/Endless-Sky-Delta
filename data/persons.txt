@@ -2475,7 +2475,7 @@ ship "Scout" "Scout (Intola)"
 		"nGVF-CC Fuel Cell"
 		"LP036a Battery Pack"
 		"D14-RN Shield Generator"
-		"Ramscoop" 2
+		"Ramscoop" 3
 
 		"A250 Atomic Thruster"
 		"A255 Atomic Steering"
