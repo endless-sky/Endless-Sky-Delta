@@ -9,6 +9,7 @@ on:
       - main
       - experimental
       - releases/v[0-9]+.[0-9]+.[0-9]+
+      - more-persons
     # ... and only when we've possibly changed how the game will function.
     paths:
     - 'source/**'
