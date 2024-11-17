@@ -2399,7 +2399,7 @@ person "Sanujab"
 	government "Hai"
 	frequency 100
 	personality
-		disables harvests timid
+		disables getaway harvests timid
 	system
 		government "Hai" "Quarg (Hai)"
 	phrase
@@ -2444,7 +2444,7 @@ person "Intola"
 	government "Merchant"
 	frequency 100
 	personality
-		disables plunders
+		disables hunting plunders secretive
 	system
 		government "Free Worlds" "Neutral" "Pirate" "Republic" "Syndicate"
 	phrase
@@ -2492,7 +2492,7 @@ person "Verdorve"
 	government "Merchant"
 	frequency 100
 	personality
-		vindictive
+		heroic opportunistic vindictive
 	system
 		government "Free Worlds" "Pirate" "Republic" "Syndicate"
 	phrase
