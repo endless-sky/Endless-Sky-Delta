@@ -35,6 +35,8 @@ This save file can be used to test these changes:
 (If any artwork was added or changed by this PR, the following must be provided.)
  - [ ] I updated the copyright attributions, or decline to claim copyright of any assets produced or modified.
 
+Please upload a zipped file with @2x assets and HighDPI images to the main body of your pull request.
+
 ## Wiki Update
 (If this PR adds a new feature or modifies a feature that should be documented in the [GitHub wiki](https://github.com/endless-sky/endless-sky/wiki), open a PR to the [wiki repository](https://github.com/endless-sky/endless-sky-wiki) and provide a link.)
 
