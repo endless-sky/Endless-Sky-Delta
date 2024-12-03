@@ -35,7 +35,6 @@ This save file can be used to test these changes:
 (If any artwork was added or changed by this PR, the following must be provided.)
  - [ ] I updated the copyright attributions, or decline to claim copyright of any assets produced or modified.
   - [ ] Include the '@2x' version of any added images alongside the regular image.
-
 - [ ] Please upload a zipped file with the necessary image, blend, and texture assets to the main body of your pull request.
 
 ## Wiki Update
