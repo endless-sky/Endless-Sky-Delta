@@ -594,7 +594,20 @@ interface "preferences"
 
 
 
+# HUD
 interface "hud"
+	# Current system.
+	anchor top center
+	sprite "ui/current system"
+		from -150 0
+		align top left
+	string "location"
+		from -65 13
+		color "medium"
+		align center
+		width 130
+		truncate back
+
 	# Player status.
 	anchor top right
 	
@@ -602,7 +615,7 @@ interface "hud"
 		from 0 0
 		align top right
 	
-	string "location"
+	string "flagship name"
 		from -160 25
 		color "medium"
 		align right
