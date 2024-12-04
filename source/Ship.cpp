@@ -1360,6 +1360,7 @@ vector<string> Ship::FlightCheck() const
 	double turnEnergy = attributes.Get("turning energy");
 	double hyperDrive = navigation.HasHyperdrive();
 	double jumpDrive = navigation.HasJumpDrive();
+	double intrasolar = attributes.Get("intrasolar");
 
 	// Report the first error condition that will prevent takeoff:
 	if(IdleHeat() >= MaximumHeat())
@@ -1392,6 +1393,13 @@ vector<string> Ship::FlightCheck() const
 			checks.emplace_back("solar power?");
 		if(fuel < 0.)
 			checks.emplace_back("fuel?");
+		if(canBeCarried && !intrasolar)
+		{
+			if(!hyperDrive && !jumpDrive)
+				checks.emplace_back("no hyperdrive?");
+			if(fuelCapacity < navigation.JumpFuel())
+				checks.emplace_back("no fuel?");
+		}
 		if(!canBeCarried)
 		{
 			if(baseAttributes.Category() != "Intrasolar" && (!hyperDrive && !jumpDrive))
