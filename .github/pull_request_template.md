@@ -34,8 +34,8 @@ This save file can be used to test these changes:
 ## Artwork Checklist
 (If any artwork was added or changed by this PR, the following must be provided.)
  - [ ] I updated the copyright attributions, or decline to claim copyright of any assets produced or modified.
-  - [ ] Include the '@2x' version of any added images alongside the regular image.
-- [ ] Please upload a zipped file with the necessary image, blend, and texture assets to the main body of your pull request.
+ - [ ] Include the '@2x' version of any added images alongside the regular image.
+ - [ ] Please upload a zipped file with the necessary image, blend, and texture assets to the main body of your pull request.
 
 ## Wiki Update
 (If this PR adds a new feature or modifies a feature that should be documented in the [GitHub wiki](https://github.com/endless-sky/endless-sky/wiki), open a PR to the [wiki repository](https://github.com/endless-sky/endless-sky-wiki) and provide a link.)
