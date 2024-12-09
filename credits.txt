@@ -1,6 +1,6 @@
-Welcome to Endless Sky!
+Welcome to Endless Sky Delta!
 
-version 0.10.10-delta
+version 0.10.11-continuous
 
 The player's manual and other
 resources are available at:
@@ -336,6 +336,7 @@ contributed to Endless Sky:
   lumbar527
   macfreek
   Mach565
+  MadisonionX
   MageKing17
   MagicMuscleMan
   Mailaender
