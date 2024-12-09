@@ -1,6 +1,6 @@
 Welcome to Endless Sky Delta!
 
-version 0.10.11-continuous
+version 0.10.11-alpha
 
 The player's manual and other
 resources are available at:
