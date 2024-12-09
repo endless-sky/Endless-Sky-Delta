@@ -68,6 +68,8 @@ Major Programming
   NomadicVolcano
   oo13
   Peter van der Meer
+  vitalchip
+  Zitchas
 
 Storyline & Faction Authors
   Amazinite
@@ -336,7 +338,7 @@ contributed to Endless Sky:
   lumbar527
   macfreek
   Mach565
-  MadisonionX
+  MadisonianX
   MageKing17
   MagicMuscleMan
   Mailaender
