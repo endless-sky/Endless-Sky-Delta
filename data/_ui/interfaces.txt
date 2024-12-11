@@ -803,7 +803,7 @@ interface "hud"
 		color "medium"
 		align center
 		width 130
-		truncate back	
+		truncate back
 
 	sprite "ui/navigation"
 		from 195 0
