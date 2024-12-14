@@ -1398,10 +1398,8 @@ vector<string> Ship::FlightCheck() const
 			if(!hyperDrive && !jumpDrive)
 				checks.emplace_back("no hyperdrive?");
 		}
-		if(!canBeCarried)
+		if(hyperDrive || jumpDrive)
 		{
-			if(baseAttributes.Category() != "Intrasolar" && (!hyperDrive && !jumpDrive))
-				checks.emplace_back("no hyperdrive?");
 			if(fuelCapacity < navigation.JumpFuel())
 				checks.emplace_back("no fuel?");
 		}
