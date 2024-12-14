@@ -1397,8 +1397,6 @@ vector<string> Ship::FlightCheck() const
 		{
 			if(!hyperDrive && !jumpDrive)
 				checks.emplace_back("no hyperdrive?");
-			if(fuelCapacity < navigation.JumpFuel())
-				checks.emplace_back("no fuel?");
 		}
 		if(!canBeCarried)
 		{
