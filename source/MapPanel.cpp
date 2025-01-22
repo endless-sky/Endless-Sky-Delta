@@ -17,6 +17,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "text/alignment.hpp"
 #include "Angle.h"
+#include "audio/Audio.h"
 #include "shader/BatchDrawList.h"
 #include "CargoHold.h"
 #include "Dialog.h"
@@ -250,14 +251,16 @@ const float MapPanel::LINK_OFFSET = 7.f;
 
 
 
-MapPanel::MapPanel(PlayerInfo &player, int commodity, const System *special)
+MapPanel::MapPanel(PlayerInfo &player, int commodity, const System *special, bool fromMission)
 	: player(player), distance(player),
 	playerSystem(*player.GetSystem()),
 	selectedSystem(special ? special : player.GetSystem()),
 	specialSystem(special),
 	playerJumpDistance(System::DEFAULT_NEIGHBOR_DISTANCE),
-	commodity(commodity)
+	commodity(commodity),
+	fromMission(fromMission)
 {
+	Audio::Pause();
 	SetIsFullScreen(true);
 	SetInterruptible(false);
 	// Recalculate the fog each time the map is opened, just in case the player
@@ -289,6 +292,13 @@ MapPanel::MapPanel(PlayerInfo &player, int commodity, const System *special)
 		playerJumpDistance = systemRange ? systemRange : playerRange;
 
 	CenterOnSystem(selectedSystem, true);
+}
+
+
+
+MapPanel::~MapPanel()
+{
+	Audio::Resume();
 }
 
 
@@ -414,7 +424,7 @@ void MapPanel::FinishDrawing(const string &buttonCondition)
 
 				if(HasMultipleLandablePlanets(*hoverSystem) || t.outfits.size() > 1)
 					for(const auto &it : t.outfits)
-						tooltip += "\n - " + to_string(it.second) + " on " + it.first->Name();
+						tooltip += "\n - " + to_string(it.second) + " on " + it.first->DisplayName();
 			}
 
 			hoverText.Wrap(tooltip);
@@ -472,7 +482,7 @@ void MapPanel::DrawMiniMap(const PlayerInfo &player, float alpha, const System *
 		const System &system = *jump[i];
 		const Government *gov = system.GetGovernment();
 		Point from = system.Position() - center + drawPos;
-		const string &name = player.KnowsName(system) ? system.Name() : UNKNOWN_SYSTEM;
+		const string &name = player.KnowsName(system) ? system.DisplayName() : UNKNOWN_SYSTEM;
 		font.Draw(name, from + Point(OUTER, -.5 * font.Height()), lineColor);
 
 		// Draw the origin and destination systems, since they
@@ -599,7 +609,12 @@ bool MapPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &command, bool
 	else if(key == 'p' && buttonCondition != "is ports")
 	{
 		GetUI()->Pop(this);
-		GetUI()->Push(new MapDetailPanel(*this));
+		GetUI()->Push(new MapDetailPanel(*this, false));
+	}
+	else if(key == 't' && buttonCondition != "is stars")
+	{
+		GetUI()->Pop(this);
+		GetUI()->Push(new MapDetailPanel(*this, true));
 	}
 	else if(key == 'f')
 	{
@@ -610,9 +625,9 @@ bool MapPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &command, bool
 	else if(key == 'x')
 		player.SetStarryMap(!mapIsStarry);
 	else if(key == SDLK_PLUS || key == SDLK_KP_PLUS || key == SDLK_EQUALS)
-		player.SetMapZoom(min(static_cast<int>(mapInterface->GetValue("max zoom")), player.MapZoom() + 1));
+		player.SetMapZoom(min<int>(mapInterface->GetValue("max zoom"), player.MapZoom() + 1));
 	else if(key == SDLK_MINUS || key == SDLK_KP_MINUS)
-		player.SetMapZoom(max(static_cast<int>(mapInterface->GetValue("min zoom")), player.MapZoom() - 1));
+		player.SetMapZoom(max<int>(mapInterface->GetValue("min zoom"), player.MapZoom() - 1));
 	else
 		return false;
 
@@ -696,9 +711,9 @@ bool MapPanel::Scroll(double dx, double dy)
 	Point anchor = mouse / Zoom() - center;
 	const Interface *mapInterface = GameData::Interfaces().Get("map");
 	if(dy > 0.)
-		player.SetMapZoom(min(static_cast<int>(mapInterface->GetValue("max zoom")), player.MapZoom() + 1));
+		player.SetMapZoom(min<int>(mapInterface->GetValue("max zoom"), player.MapZoom() + 1));
 	else if(dy < 0.)
-		player.SetMapZoom(max(static_cast<int>(mapInterface->GetValue("min zoom")), player.MapZoom() - 1));
+		player.SetMapZoom(max<int>(mapInterface->GetValue("min zoom"), player.MapZoom() - 1));
 
 	// Now, Zoom() has changed (unless at one of the limits). But, we still want
 	// anchor to be the same, so:
@@ -806,7 +821,11 @@ void MapPanel::Select(const System *system)
 {
 	if(!system)
 		return;
+
 	selectedSystem = system;
+	// Update the cache to apply any visual changes needed after the selected system was changed.
+	UpdateCache();
+
 	vector<const System *> &plan = player.TravelPlan();
 	Ship *flagship = player.Flagship();
 	if(!flagship || (!plan.empty() && system == plan.front()))
@@ -872,6 +891,7 @@ void MapPanel::Find(const string &name)
 			{
 				bestIndex = index;
 				selectedSystem = &system;
+				UpdateCache();
 				CenterOnSystem(selectedSystem);
 				if(!index)
 				{
@@ -891,6 +911,7 @@ void MapPanel::Find(const string &name)
 			{
 				bestIndex = index;
 				selectedSystem = planet.GetSystem();
+				UpdateCache();
 				CenterOnSystem(selectedSystem);
 				if(!index)
 				{
@@ -1129,8 +1150,8 @@ void MapPanel::UpdateCache()
 
 		const bool canViewSystem = player.CanView(system);
 		nodes.emplace_back(system.Position(), color,
-			player.KnowsName(system) ? system.Name() : "",
-			(&system == &playerSystem) ? closeNameColor : farNameColor,
+			player.KnowsName(system) ? system.DisplayName() : "",
+			(&system == &playerSystem || &system == selectedSystem) ? closeNameColor : farNameColor,
 			canViewSystem ? system.GetGovernment() : nullptr,
 			canViewSystem ? system.GetMapIcons() : unmappedSystem);
 	}
@@ -1260,7 +1281,7 @@ void MapPanel::DrawSelectedSystem()
 	if(!player.KnowsName(*selectedSystem))
 		text = "Selected system: unexplored system";
 	else
-		text = "Selected system: " + selectedSystem->Name();
+		text = "Selected system: " + selectedSystem->DisplayName();
 
 	int jumps = 0;
 	const vector<const System *> &plan = player.TravelPlan();
@@ -1420,24 +1441,19 @@ void MapPanel::DrawSystems()
 	// Draw the circles for the systems.
 	BatchDrawList starBatch;
 	double zoom = Zoom();
-	const float ringFade = mapIsStarry ? 1.5 - 1.25 * zoom : 1.;
 	for(const Node &node : nodes)
 	{
 		Point pos = zoom * (node.position + center);
-		if(!mapIsStarry)
+		if(commodity != SHOW_STARS)
 			RingShader::Draw(pos, OUTER, INNER, node.color);
 		else
 		{
-			// System rings fade as you zoom in if starry map is enabled.
-			const float alpha = max(ringFade, node.mapIcons.empty() ? .9f : 0.f);
-			RingShader::Draw(pos, OUTER, INNER, node.color.Additive(alpha));
-
 			// Ensures every multiple-star system has a characteristic, deterministic rotation.
 			Angle starAngle = 0;
 			Angle angularSpacing = 0;
 			Point starOffset = Point(0, 0);
 
-			const int starsToDraw = min(static_cast<int>(node.mapIcons.size()), MAX_STARS);
+			const int starsToDraw = min<int>(node.mapIcons.size(), MAX_STARS);
 			if(starsToDraw > 1)
 			{
 				starAngle = node.name.length() + node.position.Length();
@@ -1451,7 +1467,7 @@ void MapPanel::DrawSystems()
 				starAngle += angularSpacing;
 				const Sprite *star = node.mapIcons[i];
 				const Body starBody(star, pos + zoom * starOffset * starAngle.Unit(),
-					Point(0, 0), 0, sqrt(zoom) / 2, min(zoom + 0.3, 0.75));
+					Point(0, 0), 0, cbrt(zoom) * 0.6, 0.8);
 				starBatch.Add(starBody);
 			}
 		}

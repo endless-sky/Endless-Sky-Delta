@@ -119,6 +119,8 @@ mission "Remnant: Expanded Horizons Astral job"
 	waypoint
 		not attributes "pleiades"
 		not attributes "inaccessible"
+		not attributes "twilight"
+		not attributes "tangled shroud"
 	to offer
 		has "Remnant: Expanded Horizons Astral 2: done"
 		random < 50
@@ -391,6 +393,7 @@ ship "Rescue Dummy"
 		"automaton" 1
 		"energy generation" 1
 		"thrust" 30
+		"lateral thrust" 30
 		"turn" 30
 	outfits
 		"Suicide Gun"
