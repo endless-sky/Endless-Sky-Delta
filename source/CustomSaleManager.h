@@ -45,5 +45,5 @@ public:
 
 
 private:
-	static std::map<CustomSale::SellType, CustomSale> customSales;
+	static inline std::map<CustomSale::SellType, CustomSale> customSales;
 };
