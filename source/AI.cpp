@@ -488,7 +488,7 @@ void AI::IssueMoveTarget(const Point &target, const System *moveToSystem)
 	newOrders.point = target;
 	newOrders.targetSystem = moveToSystem;
 	string description = "moving to the given location";
-	description += player.GetSystem() == moveToSystem ? "." : (" in the " + moveToSystem->Name() + " system.");
+	description += player.GetSystem() == moveToSystem ? "." : (" in the " + moveToSystem->DisplayName() + " system.");
 	IssueOrders(newOrders, description);
 }
 
@@ -921,6 +921,11 @@ void AI::Step(Command &activeCommands)
 					|| shipToAssist->GetGovernment()->IsEnemy(gov)
 					|| (!shipToAssist->IsDisabled() && !shipToAssist->NeedsFuel() && !shipToAssist->NeedsEnergy()))
 			{
+				if(target == shipToAssist)
+				{
+					target.reset();
+					it->SetTargetShip(nullptr);
+				}
 				shipToAssist.reset();
 				it->SetShipToAssist(nullptr);
 			}
@@ -1848,7 +1853,11 @@ void AI::MoveIndependent(Ship &ship, Command &command) const
 			{
 				MoveTo(ship, command, Point(), Point(), 40., .8);
 				if(ship.Velocity().Dot(ship.Position()) > 0.)
+				{
 					command.SetThrust(1.);
+					double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+					command.SetLateralThrust(deviation * 5);
+				}
 				return;
 			}
 		}
@@ -2444,11 +2453,18 @@ bool AI::MoveTo(Ship &ship, Command &command, const Point &targetPosition,
 	double maxVelocity = ship.MaxVelocity(ShouldUseAfterburner(ship)) * .99;
 	if(isFacing && (velocity.LengthSquared() <= maxVelocity * maxVelocity
 			|| dp.Unit().Dot(velocity.Unit()) < .95))
+	{
 		command.SetThrust(1.);
+		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+		command.SetLateralThrust(deviation * 5);
+	}
+
 	else if(shouldReverse)
 	{
 		command.SetTurn(TurnToward(ship, velocity));
 		command.SetThrust(-1.);
+		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+		command.SetLateralThrust(deviation * 5);
 	}
 
 	return false;
@@ -2508,14 +2524,22 @@ bool AI::Stop(Ship &ship, Command &command, double maxSpeed, const Point directi
 		{
 			command.SetTurn(TurnToward(ship, velocity));
 			if(velocity.Unit().Dot(angle.Unit()) > limit)
+			{
 				command.SetThrust(-1.);
+				double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+				command.SetLateralThrust(deviation * 5);
+			}
 			return false;
 		}
 	}
 
 	command.SetTurn(TurnBackward(ship));
 	if(velocity.Unit().Dot(angle.Unit()) < -limit)
+	{
 		command.SetThrust(1.);
+		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+		command.SetLateralThrust(deviation * 5);
+	}
 
 	return false;
 }
@@ -2699,6 +2723,8 @@ void AI::KeepStation(Ship &ship, Command &command, const Body &target)
 		if(direction > THRUST_DEADBAND)
 		{
 			command.SetThrust(-1.);
+			double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+			command.SetLateralThrust(deviation * 5);
 			return;
 		}
 	}
@@ -2706,7 +2732,11 @@ void AI::KeepStation(Ship &ship, Command &command, const Body &target)
 	double direction = positionWeight * positionDelta.Dot(a) / POSITION_DEADBAND
 		+ velocityWeight * velocityDelta.Dot(a) / VELOCITY_DEADBAND;
 	if(direction > THRUST_DEADBAND)
+	{
 		command.SetThrust(1.);
+		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
+		command.SetLateralThrust(deviation * 5);
+	}
 }
 
 
@@ -4158,7 +4188,7 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		}
 
 		// Inform the player of any destinations in the system they are jumping to.
-		if(!destinations.empty())
+		if(!destinations.empty() && Preferences::GetNotificationSetting() != Preferences::NotificationSetting::OFF)
 		{
 			string message = "Note: you have ";
 			message += (missions == 1 ? "a mission that requires" : "missions that require");
@@ -4167,7 +4197,7 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 			bool oxfordComma = (count > 2);
 			for(const Planet *planet : destinations)
 			{
-				message += planet->Name();
+				message += planet->DisplayName();
 				--count;
 				if(count > 1)
 					message += ", ";
@@ -4176,6 +4206,9 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 			}
 			message += " in the system you are jumping to.";
 			Messages::Add(message, Messages::Importance::Info);
+
+			if(Preferences::GetNotificationSetting() == Preferences::NotificationSetting::BOTH)
+				Audio::Play(Audio::Get("fail"), SoundCategory::ALERT);
 		}
 		// If any destination was found, find the corresponding stellar object
 		// and set it as your ship's target planet.
@@ -4364,7 +4397,7 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 			// If the player is moving slowly over an object, then the player is considering landing there.
 			// The target object might not be able to be landed on, for example an enemy planet or a star.
 			const bool isTryingLanding = (ship.Position().Distance(object.Position()) < object.Radius() && isMovingSlowly);
-			if(object.HasValidPlanet() && object.GetPlanet()->IsAccessible(&ship))
+			if(object.HasValidPlanet() && object.GetPlanet()->IsAccessible(&ship) && object.IsVisible(ship.Position()))
 			{
 				landables.emplace_back(&object);
 				if(isTryingLanding)
@@ -4392,7 +4425,7 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		if(target)
 			message.clear();
 		else if(!message.empty())
-			Audio::Play(Audio::Get("fail"));
+			Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 
 		Messages::Importance messageImportance = Messages::Importance::High;
 
@@ -4415,10 +4448,10 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 				message = "The authorities on this " + next->GetPlanet()->Noun() +
 					" refuse to clear you to land here.";
 				messageImportance = Messages::Importance::Highest;
-				Audio::Play(Audio::Get("fail"));
+				Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 			}
 			else if(next != target)
-				message = "Switching landing targets. Now landing on " + next->Name() + ".";
+				message = "Switching landing targets. Now landing on " + next->DisplayName() + ".";
 		}
 		else if(message.empty())
 		{
@@ -4455,14 +4488,14 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 			{
 				message = "There are no planets in this system that you can land on.";
 				messageImportance = Messages::Importance::Highest;
-				Audio::Play(Audio::Get("fail"));
+				Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 			}
 			else if(!target->GetPlanet()->CanLand())
 			{
 				message = "The authorities on this " + target->GetPlanet()->Noun() +
 					" refuse to clear you to land here.";
 				messageImportance = Messages::Importance::Highest;
-				Audio::Play(Audio::Get("fail"));
+				Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 			}
 			else if(!types.empty())
 			{
@@ -4478,10 +4511,10 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 						message += ' ' + *it++ + ',';
 					message += " or " + *it;
 				}
-				message += " in this system. Landing on " + target->Name() + ".";
+				message += " in this system. Landing on " + target->DisplayName() + ".";
 			}
 			else
-				message = "Landing on " + target->Name() + ".";
+				message = "Landing on " + target->DisplayName() + ".";
 		}
 		if(!message.empty())
 			Messages::Add(message, messageImportance);
@@ -4513,13 +4546,13 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		{
 			// The player is guaranteed to have a travel plan for isWormhole to be true.
 			Messages::Add("Landing on a local wormhole to navigate to the "
-					+ player.TravelPlan().back()->Name() + " system.", Messages::Importance::High);
+					+ player.TravelPlan().back()->DisplayName() + " system.", Messages::Importance::High);
 		}
 		if(ship.GetTargetSystem() && !isWormhole)
 		{
 			string name = "selected star";
 			if(player.KnowsName(*ship.GetTargetSystem()))
-				name = ship.GetTargetSystem()->Name();
+				name = ship.GetTargetSystem()->DisplayName();
 
 			if(activeCommands.Has(Command::FLEET_JUMP))
 				Messages::Add("Engaging fleet autopilot to jump to the " + name + " system."
@@ -4549,7 +4582,7 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		AutoFire(ship, firingCommands, false, true);
 
 	const bool mouseTurning = activeCommands.Has(Command::MOUSE_TURNING_HOLD);
-	if(mouseTurning && !ship.IsBoarding() && !ship.IsReversing())
+	if(mouseTurning && !ship.IsBoarding() && (!ship.IsReversing() || ship.Attributes().Get("reverse thrust")))
 		command.SetTurn(TurnToward(ship, mousePosition));
 
 	if(activeCommands)
@@ -4592,7 +4625,8 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		}
 
 		// Stability control, uses lateral thrusters instead of ship applying drag.
-		bool stabilityEngage = !shift && Preferences::Has("Disable auto-stabilization");
+		bool stabilityEngage = (!shift && Preferences::Has("Disable auto-stabilization"))
+			|| (shift && !Preferences::Has("Disable auto-stabilization"));
 		double deviation = ship.Velocity().Unit().Cross(ship.Facing().Unit());
 		if(shipThrusting && !stabilityEngage && !ShipLateralThrusting)
 			command.SetLateralThrust(deviation * 5);
@@ -4664,7 +4698,7 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		const Planet *planet = player.TravelDestination();
 		if(planet && planet->IsInSystem(ship.GetSystem()) && planet->IsAccessible(&ship))
 		{
-			Messages::Add("Autopilot: landing on " + planet->Name() + ".", Messages::Importance::High);
+			Messages::Add("Autopilot: landing on " + planet->DisplayName() + ".", Messages::Importance::High);
 			autoPilot |= Command::LAND;
 			ship.SetTargetStellar(ship.GetSystem()->FindStellar(planet));
 		}
@@ -4703,25 +4737,25 @@ void AI::MovePlayer(Ship &ship, Command &activeCommands)
 		{
 			Messages::Add("You do not have a hyperdrive installed.", Messages::Importance::Highest);
 			autoPilot.Clear();
-			Audio::Play(Audio::Get("fail"));
+			Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 		}
 		else if(!ship.JumpNavigation().JumpFuel(ship.GetTargetSystem()))
 		{
 			Messages::Add("You cannot jump to the selected system.", Messages::Importance::Highest);
 			autoPilot.Clear();
-			Audio::Play(Audio::Get("fail"));
+			Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 		}
 		else if(!ship.JumpsRemaining() && !ship.IsEnteringHyperspace())
 		{
 			Messages::Add("You do not have enough fuel to make a hyperspace jump.", Messages::Importance::Highest);
 			autoPilot.Clear();
-			Audio::Play(Audio::Get("fail"));
+			Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 		}
 		else if(ship.IsLanding())
 		{
 			Messages::Add("You cannot jump while landing.", Messages::Importance::Highest);
 			autoPilot.Clear(Command::JUMP);
-			Audio::Play(Audio::Get("fail"));
+			Audio::Play(Audio::Get("fail"), SoundCategory::UI);
 		}
 		else
 		{

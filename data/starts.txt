@@ -1,4 +1,5 @@
 # Copyright (c) 2015 by Michael Zahniser
+# Copyright (c) 2024 by Hurleveur
 #
 # Endless Sky is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
@@ -65,21 +66,23 @@ start "hai space"
 	thumbnail "scene/hai start"
 	system "Fah Soom"
 	planet "Greenwater"
-	date 16 11 3013
+	date 16 05 3013
+	on display
+		description `This start is locked.`
 	to reveal
-		has "Ask the Hai about the Unfettered: offered"
+		has "Ask the Hai about the Unfettered"
 	on reveal
 		name "Hai Origins"
-		description `You grew up on Greenwater, a Hai world with a rich and mixed culture thanks to its climate. You've dreamed of owning your own fleet since you were given toy spaceships as a small child. To reach that goal, you worked hard at a travel company, recommending locations in human space.`
+		description `You grew up on Greenwater, a Hai world with a rich and mixed culture thanks to its climate. You've dreamed of owning your own fleet since you were given toy spaceships as a small child, and you've worked hard at a travel company to reach this goal.`
 		description `	Now, as your ferry docks at the main spaceport, you feel like this is the start of a new life as a captain.`
+		description `	To unlock this start, you must complete the main human campaign.`
 		system "Fah Soom"
 		planet "Greenwater"
-		date 16 5 3013
+		date 16 05 3013
 		credits 1431000
 		debt 1431000
 	to unlock
-		has "main plot completed"
-		has "Ask the Hai about the Unfettered: offered"
+		has "Hai Start Unlocked"
 		# TODO: think about what point of HR should unlock this once it's back in the game, if any
 		# has "event: hai-human resolution announced"
 	conversation "hai intro"
@@ -94,8 +97,11 @@ start "hai space"
 	set "hai space start"
 	# need to set it here to not have it trigger alongside the invisible mission
 	set "First Contact: Hai: offered"
+	set "First Contact: Hai: declined"
 	set "First Contact: Unfettered: offered"
-	set "Ask the Hai about the Unfettered: done"
+	set "First Contact: Unfettered: declined"
+	set "Ask the Hai about the Unfettered: offered"
+	set "Ask the Hai about the Unfettered: declined"
 
 
 conversation "hai intro"
@@ -191,7 +197,8 @@ conversation "hai intro"
 ship "Grasshopper" "Grasshopper (Hai Start)"
 	outfits
 		`"Benga" Atomic Thruster`
-		`"Biroo" Atomic Steering`
+		`"Benga" Atomic LTC`
+		`"Benga" Atomic Steering`
 		"Fuel Pod"
 		"Hai Chasm Batteries"
 		"Hai Corundum Regenerator"
@@ -256,12 +263,13 @@ start "lampyrid"
 			"mass" 240
 			"drag" 8.5
 			"heat dissipation" .7
-			"fuel capacity" 700
+			"fuel capacity" 850
 			"cargo space" 160
-			"outfit space" 300
-			"engine capacity" 130
+			"outfit space" 309
+			"engine capacity" 141
 			"weapon capacity" 50
 			"reverse thruster slot" 1
+			"lateral thruster slot" 1
 			"steering slot" 1
 			"thruster slot" 1
 			weapon
@@ -271,20 +279,50 @@ start "lampyrid"
 				"hit force" 1500
 		outfits
 			"Anti-Missile Turret"
-			"S3 Thermionic"
+			"KP-6 Photovoltaic Array"
 			"LP036a Battery Pack"
-			"D67-TM Shield Generator"
-			"Large Radar Jammer"
-			"Ramscoop"
+			"D14-RN Shield Generator"
+			"Small Radar Jammer"
 		
-			"Impala Plasma Thruster"
-			"Impala Plasma Steering"
+			"RC32 Reaction Steering"
+			"RC34 Reaction LTC"
+			"RC37 Reaction Thruster"
 			"Hyperdrive"
 
 		engine -64 28 0.7
 		engine 0 80 1.8
 		engine 0 100 1.2
 		engine 64 28 0.7
+		"lateral engine" -23 -66
+			angle 90
+			right
+			under
+			zoom 0.3
+		"lateral engine" 23 -66
+			angle 270
+			left
+			under
+			zoom 0.3
+		"lateral engine" -79 0
+			angle 90
+			right
+			under
+			zoom 0.3
+		"lateral engine" 79 0
+			angle 270
+			left
+			under
+			zoom 0.3
+		"lateral engine" -30 68
+			angle 90
+			right
+			under
+			zoom 0.3
+		"lateral engine" 30 68
+			angle 270
+			left
+			under
+			zoom 0.3
 		"reverse engine" -64.5 -31.5 0.7
 		"reverse engine" 64.5 -31.5 0.7
 		"steering engine" -64.5 -31.5 0.7

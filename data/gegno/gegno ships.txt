@@ -28,11 +28,12 @@ ship "Shale"
 		"mass" 114
 		"drag" 2
 		"heat dissipation" 0.73
-		"fuel capacity" 400
+		"fuel capacity" 325
 		"cargo space" 54
-		"outfit space" 113
+		"outfit space" 134
 		"weapon capacity" 0
-		"engine capacity" 58
+		"engine capacity" 77
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -46,6 +47,7 @@ ship "Shale"
 		"R01 Skirmish Battery"
 		
 		"RG15 Torch Thruster"
+		"RG15 Torch LTC"
 		"RG15 Torch Steering"
 		"Hyperdrive"
 	engine 0 40
@@ -71,11 +73,12 @@ ship "Dolomite"
 		"mass" 2160
 		"drag" 6.7
 		"heat dissipation" 0.42
-		"fuel capacity" 500
+		"fuel capacity" 850
 		"cargo space" 200
 		"outfit space" 152
 		"weapon capacity" 0
 		"engine capacity" 81
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -89,6 +92,7 @@ ship "Dolomite"
 		"R01 Skirmish Battery"
 		
 		"RG15 Torch Thruster"
+		"RG15 Torch LTC"
 		"RG15 Torch Steering" # Extra steering
 		"Hyperdrive"
 	engine -22.5 158
@@ -119,11 +123,12 @@ ship "Conglomerate"
 		"mass" 3620
 		"drag" 20.9
 		"heat dissipation" 0.4
-		"fuel capacity" 500
+		"fuel capacity" 1200
 		"cargo space" 415
 		"outfit space" 253
 		"weapon capacity" 0
 		"engine capacity" 146
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -138,6 +143,7 @@ ship "Conglomerate"
 		"R02 Battlezone Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		# "RG15 Torch Thruster" # Extra thruster
 		"RG18 Torch Steering"
 		# "RG15 Torch Steering" # Extra steering
@@ -172,11 +178,12 @@ ship "Granofel"
 		"mass" 1367
 		"drag" 16.3
 		"heat dissipation" 0.39
-		"fuel capacity" 500
+		"fuel capacity" 775
 		"cargo space" 560
 		"outfit space" 230
 		"weapon capacity" 0
 		"engine capacity" 151
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -189,7 +196,8 @@ ship "Granofel"
 		"C7 Brawl Cell"
 		"R02 Battlezone Battery"
 		
-		"RG18 Torch Thruster" # Extra thruster
+		"RG18 Torch Thruster"
+		"RG18 Torch LTC" # Extra thruster
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine -36 114
@@ -225,11 +233,12 @@ ship "Gypsum"
 		"mass" 720
 		"drag" 3.9
 		"heat dissipation" 0.62
-		"fuel capacity" 600
+		"fuel capacity" 675
 		"cargo space" 160
 		"outfit space" 240
 		"weapon capacity" 42
 		"engine capacity" 120
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -247,6 +256,7 @@ ship "Gypsum"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		# "RG15 Torch Steering" # Extra Steering
 		"RG18 Torch Steering"
 		"Hyperdrive"
@@ -280,11 +290,12 @@ ship "Corundum"
 		"mass" 880
 		"drag" 4.5
 		"heat dissipation" 0.64
-		"fuel capacity" 600
+		"fuel capacity" 725
 		"cargo space" 140
 		"outfit space" 316
 		"weapon capacity" 64
 		"engine capacity" 162
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -301,6 +312,7 @@ ship "Corundum"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering" # Extra Steering
 		"Hyperdrive"
 	engine 58 -58
@@ -332,6 +344,7 @@ ship "Corundum" "Corundum (Torch)"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering" # Extra steering
 		"Hyperdrive"
 
@@ -345,6 +358,7 @@ ship "Corundum" "Corundum (Multi)"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering"# Extra steering
 		"Hyperdrive"
 
@@ -363,14 +377,15 @@ ship "Protolith"
 		"mass" 37520
 		"drag" 131
 		"heat dissipation" 0.18
-		"fuel capacity" 2100
+		"fuel capacity" 34975
 		"cargo space" 1160
 		"outfit space" 942
 		"weapon capacity" 0
-		"engine capacity" 480
+		"engine capacity" 501
 		"reverse thruster slot" 1
 		"steering slot" 2 # Extra steering not removed as this sounds like verging on a superheavy that justifies it.
 		"thruster slot" 4 # Extra thruster not removed
+		"lateral thruster slot" 1
 		weapon
 			"blast radius" 360
 			"shield damage" 1860
@@ -381,7 +396,8 @@ ship "Protolith"
 		"C3 Scrap Cell" 2
 		"R03 Warforge Battery" 2
 
-		"RG3 Torch Thruster" 4
+		"RG3 Torch Thruster" 4 # This seems a bit excessive.
+		"RG3 Torch LTC" # This might not be enough.
 		"RG3 Torch Steering" 2
 	"steering engine" 87 -289 0.5
 		angle -90
@@ -415,6 +431,7 @@ ship "Protolith"
 
 ship "Dunite"
 	sprite "ship/gegno dunite"
+		"scale" 0.75
 	thumbnail "thumbnail/gegno dunite"
 	attributes
 		category "Interceptor"
@@ -430,9 +447,10 @@ ship "Dunite"
 		"heat dissipation" 0.86
 		"fuel capacity" 1
 		"cargo capacity" 1
-		"outfit space" 115
+		"outfit space" 136
 		"weapon capacity" 22
-		"engine capacity" 56
+		"engine capacity" 77
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -450,6 +468,7 @@ ship "Dunite"
 		"Savagery Pike"
 
 		"RG15 Torch Thruster"
+		"RG15 Torch LTC"
 		"RG15 Torch Steering"
 	engine 0 40
 	gun -3 -80 "Savagery Bludgeon"
@@ -477,12 +496,13 @@ ship "Augen"
 		"mass" 30000
 		"drag" 120
 		"heat dissipation" 0.17
-		"fuel capacity" 500
+		"fuel capacity" 6775
 		"cargo space" 84
-		"outfit space" 1868
+		"outfit space" 1908
 		"weapon capacity" 1073
-		"engine capacity" 460
+		"engine capacity" 501
 		"reverse thruster slot" 1
+		"lateral thruster slot" 1
 		"steering slot" 2 # Extra steering slot added
 		"thruster slot" 4 # Extra thruster slots added due to being a superheavy
 		weapon
@@ -504,6 +524,7 @@ ship "Augen"
 		"Irate Carronade" 4
 		
 		"RG3 Torch Thruster" 4
+		"RG3 Torch LTC"
 		"RG3 Torch Steering" 2
 		"Hyperdrive"
 	engine 94 302
@@ -603,11 +624,12 @@ ship "Slate"
 		"mass" 140
 		"drag" 2.2
 		"heat dissipation" 0.73
-		"fuel capacity" 400
+		"fuel capacity" 325
 		"cargo space" 81
-		"outfit space" 122
+		"outfit space" 134
 		"weapon capacity" 0
-		"engine capacity" 58
+		"engine capacity" 77
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -622,13 +644,14 @@ ship "Slate"
 		"Savagery Pike" 1
 		
 		"RG15 Torch Thruster"
+		"RG15 Torch LTC"
 		"RG15 Torch Steering"
 		"Hyperdrive"
 	engine 0 40
 	leak "leak" 60 50
 	explode "small explosion" 5
 	explode "tiny explosion" 10
-	description `Designed by the Gegno Vi, the Slate is a modified Shale with a stronger hull and more space, a prime characteristic of Vi vessels. Slightly larger than other shuttle ships to suit the Vi's stature, it is able to carry several Gegno cadets along with a small cargo load.`
+	description `Designed by the Gegno Vi, the Slate is a modified Shale with a stronger hull and more space, a prime characteristic of Vi vessels. Slightly larger than other shuttle ships to suit the Vi's stature, it is able to carry a few Gegno cadets, along with a decently increased cargo capacity.`
 
 
 
@@ -647,11 +670,12 @@ ship "Schist"
 		"mass" 2240
 		"drag" 8.5
 		"heat dissipation" 0.5
-		"fuel capacity" 500
+		"fuel capacity" 875
 		"cargo space" 140
-		"outfit space" 298
+		"outfit space" 305
 		"weapon capacity" 100
-		"engine capacity" 96
+		"engine capacity" 120
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -670,6 +694,7 @@ ship "Schist"
 		"Irate Carronade"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine 0 153.5
@@ -717,6 +742,7 @@ ship "Schist" "Schist (Heavy Load)"
 
 ship "Rhyolite"
 	sprite "ship/gegno rhyolite"
+		"scale" 0.75
 	thumbnail "thumbnail/gegno rhyolite"
 	attributes
 		category "Interceptor"
@@ -730,11 +756,12 @@ ship "Rhyolite"
 		"mass" 225
 		"drag" 4
 		"heat dissipation" 0.64
-		"fuel capacity" 400
+		"fuel capacity" 350
 		"cargo space" 30
-		"outfit space" 220
+		"outfit space" 250
 		"weapon capacity" 78
-		"engine capacity" 100
+		"engine capacity" 120
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -751,6 +778,7 @@ ship "Rhyolite"
 		"Savagery Pike" 5
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine -28.5 61.5
@@ -784,11 +812,12 @@ ship "Eclogite"
 		"mass" 550
 		"drag" 4.6
 		"heat dissipation" 0.56
-		"fuel capacity" 400
+		"fuel capacity" 425
 		"cargo space" 70
-		"outfit space" 285
-		"weapon capacity" 96
-		"engine capacity" 94
+		"outfit space" 305
+		"weapon capacity" 122
+		"engine capacity" 120
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -806,6 +835,7 @@ ship "Eclogite"
 		"Savagery Pike" 9
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine 0 82
@@ -839,11 +869,12 @@ ship "Diorite"
 		"mass" 952
 		"drag" 7.54
 		"heat dissipation" 0.56
-		"fuel capacity" 500
+		"fuel capacity" 625
 		"cargo space" 40
-		"outfit space" 453
+		"outfit space" 473
 		"weapon capacity" 195
-		"engine capacity" 140
+		"engine capacity" 145
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -862,6 +893,7 @@ ship "Diorite"
 		"Irate Carronade"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG3 Torch Steering"
 		"Hyperdrive"
 	engine -19.5 132
@@ -891,6 +923,7 @@ ship "Diorite" "Diorite (Ballistic)"
 		"R01 Skirmish Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		# "RG3 Torch Steering" # Extra steering
 		"RG15 Torch Steering"
 		"Hyperdrive"
@@ -912,11 +945,12 @@ ship "Hornfel"
 		"mass" 2960
 		"drag" 10.1
 		"heat dissipation" 0.38
-		"fuel capacity" 600
+		"fuel capacity" 1275
 		"cargo space" 120
-		"outfit space" 508
+		"outfit space" 530
 		"weapon capacity" 240
-		"engine capacity" 94
+		"engine capacity" 120
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -935,6 +969,7 @@ ship "Hornfel"
 		"Irate Carronade" 2
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	engine -18 193
@@ -1004,6 +1039,7 @@ ship "Hornfel" "Hornfel (Heavy Weapons)"
 		"R03 Warforge Battery"
 		
 		"RG18 Torch Thruster"
+		"RG18 Torch LTC"
 		"RG18 Torch Steering"
 		"Hyperdrive"
 	gun 18.5 -220 "Choleric Cannon"
@@ -1044,11 +1080,12 @@ ship "Gneiss"
 		"mass" 8256
 		"drag" 24.5
 		"heat dissipation" 0.22
-		"fuel capacity" 500
+		"fuel capacity" 2200
 		"cargo space" 95
-		"outfit space" 841
+		"outfit space" 878
 		"weapon capacity" 504
-		"engine capacity" 150
+		"engine capacity" 188
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1067,6 +1104,7 @@ ship "Gneiss"
 		"Irate Carronade" 3
 		
 		"RG3 Torch Thruster"
+		"RG3 Torch LTC"
 		"RG3 Torch Steering"
 		"Hyperdrive"
 	engine 0 270
@@ -1101,7 +1139,7 @@ ship "Gneiss"
 	explode "small explosion" 40
 	explode "tiny explosion" 80
 	"final explode" "final explosion large"
-	description `Gneiss battleships are the Gegno Vi's true sword and shield in war. They are slightly older than the Hornfels and Schists, but carry the heaviest armament, bearing three huge mounts dedicated to holding enormous Ballistic Cannons. Gniess also have extremely strong armor plating, and can take a hefty beating while firing threatening broadsides at the opposing force.`
+	description `Gneiss battleships are the Gegno Vi's true sword and shield in war. They are slightly older than the Hornfels and Schists, but carry the heaviest armament, bearing three huge mounts dedicated to holding enormous Ballistic Cannons. Gneiss also have extremely strong armor plating, and can take a hefty beating while firing threatening broadsides at the opposing force.`
 	description `	Unfortunately, in exchange for huge firepower and defensive armor, they lack speed and maneuverability, even when fitted with the largest engine systems the Vi have to offer.`
 
 
@@ -1121,11 +1159,12 @@ ship "Granulite"
 		"mass" 10080
 		"drag" 44.7
 		"heat dissipation" 0.22
-		"fuel capacity" 900
+		"fuel capacity" 4750
 		"cargo space" 718
 		"outfit space" 651
 		"weapon capacity" 216
 		"engine capacity" 203
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1146,6 +1185,7 @@ ship "Granulite"
 		
 		# "RG3 Torch Thruster" # Extra thruster
 		"RG15 Torch Thruster"
+		"RG15 Torch LTC"
 		# "RG3 Torch Steering"  # Extra Steering
 		"RG15 Torch Steering"
 		"Hyperdrive"
@@ -1192,6 +1232,7 @@ ship "Granulite"
 
 ship "Halite"
 	sprite "ship/gegno halite"
+		"scale" 0.6
 	thumbnail "thumbnail/gegno halite"
 	attributes
 		category "Fighter"
@@ -1209,6 +1250,7 @@ ship "Halite"
 		"outfit space" 78
 		"weapon capacity" 30
 		"engine capacity" 21
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1252,11 +1294,12 @@ ship "Mica"
 		"mass" 90
 		"drag" 1.9
 		"heat dissipation" 0.6
-		"fuel capacity" 400
+		"fuel capacity" 300
 		"cargo space" 36
 		"outfit space" 118
 		"weapon capacity" 0
-		"engine capacity" 50
+		"engine capacity" 61
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1271,6 +1314,7 @@ ship "Mica"
 		"Plasma Grenades"
 		
 		"SC-12 Plasma Thruster"
+		"SC-12 Plasma LTC"
 		"SC-12 Plasma Steering"
 		"Hyperdrive"
 	engine 0 40
@@ -1296,11 +1340,12 @@ ship "Coesite"
 		"mass" 460
 		"drag" 4.6
 		"heat dissipation" 0.61
-		"fuel capacity" 500
+		"fuel capacity" 475
 		"cargo space" 40
 		"outfit space" 264
 		"weapon capacity" 86
 		"engine capacity" 80
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1320,6 +1365,7 @@ ship "Coesite"
 		"Plasma Grenades" 2
 		
 		"SC-12 Plasma Thruster"
+		"SC-12 Plasma LTC"
 		"SC-14 Plasma Steering"
 		# "SC-1 Plasma Engines" # Extra thruster and steering
 		"Hyperdrive"
@@ -1355,11 +1401,12 @@ ship "Tridymite"
 		"mass" 380
 		"drag" 4.2
 		"heat dissipation" 0.59
-		"fuel capacity" 800
+		"fuel capacity" 725
 		"cargo space" 56
 		"outfit space" 200
 		"weapon capacity" 0
-		"engine capacity" 86
+		"engine capacity" 106
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1379,6 +1426,7 @@ ship "Tridymite"
 		"Plasma Grenades" 4
 		
 		"SC-14 Plasma Thruster"
+		"SC-14 Plasma LTC"
 		"SC-14 Plasma Steering"
 		"Hyperdrive"
 	engine 44.5 63
@@ -1412,11 +1460,12 @@ ship "Felsic"
 		"mass" 2260
 		"drag" 8.3
 		"heat dissipation" 0.5
-		"fuel capacity" 500
+		"fuel capacity" 875
 		"cargo space" 150
 		"outfit space" 322
 		"weapon capacity" 109
 		"engine capacity" 106
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1434,6 +1483,7 @@ ship "Felsic"
 		"Plasma Grenades" 9
 		
 		"SC-14 Plasma Thruster"
+		"SC-14 Plasma LTC"
 		"SC-14 Plasma Steering"
 		# "SC-12 Plasma Steering" # Extra Steering
 		"Hyperdrive"
@@ -1469,11 +1519,12 @@ ship "Feldspar"
 		"mass" 8720
 		"drag" 26.2
 		"heat dissipation" 0.3
-		"fuel capacity" 600
+		"fuel capacity" 2675
 		"cargo space" 82
 		"outfit space" 566
 		"weapon capacity" 234
-		"engine capacity" 172
+		"engine capacity" 173
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1491,6 +1542,7 @@ ship "Feldspar"
 		"Plasma Grenades" 66
 		
 		"SC-15 Plasma Thrusters"
+		"SC-14 Plasma LTC"
 		# "SC-12 Plasma Steering" # Extra thruster
 		"SC-14 Plasma Steering"
 		"Hyperdrive"
@@ -1526,7 +1578,6 @@ ship "Feldspar"
 		"launch effect" "scin launch"
 		angle -180
 		over
-		"launch effect" "scin launch"
 	bay "Fighter" 65.5 120
 		"launch effect" "scin launch"
 		angle -180
@@ -1560,11 +1611,12 @@ ship "Epidote"
 		"mass" 9168
 		"drag" 28.2
 		"heat dissipation" 0.32
-		"fuel capacity" 600
+		"fuel capacity" 2850
 		"cargo space" 430
 		"outfit space" 552
 		"weapon capacity" 166
 		"engine capacity" 182
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1585,6 +1637,7 @@ ship "Epidote"
 		"Plasma Grenades" 51
 		
 		"SC-15 Plasma Thrusters"
+		"SC-14 Plasma LTC"
 		"SC-14 Plasma Steering" # Extra Steering
 		"Hyperdrive"
 	engine 64 188
@@ -1628,11 +1681,12 @@ ship "Kyanite"
 		"mass" 5910
 		"drag" 22.6
 		"heat dissipation" 0.33
-		"fuel capacity" 400
+		"fuel capacity" 1300
 		"cargo space" 76
 		"outfit space" 380
 		"weapon capacity" 202
 		"engine capacity" 160
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -1656,6 +1710,7 @@ ship "Kyanite"
 		"Plasma Grenades" 33
 
 		"SC-14 Plasma Thruster"  # Extra thruster
+		"SC-14 Plasma LTC"
 		"SC-14 Plasma Steering"  # Extra steering
 		"Hyperdrive"
 	"steering engine" -84 -100 0.5
@@ -1694,6 +1749,7 @@ ship "Kyanite" "Kyanite (Guile)"
 		"Plasma Grenades" 33
 
 		"SC-14 Plasma Thruster" # Extra thruster
+		"SC-14 Plasma LTC"
 		"SC-14 Plasma Steering" # Extra steering
 		"Hyperdrive"
 
@@ -1713,6 +1769,7 @@ ship "Kyanite" "Kyanite (Acumen)"
 		"Plasma Grenades" 33
 
 		"SC-14 Plasma Thruster" # Extra thruster
+		"SC-14 Plasma LTC"
 		"SC-14 Plasma Steering" # Extra steering
 		"Hyperdrive"
 

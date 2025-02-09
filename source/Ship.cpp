@@ -901,7 +901,7 @@ void Ship::FinishLoading(bool isNewInstance)
 	// Issue warnings if this ship has is misconfigured, e.g. is missing required values
 	// or has negative outfit, cargo, weapon, or engine capacity.
 	for(auto &&attr : set<string>{"outfit space", "cargo space", "weapon capacity", "engine capacity",
-		"engine mod space", "reverse thruster slot", "steering slot", "thruster slot"})
+		"engine mod space", "reverse thruster slot", "steering slot", "thruster slot", "lateral thruster slot"})
 	{
 		double val = attributes.Get(attr);
 		if(val < 0)
@@ -944,7 +944,7 @@ void Ship::FinishLoading(bool isNewInstance)
 	if(!isNewInstance && targetSystem)
 	{
 		string message = "Warning: " + string(isYours ? "player-owned " : "NPC ")
-			+ trueModelName + " \"" + name + "\": Cannot reach target system \"" + targetSystem->Name();
+			+ trueModelName + " \"" + name + "\": Cannot reach target system \"" + targetSystem->TrueName();
 		if(!currentSystem)
 		{
 			Logger::LogError(message + "\" (no current system).");
@@ -953,7 +953,7 @@ void Ship::FinishLoading(bool isNewInstance)
 		else if(!currentSystem->Links().contains(targetSystem)
 			&& (!navigation.JumpRange() || !currentSystem->JumpNeighbors(navigation.JumpRange()).contains(targetSystem)))
 		{
-			Logger::LogError(message + "\" by hyperlink or jump from system \"" + currentSystem->Name() + ".\"");
+			Logger::LogError(message + "\" by hyperlink or jump from system \"" + currentSystem->TrueName() + ".\"");
 			targetSystem = nullptr;
 		}
 	}
@@ -1020,6 +1020,9 @@ void Ship::Save(DataWriter &out) const
 			for(const auto &it : baseAttributes.ReverseFlareSounds())
 				for(int i = 0; i < it.second; ++i)
 					out.Write("reverse flare sound", it.first->Name());
+			for(const auto &it : baseAttributes.LateralFlareSounds())
+				for(int i = 0; i < it.second; ++i)
+					out.Write("lateral flare sound", it.first->Name());
 			for(const auto &it : baseAttributes.SteeringFlareSprites())
 				for(int i = 0; i < it.second; ++i)
 					it.first.SaveSprite(out, "steering flare sprite");
@@ -1198,18 +1201,18 @@ void Ship::Save(DataWriter &out) const
 		if(formationPattern)
 			out.Write("formation", formationPattern->Name());
 		if(currentSystem)
-			out.Write("system", currentSystem->Name());
+			out.Write("system", currentSystem->TrueName());
 		else
 		{
 			// A carried ship is saved in its carrier's system.
 			shared_ptr<const Ship> parent = GetParent();
 			if(parent && parent->currentSystem)
-				out.Write("system", parent->currentSystem->Name());
+				out.Write("system", parent->currentSystem->TrueName());
 		}
 		if(landingPlanet)
 			out.Write("planet", landingPlanet->TrueName());
 		if(targetSystem)
-			out.Write("destination system", targetSystem->Name());
+			out.Write("destination system", targetSystem->TrueName());
 		if(isParked)
 			out.Write("parked");
 	}
@@ -1354,12 +1357,14 @@ vector<string> Ship::FlightCheck() const
 	double fuel = fuelCapacity + fuelChange;
 	double thrust = attributes.Get("thrust");
 	double reverseThrust = attributes.Get("reverse thrust");
+	double lateralThrust = attributes.Get("lateral thrust");
 	double afterburner = attributes.Get("afterburner thrust");
 	double thrustEnergy = attributes.Get("thrusting energy");
 	double turn = attributes.Get("turn");
 	double turnEnergy = attributes.Get("turning energy");
 	double hyperDrive = navigation.HasHyperdrive();
 	double jumpDrive = navigation.HasJumpDrive();
+	double intrasolar = attributes.Get("intrasolar");
 
 	// Report the first error condition that will prevent takeoff:
 	if(IdleHeat() >= MaximumHeat())
@@ -1368,7 +1373,7 @@ vector<string> Ship::FlightCheck() const
 		checks.emplace_back("no energy!");
 	else if((energy - consuming <= 0.) && (fuel <= 0.))
 		checks.emplace_back("no fuel!");
-	else if(!thrust && !reverseThrust && !afterburner)
+	else if(!thrust && !reverseThrust && !lateralThrust && !afterburner)
 		checks.emplace_back("no thruster!");
 	else if(!turn)
 		checks.emplace_back("no steering!");
@@ -1392,10 +1397,13 @@ vector<string> Ship::FlightCheck() const
 			checks.emplace_back("solar power?");
 		if(fuel < 0.)
 			checks.emplace_back("fuel?");
-		if(!canBeCarried)
+		if(!canBeCarried && !intrasolar && baseAttributes.Category() != "Intrasolar")
 		{
 			if(!hyperDrive && !jumpDrive)
 				checks.emplace_back("no hyperdrive?");
+		}
+		if(hyperDrive || jumpDrive)
+		{
 			if(fuelCapacity < navigation.JumpFuel())
 				checks.emplace_back("no fuel?");
 		}
@@ -2007,10 +2015,10 @@ int Ship::Scan(const PlayerInfo &player)
 	auto playScanSounds = [](const map<const Sound *, int> &sounds, Point &position)
 	{
 		if(sounds.empty())
-			Audio::Play(Audio::Get("scan"), position);
+			Audio::Play(Audio::Get("scan"), position, SoundCategory::SCAN);
 		else
 			for(const auto &sound : sounds)
-				Audio::Play(sound.first, position);
+				Audio::Play(sound.first, position, SoundCategory::SCAN);
 	};
 	if(attributes.Get("silent scans"))
 	{
@@ -2814,6 +2822,79 @@ double Ship::Energy() const
 
 
 
+// Determine if the player has a HUD fuel bar scale modifier. There are four options: Hyperdrive, Scram drive,
+// Jump drive, and fixed scale. The first three are boolean, but the fixed scale can be any integer. In use, the
+// first three trigger automatic calculations that will split the fuel bar into segments equal to a jump of
+// their respective type. The fourth lets content creators and players force bar segments of a specific length.
+bool Ship::HyperDriveFuelBar() const
+{
+	bool displayHyperFuelBar = attributes.Get("hyperdrive fuel bar scale");
+	return displayHyperFuelBar;
+}
+
+
+
+bool Ship::ScramDriveFuelBar() const
+{
+	bool displayScramFuelBar = attributes.Get("scram drive fuel bar scale");
+	return displayScramFuelBar;
+}
+
+
+
+bool Ship::JumpDriveFuelBar() const
+{
+	bool displayJumpFuelBar = attributes.Get("jump drive fuel bar scale");
+	return displayJumpFuelBar;
+}
+
+
+
+double Ship::FixedScaleFuelBar() const
+{
+	double displayFixedScaleFuelBar = attributes.Get("fixed scale fuel bar scale");
+	return displayFixedScaleFuelBar;
+}
+
+
+
+// Determine if the player has an in-flight mass display installed
+bool Ship::DisplayMass() const
+{
+	bool displayMass = attributes.Get("mass display");
+	return displayMass;
+}
+
+
+
+// Determine if the player has a hyperdrive fuel cost display installed
+bool Ship::DisplayHyperFuelCost() const
+{
+	bool displayHD = attributes.Get("hyperdrive fuel cost display");
+	return displayHD;
+}
+
+
+
+// Determine if the player has a scram drive fuel cost display installed
+bool Ship::DisplayScramFuelCost() const
+{
+	bool displaySD = attributes.Get("scram drive fuel cost display");
+	return displaySD;
+}
+
+
+
+// Determine if the player has a jump drive fuel cost display installed
+bool Ship::DisplayJumpFuelCost() const
+{
+	bool displayJD = attributes.Get("jump drive fuel cost display");
+	return displayJD;
+}
+
+
+
+// Calculate the ship's current solar energy.
 double Ship::DisplaySolar() const
 {
 	double scale = .2 + 1.8 / (.001 * position.Length() + 1);
@@ -2824,11 +2905,28 @@ double Ship::DisplaySolar() const
 
 
 
+// Calculate the ship's current ramscooop.
 double Ship::DisplayRamScoop() const
 {
 	double scale = .2 + 1.8 / (.001 * position.Length() + 1);
 	double ramScoop = currentSystem->SolarWind() * .03 * scale * (sqrt(attributes.Get("ramscoop")) + .05 * scale);
 	return ramScoop;
+}
+
+
+
+// Display combined solar power for the system.
+double Ship::DisplaySystemSolar() const
+{
+	return currentSystem->SolarPower();
+}
+
+
+
+// Display combined solar wind for the system.
+double Ship::DisplaySystemWind() const
+{
+	return currentSystem->SolarWind();
 }
 
 
@@ -3178,8 +3276,9 @@ double Ship::InertialMass() const
 
 double Ship::TurnRate() const
 {
+	double turnReductionRatio = 1. - attributes.Get("turn reduction ratio");
 	return attributes.Get("turn") / InertialMass()
-		* (1. + attributes.Get("turn multiplier"));
+		* (1. + attributes.Get("turn multiplier")) * turnReductionRatio;
 }
 
 
@@ -3194,8 +3293,9 @@ double Ship::TrueTurnRate() const
 double Ship::Acceleration() const
 {
 	double thrust = attributes.Get("thrust");
+	double thrustReductionRatio = 1 - attributes.Get("thrust reduction ratio");
 	return (thrust ? thrust : attributes.Get("afterburner thrust")) / InertialMass()
-		* (1. + attributes.Get("acceleration multiplier"));
+		* (1. + attributes.Get("acceleration multiplier")) * thrustReductionRatio;
 }
 
 
@@ -3665,6 +3765,230 @@ void Ship::AddOutfit(const Outfit *outfit, int count)
 		// ship's jump navigation. Hyperdrives and jump drives of the same type don't stack,
 		// so only do this if the outfit is either completely new or has been completely removed.
 		if((outfit->Get("hyperdrive") || outfit->Get("jump drive")) && (!before || !after))
+			navigation.Calibrate(*this);
+		// Navigation may still need to be recalibrated depending on the drives a ship has.
+		// Only do this for player ships as to display correct information on the map.
+		// Non-player ships will recalibrate before they jump.
+		else if(isYours)
+			navigation.Recalibrate(*this);
+	}
+}
+
+
+
+// Add or reduce an attribute. (To reduce, pass a negative number.)
+void Ship::ChangeAttribute(string targetAttribute, double modifyAmount)
+{
+	if(!targetAttribute.empty())
+	{
+		double limiter = 0.;
+		double minAttributeValue = 0.;
+		double originalBaseValue = baseAttributes.Get(targetAttribute);
+		double originalValue = attributes.Get(targetAttribute);
+		double newBaseValue = originalBaseValue + modifyAmount;
+		double newValue = originalValue + modifyAmount;
+
+		// Safety checks to ensure the new value is within parameters.
+		if(newBaseValue < 1. && newValue < 1. && targetAttribute == "hull")
+		{
+			// This means the minimum value for this attribute is 1.0
+			minAttributeValue = 1.;
+			limiter = minAttributeValue - newBaseValue;
+		}
+		else if(newBaseValue < 0.01 && (targetAttribute == "drag" || targetAttribute == "mass"))
+		{
+			// This means the minimum value for these attributes is 0.01
+			minAttributeValue = 0.01;
+			limiter = minAttributeValue - newBaseValue;
+		}
+		// Special handling for attributes that cannot be less than 0.
+		// These values can be 0, just they cannot be negative.
+		else if(newBaseValue < 0. && (targetAttribute == "outfit space" || targetAttribute == "cargo space" ||
+			targetAttribute == "weapon capacity" || targetAttribute == "engine capacity" ||
+			targetAttribute == "engine mod space" || targetAttribute == "shields" ||
+			targetAttribute == "reverse thruster slot" || targetAttribute == "steering slot" ||
+			targetAttribute == "thruster slot" || targetAttribute == "lateral thruster slot" ||
+			targetAttribute == "bunks" || targetAttribute == "fuel capacity" || targetAttribute == "required crew"))
+		{
+			if(newBaseValue < 0.)
+			{
+				minAttributeValue = 0.;
+				limiter = minAttributeValue - newBaseValue;
+			}
+		}
+
+		// Calculations take place here
+		newBaseValue += limiter;
+		newValue += limiter;
+
+		if(targetAttribute == "mass")
+		{
+			// Call the special method just for mass.
+			baseAttributes.ModifyMass(newBaseValue);
+			attributes.ModifyMass(newValue);
+		}
+		else
+		{
+			baseAttributes.Set(targetAttribute.c_str(), newBaseValue);
+			attributes.Set(targetAttribute.c_str(), newValue);
+		}
+
+		// Ensuring the current hull value is changed as well.
+		if(targetAttribute == "hull")
+		{
+			// Adds the modifyAmount and the limiter to the current hull too.
+			hull += modifyAmount + limiter;
+		}
+
+		// Ensuring the current shields value is changed as well.
+		if(targetAttribute == "shields")
+		{
+			// Adds the modifyAmount and the limiter to the current shields too.
+			shields += modifyAmount + limiter;
+		}
+
+		if(targetAttribute == "cargo space")
+		{
+			cargo.SetSize(attributes.Get("cargo space"));
+
+			// Only the player's ships make use of attraction and deterrence.
+			if(isYours)
+				attraction = CalculateAttraction();
+		}
+
+		// If the added or removed attribute is hyperdrive, scram drive, or jump drive capability, then
+		// recalibrate the navigation.
+		if((targetAttribute == "hyperdrive" || targetAttribute == "scram drive" || targetAttribute == "jump drive"))
+			navigation.Calibrate(*this);
+		// Navigation may still need to be recalibrated depending on the drives a ship has.
+		// Only do this for player ships as to display correct information on the map.
+		// Non-player ships will recalibrate before they jump.
+		else if(isYours)
+			navigation.Recalibrate(*this);
+	}
+}
+
+
+
+// Sets an attribute to a specific value. Certain values (mass, drag, space, etc.) have limits.
+void Ship::SetAttribute(string targetAttribute, double setAmount)
+{
+	if(!targetAttribute.empty())
+	{
+		double limiter = 0.;
+		double minAttributeValue = 0.;
+		double originalBaseValue = baseAttributes.Get(targetAttribute);
+		double originalValue = attributes.Get(targetAttribute);
+		// This is to account for potential differences between the value in baseAttributes & Attributes.
+		double originalDifference = originalValue - originalBaseValue;
+		double newBaseValue = setAmount;
+		double newValue = setAmount + originalDifference;
+
+		// double intermediaryValue = originalBaseValue - originalValue;
+
+		// Safety checks to ensure the new value is within parameters.
+		if(newBaseValue < 1. && targetAttribute == "hull")
+		{
+			// This means the minimum value for this attribute is 1.0
+			minAttributeValue = 1.;
+			limiter = minAttributeValue - newBaseValue;
+		}
+		else if(newValue < 1. && targetAttribute == "hull")
+		{
+			// This means the minimum value for this attribute is 1.0
+			minAttributeValue = 1.;
+			limiter = minAttributeValue - newValue;
+		}
+		else if(newBaseValue < 0.01 && targetAttribute == "drag")
+		{
+			// This means the minimum value for these attributes is 0.01
+			minAttributeValue = 0.01;
+			limiter = minAttributeValue - newBaseValue;
+		}
+		else if(newValue < 0.01 && targetAttribute == "drag")
+		{
+			// This means the minimum value for these attributes is 0.01
+			minAttributeValue = 0.01;
+			limiter = minAttributeValue - newValue;
+		}
+		// Special handling for attributes that cannot be less than 0.
+		// These values can be 0, just they cannot be negative.
+		else if(newBaseValue < 0. && (targetAttribute == "outfit space" || targetAttribute == "cargo space" ||
+			targetAttribute == "weapon capacity" || targetAttribute == "engine capacity" ||
+			targetAttribute == "engine mod space" || targetAttribute == "shields" ||
+			targetAttribute == "reverse thruster slot" || targetAttribute == "steering slot" ||
+			targetAttribute == "thruster slot" || targetAttribute == "lateral thruster slot" ||
+			targetAttribute == "bunks" || targetAttribute == "fuel capacity" || targetAttribute == "required crew"))
+		{
+			if(newBaseValue < 0.)
+			{
+				minAttributeValue = 0.;
+				limiter = minAttributeValue - newBaseValue;
+			}
+		}
+
+		// This increases the value that baseAttributes and attributes are set to if they were below the
+		// minimum value. The way the if/else if statements are setup, if for some reason the player's
+		// current value is lower than the base value, then the amount they are reduced is itself reduced
+		// sufficiently that it does not drop it below the minimum value.
+		// If they are not special values with restrictions, this limiter should just be 0 and thus no effect.
+		newBaseValue += limiter;
+		newValue += limiter;
+
+		if(targetAttribute == "mass")
+		{
+			// Call the special method just for mass.
+			double OriginalBaseMass = baseAttributes.Mass();
+			double OriginalMass = attributes.Mass();
+			double MassDif = OriginalMass - OriginalBaseMass;
+			if(setAmount < 0.01)
+			{
+				setAmount = 0.01;
+			}
+			double NewBaseMass = setAmount;
+			double NewMass = setAmount + MassDif;
+			if(NewMass < 0.01)
+			{
+				NewMass = 0.01;
+				NewBaseMass = NewMass - MassDif;
+			}
+			baseAttributes.SetMass(NewBaseMass);
+			attributes.SetMass(NewMass);
+		}
+		else
+		{
+			// These two lines are what actually sets the attributes.
+			baseAttributes.Set(targetAttribute.c_str(), newBaseValue);
+			attributes.Set(targetAttribute.c_str(), newValue);
+		}
+
+		// Ensuring the current hull value is changed as well.
+		if(targetAttribute == "hull")
+		{
+			// Adds the setAmount and the limiter to the current hull too.
+			hull += setAmount + limiter;
+		}
+
+		// Ensuring the current shields value is changed as well.
+		if(targetAttribute == "shields")
+		{
+			// Adds the setAmount and the limiter to the current hull too.
+			shields += setAmount + limiter;
+		}
+
+		// This just ensures the cargo is refreshed to be equal to the new attribute value.
+		if(targetAttribute == "cargo space")
+		{
+			cargo.SetSize(attributes.Get("cargo space"));
+
+			// Only the player's ships make use of attraction and deterrence.
+			if(isYours)
+				attraction = CalculateAttraction();
+		}
+
+		// If the added or removed attribute is hyperdrive, scram drive, or jump drive capability, then
+		// recalibrate the navigation.
+		if((targetAttribute == "hyperdrive" || targetAttribute == "scram drive" || targetAttribute == "jump drive"))
 			navigation.Calibrate(*this);
 		// Navigation may still need to be recalibrated depending on the drives a ship has.
 		// Only do this for player ships as to display correct information on the map.
@@ -4807,9 +5131,13 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 {
 	isUsingAfterburner = false;
 
+	double turnReductionRatio = 0.;
+	double turnCombinedFactors = 0.;
+	turnReductionRatio = 1. - attributes.Get("turn reduction ratio");
 	double mass = InertialMass();
 	double dragForce = DragForce();
 	double slowMultiplier = 1. / (1. + slowness * .05);
+	turnCombinedFactors = slowMultiplier * turnReductionRatio;
 
 	if(isDisabled)
 		velocity *= 1. - dragForce;
@@ -4861,7 +5189,7 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 				slowness += scale * attributes.Get("turning slowing");
 				disruption += scale * attributes.Get("turning disruption");
 
-				Turn(commands.Turn() * TurnRate() * slowMultiplier);
+				Turn(commands.Turn() * TurnRate() * turnCombinedFactors);
 			}
 		}
 		double thrustCommand = commands.Thrust();
@@ -4895,7 +5223,16 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 			if(cost > 0. && heat < cost * fabs(thrustCommand))
 				thrustCommand = copysign(heat / cost, thrustCommand);
 
-			thrustMagnitude = thrustCommand * slowMultiplier;
+			// The thrust reduction ratio is a percentage-as-decimal value that indicates how much the thrust will be reduced.
+			// It is intended to be paired with the lateral thrust ratio to create outfits that split a thruster's propulsion
+			// between pointing to the rear and to the sides. Ex. 50% to forward thrust, 50% to lateral thrust.
+			// The two are separate values, however, to give content creators full control. As such, for instance, it is fully
+			// acceptable to have lateral thrust ratio of 0.4 (40%) and a thrust reduction ratio of 0.5 (50%) which would
+			// be a situation where 50% of the thrust is completely diverted into lateral thrust, but with a 10% inefficiency.
+			double thrustReductionRatio = 0.;
+			thrustReductionRatio = 1. - attributes.Get("thrust reduction ratio");
+
+			thrustMagnitude = thrustCommand * slowMultiplier * thrustReductionRatio;
 
 			if(thrustCommand)
 			{
@@ -4904,6 +5241,7 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 				isThrusting = (thrustCommand > 0.);
 				isReversing = !isThrusting && attributes.Get("reverse thrust");
 				thrust = attributes.Get(isThrusting ? "thrust" : "reverse thrust");
+
 				if(thrust)
 				{
 					double scale = fabs(thrustCommand);
@@ -4928,28 +5266,42 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 			}
 		}
 		// Lateral Thrust functionality.
-		// This pulls "lateral thrust ratio" from the ship definition,
-		// and if there isn't one, it uses the default value of 0.25,
-		// which is listed as a gamerule value.
+		// This pulls "lateral thrust" from the ship definition,
+		// This also pulls the lateral thrust ratio, if one is present, as well as the thrust reduction ratio.
 		double latThrustCommand = commands.LateralThrust();
 		double latThrust = 0.;
-		double lateralThrustValue = 0.;
+		double latRatioThrust = 0.;
+		double lateralRatioThrust = 0.;
+		double lateralRatioEnergy = 0.;
+		double lateralRatioHeat = 0.;
+		latRatioThrust = attributes.Get("lateral thrust ratio");
+
 		if(attributes.Get("lateral thrust ratio"))
-			lateralThrustValue = attributes.Get("lateral thrust ratio");
-		else if(!attributes.Get("lateral thrust ratio"))
 		{
-			// lateralThrustValue = GameData::GetGamerules().DefaultLateralThrustRatio();
-			double tempLateralThrustRatio = (3000 - mass) / 3500;
-			double defaultLateralThrustRatio = GameData::GetGamerules().DefaultLateralThrustRatio();
-			if(tempLateralThrustRatio > defaultLateralThrustRatio)
-				lateralThrustValue = tempLateralThrustRatio;
-			else lateralThrustValue = defaultLateralThrustRatio;
+			lateralRatioThrust = latRatioThrust * attributes.Get("thrust");
+			lateralRatioEnergy = latRatioThrust * attributes.Get("thrusting energy");
+			lateralRatioHeat = latRatioThrust * attributes.Get("thrusting heat");
+		}
+
+		// This is the ratio pulled from the ship.
+		double latRatioTurn = 0.;
+		// This is the amount of lateral thrust derived from the turn attribute due to the ratio.
+		double lateralRatioTurn = 0.;
+		// These are the heat and energy costs derived from the turn attribute due to the ratio.
+		double latRatioTurnEnergy = 0.;
+		double latRatioTurnHeat = 0.;
+		latRatioTurn = attributes.Get("lateral turn ratio");
+		if(attributes.Get("lateral turn ratio"))
+		{
+			lateralRatioTurn = latRatioTurn * (attributes.Get("turn") / 25);
+			latRatioTurnEnergy = latRatioTurn * attributes.Get("turn energy");
+			latRatioTurnHeat = latRatioTurn * attributes.Get("turn heat");
 		}
 
 		if(latThrustCommand)
 		{
 			// Check if we are able to apply this thrust.
-			double cost = attributes.Get("thrusting energy") * lateralThrustValue;
+			double cost = attributes.Get("lateral thrusting energy") + lateralRatioEnergy + latRatioTurnEnergy;
 			if(energy < cost)
 				latThrustCommand *= energy / cost;
 
@@ -4958,12 +5310,12 @@ void Ship::DoMovement(bool &isUsingAfterburner)
 				// These area used for lateral thrusting flares.
 				isLatThrusting = true;
 				lateralDirection = latThrustCommand;
-				latThrust = attributes.Get("thrust") * lateralThrustValue;
+				latThrust = attributes.Get("lateral thrust") + lateralRatioThrust + lateralRatioTurn;
 				if(latThrust)
 				{
 					double scale = fabs(latThrustCommand);
 					energy -= scale * cost;
-					heat += scale * attributes.Get("thrusting heat") * lateralThrustValue;
+					heat += scale * (attributes.Get("lateral thrusting heat") + lateralRatioHeat + latRatioTurnHeat);
 					Point lateral(-angle.Unit().Y(), angle.Unit().X());
 					acceleration += lateral * (latThrustCommand * latThrust / mass);
 				}

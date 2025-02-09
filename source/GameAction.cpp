@@ -120,6 +120,32 @@ namespace {
 			message += "flagship.";
 		Messages::Add(message, Messages::Importance::High);
 	}
+
+	void DoModify(PlayerInfo &player, string targetAttribute, double modifyAmount)
+	{
+		// Get the player's flagship
+		Ship *flagship = player.Flagship();
+
+		// Check if the player has a flagship, and if the attribute, and amount exist.
+		// If the player does not have one of these things, return without doing anything.
+		if(!flagship || targetAttribute.empty() || !modifyAmount)
+			return;
+
+		flagship->ChangeAttribute(targetAttribute, modifyAmount);
+	}
+
+	void DoSet(PlayerInfo &player, string targetAttribute, double setAmount)
+	{
+		// Get the player's flagship
+		Ship *flagship = player.Flagship();
+
+		// Check if the player has a flagship, and if the attribute, and amount exist.
+		// If the player does not have one of these things, return without doing anything.
+		if(!flagship || targetAttribute.empty() || !setAmount)
+			return;
+
+		flagship->SetAttribute(targetAttribute, setAmount);
+	}
 }
 
 
@@ -148,7 +174,13 @@ void GameAction::LoadSingle(const DataNode &child)
 	const string &key = child.Token(0);
 	bool hasValue = (child.Size() >= 2);
 
-	if(key == "log")
+	if(key == "remove" && child.Size() >= 3 && child.Token(1) == "log")
+	{
+		auto &type = specialLogClear[child.Token(2)];
+		if(child.Size() > 3)
+			type.push_back(child.Token(3));
+	}
+	else if(key == "log")
 	{
 		bool isSpecial = (child.Size() >= 3);
 		string &text = (isSpecial ?
@@ -220,6 +252,29 @@ void GameAction::LoadSingle(const DataNode &child)
 		fail.insert(child.Token(1));
 	else if(key == "fail")
 		failCaller = true;
+	else if(key == "attributes")
+	{
+		// Current expected format is attributes add/set <attribute name> <value>
+		if(child.Size() == 4)
+		{
+			if(child.Token(1) == "add")
+			{
+				double valueChange = static_cast<double>(child.Value(3));
+				string attributeTarget = child.Token(2);
+				modifyAttributes[attributeTarget] = valueChange;
+			}
+			else if(child.Token(1) == "set")
+			{
+				double valueChange = static_cast<double>(child.Value(3));
+				string attributeTarget = child.Token(2);
+				setAttributes[attributeTarget] = valueChange;
+			}
+		}
+		else if(child.Size() > 4)
+			child.PrintTrace("Error: Skipping \"attributes\" as >4 values is not yet supported:");
+		else
+			child.PrintTrace("Error: Skipping invalid values for \"attributes\":");
+	}
 	else
 		conditions.Add(child);
 }
@@ -251,6 +306,14 @@ void GameAction::Save(DataWriter &out) const
 			}
 			out.EndChild();
 		}
+	for(auto &&it : specialLogClear)
+	{
+		if(it.second.empty())
+			out.Write("remove", "log", it.first);
+		else
+			for(auto &&jt : it.second)
+				out.Write("remove", "log", it.first, jt);
+	}
 	for(auto &&it : giftShips)
 		it.Save(out);
 	for(auto &&it : giftOutfits)
@@ -273,9 +336,9 @@ void GameAction::Save(DataWriter &out) const
 	for(auto &&it : events)
 		out.Write("event", it.first->Name(), it.second.first, it.second.second);
 	for(const System *system : mark)
-		out.Write("mark", system->Name());
+		out.Write("mark", system->TrueName());
 	for(const System *system : unmark)
-		out.Write("unmark", system->Name());
+		out.Write("unmark", system->TrueName());
 	for(const string &name : fail)
 		out.Write("fail", name);
 	if(failCaller)
@@ -286,6 +349,14 @@ void GameAction::Save(DataWriter &out) const
 			out.Write("mute");
 		else
 			out.Write("music", music.value());
+	}
+	for(auto &&it : modifyAttributes)
+	{
+		out.Write("attributes", "add", it.first, it.second);
+	}
+	for(auto &&it : setAttributes)
+	{
+		out.Write("attributes", "set", it.first, it.second);
 	}
 
 	conditions.Save(out);
@@ -316,10 +387,10 @@ string GameAction::Validate() const
 	// Marked and unmarked system must be valid.
 	for(auto &&system : mark)
 		if(!system->IsValid())
-			return "system \"" + system->Name() + "\"";
+			return "system \"" + system->TrueName() + "\"";
 	for(auto &&system : unmark)
 		if(!system->IsValid())
-			return "system \"" + system->Name() + "\"";
+			return "system \"" + system->TrueName() + "\"";
 
 	// It is OK for this action to try to fail a mission that does not exist.
 	// (E.g. a plugin may be designed for interoperability with other plugins.)
@@ -363,26 +434,53 @@ const vector<ShipManager> &GameAction::Ships() const noexcept
 
 
 
+const map<std::string, double> &GameAction::ModifyAttributes() const noexcept
+{
+	return modifyAttributes;
+}
+
+
+
+const map<std::string, double> &GameAction::SetAttributes() const noexcept
+{
+	return setAttributes;
+}
+
+
+
 // Perform the specified tasks.
 void GameAction::Do(PlayerInfo &player, UI *ui, const Mission *caller) const
 {
+	// Log entries
 	if(!logText.empty())
 		player.AddLogEntry(logText);
 	for(auto &&it : specialLogText)
 		for(auto &&eit : it.second)
 			player.AddSpecialLog(it.first, eit.first, eit.second);
+	for(auto &&it : specialLogClear)
+	{
+		if(it.second.empty())
+			player.RemoveSpecialLog(it.first);
+		else
+			for(auto &&jt : it.second)
+				player.RemoveSpecialLog(it.first, jt);
+	}
 
 	// If multiple outfits, ships are being transferred, first remove the ships,
 	// then the outfits, before adding any new ones.
+	// Removing ships.
 	for(auto &&it : giftShips)
 		if(!it.Giving())
 			it.Do(player);
+	// Take outfits.
 	for(auto &&it : giftOutfits)
 		if(it.second < 0)
 			DoGift(player, it.first, it.second, ui);
+	// Give outfits.
 	for(auto &&it : giftOutfits)
 		if(it.second > 0)
 			DoGift(player, it.first, it.second, ui);
+	// Give ships.
 	for(auto &&it : giftShips)
 		if(it.Giving())
 			it.Do(player);
@@ -403,14 +501,17 @@ void GameAction::Do(PlayerInfo &player, UI *ui, const Mission *caller) const
 		// then this action won't offer, so MissionAction payment behavior
 		// is unchanged.
 	}
+	// giving the player a fine.
 	if(fine)
 		player.Accounts().AddFine(fine);
 	for(const auto &debtEntry : debt)
 		player.Accounts().AddDebt(debtEntry.amount, debtEntry.interest, debtEntry.term);
 
+	// Trigger events.
 	for(const auto &it : events)
 		player.AddEvent(*it.first, player.GetDate() + it.second.first);
 
+	// Mark and unmark systems.
 	for(const System *system : mark)
 		caller->Mark(system);
 	for(const System *system : unmark)
@@ -440,6 +541,24 @@ void GameAction::Do(PlayerInfo &player, UI *ui, const Mission *caller) const
 			Audio::PlayMusic(music.value());
 	}
 
+	// Modify attributes.
+	for(auto &&it : modifyAttributes)
+	{
+		if(it.second)
+		{
+			DoModify(player, it.first, it.second);
+		}
+	}
+
+	// Set attributes.
+	for(auto &&it : setAttributes)
+	{
+		if(it.second)
+		{
+			DoSet(player, it.first, it.second);
+		}
+	}
+
 	// Check if applying the conditions changes the player's reputations.
 	conditions.Apply(player.Conditions());
 }
@@ -463,6 +582,8 @@ GameAction GameAction::Instantiate(map<string, string> &subs, int jumps, int pay
 	for(auto &&it : giftShips)
 		result.giftShips.push_back(it.Instantiate(subs));
 	result.giftOutfits = giftOutfits;
+	result.modifyAttributes = modifyAttributes;
+	result.setAttributes = setAttributes;
 
 	result.music = music;
 
@@ -481,6 +602,7 @@ GameAction GameAction::Instantiate(map<string, string> &subs, int jumps, int pay
 	for(auto &&it : specialLogText)
 		for(auto &&eit : it.second)
 			result.specialLogText[it.first][eit.first] = Format::Replace(eit.second, subs);
+	result.specialLogClear = specialLogClear;
 
 	result.fail = fail;
 	result.failCaller = failCaller;

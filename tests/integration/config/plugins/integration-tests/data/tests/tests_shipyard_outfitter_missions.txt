@@ -40,6 +40,10 @@ test-data "Shipyard Outfitter Mission Save"
 				"weapon capacity" 200
 				"thrust" 50
 				"turn" 1000
+				"lateral thruster slot" 1
+				"reverse thruster slot" 1
+				"steering slot" 1
+				"thruster slot" 1
 			outfits
 				Hyperdrive
 				"nGVF-BB Fuel Cell"
@@ -125,17 +129,6 @@ test "Trigger Outfitter Mission"
 			key o
 
 
-test "End Missions"
-	status partial
-	description "Just skip a mission by pressing return twice."
-	sequence
-		# Press accept (or decline, depending on if it is shown) and then skip the dialog once.
-		input
-			key "Return"
-		input
-			key "Return"
-
-
 test "Test Shipyard And Outfitter Mission"
 	status partial
 	description "Set a few conditions so they are displayed on errors, clarifying things up."
@@ -157,7 +150,7 @@ test "Shipyard Mission Test"
 		apply
 			"TEST: SHIPYARD MISSION OFFER" = 1
 		call "Trigger Shipyard Mission"
-		call "End Missions"
+		call "Skip Mission"
 		call "Depart"
 		call "Test Shipyard And Outfitter Mission"
 		assert
@@ -174,7 +167,7 @@ test "Outfitter Mission Test"
 		apply
 			"TEST: OUTFITTER MISSION OFFER" = 1
 		call "Trigger Outfitter Mission"
-		call "End Missions"
+		call "Skip Mission"
 		call "Depart"
 		call "Test Shipyard And Outfitter Mission"
 		assert

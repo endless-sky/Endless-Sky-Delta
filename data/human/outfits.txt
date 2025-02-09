@@ -170,8 +170,11 @@ outfit "Hyperdrive"
 	"outfit space" -20
 	"jump speed" .2
 	"jump fuel" 100
+	"jump mass cost" 4
+	"jump base mass" 900
 	"hyperdrive" 1
 	description "This mysterious box sits quietly at the heart of your ship, thinking its own inscrutable thoughts. When it comes time to travel between the stars it sets off a nuclear fusion reaction powerful enough to level an entire city, and then somehow tucks the resulting explosion in between the folds of regular space-time like a wasp stinging an oak leaf to lay her eggs inside. Your ship rides the resulting ripple in the fabric of space."
+	description "	The fuel required to power hyperdrives varies depending on the size of the ship. So long as the ship's total mass including cargo is less than 900, then each hyperjump will cost less than 100 fuel. How much less depends on how light the ship is. Ships that have more than 900 total mass will see the fuel per jump increase significantly."
 	description "	They say that fewer than a dozen human beings alive today understand the inner workings of the hyperdrive."
 
 outfit "Scram Drive"
@@ -182,8 +185,11 @@ outfit "Scram Drive"
 	"outfit space" -30
 	"scram drive" .2
 	"jump fuel" 150
+	"jump mass cost" 6
+	"jump base mass" 900
 	"hyperdrive" 1
 	description "A scram drive is a specially designed hyperdrive that works even if your ship is traveling at a much higher speed, at the expense of using more fuel. If you are being pursued by pirates (or just want to get somewhere in a hurry) that extra bit of speed can make a big difference."
+	description "	The fuel required to power scram drives varies depending on the size of the ship. So long as the ship's total mass including cargo is less than 900, then each hyperjump will cost less than 150 fuel. How much less depends on how light the ship is. Ships that have more than 900 total mass will see the fuel per jump increase significantly."
 
 outfit "Jump Drive"
 	category "Systems"
@@ -193,6 +199,8 @@ outfit "Jump Drive"
 	"outfit space" -20
 	"jump speed" .3
 	"jump fuel" 200
+	"jump mass cost" 8
+	"jump base mass" 900
 	"jump drive" 1
 	description "The workings of the jump drive are a total mystery. The best that human scientists have been able to find out is that this device is a containment field for matter in a state that cannot normally exist in this universe; if the drive is opened up, the field collapses and its contents disappear. Therefore, even though a few jump drives have been captured over the years, it has so far proved impossible to reverse engineer them."
 
@@ -281,6 +289,19 @@ outfit "Thermal Scanner"
 	"outfit space" -2
 	"thermal scan power" 35
 	description "While thermal signatures have always been useful as a means of identifying and tracking ships, determining a ship's effective average thermal load was functionally useless until recently. With the development of the plasma cannon and then the flamethrower, attempting to overheat a ship has become a viable combat technique. As such, engineers with the Free World have begun assembling these sensor packages to support the daring captains who choose to use this tactic."
+
+
+outfit "Astronomical Scanner"
+	category "Systems"
+	cost 18000
+	thumbnail "outfit/tactical scanner"
+	"mass" 2
+	"outfit space" -2
+	"energy consumption" .1
+	"solar power sensor" 1
+	"solar wind sensor" 1
+	description "An astronomical scanner provides data on the system's total solar power and wind output, allowing captains to see which systems are best for solar collection or ramscoop usage."
+
 
 outfit "Surveillance Pod"
 	category "Systems"
@@ -458,7 +479,7 @@ outfit "Antigrav Glass"
 outfit "Puny"
 	category "Unique"
 	"display name" `"Puny"`
-	thumbnail "outfit/unknown"
+	thumbnail "outfit/collar"
 	"unique" 1
 	description `A poodle you rescued from a dubious racing complex on Freedom. She appears to have formed a strong bond with you, willing to stick by your side.`
 	description `	Her history matches with Pookie's, but Pookie's owner claimed that Puny was not hers. Puny is also vastly less urine-prone; you suspect that the race organizers may have toilet-trained her.`
@@ -469,6 +490,14 @@ outfit "Tear of Skade"
 	"cooling" 4
 	"unique" 1
 	description "A strange glowing stone gifted to you by the Skadenga. It lacks any power source, yet is quite cold."
+
+outfit "Blood of Surtr"
+	category "Unique"
+	thumbnail "outfit/surtrblood"
+	"energy generation" 2
+	"heat generation" 4
+	"unique" 1
+	description "A strange glowing stone gifted to you by Ildico Drifa. It hums with energy and heat."
 
 
 outfit "Local Map"

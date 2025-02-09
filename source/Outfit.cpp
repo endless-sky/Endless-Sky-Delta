@@ -65,6 +65,9 @@ namespace {
 		{"thrusting disruption", 0.},
 		{"thrusting slowing", 0.},
 		{"lateral thrust ratio", 0.},
+		{"thrust reduction ratio", 0.},
+		{"lateral turn ratio", 0.},
+		{"turn reduction ratio", 0.},
 
 		{"turning shields", 0.},
 		{"turning hull", 0.},
@@ -250,6 +253,8 @@ void Outfit::Load(const DataNode &node)
 			++flareSounds[Audio::Get(child.Token(1))];
 		else if(child.Token(0) == "reverse flare sound" && child.Size() >= 2)
 			++reverseFlareSounds[Audio::Get(child.Token(1))];
+		else if(child.Token(0) == "lateral flare sound" && child.Size() >= 2)
+			++lateralFlareSounds[Audio::Get(child.Token(1))];
 		else if(child.Token(0) == "steering flare sound" && child.Size() >= 2)
 			++steeringFlareSounds[Audio::Get(child.Token(1))];
 		else if(child.Token(0) == "afterburner effect" && child.Size() >= 2)
@@ -334,10 +339,28 @@ void Outfit::Load(const DataNode &node)
 					+ pluralName + "\".");
 	}
 
+	// Set the default jump fuel if not defined.
+	bool isHyperdrive = attributes.Get("hyperdrive");
+	bool isScramDrive = attributes.Get("scram drive");
+	bool isJumpDrive = attributes.Get("jump drive");
+	if((isHyperdrive || isScramDrive) && attributes.Get("hyperdrive fuel") <= 0.)
+	{
+		double jumpFuel = attributes.Get("jump fuel");
+		attributes["hyperdrive fuel"] = (jumpFuel > 0. ? jumpFuel
+			: isScramDrive ? DEFAULT_SCRAM_DRIVE_COST : DEFAULT_HYPERDRIVE_COST);
+	}
+	if(isJumpDrive && attributes.Get("jump drive fuel") <= 0.)
+	{
+		double jumpFuel = attributes.Get("jump fuel");
+		attributes["jump drive fuel"] = (jumpFuel > 0. ? jumpFuel : DEFAULT_JUMP_DRIVE_COST);
+	}
+	if(attributes.Get("jump fuel"))
+		attributes["jump fuel"] = 0.;
+
 	// Only outfits with the jump drive and jump range attributes can
 	// use the jump range, so only keep track of the jump range on
 	// viable outfits.
-	if(attributes.Get("jump drive") && attributes.Get("jump range"))
+	if(isJumpDrive && attributes.Get("jump range"))
 		GameData::AddJumpRange(attributes.Get("jump range"));
 
 	// Legacy support for turrets that don't specify a turn rate:
@@ -548,6 +571,7 @@ void Outfit::Add(const Outfit &other, int count)
 		AddFlareSprites(lateralFlareSprites, it, count);
 	MergeMaps(flareSounds, other.flareSounds, count);
 	MergeMaps(reverseFlareSounds, other.reverseFlareSounds, count);
+	MergeMaps(lateralFlareSounds, other.lateralFlareSounds, count);
 	MergeMaps(steeringFlareSounds, other.steeringFlareSounds, count);
 	MergeMaps(afterburnerEffects, other.afterburnerEffects, count);
 	MergeMaps(jumpEffects, other.jumpEffects, count);
@@ -618,6 +642,13 @@ const map<const Sound *, int> &Outfit::FlareSounds() const
 const map<const Sound *, int> &Outfit::ReverseFlareSounds() const
 {
 	return reverseFlareSounds;
+}
+
+
+
+const map<const Sound *, int> &Outfit::LateralFlareSounds() const
+{
+	return lateralFlareSounds;
 }
 
 
@@ -715,4 +746,24 @@ void Outfit::AddLicense(const string &name)
 	const auto it = find(licenses.begin(), licenses.end(), name);
 	if(it == licenses.end())
 		licenses.push_back(name);
+}
+
+
+
+// Modify this outfit's attributes.
+void Outfit::ModifyMass(double value)
+{
+	mass += value;
+	// Don't allow mass to go to zero or less.
+	mass = (mass <= 0 ? 0.01 : mass);
+}
+
+
+
+// Set this outfit's attributes.
+void Outfit::SetMass(double MassDif)
+{
+	mass += MassDif;
+	// Don't allow mass to go to zero or less.
+	mass = (mass <= 0 ? 0.01 : mass);
 }

@@ -26,7 +26,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "DamageProfile.h"
 #include "Effect.h"
 #include "FighterHitHelper.h"
-#include "FillShader.h"
+#include "shader/FillShader.h"
 #include "Fleet.h"
 #include "Flotsam.h"
 #include "text/Font.h"
@@ -45,16 +45,16 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Minable.h"
 #include "Mission.h"
 #include "NPC.h"
-#include "OutlineShader.h"
+#include "shader/OutlineShader.h"
 #include "Person.h"
 #include "Planet.h"
 #include "PlanetLabel.h"
 #include "PlayerInfo.h"
-#include "PointerShader.h"
+#include "shader/PointerShader.h"
 #include "Preferences.h"
 #include "Projectile.h"
 #include "Random.h"
-#include "RingShader.h"
+#include "shader/RingShader.h"
 #include "Screen.h"
 #include "Ship.h"
 #include "ship/ShipAICache.h"
@@ -62,8 +62,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "ShipJumpNavigation.h"
 #include "image/Sprite.h"
 #include "image/SpriteSet.h"
-#include "SpriteShader.h"
-#include "StarField.h"
+#include "shader/SpriteShader.h"
+#include "shader/StarField.h"
 #include "StellarObject.h"
 #include "System.h"
 #include "SystemEntry.h"
@@ -234,7 +234,6 @@ namespace {
 	}
 
 	const double RADAR_SCALE = .00625;
-	const double MAX_FUEL_DISPLAY = 5000.;
 
 	const double CAMERA_VELOCITY_TRACKING = 0.1;
 	const double CAMERA_POSITION_CENTERING = 0.01;
@@ -749,7 +748,8 @@ void Engine::Step(bool isActive)
 		{
 			shipFacingUnit = flagship->Facing().Unit();
 		}
-		info.SetSprite("player sprite", flagship->GetSprite(), shipFacingUnit, flagship->GetFrame(step));
+		info.SetSprite("player sprite", flagship->GetSprite(), shipFacingUnit, flagship->GetFrame(step),
+			flagship->GetSwizzle());
 		// If the Flagship Velocity Indicator preference is set to "ghost" or "both",
 		// this will display the blue ship outline pointing in the ship's direction of motion.
 		if(Preferences::DisplayFlagshipVelocityGhost())
@@ -759,8 +759,13 @@ void Engine::Step(bool isActive)
 			info.SetOutlineColor(Radar::GetColor(1));
 		}
 	}
+	if(player.Flagship())
+		{
+			const Ship &flagship = *player.Flagship();
+			info.SetString("flagship name", flagship.Name());
+		}
 	if(currentSystem)
-		info.SetString("location", currentSystem->Name());
+		info.SetString("location", currentSystem->DisplayName());
 	info.SetString("date", player.GetDate().ToString());
 	if(flagship)
 	{
@@ -790,18 +795,88 @@ void Engine::Step(bool isActive)
 			info.SetCondition("flagship solar display");
 			info.SetString("flagship solar", to_string(flagshipSolar));
 		}
+		// Display combined Solar Power for system
+		int displaySystemPower = (flagship->DisplaySystemSolar() * 100); // Multiplied to better display decimal inputs
+		if(displaySystemPower >= 0.01 && flagship->Attributes().Get("solar power sensor"))
+		{
+			info.SetCondition("system solar display");
+			info.SetString("system solar", to_string(displaySystemPower));
+		}
+		// Display combined Solar Wind for system
+		int displaySystemWind = (flagship->DisplaySystemWind() * 100); // Multiplied to better display decimal inputs
+		if(displaySystemWind >= 0.01 && flagship->Attributes().Get("solar wind sensor"))
+		{
+			info.SetCondition("system wind display");
+			info.SetString("system wind", to_string(displaySystemWind));
+		}
+		// These check for the attribute to determine if the pilot has installed
+		// outfits that give a live display of ship mass and jump fuel costs.
+		bool flagshipMassDisplay = flagship->DisplayMass();
+		bool flagshipHyperDisplay = flagship->DisplayHyperFuelCost();
+		bool flagshipScramDisplay = flagship->DisplayScramFuelCost();
+		bool flagshipJumpDisplay = flagship->DisplayJumpFuelCost();
+		// These are to get the method of scaling the fuel bar segments.
+		bool flagshipHyperFuelBar = flagship->HyperDriveFuelBar();
+		bool flagshipScramFuelBar = flagship->ScramDriveFuelBar();
+		bool flagshipJumpFuelBar = flagship->JumpDriveFuelBar();
+		double flagshipFixedFuelBar = flagship->FixedScaleFuelBar();
+		// Transfers that information into the info setconditions.
+		if(flagshipMassDisplay)
+			info.SetCondition("flagship mass display");
+		if(flagshipHyperDisplay)
+			info.SetCondition("flagship hyper fuel display");
+		if(flagshipScramDisplay)
+			info.SetCondition("flagship scram fuel display");
+		if(flagshipJumpDisplay)
+			info.SetCondition("flagship jump fuel display");
+		// Calculates the mass, as well as hyper, scram, and jump drive fuel costs
+		double flagshipMass = flagship->InertialMass();
+		int flagshipMassNumber = round(flagshipMass);
+		info.SetString("flagship mass", to_string(flagshipMassNumber));
+		double relativeFlagshipMass = ((flagshipMass - 900.) / 100.);
+		double flagshipHyperDriveFuel = 100. + (relativeFlagshipMass * 4.);
+		int flagshipHyperDriveFuelDisplay = round(flagshipHyperDriveFuel);
+		info.SetString("flagship hyperdrive fuel per hyperjump", to_string(flagshipHyperDriveFuelDisplay));
+		double flagshipScramDriveFuel = 150. + (relativeFlagshipMass * 6.);
+		int flagshipScramDriveFuelDisplay = round(flagshipScramDriveFuel);
+		info.SetString("flagship scram drive fuel per hyperjump", to_string(flagshipScramDriveFuelDisplay));
+		double flagshipJumpDriveFuel = 200. + (relativeFlagshipMass * 8.);
+		int flagshipJumpDriveFuelDisplay = round(flagshipJumpDriveFuel);
+		info.SetString("flagship jump drive fuel per hyperjump", to_string(flagshipJumpDriveFuelDisplay));
 		// new thrust/turn/lateral bars.
 		info.SetBar("thrust", flagship->DisplayThrust());
 		info.SetBar("turn", flagship->DisplayTurn());
 		info.SetBar("lateralthrust", flagship->DisplayLateralThrust());
 		// Get the flagship's fuel capacity
 		double fuelCap = flagship->Attributes().Get("fuel capacity");
-		// If the flagship has a large amount of fuel, display a solid bar.
-		// Otherwise, display a segment for every 100 units of fuel.
-		if(fuelCap <= MAX_FUEL_DISPLAY)
-			info.SetBar("fuel", flagship->Fuel(), fuelCap * .01);
+
+		// If the flagship has an outfit that forces a specific scale for the fuel bar, use that. If it has multiple,
+		// then the priority order is HD, then SD, then JD, then fixed quantity. If none, the default is HD.
+		// In every case, if the player is trying to force a fuel bar that will result in 31 or more segments, then
+		// fall back to a solid bar.
+		double fuelToEvaluate = flagshipHyperDriveFuel;
+		double fallBackSegmentation = 1.;
+		if(flagshipHyperFuelBar)
+		{
+			fuelToEvaluate = flagshipHyperDriveFuel;
+		}
+		else if(flagshipScramFuelBar)
+		{
+			fuelToEvaluate = flagshipScramDriveFuel;
+		}
+		else if(flagshipJumpFuelBar)
+		{
+			fuelToEvaluate = flagshipJumpDriveFuel;
+		}
+		else if(flagshipFixedFuelBar)
+		{
+			fuelToEvaluate = flagshipFixedFuelBar;
+		}
+		if((fuelCap / fuelToEvaluate) < 31.)
+			info.SetBar("fuel", flagship->Fuel(), fuelCap / fuelToEvaluate);
 		else
-			info.SetBar("fuel", flagship->Fuel());
+			info.SetBar("fuel", flagship->Fuel(), fallBackSegmentation);
+
 		info.SetBar("energy", flagship->Energy());
 		double heat = flagship->Heat();
 		info.SetBar("heat", min(1., heat));
@@ -825,7 +900,7 @@ void Engine::Step(bool isActive)
 			object->GetPlanet() && object->GetPlanet()->CanLand(*flagship) ? "Can land on:" :
 			"Cannot land on:";
 		info.SetString("navigation mode", navigationMode);
-		const string &name = object->Name();
+		const string &name = object->DisplayName();
 		info.SetString("destination", name);
 
 		targets.push_back({
@@ -839,7 +914,7 @@ void Engine::Step(bool isActive)
 	{
 		info.SetString("navigation mode", "Hyperspace:");
 		if(player.CanView(*flagship->GetTargetSystem()))
-			info.SetString("destination", flagship->GetTargetSystem()->Name());
+			info.SetString("destination", flagship->GetTargetSystem()->DisplayName());
 		else
 			info.SetString("destination", "unexplored system");
 	}
@@ -871,7 +946,8 @@ void Engine::Step(bool isActive)
 		info.SetSprite("target sprite",
 			targetAsteroid->GetSprite(),
 			targetAsteroid->Facing().Unit(),
-			targetAsteroid->GetFrame(step));
+			targetAsteroid->GetFrame(step),
+			0);
 		info.SetString("target name", targetAsteroid->DisplayName() + " " + targetAsteroid->Noun());
 
 		targetVector = targetAsteroid->Position() - center;
@@ -888,18 +964,27 @@ void Engine::Step(bool isActive)
 	{
 		if(target->GetSystem() == player.GetSystem() && !target->IsCloaked())
 			targetUnit = target->Facing().Unit();
-		info.SetSprite("target sprite", target->GetSprite(), targetUnit, target->GetFrame(step));
+		targetSwizzle = target->GetSwizzle();
+		info.SetSprite("target sprite", target->GetSprite(), targetUnit, target->GetFrame(step), targetSwizzle);
 		info.SetString("target name", target->Name());
 		info.SetString("target type", target->DisplayModelName());
 		if(!target->GetGovernment())
 			info.SetString("target government", "No Government");
 		else
 			info.SetString("target government", target->GetGovernment()->GetName());
-		targetSwizzle = target->GetSwizzle();
 		info.SetString("mission target", target->GetPersonality().IsTarget() ? "(mission target)" : "");
 
+		// Only update the "active" state shown for the target if it is
+		// in the current system and targetable, or owned by the player.
 		int targetType = RadarType(*target, step);
-		info.SetOutlineColor(GetTargetOutlineColor(targetType));
+		const bool blinking = targetType == Radar::BLINK;
+		if(!blinking && ((target->GetSystem() == player.GetSystem() && target->IsTargetable()) || target->IsYours()))
+			lastTargetType = targetType;
+		if(blinking)
+			info.SetOutlineColor(GetTargetOutlineColor(Radar::BLINK));
+		else
+			info.SetOutlineColor(GetTargetOutlineColor(lastTargetType));
+
 		if(target->GetSystem() == player.GetSystem() && target->IsTargetable())
 		{
 			info.SetBar("target shields", target->Shields());
@@ -918,72 +1003,65 @@ void Engine::Step(bool isActive)
 
 			targetVector = target->Position() - center;
 
-			// Finds the range from the center of the flagship to the center of the target
 			double targetRange = target->Position().Distance(flagship->Position());
-			// Finds the range of the scan collections (tactical and strategic)
+			// Finds the range of the scan collections.
 			double tacticalRange = 100. * sqrt(flagship->Attributes().Get("tactical scan power"));
-			double strategicScanRange = 100. * sqrt(flagship->Attributes().Get("strategic scan power"));
-			// Finds the range of the individual information types
-			double crewScanRange = 100. * sqrt(flagship->Attributes().Get("crew scan power"));
-			double energyScanRange = 100. * sqrt(flagship->Attributes().Get("energy scan power"));
-			double fuelScanRange = 100. * sqrt(flagship->Attributes().Get("fuel scan power"));
-			double maneuverScanRange = 100. * sqrt(flagship->Attributes().Get("maneuver scan power"));
-			double accelerationScanRange = 100. * sqrt(flagship->Attributes().Get("acceleration scan power"));
-			double velocityScanRange = 100. * sqrt(flagship->Attributes().Get("velocity scan power"));
-			double thermalScanRange = 100. * sqrt(flagship->Attributes().Get("thermal scan power"));
-			double weaponScanRange = 100. * sqrt(flagship->Attributes().Get("weapon scan power"));
-			// The range display currently does not care about the distance,
-			// it is either present or not; but treating it the same makes it
-			// easy for people to change this if desired.
-			double rangeFinder = 100. * sqrt(flagship->Attributes().Get("range finder power"));
+			double strategicRange = 100. * sqrt(flagship->Attributes().Get("strategic scan power"));
+			// Finds the range of the individual information types.
+			double crewScanRange = tacticalRange + 100. * sqrt(flagship->Attributes().Get("crew scan power"));
+			double fuelScanRange = tacticalRange + 100. * sqrt(flagship->Attributes().Get("fuel scan power"));
+			double energyScanRange = tacticalRange + 100. * sqrt(flagship->Attributes().Get("energy scan power"));
+			double thermalScanRange = tacticalRange + 100. * sqrt(flagship->Attributes().Get("thermal scan power"));
+			double maneuverScanRange = strategicRange + 100. * sqrt(flagship->Attributes().Get("maneuver scan power"));
+			double accelerationScanRange = strategicRange + 100. * sqrt(flagship->Attributes().Get("acceleration scan power"));
+			double velocityScanRange = strategicRange + 100. * sqrt(flagship->Attributes().Get("velocity scan power"));
+			double weaponScanRange = strategicRange + 100. * sqrt(flagship->Attributes().Get("weapon scan power"));
+			bool rangeFinder = flagship->Attributes().Get("range finder power") > 0.;
+
 			// Range information. If the player has any range finding,
 			// then calculate the range and store it. If they do not
 			// have strategic or weapon range info, use normal display.
 			// If they do, then use strategic range display.
-			if(tacticalRange || strategicScanRange || rangeFinder)
+			if(tacticalRange || strategicRange || rangeFinder)
+			{
 				info.SetString("target range", to_string(static_cast<int>(round(targetRange))));
-			if((tacticalRange || rangeFinder) && !strategicScanRange)
-				info.SetCondition("range display");
-			else if(strategicScanRange)
-				info.SetCondition("strategic range display");
+				if(strategicRange)
+					info.SetCondition("strategic range display");
+				else
+					info.SetCondition("range display");
+			}
 			// Actual information requires a scrutable target
-			// that is within the relevant scanner range.
+			// that is within the relevant scanner range, unless the target
+			// is player owned, in which case information is available regardless
+			// of range and scrutability.
 			bool scrutable = !target->Attributes().Get("inscrutable");
-			if((targetRange <= (tacticalRange + crewScanRange) && scrutable)
-				|| ((tacticalRange || crewScanRange) && target->IsYours()))
+			if((targetRange <= crewScanRange && scrutable) || (crewScanRange && target->IsYours()))
 			{
 				info.SetString("target crew", to_string(target->Crew()));
-				if(targetRange <= (strategicScanRange + accelerationScanRange)
-					|| targetRange <= (strategicScanRange + velocityScanRange))
-				{
+				if(accelerationScanRange || velocityScanRange)
 					info.SetCondition("mobility crew display");
-				}
 				else
 					info.SetCondition("target crew display");
 			}
-			if((targetRange <= (tacticalRange + energyScanRange) && scrutable)
-				|| ((tacticalRange || energyScanRange) && target->IsYours()))
+			if((targetRange <= energyScanRange && scrutable) || (energyScanRange && target->IsYours()))
 			{
 				info.SetCondition("target energy display");
 				int energy = round(target->Energy() * target->Attributes().Get("energy capacity"));
 				info.SetString("target energy", to_string(energy));
 			}
-			if((targetRange <= (tacticalRange + fuelScanRange) && scrutable)
-				|| ((tacticalRange || fuelScanRange) && target->IsYours()))
+			if((targetRange <= fuelScanRange && scrutable) || (fuelScanRange && target->IsYours()))
 			{
 				info.SetCondition("target fuel display");
 				int fuel = round(target->Fuel() * target->Attributes().Get("fuel capacity"));
 				info.SetString("target fuel", to_string(fuel));
 			}
-			if((targetRange <= (tacticalRange + thermalScanRange) && scrutable)
-				|| ((tacticalRange || thermalScanRange) && target->IsYours()))
+			if((targetRange <= thermalScanRange && scrutable) || (thermalScanRange && target->IsYours()))
 			{
 				info.SetCondition("target thermal display");
 				int heat = round(100. * target->Heat());
 				info.SetString("target heat", to_string(heat) + "%");
 			}
-			if((targetRange <= (strategicScanRange + weaponScanRange) && scrutable)
-				|| ((strategicScanRange || weaponScanRange) && target->IsYours()))
+			if((targetRange <= weaponScanRange && scrutable) || (weaponScanRange && target->IsYours()))
 			{
 				info.SetCondition("target weapon range display");
 				int turretRange = round(target->GetAICache().TurretRange());
@@ -991,37 +1069,29 @@ void Engine::Step(bool isActive)
 				int gunRange = round(target->GetAICache().GunRange());
 				info.SetString("target gun", to_string(gunRange) + " ");
 			}
-			// This calculates the turn speed and selects the display position.
-			if((targetRange <= (tacticalRange + crewScanRange)
-				&& targetRange <= (strategicScanRange + maneuverScanRange) && scrutable)
-				|| ((targetRange <= (strategicScanRange + accelerationScanRange) && scrutable))
-				|| ((strategicScanRange || maneuverScanRange || velocityScanRange || accelerationScanRange)
-					&& (tacticalRange || crewScanRange) && target->IsYours()))
+			const bool mobilityScan = maneuverScanRange || velocityScanRange || accelerationScanRange;
+			if((targetRange <= crewScanRange && targetRange <= maneuverScanRange && scrutable)
+				|| (targetRange <= accelerationScanRange && scrutable)
+				|| (mobilityScan && crewScanRange && target->IsYours()))
 			{
 				info.SetCondition("turn while combined");
 				int turnRate = round(60 * target->TrueTurnRate());
 				info.SetString("target turnrate", to_string(turnRate) + " ");
 			}
-			else if((targetRange >= (tacticalRange + crewScanRange)
-				&& targetRange <= (strategicScanRange + maneuverScanRange) && scrutable)
-				|| ((strategicScanRange || maneuverScanRange) && target->IsYours()
-					&& !tacticalRange && !crewScanRange))
+			else if((targetRange >= crewScanRange && targetRange <= maneuverScanRange && scrutable)
+				|| (maneuverScanRange && target->IsYours() && !tacticalRange && !crewScanRange))
 			{
 				info.SetCondition("turn while not combined");
 				int turnRate = round(60 * target->TrueTurnRate());
 				info.SetString("target turnrate", to_string(turnRate) + " ");
 			}
-			// This calculates the current speed
-			if((targetRange <= (strategicScanRange + accelerationScanRange) && scrutable)
-				|| ((tacticalRange || accelerationScanRange) && target->IsYours()))
+			if((targetRange <= accelerationScanRange && scrutable) || (accelerationScanRange && target->IsYours()))
 			{
 				info.SetCondition("target velocity display");
 				int presentSpeed = round(60 * target->CurrentSpeed());
 				info.SetString("target velocity", to_string(presentSpeed) + " ");
 			}
-			// This calculates the current maximum acceleration
-			if((targetRange <= (strategicScanRange + velocityScanRange) && scrutable)
-				|| ((tacticalRange || velocityScanRange) && target->IsYours()))
+			if((targetRange <= velocityScanRange && scrutable) || (velocityScanRange && target->IsYours()))
 			{
 				info.SetCondition("target acceleration display");
 				int presentAcceleration = 3600 * target->TrueAcceleration();
@@ -1036,8 +1106,14 @@ void Engine::Step(bool isActive)
 	{
 		double width = max(target->Width(), target->Height());
 		Point pos = target->Position() - center;
-		statuses.emplace_back(pos, flagship->OutfitScanFraction(), flagship->CargoScanFraction(),
-			0., 10. + max(20., width * .5), Status::Type::SCAN, 1.f, Angle(pos).Degrees() + 180.);
+		const bool outfitInRange = pos.LengthSquared() <= (flagship->Attributes().Get("outfit scan power") * 10000);
+		const Status::Type outfitOverlayType = outfitInRange ? Status::Type::SCAN : Status::Type::SCAN_OUT_OF_RANGE;
+		statuses.emplace_back(pos, flagship->OutfitScanFraction(), 0.,
+			0., 10. + max(20., width * .5), outfitOverlayType, 1.f, Angle(pos).Degrees() + 180.);
+		const bool cargoInRange = pos.LengthSquared() <= (flagship->Attributes().Get("cargo scan power") * 10000);
+		const Status::Type cargoOverlayType = cargoInRange ? Status::Type::SCAN : Status::Type::SCAN_OUT_OF_RANGE;
+		statuses.emplace_back(pos, 0., flagship->CargoScanFraction(),
+			0., 10. + max(20., width * .5), cargoOverlayType, 1.f, Angle(pos).Degrees() + 180.);
 	}
 	// Handle any events that change the selected ships.
 	if(groupSelect >= 0)
@@ -1202,17 +1278,19 @@ void Engine::Draw() const
 
 	for(const auto &it : statuses)
 	{
-		static const Color color[14] = {
+		static const Color color[16] = {
 			*colors.Get("overlay flagship shields"),
 			*colors.Get("overlay friendly shields"),
 			*colors.Get("overlay hostile shields"),
 			*colors.Get("overlay neutral shields"),
 			*colors.Get("overlay outfit scan"),
+			*colors.Get("overlay outfit scan out of range"),
 			*colors.Get("overlay flagship hull"),
 			*colors.Get("overlay friendly hull"),
 			*colors.Get("overlay hostile hull"),
 			*colors.Get("overlay neutral hull"),
 			*colors.Get("overlay cargo scan"),
+			*colors.Get("overlay cargo scan out of range"),
 			*colors.Get("overlay flagship disabled"),
 			*colors.Get("overlay friendly disabled"),
 			*colors.Get("overlay hostile disabled"),
@@ -1433,14 +1511,14 @@ void Engine::EnterSystem()
 
 	doEnter = true;
 	doEnterLabels = true;
-	player.IncrementDate();
+	player.AdvanceDate();
 	const Date &today = player.GetDate();
 
 	const System *system = flagship->GetSystem();
 	Audio::PlayMusic(system->MusicName());
 	GameData::SetHaze(system->Haze(), false);
 
-	Messages::Add("Entering the " + system->Name() + " system on "
+	Messages::Add("Entering the " + system->DisplayName() + " system on "
 		+ today.ToString() + (system->IsInhabited(flagship) ?
 			"." : ". No inhabited planets detected."), Messages::Importance::Daily);
 
@@ -1517,22 +1595,23 @@ void Engine::EnterSystem()
 	// Place five seconds worth of fleets and weather events. Check for
 	// undefined fleets by not trying to create anything with no
 	// government set.
+	ConditionsStore &conditions = player.Conditions();
 	for(int i = 0; i < 5; ++i)
 	{
 		for(const auto &fleet : system->Fleets())
 			// Skip fleets that don't want to spawn on system entry,
 			// or fleets whose limits have already been reached.
 			if(!fleet.GetFlags(Fleet::SKIP_SYSTEM_ENTRY) &&
-				FleetPlacementLimit(fleet, 60, true))
+				fleet.CanTrigger(conditions) && FleetPlacementLimit(fleet, 60, true))
 			{
 				fleetShips.clear();
 				fleet.Get()->Place(*system, fleetShips, true);
 				AddSpawnedFleet(fleet);
 			}
 
-		auto CreateWeather = [this](const RandomEvent<Hazard> &hazard, Point origin)
+		auto CreateWeather = [this, conditions](const RandomEvent<Hazard> &hazard, Point origin)
 		{
-			if(hazard.Get()->IsValid() && Random::Int(hazard.Period()) < 60)
+			if(hazard.Get()->IsValid() && Random::Int(hazard.Period()) < 60 && hazard.CanTrigger(conditions))
 			{
 				const Hazard *weather = hazard.Get();
 				int hazardLifetime = weather->RandomDuration();
@@ -1581,6 +1660,7 @@ void Engine::EnterSystem()
 	{
 		Messages::Add(GameData::HelpMessage("basics 1"), Messages::Importance::High);
 		Messages::Add(GameData::HelpMessage("basics 2"), Messages::Importance::High);
+		Messages::Add(GameData::HelpMessage("basics 3"), Messages::Importance::High);
 	}
 }
 
@@ -1655,10 +1735,10 @@ void Engine::CalculateStep()
 			// No sounds.
 		}
 		else if(jumpSounds.empty())
-			Audio::Play(Audio::Get(isJumping ? "jump drive" : "hyperdrive"));
+			Audio::Play(Audio::Get(isJumping ? "jump drive" : "hyperdrive"), SoundCategory::JUMP);
 		else
 			for(const auto &sound : jumpSounds)
-				Audio::Play(sound.first);
+				Audio::Play(sound.first, SoundCategory::JUMP);
 	}
 	// Check if the flagship just entered a new system.
 	if(flagship && playerSystem != flagship->GetSystem())
@@ -1806,17 +1886,22 @@ void Engine::CalculateStep()
 				if(ship->ThrustMagnitude() && !ship->EnginePoints().empty())
 				{
 					for(const auto &it : ship->Attributes().FlareSounds())
-						Audio::Play(it.first, ship->Position());
+						Audio::Play(it.first, ship->Position(), SoundCategory::ENGINE);
 				}
 				else if(ship->IsReversing() && !ship->ReverseEnginePoints().empty())
 				{
 					for(const auto &it : ship->Attributes().ReverseFlareSounds())
-						Audio::Play(it.first, ship->Position());
+						Audio::Play(it.first, ship->Position(), SoundCategory::ENGINE);
+				}
+				else if(ship->IsLatThrusting() && !ship->LateralEnginePoints().empty())
+				{
+					for(const auto &it : ship->Attributes().LateralFlareSounds())
+						Audio::Play(it.first, ship->Position(), SoundCategory::ENGINE);
 				}
 				if(ship->IsSteering() && !ship->SteeringEnginePoints().empty())
 				{
 					for(const auto &it : ship->Attributes().SteeringFlareSounds())
-						Audio::Play(it.first, ship->Position());
+						Audio::Play(it.first, ship->Position(), SoundCategory::ENGINE);
 				}
 			}
 			else
@@ -1829,17 +1914,22 @@ void Engine::CalculateStep()
 		if(flagship->IsThrusting() && !flagship->EnginePoints().empty())
 		{
 			for(const auto &it : flagship->Attributes().FlareSounds())
-				Audio::Play(it.first);
+				Audio::Play(it.first, SoundCategory::ENGINE);
 		}
 		else if(flagship->IsReversing() && !flagship->ReverseEnginePoints().empty())
 		{
 			for(const auto &it : flagship->Attributes().ReverseFlareSounds())
-				Audio::Play(it.first);
+				Audio::Play(it.first, SoundCategory::ENGINE);
+		}
+		else if(flagship->IsLatThrusting() && !flagship->LateralEnginePoints().empty())
+		{
+			for(const auto &it : flagship->Attributes().LateralFlareSounds())
+				Audio::Play(it.first, SoundCategory::ENGINE);
 		}
 		if(flagship->IsSteering() && !flagship->SteeringEnginePoints().empty())
 		{
 			for(const auto &it : flagship->Attributes().SteeringFlareSounds())
-				Audio::Play(it.first);
+				Audio::Play(it.first, SoundCategory::ENGINE);
 		}
 	}
 	// Draw the projectiles.
@@ -1915,10 +2005,10 @@ void Engine::MoveShip(const shared_ptr<Ship> &ship)
 				// No sounds.
 			}
 			else if(jumpSounds.empty())
-				Audio::Play(Audio::Get(isJump ? "jump out" : "hyperdrive out"), position);
+				Audio::Play(Audio::Get(isJump ? "jump out" : "hyperdrive out"), position, SoundCategory::JUMP);
 			else
 				for(const auto &sound : jumpSounds)
-					Audio::Play(sound.first, position);
+					Audio::Play(sound.first, position, SoundCategory::JUMP);
 		}
 
 		// Did this ship just jump into the player's system?
@@ -1931,10 +2021,10 @@ void Engine::MoveShip(const shared_ptr<Ship> &ship)
 				// No sounds.
 			}
 			else if(jumpSounds.empty())
-				Audio::Play(Audio::Get(isJump ? "jump in" : "hyperdrive in"), position);
+				Audio::Play(Audio::Get(isJump ? "jump in" : "hyperdrive in"), position, SoundCategory::JUMP);
 			else
 				for(const auto &sound : jumpSounds)
-					Audio::Play(sound.first, position);
+					Audio::Play(sound.first, position, SoundCategory::JUMP);
 		}
 	}
 
@@ -1995,8 +2085,9 @@ void Engine::SpawnFleets()
 
 	// Non-mission NPCs spawn at random intervals in neighboring systems,
 	// or coming from planets in the current one.
+	ConditionsStore &conditions = player.Conditions();
 	for(const auto &fleet : player.GetSystem()->Fleets())
-		if(FleetPlacementLimit(fleet, 1, true) > 0)
+		if(FleetPlacementLimit(fleet, 1, true) > 0 && fleet.CanTrigger(conditions))
 		{
 			const Government *gov = fleet.Get()->GetGovernment();
 			if(!gov)
@@ -2074,9 +2165,10 @@ void Engine::SpawnPersons()
 // Generate weather from the current system's hazards.
 void Engine::GenerateWeather()
 {
-	auto CreateWeather = [this](const RandomEvent<Hazard> &hazard, Point origin)
+	ConditionsStore &conditions = player.Conditions();
+	auto CreateWeather = [this, conditions](const RandomEvent<Hazard> &hazard, Point origin)
 	{
-		if(hazard.Get()->IsValid() && !Random::Int(hazard.Period()))
+		if(hazard.Get()->IsValid() && !Random::Int(hazard.Period()) && hazard.CanTrigger(conditions))
 		{
 			const Hazard *weather = hazard.Get();
 			// If a hazard has activated, generate a duration and strength of the
@@ -2232,12 +2324,12 @@ void Engine::HandleMouseClicks()
 					if(&object == flagship->GetTargetStellar())
 					{
 						if(!planet->CanLand(*flagship))
-							Messages::Add("The authorities on " + planet->Name()
+							Messages::Add("The authorities on " + planet->DisplayName()
 									+ " refuse to let you land.", Messages::Importance::Highest);
-						else
+						else if(!flagship->IsDestroyed())
 						{
 							activeCommands |= Command::LAND;
-							Messages::Add("Landing on " + planet->Name() + ".", Messages::Importance::High);
+							Messages::Add("Landing on " + planet->DisplayName() + ".", Messages::Importance::High);
 						}
 					}
 					else
@@ -2746,7 +2838,7 @@ void Engine::FillRadar()
 	else if(hasHostiles && !hadHostiles)
 	{
 		if(Preferences::PlayAudioAlert())
-			Audio::Play(Audio::Get("alarm"));
+			Audio::Play(Audio::Get("alarm"), SoundCategory::ALERT);
 		alarmTime = 300;
 		hadHostiles = true;
 	}
@@ -2800,7 +2892,7 @@ void Engine::DrawShipSprites(const Ship &ship)
 			ship.Attributes().ReverseFlareSprites(), Ship::EnginePoint::UNDER);
 	if(ship.IsLatThrusting() && !ship.LateralEnginePoints().empty())
 		DrawFlareSprites(ship, draw[currentCalcBuffer], ship.LateralEnginePoints(),
-			ship.Attributes().FlareSprites(), Ship::EnginePoint::UNDER);
+			ship.Attributes().LateralFlareSprites(), Ship::EnginePoint::UNDER);
 	if(ship.IsSteering() && !ship.SteeringEnginePoints().empty())
 		DrawFlareSprites(ship, draw[currentCalcBuffer], ship.SteeringEnginePoints(),
 			ship.Attributes().SteeringFlareSprites(), Ship::EnginePoint::UNDER);
@@ -2835,7 +2927,7 @@ void Engine::DrawShipSprites(const Ship &ship)
 			ship.Attributes().ReverseFlareSprites(), Ship::EnginePoint::OVER);
 	if(ship.IsLatThrusting() && !ship.LateralEnginePoints().empty())
 		DrawFlareSprites(ship, draw[currentCalcBuffer], ship.LateralEnginePoints(),
-			ship.Attributes().FlareSprites(), Ship::EnginePoint::OVER);
+			ship.Attributes().LateralFlareSprites(), Ship::EnginePoint::OVER);
 	if(ship.IsSteering() && !ship.SteeringEnginePoints().empty())
 		DrawFlareSprites(ship, draw[currentCalcBuffer], ship.SteeringEnginePoints(),
 			ship.Attributes().SteeringFlareSprites(), Ship::EnginePoint::OVER);

@@ -1,6 +1,6 @@
-Welcome to Endless Sky!
+Welcome to Endless Sky Delta!
 
-version 0.10.10-delta
+version 0.10.11.5-delta
 
 The player's manual and other
 resources are available at:
@@ -63,15 +63,25 @@ Major Programming
   Frederick Goy IV
   guillochon
   Hadron1776
+  Hurleveur
+  Koranir
   kozbot
   MarcelineVQ
   NomadicVolcano
   oo13
   Peter van der Meer
+  Quyykk
+  RisingLeaf
+  tibetiroka
+  TomGoodIdea
+  vitalchip
+  warp-core
+  Zitchas
 
 Storyline & Faction Authors
   Amazinite
   Arachi-Lover
+  Azure3141
   beccabunny
   Daeridanii
   Lia Gerty
@@ -129,6 +139,9 @@ Artwork
   @Karirawri (CC-BY-SA-4.0)
   Gef. Taubenbrust (CC-BY-SA-4.0)
   Saugia (CC-BY-SA-4.0)
+  Rising Leaf (CC-BY-SA-4.0)
+  Unordered Sigh (CC-BY-SA-3.0)
+  Zitchas (CC-BY-SA-4.0)
 
 Photos from Wikimedia Commons
   Berthold Werner (CC-BY-SA-3.0)
@@ -216,6 +229,7 @@ contributed to Endless Sky:
   Brick63
   captain0xff
   ChamEV
+  chrisandreae
   comnom
   corecontingency
   Corraban2
@@ -278,6 +292,7 @@ contributed to Endless Sky:
   gunqqer
   Hacklin
   Hadron1776
+  HangryBear
   Hannah-E-M
   har9862
   Hatrask
@@ -289,6 +304,7 @@ contributed to Endless Sky:
   Hurleveur
   Hyugat
   implicitfield
+  ImprovisedUsername
   InfiniteDonuts
   infinitewarp
   ItsNickBarry
@@ -336,6 +352,7 @@ contributed to Endless Sky:
   lumbar527
   macfreek
   Mach565
+  MadisonianX
   MageKing17
   MagicMuscleMan
   Mailaender
@@ -351,12 +368,14 @@ contributed to Endless Sky:
   mike-f1
   MillerNerd
   mimirzero
+  mixx99
   mOctave
   moonliiiqhte
   mootootwo
   Mr-L-oof
   naehc
   Nams-2
+  NateEag
   nathan-b
   Nescio0
   neurotrope
@@ -454,6 +473,7 @@ contributed to Endless Sky:
   TheGiraffe3
   TheMarksman-ES
   thenerdfreak
+  thetazero
   TheUnfetteredOne
   thewierdnut
   thomasballinger
@@ -491,6 +511,7 @@ contributed to Endless Sky:
   wjbotham
   wjp
   Wrzlprnft
+  xobes
   xxxyyyqqq12345
   YellowApple
   yjhn

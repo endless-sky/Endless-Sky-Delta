@@ -608,3 +608,8 @@ conversation "end of intro missions"
 		
 	label end
 	`	He hands you a credit chip worth <payment>, and says, "Best of luck to you, Captain. Don't hesitate to look me up if you're ever in the area. And remember to check the spaceports wherever you land. You never know who you'll find wandering around there."`
+	`	He pauses for a moment, a look of indecision on his face. "Ah, why not?" he mutters to himself. Then, with a look of decision, he opens his duffle bag and pulls out a small device with some tubes and cables.`
+	`	"I was given this engine mod by some salvagers I saved from a pirate attack. I am not sure what it is, but my engineer thought it was a regulator and managed to install it on my engines. All I know is that I always got a bit more performance out of my ship when it was in place." He hefts it, a fond look on his face. "It has been something of a good luck charm for me, I guess. Now it's time to pay it forward and help someone new."`
+	`	He hands you the device, and with a salute, turns and walks away.`
+	action
+		outfit "James' Engine Mod"

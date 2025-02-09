@@ -13,6 +13,7 @@
 
 ship "Kaiken"
 	sprite "ship/kaiken"
+		"scale" 0.6
 	thumbnail "thumbnail/kaiken"
 	attributes
 		category "Fighter"
@@ -27,6 +28,7 @@ ship "Kaiken"
 		"outfit space" 121
 		"weapon capacity" 35
 		"engine capacity" 45
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -44,6 +46,7 @@ ship "Kaiken"
 		"Shield Relay Limiter" 6
 		
 		"Chiisana Rift Thruster" # Extra thruster
+		"Chiisana Rift LTC"
 		"Chiisana Rift Steering"
 	
 	engine -5.5 30.5
@@ -75,11 +78,12 @@ ship "Sasumata"
 		"mass" 710
 		"drag" 7.05
 		"heat dissipation" 0.54
-		"fuel capacity" 700
+		"fuel capacity" 800
 		"cargo space" 32
-		"outfit space" 397
+		"outfit space" 430
 		"weapon capacity" 122
-		"engine capacity" 126
+		"engine capacity" 141
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -105,6 +109,7 @@ ship "Sasumata"
 		"Shield Relay Limiter" 10
 		
 		"Subarashii Rift Thruster"
+		"Subarashii Rift LTC"
 		"Ookii Rift Steering"
 		"Hyperdrive"
 	
@@ -126,6 +131,7 @@ ship "Sasumata"
 	explode "large explosion" 5
 	"final explode" "final explosion small"
 	description "The Sasumata is the chief scout ship of the Bunrodea. While not designed for combat, this stealth transport vessel is still capable of holding its own against some smaller warships; its four fighter bays turn the Sasumata into a force to be reckoned with when its fighters are deployed."
+	description "	The cloaking technology is built into the Sasumata's hull; it cannot be removed or transferred to another ship."
 
 
 
@@ -142,11 +148,12 @@ ship "Tanto"
 		"mass" 508
 		"drag" 3.9
 		"heat dissipation" 0.7
-		"fuel capacity" 600
+		"fuel capacity" 625
 		"cargo space" 219
-		"outfit space" 231
+		"outfit space" 242
 		"weapon capacity" 56
-		"engine capacity" 102
+		"engine capacity" 107
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -163,6 +170,7 @@ ship "Tanto"
 		"Small Shield Relay"
 		
 		"Ookii Rift Thruster"
+		"Ookii Rift LTC"
 		"Ookii Rift Steering"
 		# "Chiisana Rift Thruster" # Extra thruster
 		"Hyperdrive"
@@ -197,11 +205,12 @@ ship "Ararebo"
 		"mass" 1780
 		"drag" 19.7
 		"heat dissipation" 0.53
-		"fuel capacity" 700
+		"fuel capacity" 1250
 		"cargo space" 414
-		"outfit space" 594
+		"outfit space" 615
 		"weapon capacity" 112
 		"engine capacity" 108
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -225,6 +234,7 @@ ship "Ararebo"
 		"Nanite Enhancer" 5
 		
 		"Ookii Rift Thruster"
+		"Ookii Rift LTC"
 		"Ookii Rift Steering"
 		"Hyperdrive"
 	
@@ -269,9 +279,10 @@ ship "Tekkan"
 		"heat dissipation" 0.75
 		"fuel capacity" 700
 		"cargo space" 21
-		"outfit space" 321
+		"outfit space" 342
 		"weapon capacity" 100
-		"engine capacity" 85
+		"engine capacity" 107
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -292,6 +303,7 @@ ship "Tekkan"
 		"Shield Relay Booster" 5
 		
 		"Ookii Rift Thruster"
+		"Ookii Rift LTC"
 		"Ookii Rift Steering"
 		"Hyperdrive"
 	
@@ -326,11 +338,12 @@ ship "Kunai"
 		"mass" 740
 		"drag" 6.8
 		"heat dissipation" 0.66
-		"fuel capacity" 700
+		"fuel capacity" 800
 		"cargo space" 28
-		"outfit space" 407
+		"outfit space" 412
 		"weapon capacity" 158
-		"engine capacity" 102
+		"engine capacity" 107
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -351,6 +364,7 @@ ship "Kunai"
 		"Small Nanite Fabricator"
 		
 		"Ookii Rift Thruster"
+		"Ookii Rift LTC"
 		"Ookii Rift Steering"
 		# "Chiisana Rift Steering" # Extra steering
 		"Hyperdrive"
@@ -387,11 +401,12 @@ ship "Kama"
 		"mass" 2320
 		"drag" 12.6
 		"heat dissipation" 0.5
-		"fuel capacity" 800
+		"fuel capacity" 1475
 		"cargo space" 56
 		"outfit space" 573
 		"weapon capacity" 247
 		"engine capacity" 121
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -414,6 +429,7 @@ ship "Kama"
 		"Outfits Expansion" 2
 		
 		"Ookii Rift Thruster"
+		"Ookii Rift LTC"
 		"Ookii Rift Steering"
 		# "Nami Rift Steering" # Extra steering
 		"Hyperdrive"
@@ -463,11 +479,12 @@ ship "Chigiriki"
 		"mass" 5200
 		"drag" 16.54
 		"heat dissipation" 0.4
-		"fuel capacity" 900
+		"fuel capacity" 2800
 		"cargo space" 102
 		"outfit space" 747
 		"weapon capacity" 504
 		"engine capacity" 145
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -491,6 +508,7 @@ ship "Chigiriki"
 		"Outfits Expansion" 4
 		
 		"Ookii Rift Thruster"
+		"Ookii Rift LTC"
 		"Subarashii Rift Steering"
 		"Hyperdrive"
 		
@@ -536,4 +554,4 @@ ship "Chigiriki"
 	explode "large explosion" 20
 	explode "huge explosion" 10
 	"final explode" "final explosion large"
-	description "The Chigiriki is the largest of the Bunrodea's gunships, boasting an astonishing seventeen gun ports. One of these ports is equipped with the devastating Thorax Cannon, a massive cannon capable of dealing significant damage to any ship that dares get in the Chigiriki's way. Some Chigiriki also double as missile platforms, raining down a walls of missiles so thick on their target that it can blot out the nearest star."
+	description "The Chigiriki is the largest of the Bunrodea's gunships, boasting an astonishing seventeen gun ports. One of these ports is equipped with the devastating Thorax Cannon, a massive cannon capable of dealing significant damage to any ship that dares get in the Chigiriki's way. Some Chigiriki also double as missile platforms, raining down walls of missiles so thick that they can blot out the nearest star."

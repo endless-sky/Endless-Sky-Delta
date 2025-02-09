@@ -1065,7 +1065,7 @@ mission "Remnant: Cognizance 23"
 	on accept
 		give ship Merganser
 	npc kill
-		government "Korath"
+		government "Kor Alaji"
 		personality coward target uninterested staying
 		system "Farinus"
 		fleet
@@ -1139,7 +1139,7 @@ mission "Remnant: Cognizance 24"
 					decline
 	on stopover
 		conversation
-			`As you slip into the dock on Esquiline it quickly becomes apparent that the station is rapidly returning to full functionality, or perhaps even expanding beyond its original design: people are everywhere, and most of them are moving with purpose or diligently working on something. Several technicians cling to the ceiling overhead as they install new conduit. Despite the busy atmosphere, people frequently stop to glance out the windows, and a flutter of gestures break out whenever someone spots a void sprite. Seeing how busy it is, you understand the traffic controller's request that you refrain from taking up a berth for longer than necessary.`
+			`As you slip into the dock on Esquiline it quickly becomes apparent that the station is rapidly returning to full functionality, or perhaps even expanding beyond its original design: people are everywhere, and most of them are moving with purpose or diligently working on something. Several technicians cling to the ceiling overhead as they install a new conduit. Despite the busy atmosphere, people frequently stop to glance out the windows, and a flutter of gestures break out whenever someone spots a void sprite. Seeing how busy it is, you understand the traffic controller's request that you refrain from taking up a berth for longer than necessary.`
 			`	You find Gavriil nearby, where they are going over a freshly installed hydroponics array with a pair of Remnant in tow. They quickly finish and gesture farewell to the other two before walking over to you. "Greetings, Captain <first>! Welcome back to Esquiline. It has changed a bit since you were here last." Their gestures have an overtone of pride. "Dusk told me that we have a new station to bring online again, so we should probably get moving."`
 	on complete
 		payment 250000
@@ -1199,7 +1199,7 @@ mission "Remnant: Cognizance 25"
 					accept
 				`	"No."`
 					decline
-	npc kill
+	npc disable
 		government "Korath"
 		personality target marked waiting
 		system "Egeria"
@@ -1248,7 +1248,7 @@ mission "Remnant: Cognizance 26"
 		payment 250000
 		outfit "Aeon Cell" -1
 		conversation
-			`Gavriil has you unload the Aeon Cell into a corner of a nearby bay. "Thank you, <first>! The station is running critically low of power, and this should help stabilize it. We will eventually need a full team out here as well as some fuel to get the main reactor running properly, but first we need to figure out exactly what it uses."`
+			`Gavriil has you unload the Aeon Cell into a corner of a nearby bay. "Thank you, <first>! The station is running critically low on power, and this should help stabilize it. We will eventually need a full team out here as well as some fuel to get the main reactor running properly, but first we need to figure out exactly what it uses."`
 			`	They pull out their commlink and check a few things. "Go to Caelian and check in with Torza. He should have finished putting the team through their paces by the time you get there. See you soon, Captain!"`
 
 
@@ -1281,7 +1281,7 @@ mission "Remnant: Cognizance 28"
 			`Your commlink springs to life as you enter final approach to Caelian, revealing Torza in a flurry of motion. He focuses momentarily on the camera. "Captain <first>, and flying a ship with a substantial lifting capacity, excellent! The Korath have discovered one of our forward operating bases, and we need help evacuating it now. It is located on Baianus in the Parca system. There are 20 people and 280 cubic meters of equipment to retrieve. The Korath have set up a blockade, so you will need something reasonably fast to get through it. You can fight them or not, as you wish, but the primary task is evacuating the outpost. Embers speed your flight, Captain."`
 				accept
 	npc
-		government "Korath"
+		government "Kor Isaha"
 		personality heroic plunders harvests waiting staying
 		system "Parca"
 		fleet
@@ -1315,7 +1315,7 @@ mission "Remnant: Cognizance 29"
 			`	The shield opens one final time to allow you to leave, and you practically leap into the teeth of a Korath attack. The anti-air artillery continues its rhythmic barrage against the incoming ships, but it is evident that both it and the shields around the base are failing under the assault. As you head for orbit, the last image you see is the artillery pieces sag and collapse as they melt into the ground. Your sensors record a sudden explosion from the cavern, to which the Remnant give a sad but satisfied nod. "Take us back to Caelian please, Captain."`
 				launch
 	npc
-		government "Korath"
+		government "Kor Isaha"
 		personality heroic plunders harvests waiting launching
 		system "Parca"
 		fleet
@@ -1330,7 +1330,7 @@ mission "Remnant: Cognizance 29"
 		payment 500000
 		conversation
 			`The brutal sun of Caelian hits you like a hammer as you open the hatch to let the evacuees out. A few of the Remnant step into the sun as if relishing the heat, while others move quickly to the shade of a nearby structure to confer. Several, however, need to be carried out to waiting vehicles: it seems that they were hurt in one of the initial raids, and while adrenaline kept them going during the evacuation, their condition deteriorated during the flight back. The Remnant carry them with reverent haste, and then the vehicles they are loaded into vanish quickly into nearby structures.`
-			`	"The Embers saw you safely through." Gestures Torza with a note of appreciation, appearing from a nearby hatch. "The loss of that outpost is unfortunate, but at least most of the Remnant there survived. Thank you for your assistance." He glances at his commlink. "Your logistics adjustment has been added to your account, of course, but I suspect that you are interested in pushing forward the progress in studying Ssil Vida. Meet me in the spaceport when you are ready."`
+			`	"The Embers saw you safely through," gestures Torza with a note of appreciation, appearing from a nearby hatch. "The loss of that outpost is unfortunate, but at least most of the Remnant there survived. Thank you for your assistance." He glances at his commlink. "Your logistics adjustment has been added to your account, of course, but I suspect that you are interested in pushing forward the progress in studying Ssil Vida. Meet me in the spaceport when you are ready."`
 
 
 
@@ -1678,3 +1678,4 @@ mission "Remnant: Cognizance 39"
 		has "Remnant: Cognizance 38: done"
 	on offer
 		event "remnant: cognizance calm" 5
+		fail

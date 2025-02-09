@@ -40,6 +40,10 @@ test-data "Conversation Conditions Test Save"
 				"weapon capacity" 200
 				"thrust" 50
 				"turn" 1000
+				"lateral thruster slot" 1
+				"reverse thruster slot" 1
+				"steering slot" 1
+				"thruster slot" 1
 			outfits
 				Hyperdrive
 				"nGVF-BB Fuel Cell"
@@ -183,7 +187,7 @@ test "Conditional Test"
 		apply
 			"TEST: CONDITIONAL CHOICE" = 1
 		call "Trigger Ruin Spaceport Mission"
-		call "Skip Spaceport Mission"
+		call "Skip Mission"
 		call "Depart"
 		call "Test Conditions"
 		assert
@@ -200,7 +204,7 @@ test "Conditional Test Goto"
 		apply
 			"TEST: CONDITIONAL CHOICE GOTO" = 1
 		call "Trigger Ruin Spaceport Mission"
-		call "Skip Spaceport Mission"
+		call "Skip Mission"
 		call "Depart"
 		call "Test Conditions"
 		assert
@@ -221,7 +225,7 @@ test "Conditional Test Out of Bound"
 		# but if we can somehow access the condition below with the down key then its a problem.
 		input
 			key "Down"
-		call "Skip Spaceport Mission"
+		call "Skip Mission"
 		call "Depart"
 		call "Test Conditions"
 		assert

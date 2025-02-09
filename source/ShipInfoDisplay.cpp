@@ -20,7 +20,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "CategoryTypes.h"
 #include "Color.h"
 #include "Depreciation.h"
-#include "FillShader.h"
+#include "shader/FillShader.h"
 #include "text/Format.h"
 #include "GameData.h"
 #include "Gamerules.h"
@@ -259,7 +259,9 @@ void ShipInfoDisplay::UpdateAttributes(const Ship &ship, const PlayerInfo &playe
 
 	double fullMass = emptyMass + attributes.Get("cargo space");
 	isGeneric &= (fullMass != emptyMass);
-	double forwardThrust = attributes.Get("thrust") ? attributes.Get("thrust") : attributes.Get("afterburner thrust");
+	double thrustModified = 0.;
+	thrustModified = attributes.Get("thrust") * (1 - attributes.Get("thrust reduction ratio"));
+	double forwardThrust = thrustModified ? thrustModified : attributes.Get("afterburner thrust");
 	attributeLabels.push_back(string());
 	attributeValues.push_back(string());
 	attributesHeight += 10;
@@ -446,7 +448,8 @@ void ShipInfoDisplay::UpdateOutfits(const Ship &ship, const PlayerInfo &player, 
 
 	map<string, map<string, int>> listing;
 	for(const auto &it : ship.Outfits())
-		listing[it.first->Category()][it.first->DisplayName()] += it.second;
+		if(it.first->IsDefined() && !it.first->Category().empty() && !it.first->DisplayName().empty())
+			listing[it.first->Category()][it.first->DisplayName()] += it.second;
 
 	for(const auto &cit : listing)
 	{
@@ -615,7 +618,7 @@ void ShipInfoDisplay::DrawShipHealthStats(const Ship &ship, const Rectangle & bo
 
 
 	// This allows the section to stack nicely with other info panel sections,
-	// But will also allow it to be called on its own in a new box if desire.
+	// but will also allow it to be called on its own in a new box if desired.
 	for(int i = 0; i < infoPanelLine; i++)
 	{
 		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
@@ -623,21 +626,25 @@ void ShipInfoDisplay::DrawShipHealthStats(const Ship &ship, const Rectangle & bo
 
 	if(hasShieldRegen)
 	{
+		CheckHover(table, "shields (charge):");
 		table.DrawTruncatedPair("shields (charge):", dim, Format::Number(ship.MaxShields())
 			+ " (" + Format::Number(60. * shieldRegen) + "/s)", bright, Truncate::MIDDLE, true);
 	}
 	else
 	{
-		table.DrawTruncatedPair("shields", dim, Format::Number(ship.MaxShields()), bright, Truncate::MIDDLE, true);
+		CheckHover(table, "shields:");
+		table.DrawTruncatedPair("shields:", dim, Format::Number(ship.MaxShields()), bright, Truncate::MIDDLE, true);
 	}
 	if(hasHullRegen)
 	{
+		CheckHover(table, "hull (repair):");
 		table.DrawTruncatedPair("hull (repair):", dim, Format::Number(ship.MaxHull())
 			+ " (" + Format::Number(60. * hullRegen) + "/s)", bright, Truncate::MIDDLE, true);
 	}
 	else
 	{
-		table.DrawTruncatedPair("hull", dim, Format::Number(ship.MaxHull()), bright, Truncate::MIDDLE, true);
+		CheckHover(table, "hull:");
+		table.DrawTruncatedPair("hull:", dim, Format::Number(ship.MaxHull()), bright, Truncate::MIDDLE, true);
 	}
 	infoPanelLine = infoPanelLine + 2;
 }
@@ -670,11 +677,15 @@ void ShipInfoDisplay::DrawShipCarryingCapacities(const Ship &ship, const Rectang
 		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
 	}
 
+	CheckHover(table, "mass:");
 	table.DrawTruncatedPair("current mass:", dim, Format::Number(ship.Mass()) + " tons", bright, Truncate::MIDDLE, true);
+	CheckHover(table, "cargo:");
 	table.DrawTruncatedPair("cargo space:", dim, Format::Number(ship.Cargo().Used())
 		+ " / " + Format::Number(attributes.Get("cargo space")) + " tons", bright, Truncate::MIDDLE, true);
+	CheckHover(table, "required crew / bunks:");
 	table.DrawTruncatedPair("required crew / bunks", dim, Format::Number(ship.Crew())
 		+ " / " + Format::Number(attributes.Get("bunks")), bright, Truncate::MIDDLE, true);
+	CheckHover(table, "fuel / fuel capacity:");
 	table.DrawTruncatedPair("fuel / fuel capacity:", dim, Format::Number(ship.Fuel() * attributes.Get("fuel capacity"))
 		+ " / " + Format::Number(attributes.Get("fuel capacity")), bright, Truncate::MIDDLE, true);
 
@@ -727,41 +738,66 @@ void ShipInfoDisplay::DrawShipManeuverStats(const Ship &ship, const Rectangle & 
 	// currentMass /= reduction;
 	fullMass /= reduction;
 
-	// This calculates a fixed lateral thrust using the ship's empty mass.
-	double lateralThrustValue = 0.;
-
+	// This section checks to see if a ship or an outfit on that ship has the lateral thrust ratio attribute
+	// or the lateral steering ratio attribute. If it does, it will get that amount and add it to
+	// the "lateralCombinedThrust" variable.
+	double lateralRatioThrust = 0.;
+	double lateralRatioTurn = 0.;
+	double lateralCombinedThrust = 0.;
+	double thrustReductionRatio = 0.;
+	double turnReductionRatio = 0.;
+	double thrustCombinedModifiers = 0.;
+	double turnCombinedModifiers = 0.;
 	if(attributes.Get("lateral thrust ratio"))
-		lateralThrustValue = attributes.Get("lateral thrust ratio");
-	else if(!attributes.Get("lateral thrust ratio"))
-	{
-		double tempLateralThrustRatio = (3000 - emptyMass) / 3500;
-		double defaultLateralThrustRatio = GameData::GetGamerules().DefaultLateralThrustRatio();
-		if(tempLateralThrustRatio > defaultLateralThrustRatio)
-			lateralThrustValue = tempLateralThrustRatio;
-		else lateralThrustValue = defaultLateralThrustRatio;
-	}
-	double emptyLatThrust = attributes.Get("thrust") * lateralThrustValue;
+		lateralRatioThrust = attributes.Get("lateral thrust ratio") * attributes.Get("thrust");
+	// The "/25" is an arbitrary value used to reduce the size of the turn amount, as turn seems to use different
+	// units than thrust. 30 was picked because dividing the largest turn amount of human steering by it gave a result
+	// that was close to the largest thrust amount of any human thruster; and dividing the weakest human steering by it
+	// gave a result that was very close to the weakest human thruster.
+	if(attributes.Get("lateral turn ratio"))
+		lateralRatioTurn = attributes.Get("lateral turn ratio") * attributes.Get("turn") / 25;
+	lateralCombinedThrust = attributes.Get("lateral thrust") + lateralRatioThrust + lateralRatioTurn;
 
-	double baseAccel = 3600. * attributes.Get("thrust") * (1. + attributes.Get("acceleration multiplier"));
+	// The thrust reduction ratio is a percentage-as-decimal value that indicates how much the thrust will be reduced.
+	// It is intended to be paired with the lateral thrust ratio to create outfits that split a thruster's propulsion
+	// between pointing to the rear and to the sides. Ex. 50% to forward thrust, 50% to lateral thrust.
+	// The two are separate values, however, to give content creators full control. As such, for instance, it is fully
+	// acceptable to have lateral thrust ratio of 0.4 (40%) and a thrust reduction ratio of 0.5 (50%) which would
+	// be a situation where 50% of the thrust is completely diverted into lateral thrust, but with a 10% inefficiency.
+	// A content creator could also use it to simulate damage or hinderance to the player. For instance, giving them
+	// an outfit called "gummed up fuel" that has "thrust reduction ratio 0.1 to give them a 10% thrust penalty.
+	thrustReductionRatio = 1. - attributes.Get("thrust reduction ratio");
+	thrustCombinedModifiers = thrustReductionRatio * (1. + attributes.Get("acceleration multiplier"));
+	turnReductionRatio = 1. - attributes.Get("turn reduction ratio");
+	turnCombinedModifiers = turnReductionRatio * (1. + attributes.Get("turn multiplier"));
+
+	double baseAccel = 3600. * attributes.Get("thrust") * thrustCombinedModifiers;
 	double afterburnerAccel = 3600. * attributes.Get("afterburner thrust") * (1. +
 		attributes.Get("acceleration multiplier"));
 	double reverseAccel = 3600. * attributes.Get("reverse thrust") * (1. + attributes.Get("acceleration multiplier"));
-	double lateralAccel = 3600. * emptyLatThrust * (1. + attributes.Get("acceleration multiplier"));
+	double lateralAccel = 3600. * lateralCombinedThrust * (1. + attributes.Get("acceleration multiplier"));
 
-	double baseTurn = (60. * attributes.Get("turn") * (1. + attributes.Get("turn multiplier"))) / emptyMass;
-	double minTurn = (60. * attributes.Get("turn") * (1. + attributes.Get("turn multiplier"))) / fullMass;
+	double baseTurn = (60. * attributes.Get("turn") * turnCombinedModifiers) / emptyMass;
+	double minTurn = (60. * attributes.Get("turn") * turnCombinedModifiers) / fullMass;
 
+	CheckHover(table, "max speed (w/AB):");
 	table.DrawTruncatedPair("max speed (w/AB):", dim, Format::Number(60. * attributes.Get("thrust") / ship.Drag()) + " (" +
 		Format::Number(60. * attributes.Get("afterburner thrust") / ship.Drag()) + ")", bright, Truncate::MIDDLE, true);
+	CheckHover(table, "movement (full - no cargo):");
 	table.DrawTruncatedPair("thrust (min - max):", dim, " ", bright, Truncate::MIDDLE, true);
+	CheckHover(table, "acceleration:");
 	table.DrawTruncatedPair("   forward:", dim, Format::Number(baseAccel / fullMass) +
 		" - " + Format::Number(baseAccel / emptyMass), bright, Truncate::MIDDLE, true);
+	CheckHover(table, "acceleration (afterburner):");
 	table.DrawTruncatedPair("   Afterburner:", dim, Format::Number(afterburnerAccel / fullMass) +
 		" - " + Format::Number(afterburnerAccel / emptyMass), bright, Truncate::MIDDLE, true);
+	CheckHover(table, "acceleration (reverse):");
 	table.DrawTruncatedPair("   reverse:", dim, Format::Number(reverseAccel / fullMass) +
 		" - " + Format::Number(reverseAccel / emptyMass), bright, Truncate::MIDDLE, true);
+	CheckHover(table, "acceleration (lateral):");
 	table.DrawTruncatedPair("   lateral:", dim, Format::Number(lateralAccel / fullMass) +
 		" - " + Format::Number(lateralAccel / emptyMass), bright, Truncate::MIDDLE, true); // currently doesn't work
+	CheckHover(table, "turning:");
 	table.DrawTruncatedPair("turning:", dim, Format::Number(minTurn) + " - " + Format::Number(baseTurn), bright,
 		Truncate::MIDDLE, true);
 
@@ -809,6 +845,7 @@ void ShipInfoDisplay::DrawShipOutfitStat(const Ship &ship, const Rectangle & bou
 
 	for(unsigned i = 0; i < NAMES.size(); i += 2)
 	{
+		CheckHover(table, "outfit space free:");
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
 		infoPanelLine++;
@@ -842,7 +879,7 @@ void ShipInfoDisplay::DrawShipCapacities(const Ship &ship, const Rectangle & bou
 		table.DrawTruncatedPair(" ", dim, " ", bright, Truncate::MIDDLE, true);
 	}
 
-	// Find out how much outfit, engine, and weapon space the chassis has.
+	// Find out how much engine and weapon space the chassis has.
 	map<string, double> chassis;
 	static const vector<string> NAMES = {
 		"    weapon capacity:", "weapon capacity",
@@ -857,6 +894,7 @@ void ShipInfoDisplay::DrawShipCapacities(const Ship &ship, const Rectangle & bou
 
 	for(unsigned i = 0; i < NAMES.size(); i += 2)
 	{
+		CheckHover(table, NAMES[i]);
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
 		infoPanelLine++;
@@ -907,6 +945,7 @@ void ShipInfoDisplay::DrawShipPropulsionCapacities(const Ship &ship, const Recta
 
 	for(unsigned i = 0; i < NAMES.size(); i += 2)
 	{
+		CheckHover(table, NAMES[i]);
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
 		infoPanelLine++;
@@ -956,6 +995,7 @@ void ShipInfoDisplay::DrawShipHardpointStats(const Ship &ship, const Rectangle &
 
 	for(unsigned i = 0; i < NAMES.size(); i += 2)
 	{
+		CheckHover(table, NAMES[i]);
 		table.DrawTruncatedPair((NAMES[i]), dim, Format::Number(attributes.Get(NAMES[i + 1]))
 			+ " / " + Format::Number(chassis[NAMES[i + 1]]), bright, Truncate::MIDDLE, true);
 		infoPanelLine++;
@@ -1002,6 +1042,7 @@ void ShipInfoDisplay::DrawShipBayStats(const Ship &ship, const Rectangle & bound
 			string bayLabel = bayType;
 			transform(bayLabel.begin(), bayLabel.end(), bayLabel.begin(), ::tolower);
 
+			CheckHover(table, bayLabel + " bays:");
 			table.DrawTruncatedPair(bayLabel + " bays:", dim, Format::Number(totalBays), bright, Truncate::MIDDLE, true);
 		}
 	}
@@ -1147,7 +1188,7 @@ void ShipInfoDisplay::DrawShipEnergyHeatStats(const Ship &ship, const Rectangle 
 
 	for(unsigned i = 0; i < tableLabels.size(); ++i)
 	{
-		// CheckHover(table, tableLabels[i]);
+		CheckHover(table, tableLabels[i]);
 		table.Draw(tableLabels[i], dim);
 		table.Draw(energyTable[i], bright);
 		table.Draw(heatTable[i], bright);

@@ -27,11 +27,12 @@ ship "Korath Dredger"
 		"mass" 12024
 		"drag" 17.1
 		"heat dissipation" .45
-		"fuel capacity" 900
+		"fuel capacity" 5475
 		"cargo space" 675
-		"outfit space" 763
+		"outfit space" 803
 		"weapon capacity" 276
-		"engine capacity" 206
+		"engine capacity" 246
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -56,6 +57,7 @@ ship "Korath Dredger"
 		"Reverser (Lunar Class)"
 		"Steering (Planetary Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Scram Drive"
 		"Jump Drive"
 		
@@ -107,11 +109,12 @@ ship "Korath Raider"
 		"mass" 2880
 		"drag" 12
 		"heat dissipation" .5
-		"fuel capacity" 600
+		"fuel capacity" 1325
 		"cargo space" 175
-		"outfit space" 777
+		"outfit space" 817
 		"weapon capacity" 339
-		"engine capacity" 159
+		"engine capacity" 199
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -137,6 +140,7 @@ ship "Korath Raider"
 		"Thermal Repeater Rifle" 196
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Bow Drive (Meteor Class)"
 		"Jump Drive"
@@ -171,6 +175,7 @@ ship "Korath Raider"
 
 ship "Korath Chaser"
 	sprite "ship/chaser"
+		"scale" 0.6
 	thumbnail "thumbnail/chaser"
 	attributes
 		category "Fighter"
@@ -182,9 +187,10 @@ ship "Korath Chaser"
 		"mass" 106
 		"drag" 1.35
 		"heat dissipation" .6
-		"outfit space" 92
+		"outfit space" 104
 		"weapon capacity" 25
-		"engine capacity" 30
+		"engine capacity" 41
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -201,6 +207,7 @@ ship "Korath Chaser"
 		"Thermal Repeater Rifle"
 		
 		"Thruster (Asteroid Class)"
+		"Lateral (Asteroid Class)"
 		"Steering (Asteroid Class)"
 	
 	engine -7 23
@@ -224,11 +231,12 @@ ship "Korath World-Ship"
 		"mass" 13880
 		"drag" 21
 		"heat dissipation" .4
-		"fuel capacity" 1000
+		"fuel capacity" 6700
 		"cargo space" 264
-		"outfit space" 839
+		"outfit space" 879
 		"weapon capacity" 314
-		"engine capacity" 165
+		"engine capacity" 205
+		"lateral thruster slot" 1
 		"reverse thruster slot" 1
 		"steering slot" 1
 		"thruster slot" 1
@@ -250,6 +258,7 @@ ship "Korath World-Ship"
 		"Microbot Defense Station" 19
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Hyperdrive"
 	
@@ -319,6 +328,7 @@ ship "Korath Dredger" "Korath Dredger (Civilian)"
 		"Steering (Planetary Class)"
 		"Reverser (Lunar Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Scram Drive"
 	
 	turret "Digger Mining Turret"
@@ -347,6 +357,7 @@ ship "Korath Dredger" "Korath Dredger (Crippled)"
 		"Steering (Lunar Class)"
 		# "Steering (Asteroid Class)" # Extra steering
 		"Thruster (Lunar Class)"
+		"Lateral (Lunar Class)"
 		# "Thruster (Asteroid Class)" # Extra thruster
 		"Hyperdrive"
 		"Jump Drive (Broken)"
@@ -377,6 +388,7 @@ ship "Korath Dredger" "Korath Dredger (Digger)"
 		"Reverser (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Thruster (Stellar Class)"
+		"Lateral (Planetary Class)"
 		"Jump Drive"
 		"Scram Drive"
 	
@@ -404,6 +416,7 @@ ship "Korath Dredger" "Korath Dredger (Shunt)"
 		"Reverser (Asteroid Class)"
 		"Steering (Planetary Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Jump Drive"
 		"Scram Drive"
 	
@@ -432,6 +445,7 @@ ship "Korath Dredger" "Korath Dredger (Ground Assault)"
 		"Reverser (Asteroid Class)"
 		"Steering (Lunar Class)"
 		"Thruster (Lunar Class)"
+		"Lateral (Lunar Class)"
 		"Hyperdrive"
 		"Jump Drive"
 
@@ -458,6 +472,7 @@ ship "Korath Dredger" "Korath Dredger (Heaver)"
 
 		"Reverser (Asteroid Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive"
 
@@ -488,6 +503,7 @@ ship "Korath Raider" "Korath Raider (Blaze)"
 		"Reverser (Asteroid Class)"
 		"Steering (Planetary Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Jump Drive"
 	
 	pylon "Firelight Missile Bank"
@@ -516,6 +532,7 @@ ship "Korath Raider" "Korath Raider (Crippled)"
 		"Bow Drive (Meteor Class)"
 		# "Thruster (Asteroid Class)" # Extra thruster
 		"Thruster (Lunar Class)"
+		"Lateral (Lunar Class)"
 		# "Steering (Asteroid Class)" # Extra steering
 		"Steering (Lunar Class)"
 		"Afterburner (Asteroid Class)"
@@ -551,6 +568,7 @@ ship "Korath Raider" "Korath Raider (Ember)"
 		
 		"Bow Drive (Meteor Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Afterburner (Asteroid Class)"
 		"Jump Drive"
@@ -585,6 +603,7 @@ ship "Korath Raider" "Korath Raider (Ember Blaze)"
 		"Reverser (Asteroid Class)"
 		"Steering (Planetary Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Jump Drive"
 		"Hyperdrive"
 	
@@ -618,6 +637,7 @@ ship "Korath Raider" "Korath Raider (Ember Shunt)"
 		
 		"Reverser (Comet Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive"
 		"Hyperdrive"
@@ -650,6 +670,7 @@ ship "Korath Raider" "Korath Raider (Hyperdrive)"
 		
 		"Bow Drive (Meteor Class)"
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive (Broken)"
 		"Hyperdrive"
@@ -674,6 +695,7 @@ ship "Korath Chaser" "Korath Chaser (Expeller)"
 		"Korath Repeater Rifle"
 		
 		"Thruster (Asteroid Class)"
+		"Lateral (Asteroid Class)"
 		"Bow Drive (Meteor Class)"
 
 
@@ -701,6 +723,7 @@ ship "Korath Chaser" "Korath Chaser (World-Ship)"
 		
 		"Steering (Asteroid Class)"
 		"Thruster (Asteroid Class)"
+		"Lateral (Asteroid Class)"
 		"Afterburner (Asteroid Class)"
 		"Hyperdrive"
 
@@ -720,6 +743,7 @@ ship "Korath World-Ship" "Korath World-Ship A (Jump)"
 		"Microbot Defense Station" 20
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive"
 	
@@ -747,6 +771,7 @@ ship "Korath World-Ship" "Korath World-Ship B (Crippled)"
 		"Outfits Expansion"
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive (Broken)"
 		"Hyperdrive"
@@ -777,6 +802,7 @@ ship "Korath World-Ship" "Korath World-Ship B (Ember)"
 		"Outfits Expansion"
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive"
 		"Hyperdrive"
@@ -806,6 +832,7 @@ ship "Korath World-Ship" "Korath World-Ship B (Jump)"
 		"Microbot Defense Station" 20
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive"
 	
@@ -835,6 +862,7 @@ ship "Korath World-Ship" "Korath World-Ship C (Jump)"
 		"Microbot Defense Station" 20
 		
 		"Thruster (Planetary Class)"
+		"Lateral (Planetary Class)"
 		"Steering (Planetary Class)"
 		"Jump Drive"
 	

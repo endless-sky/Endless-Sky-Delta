@@ -50,6 +50,7 @@ public:
 	static const int SHOW_GOVERNMENT = -5;
 	static const int SHOW_REPUTATION = -6;
 	static const int SHOW_DANGER = -7;
+	static const int SHOW_STARS = -8;
 
 	static const float OUTER;
 	static const float INNER;
@@ -69,7 +70,12 @@ public:
 
 
 public:
-	explicit MapPanel(PlayerInfo &player, int commodity = SHOW_REPUTATION, const System *special = nullptr);
+	explicit MapPanel(PlayerInfo &player, int commodity = SHOW_REPUTATION,
+		const System *special = nullptr, bool fromMission = false);
+
+	virtual ~MapPanel() override;
+
+
 
 	virtual void Step() override;
 	virtual void Draw() override;
@@ -139,7 +145,6 @@ protected:
 	int recentering = 0;
 	int commodity;
 	int step = 0;
-	bool mapIsStarry = false;
 	std::string buttonCondition;
 
 	// Distance from the screen center to the nearest owned system,
@@ -165,6 +170,8 @@ protected:
 	// else gets in the way of its default position.
 	int selectedSystemOffset = 0;
 
+	bool fromMission = false;
+
 private:
 	void DrawTravelPlan();
 	// Display the name of and distance to the selected system.
@@ -177,7 +184,7 @@ private:
 	void DrawSystems();
 	void DrawNames();
 	void DrawMissions();
-	void DrawPointer(const System *system, unsigned &systemCount, const Color &color, bool bigger = false);
+	void DrawPointer(const System *system, unsigned &systemCount, unsigned max, const Color &color, bool bigger = false);
 	static void DrawPointer(Point position, unsigned &systemCount, const Color &color,
 		bool drawBack = true, bool bigger = false);
 

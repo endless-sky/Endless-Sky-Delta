@@ -713,6 +713,7 @@ ship "Deep River" "Deep River (Jump, Unarmed)"
 		"Dark Storm Shielding" 3
 		"Fuel Pod"
 		"Type 2 Radiant Thruster"
+		"Type 2 Radiant LTC"
 		"Type 4 Radiant Steering"
 		"Jump Drive"
 
@@ -1176,6 +1177,10 @@ mission "Wanderers: Alpha Surveillance C (Pug)"
 
 
 ship "Carrier" "Carrier (Alpha)"
+	sprite "ship/modified carrier"
+	thumbnail "thumbnail/modified carrier"
+	add attributes
+		"weapon capacity" 120
 	outfits
 		"Ion Cannon" 2
 		"Hai Tracker Pod" 4
@@ -1192,21 +1197,20 @@ ship "Carrier" "Carrier (Alpha)"
 		"Laser Rifle" 120
 		
 		`"Bondir" Atomic Thruster`
+		`"Bondir" Atomic LTC`
 		"Steering (Stellar Class)"
 		"Jump Drive"
 	
-	gun "Ion Cannon"
-	gun "Ion Cannon"
-	gun
-	gun
-	pylon "Hai Tracker Pod"
-	pylon "Hai Tracker Pod"
-	pylon "Hai Tracker Pod"
-	pylon "Hai Tracker Pod"
-	turret "Shield Disruptor Turret"
-	turret "Husk-Slice Turret"
-	turret "Shield Disruptor Turret"
-	turret "Husk-Slice Turret"
+	gun -17 -179 "Ion Cannon"
+	gun 17 -179 "Ion Cannon"
+	pylon -25 -168 "Hai Tracker Pod"
+	pylon 25 -168 "Hai Tracker Pod"
+	pylon -32.5 -163.5 "Hai Tracker Pod"
+	pylon 32.5 -163.5 "Hai Tracker Pod"
+	turret 0 -49 "Shield Disruptor Turret"
+	turret 0 14 "Husk-Slice Turret"
+	turret -22 22 "Shield Disruptor Turret"
+	turret 22 22 "Husk-Slice Turret"
 
 mission "Wanderers: Alpha Surveillance D"
 	name "Find the Alphas"
@@ -2476,6 +2480,21 @@ event "battle for sich'ka'ara ends"
 	planet "Kort Vek'kri"
 		attributes "unfettered"
 		spaceport `The Unfettered clearly do not know quite what to make of the Wanderer research station here that they have recently captured. Animals that were once part of various experiments are now wandering loose, and the Unfettered are making only sporadic efforts to keep them well-fed. Every once in a while one of them, driven by sheer hunger, tries to smash its way into one of the crates of military rations that the Unfettered have stacked up in the shade near the main landing pad.`
+		remove tribute
+
+# Patch mission for players who got these missions before 0.10.11 and didn't get tribute from Kort Vek'kri cleared.
+mission "Wanderers: Kort Vek'kri Tribute Patch"
+	landing
+	invisible
+	to offer
+		has "event: battle for sich'ka'ara ends"
+	on offer
+		event "kort vek'kri tribute clear"
+		fail
+
+event "kort vek'kri tribute clear"
+	planet "Kort Vek'kri"
+		remove tribute
 	
 event "solifuge deployment"
 	shipyard "Mon Ki o'Uden Advanced"
