@@ -761,13 +761,6 @@ void PlayerInfo::AdvanceDate(int amount)
 	// The standard prices will be used to query the value of the fleet of the player, instead of the local prices.
 	CustomSaleManager::Clear();
 
-	// For accounting, keep track of the player's net worth. This is for
-	// calculation of yearly income to determine maximum mortgage amounts.
-	int64_t assets = depreciation.Value(ships, date.DaysSinceEpoch());
-	for(const shared_ptr<Ship> &ship : ships)
-		assets += ship->Cargo().Value(system);
-
-
 		DoAccounting();
 	}
 	// Reset the reload counters for all your ships.
