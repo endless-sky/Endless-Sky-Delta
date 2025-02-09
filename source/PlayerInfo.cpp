@@ -758,20 +758,6 @@ void PlayerInfo::AdvanceDate(int amount)
 			if(!mission.IsFailed(*this))
 				mission.Do(Mission::DAILY, *this);
 		}
-		if(tributeIncome)
-			message += Format::CreditString(tributeIncome) + " in tribute";
-		if(salariesIncome && tributeIncome && b.assetsReturns)
-			message += ",";
-		if((salariesIncome || tributeIncome) && b.assetsReturns)
-			message += " and ";
-		if(b.assetsReturns)
-			message += Format::CreditString(b.assetsReturns) + " based on outfits and ships";
-		message += ".";
-		Messages::Add(message, Messages::Importance::High);
-		accounts.AddCredits(salariesIncome + tributeIncome + b.assetsReturns);
-	}
-
-
 	// The standard prices will be used to query the value of the fleet of the player, instead of the local prices.
 	CustomSaleManager::Clear();
 
