@@ -1,0 +1,68 @@
+# Copyright (c) 2024 by Loymdayddaud
+#
+# Endless Sky is free software: you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Endless Sky is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+
+pricing outfits "Quarg Technology Friendly Groups"
+	location
+		government "Free Worlds" "Hai" "Neutral" "Republic" "Syndicate"
+	offset
+		"Nanotech Battery" 0.01 %
+		"Antimatter Core" 0.01 %
+		"Quarg Skylance" 0.01 %
+		"Quarg Anti-Missile" 0.01 %
+		"Intrusion Countermeasures" 0.01 %
+		"Medium Graviton Thruster" 0.01 %
+		"Medium Graviton Steering" 0.01 %
+		"Quantum Shield Generator" 0.01 %
+
+pricing outfits "Quarg Technology Hostile Groups"
+	location
+		government "Hai (Unfettered)" "Independent" "Pirate"
+	offset
+		"Nanotech Battery" 2 %
+		"Antimatter Core" 2 %
+		"Quarg Skylance" 2 %
+		"Quarg Anti-Missile" 2 %
+		"Intrusion Countermeasures" 2 %
+		"Medium Graviton Thruster" 2 %
+		"Medium Graviton Steering" 2 %
+		"Quantum Shield Generator" 2 %
+
+
+pricing outfits "Remnant Hai Keystones"
+	import
+	location
+		government "Remnant"
+	conditions
+		or
+			has "Remnant: Key Stones: done"
+			has "Remnant: Key Stones (Pre-Hai) 2: done"
+	value
+		"Quantum Keystone" 230000
+
+pricing outfits "Remnant Jump Drives"
+	import
+	location
+		government "Remnant"
+	value
+		"Jump Drive" 500000
+
+
+pricing outfits "Unfettered Jump Drives"
+	import
+	location
+		government "Hai (Unfettered)"
+	conditions
+		has "Unfettered Jump Drive 1: done"
+	value
+		"Jump Drive" 1000000
