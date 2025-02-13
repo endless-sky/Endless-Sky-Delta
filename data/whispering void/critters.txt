@@ -36,7 +36,6 @@ ship "Pincer Beast"
 		"thrust" 37
 		"lateral thrust" 19
 		"turn" 1650
-		"reverse thrust" 2.5
 		"hull repair rate" 5
 		"energy capacity" 1000
 		"energy generation" 5
