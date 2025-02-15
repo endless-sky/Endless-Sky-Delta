@@ -29,14 +29,14 @@ pricing outfits "Quarg Technology Hostile Groups"
 	location
 		government "Hai (Unfettered)" "Independent" "Pirate"
 	offset
-		"Nanotech Battery" 2 %
-		"Antimatter Core" 2 %
-		"Quarg Skylance" 2 %
-		"Quarg Anti-Missile" 2 %
-		"Intrusion Countermeasures" 2 %
-		"Medium Graviton Thruster" 2 %
-		"Medium Graviton Steering" 2 %
-		"Quantum Shield Generator" 2 %
+		"Nanotech Battery" 5 %
+		"Antimatter Core" 5 %
+		"Quarg Skylance" 5 %
+		"Quarg Anti-Missile" 5 %
+		"Intrusion Countermeasures" 5 %
+		"Medium Graviton Thruster" 5 %
+		"Medium Graviton Steering" 5 %
+		"Quantum Shield Generator" 5 %
 
 
 pricing outfits "Remnant Hai Keystones"
