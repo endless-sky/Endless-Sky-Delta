@@ -58,7 +58,7 @@ void CustomSale::Load(const DataNode &node, bool eventChange)
 			amount = size > 1 ? line.Value(1) : 1.;
 		// All values are converted into percentages if that is not how they are given (which would be indicated by %)
 		// This means that the offset is handled as relative to the modified price instead of the default one.
-		// Outfitter changes always are perrcentages.
+		// Outfitter changes always are percentages.
 		if((mode != "outfitters"
 				&& (size == (2 + isAdd)
 				|| (size > 2 && line.Token(2 + isAdd) != "%"))))
