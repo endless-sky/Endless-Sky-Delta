@@ -58,11 +58,3 @@ pricing outfits "Remnant Jump Drives"
 		"Jump Drive" 500000
 
 
-pricing outfits "Unfettered Jump Drives"
-	import
-	location
-		government "Hai (Unfettered)"
-	conditions
-		has "Unfettered Jump Drive 1: done"
-	value
-		"Jump Drive" 1000000
