@@ -1,4 +1,4 @@
-# Copyright (c) 2024 by Loymdayddaud
+# Copyright (c) 2024 by Loymdayddaud and Zitchas
 #
 # Endless Sky is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
@@ -62,7 +62,7 @@ pricing outfits "Remnant Valued Tech"
 		"Antimatter Core" 3.5 %
 		"Quarg Skylance" 3.5 %
 		"Quarg Anti-Missile" 3.5 %
-		"Intrusion Countermeasures.5" 3 %
+		"Intrusion Countermeasures" 3 %
 		"Medium Graviton Thruster" 3.5 %
 		"Medium Graviton Steering" 3.5 %
 		"Quantum Shield Generator" 3.5 %
