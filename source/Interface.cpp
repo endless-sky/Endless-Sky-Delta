@@ -834,12 +834,21 @@ void Interface::BarElement::Draw(const Rectangle &rect, const Information &info,
 		if(value < 0)
 			while(v > value)
 			{
+				Color nFromColor = Color::Combine(1 - v, *fromColor, v, *toColor);
 				Point from = start + v * dimensions;
 				v -= filled;
-				Point to = start + max(v, value) * dimensions;
+
+				double lim = max(v, value);
+				Point to = start + lim * dimensions;
+
+				float d = (to - from).Length() / 2.;
+				float twidth = d < width ? width * d / 2. : width;
+				from += unit * twidth;
+				to -= unit * twidth;
+				Color nToColor = Color::Combine(1 - lim, *fromColor, lim, *toColor);
 				v -= empty;
 
-				LineShader::Draw(from, to, width, *color);
+				LineShader::DrawGradient(from, to, twidth, nFromColor, nToColor);
 			}
 	}
 }
